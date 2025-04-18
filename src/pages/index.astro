@@ -1,0 +1,425 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Image from "../components/Image.astro";
+import "../styles/global.css";
+---
+
+<Layout title="MCCP">
+  <main>
+    <!-- Revenir à la section titre originale -->
+    <section class="title-section">
+      <h1>
+        UNE LISTE CITOYENNE POUR LES ÉLECTIONS MUNICIPALES 2026
+      </h1>
+      <p>
+        Porté par le Mouvement Citoyen des Communes de Putanges-le-Lac
+      </p>
+    </section>
+
+    <!-- Section Ambitions -->
+    <section class="ambitions-section">
+      <h2>Nos ambitions</h2>
+      <ul>
+        <li>
+          Des <strong>bourgs vivants</strong> où l'esprit de village est conservé
+        </li>
+        <li>
+          Une véritable <strong>solidarité</strong> entre nos différentes communes et entre <strong>générations</strong>
+        </li>
+        <li>
+          Des <strong>commerces locaux</strong> et <strong>services essentiels</strong> accessibles à tous les habitants
+        </li>
+        <li>
+          Une <strong>économie locale</strong> dynamique créant des emplois durables
+        </li>
+        <li>
+          Un environnement préservé et valorisé pour notre santé et les <strong>générations futures</strong>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Section texte -->
+    <section class="text-section">
+      <p>
+        Nous pensons qu'un programme politique doit être défini en concertation avec l'ensemble des habitants qui souhaitent exprimer leur avis, leurs envies et leurs besoins, en embrassant toute la diversité de la population de Putanges-le-Lac.
+      </p>
+      <p>
+        Le programme, c'est donc tous ensemble que nous le travaillerons, par divers moyens : des débats publics, du porte à porte, ou autour d'un verre.
+      </p>
+    </section>
+
+    <!-- Section Valeurs -->
+    <section class="values-section">
+      <h2>Nos valeurs</h2>
+      <ul>
+        <li>
+          <strong>Démocratie participative</strong>, les décisions importantes sont prises avec les habitants
+        </li>
+        <li>
+          <strong>Équité</strong>, entre toutes les communes
+        </li>
+        <li>
+          <strong>Solidarité</strong>, entre générations et entre tous les habitants
+        </li>
+        <li>
+          <strong>Transparence et éthique</strong>, dans la gestion des affaires publiques
+        </li>
+        <li>
+          <strong>Respect</strong>, des paysages et de l'environnement. Préservation des ressources naturelles de notre territoire
+        </li>
+        <li>
+          <strong>Inclusion</strong>, de toutes et tous, quelles que soient les différences
+        </li>
+      </ul>
+    </section>
+
+    <!-- Section Contribution -->
+    <section class="contribution-section">
+      <h2>Envie de contribuer ?</h2>
+      <div class="max-w-3xl mx-auto">
+        <h3 class="text-xl text-secondary mb-4">Vous décidez de votre niveau d'engagement</h3>
+        
+        <ul class="space-y-6">
+          <li>
+            <h3 class="text-lg font-bold text-secondary">Restez informé !</h3>
+            <p>Laisser-nous vos coordonnées, téléphone ou email. C'est déjà nous soutenir et montrer votre intérêt.</p>
+          </li>
+          
+          <li>
+            <h3 class="text-lg font-bold text-secondary">Parlez en autour de vous !</h3>
+            <p>Nous cherchons toujours des énergies vives.</p>
+          </li>
+          
+          <li>
+            <h3 class="text-lg font-bold text-secondary">Partagez vos idées</h3>
+            <ul class="ml-6 space-y-2 list-disc">
+              <li>Par mail : Envoyez-nous vos suggestions par mail. Un conseil, une idée, une préoccupation ? Nous vous écoutons.</li>
+              <li>Par téléphone : Accordez-nous un temps d'échange par téléphone ou en personne.</li>
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="text-lg font-bold text-secondary">Rencontrons-nous !</h3>
+            <p>Participez à nos rencontres, des moments conviviaux pour apprendre et échanger.</p>
+          </li>
+          
+          <li>
+            <h3 class="text-lg font-bold text-secondary">Rejoignez-nous !</h3>
+            <p>Participez aux réunions de travail de préparation de la liste deux soirées par mois.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section">
+      <h2>Contactez-nous</h2>
+      <p>Vous pouvez nous contacter par téléphone ou par email.<p>
+        <a href="tel:0767020716" class="phone-button">
+          <span>📞</span>
+          07 67 02 07 16
+        </a>
+      
+      <form 
+        action="https://formspree.io/f/xjkyqpag"
+        method="POST"
+        class="contact-form"
+      >
+        <div class="form-group">
+          <label for="email">Votre email</label>
+          <input 
+            type="email" 
+            id="email"
+            name="email" 
+            required
+            placeholder="exemple@email.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Votre message</label>
+          <textarea 
+            id="message"
+            name="message" 
+            required
+            placeholder="Partagez-nous vos idées, questions ou suggestions..."
+            rows="5"
+          ></textarea>
+        </div>
+
+        <button type="submit">
+          Envoyer
+        </button>
+      </form>
+       </section>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary: #2E8B57;    /* Vert */
+    --secondary: #1B365D;  /* Bleu marine */
+    --font-main: 'League Spartan', sans-serif;
+  }
+
+  main {
+    font-family: var(--font-main);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .title-section {
+    text-align: center;
+  }
+
+  .title-section h1 {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .title-section p {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--secondary);
+  }
+
+  h2 {
+    font-family: var(--font-main);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    color: var(--secondary);
+    font-size: 1.3rem;
+  }
+
+  li span {
+    display: none;
+  }
+
+  strong {
+    font-family: var(--font-main);
+    color: var(--secondary);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding: 0 0.2rem;
+    background: linear-gradient(180deg, 
+      transparent 65%, 
+      rgba(46, 139, 87, 0.2) 65%
+    );
+  }
+
+  .text-section {
+    text-align: center;
+    max-width: 55rem;
+    margin: 0 auto;
+    color: var(--secondary);
+  }
+
+  .text-section p {
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+  }
+
+  .values-section li {
+    font-family: var(--font-main);
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .contact-section {
+    text-align: center;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .contact-links a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.3rem;
+  }
+
+  .contact-links span {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    main {
+      font-size: 1.1rem;
+    }
+  }
+
+  .ambitions-section ul,
+  .values-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .ambitions-section li,
+  .values-section li {
+    position: relative;
+    padding-left: 2rem;
+    color: var(--secondary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .ambitions-section li::before,
+  .values-section li::before {
+    content: "•";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--primary);
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  .contact-form {
+    max-width: 40rem;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    color: var(--secondary);
+    transition: border-color 0.2s ease;
+    margin: 0;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .contact-form button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .contact-form button:hover {
+    background-color: #247a48;
+  }
+
+  .form-note {
+    margin-top: 1.5rem;
+    color: var(--secondary);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: 1.5rem;
+      margin: 2rem 0;
+      width: 100%;
+    }
+  }
+
+  .phone-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary);
+    color: white !important;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .phone-button:hover {
+    background-color: #247a48;
+    transform: translateY(-2px);
+  }
+
+  .phone-button span {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .phone-button {
+      width: auto;
+      justify-content: center;
+    }
+  }
+
+  li h3 + p {
+    margin-left: 0;
+  }
+
+  li h3 + ul.list-disc {
+    margin-left: 1rem;
+    list-style-type: disc;
+  }
+</style>
+ 
+ 

@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+}
+
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+
+    <title>{title}</title>
+    <meta name="description" content="MCC Putanges-le-Lac" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="MCC Putanges-le-Lac" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <!-- <meta property="og:image" content="/assets/img/" /> -->
+    <meta property="og:image:alt" content="MCC Putanges-le-Lac" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:description" content="MCC Putanges-le-Lac" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <slot />
+    <Footer />
+  </body>
+</html>
