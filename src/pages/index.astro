@@ -87,8 +87,16 @@ import "../styles/global.css";
 
 <script type="text/javascript" src="https://app.mailjet.com/pas-nc-embedded-v1.js"></script>
 
+
+
           </li>
-          
+          <li>
+          <h3 class="text-lg font-bold text-secondary">Suivez-nous sur Facebook</h3>
+          <p>Restez informés de nos actualités et événements</p>
+          <a href="https://www.facebook.com/mccputanges" class="facebook-button" target="_blank" rel="noopener noreferrer">
+            Rejoindre notre page Facebook
+          </a>
+          </li>          
           <li>
             <h3 class="text-lg font-bold text-secondary">Parlez en autour de vous !</h3>
             <p>Nous cherchons toujours des énergies vives.</p>
@@ -423,6 +431,58 @@ import "../styles/global.css";
   li h3 + ul.list-disc {
     margin-left: 1rem;
     list-style-type: disc;
+  }
+
+  .social-card {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .social-card h4 {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-card p {
+    color: var(--secondary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .facebook-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #1877f2; /* Couleur officielle Facebook */
+    color: white !important;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .facebook-button:hover {
+    background-color: #1664d9;
+    transform: translateY(-2px);
+  }
+
+  .facebook-button span {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .social-card {
+      margin: 2rem 0;
+      padding: 1rem;
+    }
   }
 </style>
  
