@@ -1,23 +1,75 @@
-<hr />
+---
+const currentYear = new Date().getFullYear();
+---
 
-<footer>
-
-
-  <small>
-    <time>2025</time>
-      <strong> Le Mouvement Citoyen des Communes de Putanges-le-Lac</strong>
-  </small>
-
-  <br />
-  <small>
-Built with <a href="https://astro.build/"
-      >Astro</a
-    >
-  </small>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="brand">MCCP</div>
+    <p>Mouvement Citoyen des Communes de Putanges-le-Lac</p>
+    <a href="tel:0767020716">07 67 02 07 16</a>
+    <span class="dot">•</span>
+    <a href="mailto:contact@mccputanges.fr">contact@mccputanges.fr</a>
+    <span class="dot">•</span>
+    <a href="https://www.facebook.com/mccputanges">Facebook</a>
+    <span class="copyright">&copy; {currentYear} MCCP </span>
+  </div>
 </footer>
 
 <style>
-  footer div a {
-    margin-right: 5px;
+  .footer {
+    border-top: 1px solid #eaeaea;
+    padding: 1.5rem 0;
+    margin-top: 4rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: var(--secondary);
+    font-size: 0.9rem;
+  }
+
+  .brand {
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--primary);
+  }
+
+  .dot {
+    opacity: 0.5;
+  }
+
+  .copyright {
+    margin-left: auto;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .copyright {
+      margin: 0;
+    }
+
+    .dot {
+      display: none;
+    }
   }
 </style>
