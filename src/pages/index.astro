@@ -1,12 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Image from "../components/Image.astro";
+import { getCollection } from 'astro:content';
 import "../styles/global.css";
+
+// Récupérer les articles de blog
+const allPosts = await getCollection('blog');
+
+// Trier par date et prendre les 3 plus récents
+const recentPosts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
+
+// Fonction pour générer un slug à partir du titre
+function generateSlug(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s]/g, '')
+    .replace(/\s+/g, '-');
+}
 ---
 
 <Layout title="MCCP">
   <main>
-    <!-- Remplacer la section title-section par : -->
     <section class="hero-section">
       <div class="hero-content">
         <h1>
@@ -17,7 +33,7 @@ import "../styles/global.css";
         </p>
       </div>
       <div class="photo-credit">
-        Photo du lac de Rabodanges © Aurélie
+        Photo du lac de Rabodanges © Auré
       </div>
     </section>
 
@@ -77,6 +93,43 @@ import "../styles/global.css";
             <strong>Inclusion</strong>, de toutes et tous, quelles que soient les différences
           </li>
         </ul>
+      </section>
+
+      <!-- Nouvelle section Actualités -->
+      <section class="news-section">
+        <h2>Dernières actualités</h2>
+        
+        <div class="news-grid">
+          {recentPosts.map(post => {
+            const slug = post.slug || generateSlug(post.data.title);
+            
+            return (
+              <article class="news-card">
+                <a href={`/blog/${slug}`} class="card-link">
+                  {post.data.image && (
+                    <img src={post.data.image} alt={post.data.title} />
+                  )}
+                  <div class="news-content">
+                    <h3>{post.data.title}</h3>
+                    <div class="post-meta">
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('fr-FR')}
+                      </time>
+                    </div>
+                    <p class="description">{post.data.description}</p>
+                    <span class="read-more">
+                      Lire la suite →
+                    </span>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+        
+        <div class="view-all">
+          <a href="/blog" class="view-all-link">Voir toutes les actualités</a>
+        </div>
       </section>
 
       <!-- Section Contribution -->
@@ -175,364 +228,7 @@ import "../styles/global.css";
 </Layout>
 
 <style>
-  :root {
-    --primary: #2E8B57;    /* Vert */
-    --secondary: #1B365D;  /* Bleu marine */
-    --font-main: 'League Spartan', sans-serif;
-  }
 
-  main {
-    font-family: var(--font-main);
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0;
-    font-size: 1.2rem;
-    line-height: 1.8;
-  }
-
-  .content-wrapper {
-    padding: 0 1rem 2rem;
-  }
-
-  .hero-section {
-    position: relative;
-    width: 100vw;
-    height: 80vh;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 calc(-50vw + 50%);
-    background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.4)
-    ), url('/assets/img/IMG_6334.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .hero-content {
-    text-align: center;
-    padding: 2rem;
-    max-width: 850px;
-    z-index: 1;
-  }
-
-  .hero-content h1 {
-    font-family: var(--font-main);
-    font-size: 4rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-content p {
-    font-family: var(--font-main);
-    font-size: 1.8rem;
-    font-weight: 500;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  h2 {
-    font-family: var(--font-main);
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li,p {
-    color: var(--secondary);
-    font-size: 1.3rem;
-  }
-
-  li span {
-    display: none;
-  }
-
-  strong {
-    font-family: var(--font-main);
-    color: var(--secondary);
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-    padding: 0 0.2rem;
-    background: linear-gradient(180deg, 
-      transparent 65%, 
-      rgba(46, 139, 87, 0.2) 65%
-    );
-  }
-
-  .text-section {
-    text-align: center;
-    max-width: 55rem;
-    margin: 0 auto;
-    color: var(--secondary);
-  }
-
-  .text-section p {
-    margin-bottom: 2rem;
-    font-size: 1.3rem;
-  }
-
-  .values-section li {
-    font-family: var(--font-main);
-    font-size: 1.3rem;
-    font-weight: 500;
-  }
-
-  .contact-section {
-    text-align: center;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .contact-links a {
-    color: var(--secondary);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.3rem;
-  }
-
-  .contact-links span {
-    font-size: 1.4rem;
-  }
-
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 1.8rem;
-    }
-
-    main {
-      font-size: 1.1rem;
-    }
-
-    .hero-section {
-      height: 60vh;
-      min-height: 400px;
-    }
-
-    .hero-content h1 {
-      font-size: 2.5rem;
-    }
-
-    .hero-content p {
-      font-size: 1.4rem;
-    }
-  }
-
-  .ambitions-section ul,
-  .values-section ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .ambitions-section li,
-  .values-section li {
-    position: relative;
-    padding-left: 2rem;
-    color: var(--secondary);
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-  }
-
-  .ambitions-section li::before,
-  .values-section li::before {
-    content: "•";
-    position: absolute;
-    left: 0.5rem;
-    color: var(--primary);
-    font-size: 1.4rem;
-    line-height: 1.4;
-  }
-
-  .contact-form {
-    max-width: 40rem;
-    margin: 3rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--secondary);
-    font-size: 1.2rem;
-    font-weight: 500;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 0.5rem;
-    font-family: var(--font-main);
-    font-size: 1.2rem;
-    color: var(--secondary);
-    transition: border-color 0.2s ease;
-    margin: 0;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: #9ca3af;
-  }
-
-  .contact-form button {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 1rem 2rem;
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    font-family: var(--font-main);
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  .contact-form button:hover {
-    background-color: #247a48;
-  }
-
-  .form-note {
-    margin-top: 1.5rem;
-    color: var(--secondary);
-    font-size: 1.1rem;
-  }
-
-  .phone-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--primary);
-    color: white !important;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s ease;
-  }
-
-  .phone-button:hover {
-    background-color: #247a48;
-    transform: translateY(-2px);
-  }
-
-  .phone-button span {
-    font-size: 1.2rem;
-  }
-
-  li h3 + p {
-    margin-left: 0;
-  }
-
-  li h3 + ul.list-disc {
-    margin-left: 1rem;
-    list-style-type: disc;
-  }
-
-  .social-card {
-    background-color: #f8f9fa;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .social-card h4 {
-    color: var(--secondary);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .social-card p {
-    color: var(--secondary);
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .facebook-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: #1877f2; /* Couleur officielle Facebook */
-    color: white !important;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.2s ease;
-  }
-
-  .facebook-button:hover {
-    background-color: #1664d9;
-    transform: translateY(-2px);
-  }
-
-  .facebook-button span {
-    font-size: 1.2rem;
-  }
-
-  .photo-credit {
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
-    font-size: 0.75rem;
-    color: white;
-    opacity: 0.7;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    font-style: italic;
-  }
-
-  .photo-credit:hover {
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    .photo-credit {
-      font-size: 0.7rem;
-      bottom: 0.8rem;
-      right: 1rem;
-    }
-  }
 </style>
  
  

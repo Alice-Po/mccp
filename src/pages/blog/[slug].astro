@@ -4,7 +4,6 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  console.log('Posts pour getStaticPaths:', posts); // Debug
   
   return posts.map(post => {
     // Générer un slug directement ici sans fonction auxiliaire
@@ -12,8 +11,6 @@ export async function getStaticPaths() {
       .toLowerCase()
       .replace(/[^\w\s]/g, '')
       .replace(/\s+/g, '-');
-    
-    console.log('Slug généré:', slug); // Debug
     
     return {
       params: { slug },
@@ -34,7 +31,6 @@ const { post } = Astro.props;
           <time datetime={post.data.pubDate.toISOString()}>
             {post.data.pubDate.toLocaleDateString('fr-FR')}
           </time>
-          <span class="author">par {post.data.author}</span>
         </div>
       </div>
 
@@ -47,11 +43,21 @@ const { post } = Astro.props;
       )}
 
       <div class="post-content">
-        <p>{post.data.description}</p>
+        <p class="description">{post.data.description}</p>
         
         <!-- Contenu de l'article -->
         <div class="article-body">
           {post.body && <p>{post.body}</p>}
+        </div>
+        
+        <!-- Boutons de navigation -->
+        <div class="article-navigation">
+          <a href="/blog" class="nav-button secondary-button">
+            <span class="nav-icon">←</span> Retour aux actualités
+          </a>
+          <a href="/" class="nav-button primary-button">
+            Retour à l'accueil
+          </a>
         </div>
       </div>
     </article>
@@ -63,53 +69,5 @@ const { post } = Astro.props;
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem 1rem;
-  }
-
-  .blog-post {
-    background-color: white;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  }
-
-  .post-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 2rem 1rem 0;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    color: var(--secondary);
-    margin-bottom: 1rem;
-  }
-
-  .post-meta {
-    color: var(--secondary);
-    opacity: 0.8;
-    font-size: 0.9rem;
-  }
-
-  .post-image {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: cover;
-    margin-bottom: 2rem;
-  }
-
-  .post-content {
-    padding: 0 2rem 2rem;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: var(--secondary);
-  }
-
-  .author {
-    margin-left: 1rem;
-  }
-
-  .article-body {
-    margin-top: 2rem;
   }
 </style>
