@@ -1,0 +1,12 @@
+---
+title: 'Nous étions au marché ce premier Mai'
+description: 'Ce matin, jeudi 1er Mai, nous étions au marché de Putanges-Pont-Écrepin pour faire connaître et discuter de notre démarche.'
+pubDate: 2024-03-16
+author: 'MCCP'
+image: '/assets/img/marche1052025.jpeg'
+tags: ['test']
+draft: false
+---
+
+Ce matin, jeudi 1er Mai, nous étions au marché de Putanges-Pont-Écrepin pour faire connaître et discuter de notre démarche.
+Samedi 10 Mai de 10h à 12h nous serons au bord du lac de Rabodanges pour un moment convivial. Si vous souhaitez nous rencontrer et venir discuter des prochains pas de la liste avec nous vous êtes les bienvenues !

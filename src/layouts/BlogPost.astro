@@ -1,0 +1,72 @@
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+
+<Layout title={frontmatter.title}>
+  <main>
+    <article class="blog-post">
+      <div class="post-header">
+        <h1>{frontmatter.title}</h1>
+        <div class="post-meta">
+          <time datetime={frontmatter.pubDate}>
+            {new Date(frontmatter.pubDate).toLocaleDateString('fr-FR')}
+          </time>
+          <span class="author">par {frontmatter.author}</span>
+        </div>
+      </div>
+
+      {frontmatter.image && (
+        <img 
+          src={frontmatter.image} 
+          alt={frontmatter.title}
+          class="post-image"
+        />
+      )}
+
+      <div class="post-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .post-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    color: var(--secondary);
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .post-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  .author {
+    margin-left: 1rem;
+  }
+</style> 
