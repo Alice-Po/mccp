@@ -274,11 +274,23 @@ strong {
   margin-bottom: 1.5rem;
 }
 
+.article-body li {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
 .article-body strong {
-  background-color: rgba(46, 139, 87, 0.1);
+  background: rgba(46, 139, 87, 0.1);
   padding: 0.2rem 0.4rem;
   border-radius: 0.3rem;
   font-weight: 600;
+}
+
+.article-body div.strong {
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  font-weight: 600;
+  display: inline-block;
 }
 
 /* Styles pour la section hero */

@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -20,6 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
@@ -47,7 +48,7 @@ const { post } = Astro.props;
         
         <!-- Contenu de l'article -->
         <div class="article-body">
-          {post.body && <p>{post.body}</p>}
+          <Content />
         </div>
         
         <!-- Boutons de navigation -->
