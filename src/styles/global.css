@@ -635,3 +635,33 @@ strong {
     margin-bottom: 0.5rem;
   }
 }
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.instagram-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #e1306c; /* Couleur officielle Instagram */
+  color: white !important;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.instagram-button:hover {
+  background-color: #c13584; /* Version plus foncée pour le survol */
+  transform: translateY(-2px);
+}
+
+.instagram-button span {
+  font-size: 1.2rem;
+}
