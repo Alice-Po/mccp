@@ -89,10 +89,39 @@ import Layout from "../layouts/Layout.astro";
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
     
-    // Ouvrir le modal au clic sur l'image
+    // Fonction pour vérifier si l'appareil est mobile
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+    
+    // Ouvrir le modal au clic sur l'image (seulement sur desktop)
     if (image) {
-      image.addEventListener('click', () => {
-        if (modal && modalImg) {
+      // Mettre à jour le style du curseur en fonction de la taille de l'écran
+      const updateCursorStyle = () => {
+        if (isMobile()) {
+          image.style.cursor = 'default'; // Curseur normal sur mobile
+          image.title = ''; // Supprimer le titre sur mobile
+          
+          // Masquer la légende sur mobile
+          const caption = document.querySelector('.image-caption');
+          if (caption) caption.style.display = 'none';
+        } else {
+          image.style.cursor = 'pointer'; // Curseur pointer sur desktop
+          image.title = 'Cliquez pour agrandir l\'image'; // Rétablir le titre sur desktop
+          
+          // Afficher la légende sur desktop
+          const caption = document.querySelector('.image-caption');
+          if (caption) caption.style.display = 'block';
+        }
+      };
+      
+      // Mettre à jour le style initial
+      updateCursorStyle();
+      
+      // Mettre à jour le style lors du redimensionnement de la fenêtre
+      window.addEventListener('resize', updateCursorStyle);
+      
+      // Ajouter l'événement de clic uniquement si ce n'est pas un mobile
+      image.addEventListener('click', (e) => {
+        if (!isMobile() && modal && modalImg) {
           modal.classList.add('open');
           modalImg.src = image.src;
           document.body.style.overflow = 'hidden'; // Empêcher le défilement
