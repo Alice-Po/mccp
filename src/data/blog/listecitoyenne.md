@@ -3,7 +3,7 @@ title: "Qu'est-ce qu'une liste citoyenne et participative ?"
 description: "Depuis quelques années, nous entendons de plus en plus parler de 'listes citoyennes' ou 'listes participatives' lors des élections municipales. Mais concrètement, qu'est-ce que cela signifie pour notre commune et ses habitants ? Explications simples."
 pubDate: 2025-05-09
 author: 'MCCP'
-image: '/assets/img/liste-citoyenne.jpg'
+image: '/assets/img/liste-citoyenne.png'
 tags: ['test']
 draft: false
 ---
