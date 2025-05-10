@@ -1,0 +1,414 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Rétro-planning - MCCP">
+  <main>
+    <h1>Notre rétro-planning jusqu'aux élections</h1>
+    
+    <div class="retroplanning-image-container">
+      <img 
+        src="/assets/img/retroplanning.jpeg" 
+        alt="Rétro-planning manuscrit" 
+        class="retroplanning-image" 
+        id="retroplanningImage" 
+        title="Cliquez pour agrandir l'image"
+      />
+      <div class="image-caption">Cliquez sur l'image pour l'agrandir</div>
+    </div>
+    
+    <!-- Modal pour l'image agrandie -->
+    <div id="imageModal" class="modal" role="dialog" aria-label="Image agrandie">
+      <span class="close-modal" aria-label="Fermer">&times;</span>
+      <img class="modal-content" id="modalImage" alt="Rétro-planning manuscrit agrandi">
+    </div>
+    
+    <div class="timeline">
+      <!-- Phase 1 -->
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <div class="timeline-date">Jusqu'à Octobre 2025</div>
+          <h2>RENFORCEMENT DU COLLECTIF</h2>
+          <ul>
+            <li>Accueil de nouvelles personnes</li>
+            <li>Mobilisations (porte à porte, tables rondes, discussions thématiques)</li>
+            <li>Constitution du programme</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Célébration 1 -->
+      <div class="timeline-celebration">
+        <div class="celebration-text">🎉 On célèbre !</div>
+      </div>
+      
+      <!-- Phase 2 -->
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <div class="timeline-date">D'Octobre à Décembre 2025</div>
+          <h2>NAISSANCE DE LA LISTE</h2>
+          <ul>
+            <li>Ateliers thématiques</li>
+            <li>Choix des candidats</li>
+            <li>Choix de la tête de liste</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Célébration 2 -->
+      <div class="timeline-celebration">
+        <div class="celebration-text">🎉 On célèbre !</div>
+      </div>
+      
+      <!-- Phase 3 -->
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <div class="timeline-date">De Décembre 2025 à Mars 2026</div>
+          <h2>CAMPAGNE</h2>
+          <ul>
+            <li>Formation des candidats</li>
+            <li>Faire campagne (porte à porte, événements)</li>
+            <li>Dépôt de la liste</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Célébration finale -->
+      <div class="timeline-celebration final-celebration">
+        <div class="celebration-text">En Mars 2026, on gagne les élections !</div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Récupérer les éléments
+    const image = document.getElementById('retroplanningImage');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-modal');
+    
+    // Ouvrir le modal au clic sur l'image
+    if (image) {
+      image.addEventListener('click', () => {
+        if (modal && modalImg) {
+          modal.classList.add('open');
+          modalImg.src = image.src;
+          document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        }
+      });
+    }
+    
+    // Fermer le modal au clic sur le bouton de fermeture
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = ''; // Réactiver le défilement
+      });
+    }
+    
+    // Fermer le modal au clic en dehors de l'image
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('open');
+          document.body.style.overflow = ''; // Réactiver le défilement
+        }
+      });
+    }
+    
+    // Fermer le modal avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = ''; // Réactiver le défilement
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Styles pour l'image du rétro-planning */
+  .retroplanning-image-container {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+  
+  .retroplanning-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Indiquer que l'image est cliquable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .retroplanning-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .image-caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-style: italic;
+  }
+  
+  /* Styles pour le modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+  }
+  
+  .modal.open {
+    display: flex;
+  }
+  
+  .modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: zoom 0.3s ease;
+  }
+  
+  @keyframes zoom {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1101;
+    transition: color 0.3s ease;
+  }
+  
+  .close-modal:hover {
+    color: var(--primary);
+  }
+  
+  /* Styles spécifiques à la frise chronologique */
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Ligne verticale */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: var(--primary);
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    width: 100%;
+    clear: both;
+  }
+  
+  .timeline-content {
+    position: relative;
+    width: 45%;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Positionnement explicite gauche/droite */
+  .timeline-item.left .timeline-content {
+    float: left;
+  }
+  
+  .timeline-item.right .timeline-content {
+    float: right;
+  }
+  
+  /* Points sur la ligne */
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  
+  /* Flèches pointant vers la ligne */
+  .timeline-item.left .timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid white;
+  }
+  
+  .timeline-item.right .timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+  }
+  
+  .timeline-date {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: rgba(46, 139, 87, 0.1);
+    border-radius: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-content h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .timeline-content ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+  
+  .timeline-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Célébrations */
+  .timeline-celebration {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+    z-index: 2;
+    clear: both;
+  }
+  
+  .celebration-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .celebration-text {
+    background-color: var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .final-celebration .celebration-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  .final-celebration .celebration-text {
+    background-color: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  /* Animation au survol */
+  .timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Clearfix pour éviter les problèmes de flottants */
+  .timeline-item::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 2rem;
+    }
+    
+    .timeline-item::after {
+      left: 2rem;
+    }
+    
+    .timeline-content {
+      width: calc(100% - 4rem);
+      float: none;
+      margin-left: 4rem;
+    }
+    
+    .timeline-item.left .timeline-content,
+    .timeline-item.right .timeline-content {
+      float: none;
+    }
+    
+    .timeline-item.left .timeline-content::after,
+    .timeline-item.right .timeline-content::after {
+      display: none;
+    }
+    
+    .timeline-celebration {
+      margin-left: 2rem;
+      align-items: flex-start;
+    }
+  }
+</style>

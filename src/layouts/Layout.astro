@@ -7,9 +7,17 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 const { title } = Astro.props;
+
+// Définir les liens de navigation
+const navLinks = [
+  { href: "/", text: "Accueil" },
+  { href: "/blog", text: "Actualités" },
+  { href: "/retroplanning", text: "Rétro-planning" },
+  // Ajoutez d'autres liens selon vos besoins
+];
 ---
 
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" , initial-scale="1" />
@@ -23,7 +31,7 @@ const { title } = Astro.props;
     <meta property="og:url" content={Astro.url} />
     <!-- <meta property="og:image" content="/assets/img/" /> -->
     <meta property="og:image:alt" content="MCC Putanges-le-Lac" />
-    <meta property="og:locale" content="en" />
+    <meta property="og:locale" content="fr" />
     <meta property="og:description" content="MCC Putanges-le-Lac" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,8 +39,50 @@ const { title } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="logo">
+          <a href="/">MCCP</a>
+        </div>
+        
+        <nav class="main-nav">
+          <button class="mobile-menu-toggle" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          
+          <ul class="nav-links">
+            {navLinks.map(link => (
+              <li>
+                <a href={link.href} class={Astro.url.pathname === link.href ? 'active' : ''}>
+                  {link.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
     <slot />
     <Footer />
+    
+    <script>
+      // Script pour le menu mobile
+      document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuToggle && navLinks) {
+          mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('open');
+            navLinks.classList.toggle('open');
+            document.body.classList.toggle('menu-open');
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
