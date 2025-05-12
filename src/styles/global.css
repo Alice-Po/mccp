@@ -818,3 +818,116 @@ strong {
     right: 0;
   }
 }
+
+/* Styles pour la section Kit de communication */
+.kit-section {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.kit-section p {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--secondary);
+  font-size: 1.3rem;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.document-card {
+  display: flex;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.document-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.document-icon {
+  font-size: 2.5rem;
+  margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.document-info {
+  text-align: left;
+  flex: 1;
+}
+
+.document-info h3 {
+  font-size: 1.4rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+}
+
+.document-info p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0 1.5rem;
+  color: var(--secondary);
+  opacity: 0.8;
+  text-align: left;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary);
+  color: white !important;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.download-button span {
+  font-size: 1.2rem;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+  .documents-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .document-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .document-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .document-info {
+    text-align: center;
+  }
+  
+  .document-info p {
+    text-align: center;
+  }
+}

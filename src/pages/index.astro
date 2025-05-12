@@ -149,8 +149,8 @@ function generateSlug(title: string) {
 
 
             </li>
-            <li>
-              <h3 class="text-lg font-bold text-secondary">Suivez-nous sur les réseaux sociaux</h3>
+            <li class="pb-4">
+              <h3 class="text-lg font-bold text-secondary mt-4">Suivez-nous sur les réseaux sociaux</h3>
               <p>Restez informés de nos actualités et événements</p>
               <div class="social-buttons">
                 <a href="https://www.facebook.com/mccputanges" class="facebook-button" target="_blank" rel="noopener noreferrer">
@@ -162,7 +162,7 @@ function generateSlug(title: string) {
               </div>
             </li>
             <li>
-              <h3 class="text-lg font-bold text-secondary">Parlez en autour de vous !</h3>
+              <h3 class="text-lg font-bold text-secondary mt-4">Parlez en autour de vous !</h3>
               <p>Nous cherchons toujours des énergies vives.</p>
             </li>
             
@@ -185,7 +185,7 @@ function generateSlug(title: string) {
             </li>
           </ul>
         </div>
-      </section>
+  </section>
 
       <!-- Section Contact -->
       <section class="contact-section">
@@ -227,13 +227,45 @@ function generateSlug(title: string) {
             Envoyer
           </button>
         </form>
-         </section>
+      </section>
+
+      <!-- Nouvelle section Kit de communication -->
+      <section class="kit-section">
+        <h2>Kit de communication</h2>
+        <p>Téléchargez et partagez nos documents d'information pour faire connaître notre initiative.</p>
+        
+        <div class="documents-grid">
+          <div class="document-card">
+            <div class="document-icon">📄</div>
+            <div class="document-info">
+              <h3>Livret d'accueil</h3>
+              <p>Livret d'accueil de la démarche et de nos valeurs</p>
+              <a href="/assets/img/MCCP-Livret-daccueil.pdf" download class="download-button">
+                <span>⬇️</span> Télécharger le PDF
+              </a>
+            </div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-icon">📄</div>
+            <div class="document-info">
+              <h3>Tract à imprimer</h3>
+              <p>Carte de visite à distribuer pour informer sur notre initiative citoyenne</p>
+              <a href="/assets/img/tract-a-imprimer.pdf" download class="download-button">
+                <span>⬇️</span> Télécharger le PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 </Layout>
 
 <style>
-
+.contribution-section li {
+  margin-top: 1rem;
+}
 </style>
  
  
