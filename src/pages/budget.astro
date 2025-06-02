@@ -113,14 +113,7 @@ const montants = donneesComptables.donnees_comptables.map(item => item.montant_r
               responsive: true,
               plugins: {
                 legend: {
-                  position: 'bottom',
-                  labels: {
-                    font: {
-                      family: 'League Spartan',
-                      size: 12
-                    },
-                    padding: 15
-                  }
+                  display: false
                 },
                 title: {
                   display: true,
@@ -137,7 +130,7 @@ const montants = donneesComptables.donnees_comptables.map(item => item.montant_r
                     label: function(context) {
                       let label = context.label || '';
                       let value = Number(context.raw) || 0;
-                      return `${label}: ${value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+                      return `${label}: ${value.toFixed(2)} €`;
                     }
                   }
                 }
