@@ -63,9 +63,10 @@ const montants = donneesComptables.donnees_comptables.map(item => item.montant_r
           <ul class="budget-legend">
             {donneesComptables.donnees_comptables.map((item, index) => (
               <li>
-                <span class="legend-color" style={`background-color: ${chartColors[index]}`}></span>
-                <span class="legend-label">{item.libelle}</span>
-                <span class="legend-value">{item.montant_realise.toLocaleString('fr-FR')} €</span>
+
+                <div class="legend-color" style={`background-color: ${chartColors[index]}`}></div>
+                <div class="legend-label">{item.libelle}</div>
+                <div class="legend-value">{item.montant_realise.toLocaleString('fr-FR')} €</div>
               </li>
             ))}
           </ul>
@@ -185,7 +186,7 @@ const montants = donneesComptables.donnees_comptables.map(item => item.montant_r
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    background: var(--background);
+    background: #f8f9fa;
   }
   .legend-color {
     width: 20px;
@@ -196,12 +197,12 @@ const montants = donneesComptables.donnees_comptables.map(item => item.montant_r
   .legend-label {
     flex: 1;
     font-weight: 500;
-    color: var(--secondary);
+    color: #495057;
     font-size: 0.9rem;
   }
   .legend-value {
     font-weight: 600;
-    color: var(--primary);
+    color: #2e8b57;
   }
   @media (max-width: 768px) {
     .budget-container {
