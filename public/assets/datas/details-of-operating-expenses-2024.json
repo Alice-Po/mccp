@@ -1,0 +1,424 @@
+{
+    "donnees_comptables": [
+        {
+            "compte": "6042",
+            "libelle": "Achats de prestations de services (autres que",
+            "montant_realise": 2638.05
+        },
+        {
+            "compte": "60611",
+            "libelle": "Eau et assainissement",
+            "montant_realise": 11928.15
+        },
+        {
+            "compte": "60612",
+            "libelle": "Energie - Electricite",
+            "montant_realise": 65602.50
+        },
+        {
+            "compte": "60621",
+            "libelle": "Combustibles",
+            "montant_realise": 13721.24
+        },
+        {
+            "compte": "60622",
+            "libelle": "Carburants",
+            "montant_realise": 11818.15
+        },
+        {
+            "compte": "60623",
+            "libelle": "Alimentation",
+            "montant_realise": 240.67
+        },
+        {
+            "compte": "60631",
+            "libelle": "Fournitures d'entretien",
+            "montant_realise": 3137.55
+        },
+        {
+            "compte": "60632",
+            "libelle": "Fournitures de petit equipement",
+            "montant_realise": 10630.86
+        },
+        {
+            "compte": "60633",
+            "libelle": "Fournitures de voirie",
+            "montant_realise": 6827.20
+        },
+        {
+            "compte": "60636",
+            "libelle": "Habillement et vetements de travail",
+            "montant_realise": 2027.78
+        },
+        {
+            "compte": "6064",
+            "libelle": "Fournitures administratives",
+            "montant_realise": 6615.52
+        },
+        {
+            "compte": "6068",
+            "libelle": "Autres matieres et fournitures",
+            "montant_realise": 4450.22
+        },
+        {
+            "compte": "611",
+            "libelle": "Contrats de prestations de services",
+            "montant_realise": 13650.83
+        },
+        {
+            "compte": "6132",
+            "libelle": "Locations immobilieres",
+            "montant_realise": 7232.02
+        },
+        {
+            "compte": "61358",
+            "libelle": "Autres",
+            "montant_realise": 5878.87
+        },
+        {
+            "compte": "61521",
+            "libelle": "Terrains",
+            "montant_realise": 25381.04
+        },
+        {
+            "compte": "615221",
+            "libelle": "Batiments publics",
+            "montant_realise": 5532.31
+        },
+        {
+            "compte": "615228",
+            "libelle": "Autres bâtiments",
+            "montant_realise": 19557.04
+        },
+        {
+            "compte": "615231",
+            "libelle": "Voiries",
+            "montant_realise": 21006.78
+        },
+        {
+            "compte": "615232",
+            "libelle": "Réseaux",
+            "montant_realise": 3440.36
+        },
+        {
+            "compte": "61551",
+            "libelle": "Matériel roulant",
+            "montant_realise": 12391.32
+        },
+        {
+            "compte": "61558",
+            "libelle": "Autres biens mobiliers",
+            "montant_realise": 1341.75
+        },
+        {
+            "compte": "6156",
+            "libelle": "Maintenance",
+            "montant_realise": 40275.95
+        },
+        {
+            "compte": "6161",
+            "libelle": "Multirisques",
+            "montant_realise": 26127.96
+        },
+        {
+            "compte": "617",
+            "libelle": "Etudes et recherches",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6182",
+            "libelle": "Divers",
+            "montant_realise": 2901.81
+        },
+        {
+            "compte": "6183",
+            "libelle": "Frais de formation (personnel extérieur à la)",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6184",
+            "libelle": "Versements à des organismes de formation",
+            "montant_realise": 5028.00
+        },
+        {
+            "compte": "6225",
+            "libelle": "Indemnités au comptable et aux régisseurs",
+            "montant_realise": 160.00
+        },
+        {
+            "compte": "62268",
+            "libelle": "Autres honoraires conseils",
+            "montant_realise": 20942.44
+        },
+        {
+            "compte": "6227",
+            "libelle": "Frais d'actes et de contentieux",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6228",
+            "libelle": "Divers",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6231",
+            "libelle": "Annonces et insertions",
+            "montant_realise": 4412.42
+        },
+        {
+            "compte": "6232",
+            "libelle": "Fêtes et cérémonies",
+            "montant_realise": 35794.22
+        },
+        {
+            "compte": "6238",
+            "libelle": "Divers",
+            "montant_realise": 1159.20
+        },
+        {
+            "compte": "6241",
+            "libelle": "Transports de biens et transports collectifs",
+            "montant_realise": 28.00
+        },
+        {
+            "compte": "6261",
+            "libelle": "Frais d'affranchissement",
+            "montant_realise": 1948.49
+        },
+        {
+            "compte": "6262",
+            "libelle": "Frais de télécommunications",
+            "montant_realise": 19811.20
+        },
+        {
+            "compte": "627",
+            "libelle": "Services bancaires et assimilés",
+            "montant_realise": 281.36
+        },
+        {
+            "compte": "6281",
+            "libelle": "Concours divers (cotisations)",
+            "montant_realise": 4810.18
+        },
+        {
+            "compte": "6283",
+            "libelle": "Frais de nettoyage des locaux",
+            "montant_realise": 649.26
+        },
+        {
+            "compte": "62878",
+            "libelle": "A ddes tiers",
+            "montant_realise": 2656.83
+        },
+        {
+            "compte": "6288",
+            "libelle": "Autres",
+            "montant_realise": 12698.86
+        },
+        {
+            "compte": "63512",
+            "libelle": "Autres impôts taxes et versements assimilés s",
+            "montant_realise": 18897.00
+        },
+        {
+            "compte": "637",
+            "libelle": "Autres impôts taxes et versements assimilés (",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6215",
+            "libelle": "Personnel affecté par la collectivité de ratt",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6217",
+            "libelle": "Personnel affecté par la commune membre du GF",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6332",
+            "libelle": "Cotisations versées au FNAL",
+            "montant_realise": 328.02
+        },
+        {
+            "compte": "6336",
+            "libelle": "Cotisations au centre national et aux CDG de",
+            "montant_realise": 8538.04
+        },
+        {
+            "compte": "6338",
+            "libelle": "Autres impôts taxes et versements assimilés s",
+            "montant_realise": 985.11
+        },
+        {
+            "compte": "64111",
+            "libelle": "Rémunération principale",
+            "montant_realise": 158946.75
+        },
+        {
+            "compte": "64131",
+            "libelle": "Rémunérations",
+            "montant_realise": 169098.71
+        },
+        {
+            "compte": "6451",
+            "libelle": "Cotisations à l'URSSAF",
+            "montant_realise": 80779.71
+        },
+        {
+            "compte": "6453",
+            "libelle": "Cotisations aux Caisses de retraite",
+            "montant_realise": 48146.64
+        },
+        {
+            "compte": "6454",
+            "libelle": "Cotisations aux ASSEDIC",
+            "montant_realise": 8460.22
+        },
+        {
+            "compte": "6455",
+            "libelle": "Cotisations pour assurance du personnel",
+            "montant_realise": 14385.36
+        },
+        {
+            "compte": "6456",
+            "libelle": "Versement au F,N,C, du supplément familial",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6474",
+            "libelle": "Versement aux autres oeuvres sociales",
+            "montant_realise": 2604.00
+        },
+        {
+            "compte": "6478",
+            "libelle": "Autres charges sociales diverses",
+            "montant_realise": 39372.52
+        },
+        {
+            "compte": "6488",
+            "libelle": "Autres charges de personnel",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "7391111",
+            "libelle": "Dégrèvement de taxe foncière sur les propriét",
+            "montant_realise": 1059.00
+        },
+        {
+            "compte": "739221",
+            "libelle": "FNGIR",
+            "montant_realise": 60969.00
+        },
+        {
+            "compte": "73952",
+            "libelle": "Fraction compensatoire de la CVAE",
+            "montant_realise": 312.00
+        },
+        {
+            "compte": "65134",
+            "libelle": "Aides",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "65311",
+            "libelle": "Indemnités de fonction",
+            "montant_realise": 123343.70
+        },
+        {
+            "compte": "65313",
+            "libelle": "Cotisations de retraite",
+            "montant_realise": 5171.61
+        },
+        {
+            "compte": "65314",
+            "libelle": "Cotisations de sécurité sociale - part patron",
+            "montant_realise": 7874.76
+        },
+        {
+            "compte": "65315",
+            "libelle": "Formation",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "65568",
+            "libelle": "Autres contributions",
+            "montant_realise": 225.00
+        },
+        {
+            "compte": "6558",
+            "libelle": "Autres contributions obligatoires",
+            "montant_realise": 1922.02
+        },
+        {
+            "compte": "657363",
+            "libelle": "CCAS-CIAS",
+            "montant_realise": 1500.00
+        },
+        {
+            "compte": "65748",
+            "libelle": "Autres personnes de droit privé",
+            "montant_realise": 9578.00
+        },
+        {
+            "compte": "65882",
+            "libelle": "Autres charges diverses de gestion courante",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "65888",
+            "libelle": "Autres",
+            "montant_realise": 9009.94
+        },
+        {
+            "compte": "66111",
+            "libelle": "Intérêts réglés à l'échéance",
+            "montant_realise": 4893.68
+        },
+        {
+            "compte": "673",
+            "libelle": "Titres annulés (sur exercices antérieurs)",
+            "montant_realise": 339.80
+        },
+        {
+            "compte": "6815",
+            "libelle": "Dotations aux amortissements aux dépréciation",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "6817",
+            "libelle": "Dotations aux dépréciations des actifs circul",
+            "montant_realise": 406.95
+        },
+        {
+            "compte": "23",
+            "libelle": "Virement à la section d'investissement",
+            "montant_realise": 0.00
+        },
+        {
+            "compte": "675",
+            "libelle": "Valeur comptable des immobilisations cédées",
+            "montant_realise": 108876.91
+        },
+        {
+            "compte": "6761",
+            "libelle": "Différences sur réalisations (positives) tran",
+            "montant_realise": 6201.72
+        },
+        {
+            "compte": "6811",
+            "libelle": "Dotations aux amortissements des immobilisati",
+            "montant_realise": 10923.00
+        },
+        {
+            "compte": "Non utilisé",
+            "libelle": "Non utilisé par rapport au budget prévu",
+            "montant_realise": 2248919.94
+        }
+    ],
+    "resume": {
+        "nombre_de_comptes": 81,
+        "total_realise": 3516832.55,
+        "devise": "EUR"
+    }
+}
