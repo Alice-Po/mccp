@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Chart from '../components/Chart.astro';
 import { readFileSync } from 'fs';
 
 interface DetailsOfOperatingExpenses2024 {
@@ -8,57 +9,12 @@ interface DetailsOfOperatingExpenses2024 {
   montant_realise: number;
 }
 
-interface DonneeAvecCouleur extends DetailsOfOperatingExpenses2024 {
-  color: string;
-  originalIndex: number;
-}
-
 // Lecture du fichier JSON réel
 const jsonContent = readFileSync('public/assets/datas/details-of-operating-expenses-2024.json', 'utf-8');
 const data = JSON.parse(jsonContent);
 
-// Utilisation des vraies données
-const donneesComptables = {
-  "details_of_operating_expenses_2024": data.details_of_operating_expenses_2024 as DetailsOfOperatingExpenses2024[]
-};
-
-const chartColors = [
-  '#2e8b57', // Vert primaire
-  '#1b365d', // Bleu marine
-  '#ac502b', // Accent
-  '#747474', // Gris
-  '#e0e0e0', // Gris clair
-  '#ff6b6b', // Rouge
-  '#9b59b6', // Violet
-  '#e67e22', // Orange
-  '#34495e', // Bleu gris
-  '#16a085', // Turquoise
-  '#f39c12', // Jaune orangé
-  '#e74c3c', // Rouge vif
-  '#3498db', // Bleu ciel
-  '#95a5a6', // Gris moyen
-  '#d35400', // Orange foncé
-  '#8e44ad', // Violet foncé
-  '#27ae60', // Vert émeraude
-  '#f1c40f', // Jaune
-  '#e91e63', // Rose
-  '#607d8b'  // Bleu gris foncé
-];
-
-// Créer un tableau avec les données et leurs couleurs, puis trier par montant décroissant
-const dataWithColors: DonneeAvecCouleur[] = donneesComptables.details_of_operating_expenses_2024.map((item: DetailsOfOperatingExpenses2024, index: number) => ({
-  ...item,
-  color: chartColors[index % chartColors.length], // Utilise modulo pour éviter de dépasser le tableau de couleurs
-  originalIndex: index
-})).sort((a: DonneeAvecCouleur, b: DonneeAvecCouleur) => b.montant_realise - a.montant_realise);
-
-// Extraire les données triées pour Chart.js
-const labels = dataWithColors.map((item: DonneeAvecCouleur) => item.libelle);
-const montants = dataWithColors.map((item: DonneeAvecCouleur) => item.montant_realise);
-const sortedColors = dataWithColors.map((item: DonneeAvecCouleur) => item.color);
-
-// Calculer le total des dépenses affichées
-const totalDepenses = dataWithColors.reduce((total, item) => total + item.montant_realise, 0);
+// Utilisation des vraies données avec la bonne clé
+const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating_expenses_2024 as DetailsOfOperatingExpenses2024[];
 ---
 
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
@@ -82,134 +38,13 @@ const totalDepenses = dataWithColors.reduce((total, item) => total + item.montan
     <section class="budget-section">
       <h1>Budget 2024</h1>
       
-      <div class="details-of-operating-expenses-2024-container">
-        <div class="chart-container">
-          <canvas id="budgetChart" aria-label="Graphique en camembert du budget 2024"></canvas>
-          
-        </div>
-        
-       
-        
-        <div class="budget-details">
-          <h2>Détail des dépenses de fonctionnement 2024</h2>
-           <!-- Total des dépenses en évidence -->
-        <div class="total-depenses">
-          <div class="total-content">
-            <span class="total-label">Total des dépenses de fonctionnement</span>
-            <span class="total-amount">{totalDepenses.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €</span>
-          </div>
-        </div>
-          <ul class="budget-legend">
-            {dataWithColors.map((item, index) => (
-              <li>
-                <div class="legend-color" style={`background-color: ${item.color}`}></div>
-                <div class="legend-label">{item.libelle}</div>
-                <div class="legend-value">{item.montant_realise.toLocaleString('fr-FR')} €</div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <Chart 
+        data={depensesData}
+        title="Détail des dépenses de fonctionnement 2024"
+        totalLabel="Total des dépenses de fonctionnement"
+      />
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script define:vars={{ labels, montants, sortedColors }}>
-    let chartInstance = null;
-
-    // Attendre que le DOM soit chargé
-    window.addEventListener('load', () => {
-      try {
-        // Vérifier les données
-        console.log('Labels:', labels);
-        console.log('Montants:', montants);
-        console.log('Couleurs:', sortedColors);
-
-        const canvas = document.getElementById('budgetChart');
-        if (!canvas) {
-          console.error('Canvas #budgetChart non trouvé');
-          return;
-        }
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          console.error('Contexte 2D du canvas non disponible');
-          return;
-        }
-
-        // Créer le graphique en camembert
-        chartInstance = new Chart(ctx, {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Budget Réalisé 2024',
-              data: montants,
-              backgroundColor: sortedColors,
-              borderWidth: 2,
-              borderColor: '#ffffff',
-              hoverBorderWidth: 4,
-              hoverBorderColor: '#333333'
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false
-              },
-              title: {
-                display: true,
-                text: 'Dépenses de fonctionnement 2024',
-                font: {
-                  family: 'League Spartan',
-                  size: 20,
-                  weight: 'bold'
-                },
-                padding: 20
-              },
-              tooltip: {
-                callbacks: {
-                  label: function(context) {
-                    let label = context.label || '';
-                    let value = Number(context.raw) || 0;
-                    return `${label}: ${value.toFixed(2)} €`;
-                  }
-                }
-              }
-            }
-          }
-        });
-
-        // Ajouter les interactions avec la sidebar
-        const legendItems = document.querySelectorAll('.budget-legend li');
-        legendItems.forEach((item, index) => {
-          item.addEventListener('mouseenter', () => {
-            // Mettre en évidence le segment correspondant
-            chartInstance.setActiveElements([{
-              datasetIndex: 0,
-              index: index
-            }]);
-            chartInstance.update('none');
-            
-            // Ajouter une classe CSS pour l'effet visuel sur l'item
-            item.classList.add('legend-hover');
-          });
-
-          item.addEventListener('mouseleave', () => {
-            // Enlever la mise en évidence
-            chartInstance.setActiveElements([]);
-            chartInstance.update('none');
-            
-            // Enlever la classe CSS
-            item.classList.remove('legend-hover');
-          });
-        });
-
-      } catch (error) {
-        console.error('Erreur lors de la création du graphique:', error);
-      }
-    });
-  </script>
 </Layout>
 
 <style>
@@ -305,191 +140,10 @@ const totalDepenses = dataWithColors.reduce((total, item) => total + item.montan
         width: 100%;
       }
     }
-
-    .details-of-operating-expenses-2024-container {
-      width: 100%;
-      margin: 0;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 3rem;
-      align-items: start;
-    }
-    
-    .chart-container {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      width: 100%;
-      grid-column: 1;
-      grid-row: 1;
-    }
-    
-    /* Styles pour le total des dépenses */
-    .total-depenses {
-      background: linear-gradient(135deg, #2e8b57 0%, #1b5e39 100%);
-      border-radius: 1.5rem;
-      padding: 2rem;
-      box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
-      text-align: center;
-      grid-column: 1;
-      grid-row: 2;
-    }
-    
-    .budget-details {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      width: 100%;
-      grid-column: 2;
-      grid-row: 1 / 3;
-      display: flex;
-      flex-direction: column;
-      max-height: calc(100vh - 200px); /* Hauteur maximum raisonnable */
-      overflow: hidden;
-    }
-    
-    .budget-legend {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      overflow-y: auto;
-      flex: 1;
-      /* Scroll discret et stylé */
-      scrollbar-width: thin;
-      scrollbar-color: rgba(46, 139, 87, 0.3) transparent;
-    }
-    
-    /* Styles pour le scrollbar sur Webkit (Chrome, Safari) */
-    .budget-legend::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    .budget-legend::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    .budget-legend::-webkit-scrollbar-thumb {
-      background-color: rgba(46, 139, 87, 0.3);
-      border-radius: 3px;
-      transition: background-color 0.2s ease;
-    }
-    
-    .budget-legend::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(46, 139, 87, 0.5);
-    }
-    
-    .budget-legend li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      padding: 0.75rem;
-      border-radius: 0.4rem;
-      background: #f8f9fa;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .budget-legend li:hover,
-    .budget-legend li.legend-hover {
-      background: #e9ecef;
-      transform: translateX(3px);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    }
-    
-    .legend-color {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      margin-right: 1rem;
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-    }
-    
-    .budget-legend li:hover .legend-color,
-    .budget-legend li.legend-hover .legend-color {
-      transform: scale(1.15);
-    }
-    
-    .legend-label {
-      flex: 1;
-      font-weight: 500;
-      color: #495057;
-      font-size: 0.9rem;
-      margin-right: 0.75rem;
-      line-height: 1.3;
-    }
-    
-    .legend-value {
-      font-weight: 600;
-      color: #2e8b57;
-      font-size: 0.95rem;
-      text-align: right;
-      min-width: 110px;
-    }
     
     h1 {
       text-align: center;
       margin-bottom: 3rem;
       font-size: 2.5rem;
-    }
-    
-    .total-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .total-label {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .total-amount {
-      color: white;
-      font-size: 2.5rem;
-      font-weight: 700;
-      font-family: 'League Spartan', sans-serif;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    h2 {
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-      flex-shrink: 0; /* Empêche la compression */
-    }
-    
-    /* Styles pour le total des dépenses dans la sidebar - maintenant fixe en haut */
-    .budget-details .total-depenses {
-      background: linear-gradient(135deg, #2e8b57 0%, #1b5e39 100%);
-      border-radius: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
-      text-align: center;
-      margin-bottom: 1rem;
-      flex-shrink: 0; /* Empêche la compression */
-    }
-    
-    .budget-details .total-label {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 0.25rem;
-    }
-    
-    .budget-details .total-amount {
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 700;
-      font-family: 'League Spartan', sans-serif;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 </style>
