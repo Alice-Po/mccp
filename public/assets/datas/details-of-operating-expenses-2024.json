@@ -1,5 +1,5 @@
 {
-    "donnees_comptables": [
+    "details_of_operating_expenses_2024": [
         {
             "compte": "6042",
             "libelle": "Achats de prestations de services (autres que",
@@ -411,9 +411,9 @@
             "montant_realise": 10923.00
         },
         {
-            "compte": "Non utilisé",
-            "libelle": "Non utilisé par rapport au budget prévu",
-            "montant_realise": 2248919.94
+            "compte": "Épargne nette",
+            "libelle": "Épargne nette",
+            "montant_realise": 199457.21
         }
     ],
     "resume": {
