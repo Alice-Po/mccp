@@ -1,0 +1,202 @@
+---
+interface Props {
+  title: string;
+  isOpenByDefault?: boolean;
+}
+
+const { title, isOpenByDefault = false } = Astro.props;
+
+// Générer un ID unique pour cet accordéon
+const accordionId = `accordion-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="chart-accordion">
+  <button 
+    class="accordion-header" 
+    type="button" 
+    data-accordion-target={accordionId}
+    aria-expanded={isOpenByDefault ? "true" : "false"}
+    aria-controls={accordionId}
+  >
+    <div class="accordion-title">
+      <span class="accordion-icon">📊</span>
+      <h3>{title}</h3>
+    </div>
+    <span class="accordion-chevron">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </span>
+  </button>
+  
+  <div 
+    id={accordionId}
+    class={`accordion-content ${isOpenByDefault ? 'open' : ''}`}
+    aria-hidden={isOpenByDefault ? "false" : "true"}
+  >
+    <div class="accordion-body">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionButtons = document.querySelectorAll('.accordion-header');
+    
+    accordionButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-accordion-target');
+        const content = document.getElementById(targetId);
+        const chevron = button.querySelector('.accordion-chevron');
+        
+        if (content) {
+          const isOpen = content.classList.contains('open');
+          
+          if (isOpen) {
+            // Fermer l'accordéon
+            content.classList.remove('open');
+            content.style.maxHeight = null;
+            button.setAttribute('aria-expanded', 'false');
+            content.setAttribute('aria-hidden', 'true');
+            chevron.style.transform = 'rotate(0deg)';
+          } else {
+            // Ouvrir l'accordéon
+            content.classList.add('open');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            button.setAttribute('aria-expanded', 'true');
+            content.setAttribute('aria-hidden', 'false');
+            chevron.style.transform = 'rotate(180deg)';
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .chart-accordion {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 2px solid #f1f3f4;
+    transition: all 0.3s ease;
+  }
+
+  .chart-accordion:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary);
+  }
+
+  .accordion-header {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    color: white;
+  }
+
+  .accordion-header:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #1a4d34 100%);
+  }
+
+  .accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .accordion-icon {
+    font-size: 1.5rem;
+  }
+
+  .accordion-title h3 {
+    margin: 0;
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .accordion-chevron {
+    transition: transform 0.3s ease;
+    color: white;
+    opacity: 0.8;
+  }
+
+  .accordion-chevron:hover {
+    opacity: 1;
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    background: #fafbfc;
+  }
+
+  .accordion-content.open {
+    max-height: none !important;
+  }
+
+  .accordion-body {
+    padding: 2rem;
+    background: #fafbfc;
+  }
+
+  /* Animation pour les graphiques à l'intérieur */
+  .accordion-content.open :global(.chart-component-container) {
+    animation: slideInUp 0.6s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .accordion-header {
+      padding: 1rem 1.5rem;
+    }
+    
+    .accordion-title h3 {
+      font-size: 1.2rem;
+    }
+    
+    .accordion-icon {
+      font-size: 1.3rem;
+    }
+    
+    .accordion-body {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .accordion-header {
+      padding: 1rem;
+    }
+    
+    .accordion-title {
+      gap: 0.75rem;
+    }
+    
+    .accordion-title h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style> 
