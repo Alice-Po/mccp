@@ -53,8 +53,10 @@ function formatCurrency(amount: number): string {
 
 // Fonction pour déterminer la couleur de fond selon le type de section
 function getSectionColor(type: string, highlight_color?: string): string {
-  if (type === 'expenses') return '#FFF9C4'; // Jaune clair
-  if (type === 'revenues') return '#E8F5E8'; // Vert clair
+  if (type === 'expenses') return '#FFF9C4'; // Jaune clair - fonctionnement
+  if (type === 'revenues') return '#E8F5E8'; // Vert clair - fonctionnement
+  if (type === 'investment_expenses') return '#FFE5B4'; // Orange clair - investissement
+  if (type === 'investment_revenues') return '#E5F3FF'; // Bleu clair - investissement
   if (type === 'balance') return '#F0F4F8'; // Gris-bleu clair
   return '#FFFFFF';
 }

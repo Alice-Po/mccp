@@ -1,0 +1,266 @@
+{
+    "details_of_operating_incomes_2024": [
+        {
+            "compte": "7021",
+            "libelle": "Ventes de récoltes",
+            "montant_realise": 76.00,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70311",
+            "libelle": "Concession dans les cimetières (produit net)",
+            "montant_realise": 2050.00,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70322",
+            "libelle": "Droits de stationnement et de location sur le",
+            "montant_realise": 1000.00,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70323",
+            "libelle": "Redevance d'occupation du domaine public",
+            "montant_realise": 4346.77,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70388",
+            "libelle": "Autres redevances et recettes diverses",
+            "montant_realise": 609.60,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70632",
+            "libelle": "A caractère de loisirs",
+            "montant_realise": 6570.42,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70846",
+            "libelle": "au GFP de rattachement",
+            "montant_realise": 55062.30,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "70878",
+            "libelle": "par des tiers",
+            "montant_realise": 3134.74,
+            "category": "PRODUITS DES SERVICES ET DU DOMAINE"
+        },
+        {
+            "compte": "7318",
+            "libelle": "Autres",
+            "montant_realise": 0.00,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "73211",
+            "libelle": "Attribution de compensation",
+            "montant_realise": 2550.00,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "732221",
+            "libelle": "Fonds de péréquation des ressources communale",
+            "montant_realise": 17045.00,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "73223",
+            "libelle": "Fonds départemental des DMTO pour les commune",
+            "montant_realise": 72375.99,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "73224",
+            "libelle": "Fonds de péréquation de la cotisation sur la",
+            "montant_realise": 0.00,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "7352",
+            "libelle": "Fraction compensatoire de la CVAE",
+            "montant_realise": 48965.00,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "73111",
+            "libelle": "Impôts directs locaux",
+            "montant_realise": 767982.00,
+            "category": "FISCALITE LOCALE"
+        },
+        {
+            "compte": "73114",
+            "libelle": "Imposition forfaitaire sur les entreprises de",
+            "montant_realise": 21454.00,
+            "category": "FISCALITE LOCALE"
+        },
+        {
+            "compte": "73118",
+            "libelle": "Autres contributions directes",
+            "montant_realise": 6416.00,
+            "category": "FISCALITE LOCALE"
+        },
+        {
+            "compte": "731721",
+            "libelle": "Taxe de séjour",
+            "montant_realise": 52.60,
+            "category": "IMPOTS ET TAXES"
+        },
+        {
+            "compte": "74111",
+            "libelle": "Dotation forfaitaire des communes",
+            "montant_realise": 283196.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "741121",
+            "libelle": "Dotation de solidarité rurale (DSR) des commu",
+            "montant_realise": 457981.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74112Z",
+            "libelle": "Dotation nationale de péréquation (DNP) des c",
+            "montant_realise": 76377.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "742",
+            "libelle": "Dotations aux élus locaux",
+            "montant_realise": 293.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "744",
+            "libelle": "FCTVA",
+            "montant_realise": 14386.08,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74718",
+            "libelle": "Autres",
+            "montant_realise": 22619.17,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74748",
+            "libelle": "Autres communes",
+            "montant_realise": 142.76,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74751",
+            "libelle": "GFP de rattachement",
+            "montant_realise": 0.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74758",
+            "libelle": "Autres groupements",
+            "montant_realise": 65.10,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74832",
+            "libelle": "Etat - Compensation au titre de la Contributi",
+            "montant_realise": 27798.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74833",
+            "libelle": "Etat - Compensation au titre des exonérations",
+            "montant_realise": 79865.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74834",
+            "libelle": "Etat - Compensation au titre des exonérations",
+            "montant_realise": 0.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74835",
+            "libelle": "Dotation pour transfert des compensations d'e",
+            "montant_realise": 0.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "748374",
+            "libelle": "Dotation biodiversité et aménités rurales",
+            "montant_realise": 9742.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "74888",
+            "libelle": "Autres",
+            "montant_realise": 41119.00,
+            "category": "DOTATIONS ET PARTICIPATIONS"
+        },
+        {
+            "compte": "752",
+            "libelle": "Revenus des immeubles",
+            "montant_realise": 79981.21,
+            "category": "AUTRES PROD. DE GESTION COURANTE"
+        },
+        {
+            "compte": "755",
+            "libelle": "Dédits et pénalités perçus",
+            "montant_realise": 21734.10,
+            "category": "AUTRES PROD. DE GESTION COURANTE"
+        },
+        {
+            "compte": "75814",
+            "libelle": "Redevance sur l'énergie hydraulique",
+            "montant_realise": 0.00,
+            "category": "AUTRES PROD. DE GESTION COURANTE"
+        },
+        {
+            "compte": "75888",
+            "libelle": "Autres",
+            "montant_realise": 30589.25,
+            "category": "AUTRES PROD. DE GESTION COURANTE"
+        },
+        {
+            "compte": "6419",
+            "libelle": "Remboursements sur rémunérations du personnel",
+            "montant_realise": 3807.85,
+            "category": "ATTENUATION DE CHARGES"
+        },
+        {
+            "compte": "761",
+            "libelle": "Produits de participations",
+            "montant_realise": 10.80,
+            "category": "PRODUITS FINANCIERS"
+        },
+        {
+            "compte": "773",
+            "libelle": "Mandats annulés (sur exercices antérieurs) ou",
+            "montant_realise": 1660.05,
+            "category": "PRODUITS EXCEPTIONNELS"
+        },
+        {
+            "compte": "775",
+            "libelle": "Produits des cessions d'immobilisations",
+            "montant_realise": 88150.00,
+            "category": "PRODUITS EXCEPTIONNELS"
+        },
+        {
+            "compte": "7761",
+            "libelle": "Différences sur réalisations (négatives) repr",
+            "montant_realise": 26928.63,
+            "category": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS"
+        },
+        {
+            "compte": "002",
+            "libelle": "Résultat de fonctionnement reporté",
+            "montant_realise": 1542121.54,
+            "category": "Résultat de fonctionnement reporté"
+        }
+    ],
+    "resume": {
+        "total_realise": 3818257.96,
+        "devise": "EUR"
+    }
+}

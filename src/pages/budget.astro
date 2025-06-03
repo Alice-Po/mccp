@@ -14,9 +14,13 @@ interface DetailsOfOperatingExpenses2024 {
 const jsonContent = readFileSync('public/assets/datas/details-of-operating-expenses-2024.json', 'utf-8');
 const data = JSON.parse(jsonContent);
 
-// Lecture des données pour le tableau comparatif
-const overviewContent = readFileSync('public/assets/datas/overview-of-operating-expenses-2024.json', 'utf-8');
+// Lecture des données pour le tableau de la section de fonctionnement
+const overviewContent = readFileSync('public/assets/datas/overview-of-operating-section-2024.json', 'utf-8');
 const overviewData = JSON.parse(overviewContent);
+
+// Lecture des données pour le tableau d'investissement
+const investmentContent = readFileSync('public/assets/datas/overview-of-investing-section-2024.json', 'utf-8');
+const investmentData = JSON.parse(investmentContent);
 
 // Utilisation des vraies données avec la bonne clé
 const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating_expenses_2024 as DetailsOfOperatingExpenses2024[];
@@ -43,7 +47,7 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
     <section class="budget-section">
       <h1>Budget 2024</h1>
       
-      <!-- Tableau financier comparatif -->
+      <!-- Tableau financier comparatif - Section de fonctionnement -->
       <FinancialTable data={overviewData} />
       
       <!-- Graphique détaillé des dépenses -->
@@ -52,6 +56,9 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
         title="Détail des dépenses de fonctionnement 2024"
         totalLabel="Total des dépenses de fonctionnement"
       />
+      
+      <!-- Tableau financier comparatif - Section d'investissement -->
+      <FinancialTable data={investmentData} />
     </section>
   </main>
 </Layout>
@@ -163,6 +170,12 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
     /* Espacement entre le tableau et le graphique */
     .budget-section > :global(.financial-table-container) {
       margin-bottom: 4rem;
+    }
+
+    /* Espacement spécifique pour le dernier tableau (investissement) */
+    .budget-section > :global(.financial-table-container:last-child) {
+      margin-top: 4rem;
+      margin-bottom: 2rem;
     }
 
     /* Amélioration responsive pour les plus grandes résolutions */
