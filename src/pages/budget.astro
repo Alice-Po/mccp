@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Chart from '../components/Chart.astro';
 import FinancialTable from '../components/FinancialTable.astro';
 import ChartAccordion from '../components/ChartAccordion.astro';
+import BudgetNavigation from '../components/BudgetNavigation.astro';
 import { readFileSync } from 'fs';
 
 interface DetailsOfOperatingExpenses2024 {
@@ -40,6 +41,9 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
 
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
   <main>
+    <!-- Navigation sidebar -->
+    <BudgetNavigation />
+    
     <!-- Message d'avertissement pour les petits écrans -->
     <div class="screen-warning">
       <div class="warning-content">
@@ -60,39 +64,45 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
       <h1>Budget 2024</h1>
       
       <!-- Tableau financier - Section de fonctionnement -->
-      <FinancialTable data={overviewData} />
+      <div id="section-fonctionnement" class="budget-anchor">
+        <FinancialTable data={overviewData} />
+      </div>
       
       <!-- Accordéon contenant les graphiques détaillés de fonctionnement -->
-      <ChartAccordion title="Graphiques détaillés - Section de fonctionnement">
-        <!-- Graphique détaillé des dépenses -->
-        <Chart 
-          data={depensesData}
-          title="Détail des dépenses de fonctionnement 2024"
-          totalLabel="Total des dépenses de fonctionnement"
-          chartColors={[
-            '#e74c3c', '#c0392b', '#a93226', '#922b21', '#7b241c', '#641e16',
-            '#d35400', '#b7410e', '#9c2706', '#873600', '#762d00', '#662500',
-            '#f39c12', '#d68910', '#b7750f', '#9a650e', '#82550c', '#6e450a',
-            '#e67e22', '#dc7633', '#d5611b', '#ca5d15', '#bf590f', '#b45309'
-          ]}
-        />
-        
-        <!-- Graphique détaillé des recettes -->
-        <Chart 
-          data={recettesData}
-          title="Détail des recettes de fonctionnement 2024"
-          totalLabel="Total des recettes de fonctionnement"
-          chartColors={[
-            '#27ae60', '#229954', '#1e8449', '#196f3d', '#145a32', '#0f4c27',
-            '#16a085', '#138d75', '#117a65', '#0e6655', '#0b5345', '#094135',
-            '#2ecc71', '#28b463', '#239b56', '#1f8b4c', '#1a7b42', '#166a36',
-            '#58d68d', '#52c882', '#4caf76', '#45976a', '#3f7f5e', '#396652'
-          ]}
-        />
-      </ChartAccordion>
+      <div id="graphiques-fonctionnement" class="budget-anchor">
+        <ChartAccordion title="Graphiques détaillés - Section de fonctionnement">
+          <!-- Graphique détaillé des dépenses -->
+          <Chart 
+            data={depensesData}
+            title="Détail des dépenses de fonctionnement 2024"
+            totalLabel="Total des dépenses de fonctionnement"
+            chartColors={[
+              '#e74c3c', '#c0392b', '#a93226', '#922b21', '#7b241c', '#641e16',
+              '#d35400', '#b7410e', '#9c2706', '#873600', '#762d00', '#662500',
+              '#f39c12', '#d68910', '#b7750f', '#9a650e', '#82550c', '#6e450a',
+              '#e67e22', '#dc7633', '#d5611b', '#ca5d15', '#bf590f', '#b45309'
+            ]}
+          />
+          
+          <!-- Graphique détaillé des recettes -->
+          <Chart 
+            data={recettesData}
+            title="Détail des recettes de fonctionnement 2024"
+            totalLabel="Total des recettes de fonctionnement"
+            chartColors={[
+              '#27ae60', '#229954', '#1e8449', '#196f3d', '#145a32', '#0f4c27',
+              '#16a085', '#138d75', '#117a65', '#0e6655', '#0b5345', '#094135',
+              '#2ecc71', '#28b463', '#239b56', '#1f8b4c', '#1a7b42', '#166a36',
+              '#58d68d', '#52c882', '#4caf76', '#45976a', '#3f7f5e', '#396652'
+            ]}
+          />
+        </ChartAccordion>
+      </div>
 
       <!-- Tableau financier - Section d'investissement -->
-      <FinancialTable data={investmentData} />
+      <div id="section-investissement" class="budget-anchor">
+        <FinancialTable data={investmentData} />
+      </div>
     </section>
   </main>
 </Layout>
@@ -102,7 +112,7 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
         width: auto;
         max-width: 1400px;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 2rem 0 320px; /* Marge droite restaurée + espace pour la sidebar */
     }
 
     /* Message d'avertissement - masqué par défaut */
@@ -168,6 +178,12 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
       transform: translateY(-2px);
     }
 
+    /* Styles pour les ancres de navigation */
+    .budget-anchor {
+      scroll-margin-top: 100px; /* Décalage pour éviter le header */
+      position: relative;
+    }
+
     /* Affichage conditionnel basé sur la largeur d'écran */
     @media (max-width: 1399px) {
       .screen-warning {
@@ -176,6 +192,10 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
       
       .budget-section {
         display: none;
+      }
+
+      main {
+        padding: 0 1rem; /* Retour au padding normal sur petits écrans */
       }
     }
 
@@ -225,14 +245,22 @@ const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_ope
       margin-bottom: 0;
     }
 
-    /* Amélioration responsive pour les plus grandes résolutions */
+    /* Ajustements pour les très grands écrans */
     @media (min-width: 1600px) {
       main {
         max-width: 1600px;
+        padding: 0 3rem 0 350px; /* Plus d'espace pour la sidebar et marge droite augmentée */
       }
       
       .budget-section {
-        padding: 3rem 1rem;
+        padding: 3rem 0;
+      }
+    }
+
+    /* Ajustements pour les écrans moyens */
+    @media (min-width: 1400px) and (max-width: 1599px) {
+      main {
+        padding: 0 2rem 0 300px; /* Sidebar plus compacte avec marge droite équilibrée */
       }
     }
 </style>
