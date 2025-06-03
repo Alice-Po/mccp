@@ -10,9 +10,19 @@ interface DetailsOfOperatingExpenses2024 {
   montant_realise: number;
 }
 
-// Lecture des données pour le graphique
+interface DetailsOfOperatingIncomes2024 {
+  compte: string;
+  libelle: string;
+  montant_realise: number;
+}
+
+// Lecture des données pour le graphique des dépenses
 const jsonContent = readFileSync('public/assets/datas/details-of-operating-expenses-2024.json', 'utf-8');
 const data = JSON.parse(jsonContent);
+
+// Lecture des données pour le graphique des recettes
+const incomesContent = readFileSync('public/assets/datas/details_of-operating-incomes-2024.json', 'utf-8');
+const incomesData = JSON.parse(incomesContent);
 
 // Lecture des données pour le tableau de la section de fonctionnement
 const overviewContent = readFileSync('public/assets/datas/overview-of-operating-section-2024.json', 'utf-8');
@@ -22,8 +32,9 @@ const overviewData = JSON.parse(overviewContent);
 const investmentContent = readFileSync('public/assets/datas/overview-of-investing-section-2024.json', 'utf-8');
 const investmentData = JSON.parse(investmentContent);
 
-// Utilisation des vraies données avec la bonne clé
+// Utilisation des vraies données avec les bonnes clés
 const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating_expenses_2024 as DetailsOfOperatingExpenses2024[];
+const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_operating_incomes_2024 as DetailsOfOperatingIncomes2024[];
 ---
 
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
@@ -47,7 +58,7 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
     <section class="budget-section">
       <h1>Budget 2024</h1>
       
-      <!-- Tableau financier comparatif - Section de fonctionnement -->
+      <!-- Tableau financier - Section de fonctionnement -->
       <FinancialTable data={overviewData} />
       
       <!-- Graphique détaillé des dépenses -->
@@ -55,9 +66,30 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
         data={depensesData}
         title="Détail des dépenses de fonctionnement 2024"
         totalLabel="Total des dépenses de fonctionnement"
+        chartColors={[
+          '#e74c3c', '#c0392b', '#a93226', '#922b21', '#7b241c', '#641e16',
+          '#d35400', '#b7410e', '#9c2706', '#873600', '#762d00', '#662500',
+          '#f39c12', '#d68910', '#b7750f', '#9a650e', '#82550c', '#6e450a',
+          '#e67e22', '#dc7633', '#d5611b', '#ca5d15', '#bf590f', '#b45309'
+        ]}
       />
       
-      <!-- Tableau financier comparatif - Section d'investissement -->
+
+      
+      <!-- Graphique détaillé des recettes -->
+      <Chart 
+        data={recettesData}
+        title="Détail des recettes de fonctionnement 2024"
+        totalLabel="Total des recettes de fonctionnement"
+        chartColors={[
+          '#27ae60', '#229954', '#1e8449', '#196f3d', '#145a32', '#0f4c27',
+          '#16a085', '#138d75', '#117a65', '#0e6655', '#0b5345', '#094135',
+          '#2ecc71', '#28b463', '#239b56', '#1f8b4c', '#1a7b42', '#166a36',
+          '#58d68d', '#52c882', '#4caf76', '#45976a', '#3f7f5e', '#396652'
+        ]}
+      />
+
+            <!-- Tableau financier - Section d'investissement -->
       <FinancialTable data={investmentData} />
     </section>
   </main>
@@ -172,9 +204,13 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
       margin-bottom: 4rem;
     }
 
-    /* Espacement spécifique pour le dernier tableau (investissement) */
-    .budget-section > :global(.financial-table-container:last-child) {
-      margin-top: 4rem;
+    /* Espacement entre les composants Chart */
+    .budget-section > :global(.chart-component-container) {
+      margin-bottom: 4rem;
+    }
+
+    /* Espacement spécifique pour le dernier graphique (recettes) */
+    .budget-section > :global(.chart-component-container:last-child) {
       margin-bottom: 2rem;
     }
 
