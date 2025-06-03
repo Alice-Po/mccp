@@ -1,0 +1,322 @@
+---
+interface OverviewData {
+  metadata: {
+    title: string;
+    periods: {
+      budget_2024: string;
+      actual_2024: string;
+      budget_2025: string;
+    };
+    columns: {
+      compte: string;
+      libelle: string;
+      prevus_2024: string;
+      realises_2024: string;
+      propositions_2025: string;
+      notes: string;
+    };
+  };
+  sections: Array<{
+    type: string;
+    title: string;
+    highlight_color?: string;
+    items: Array<{
+      compte?: string;
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+      notes: string;
+    }>;
+    total?: {
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+    };
+  }>;
+}
+
+interface Props {
+  data: OverviewData;
+}
+
+const { data } = Astro.props;
+
+// Fonction pour formater les montants en français
+function formatCurrency(amount: number): string {
+  return amount.toLocaleString('fr-FR', { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  }) + ' €';
+}
+
+// Fonction pour déterminer la couleur de fond selon le type de section
+function getSectionColor(type: string, highlight_color?: string): string {
+  if (type === 'expenses') return '#FFF9C4'; // Jaune clair
+  if (type === 'revenues') return '#E8F5E8'; // Vert clair
+  if (type === 'balance') return '#F0F4F8'; // Gris-bleu clair
+  return '#FFFFFF';
+}
+---
+
+<div class="financial-table-container">
+  <div class="table-header">
+    <h2>{data.metadata.title}</h2>
+    <!-- <div class="table-periods">
+      <span class="period-tag">{data.metadata.periods.budget_2024}</span>
+      <span class="period-tag">{data.metadata.periods.budget_2025}</span>
+    </div> -->
+  </div>
+
+  <div class="table-wrapper">
+    <table class="financial-table">
+      <thead>
+        <tr>
+          <th class="col-compte">{data.metadata.columns.compte}</th>
+          <th class="col-libelle">{data.metadata.columns.libelle}</th>
+          <th class="col-amount">{data.metadata.columns.prevus_2024}</th>
+          <th class="col-amount">{data.metadata.columns.realises_2024}</th>
+          <th class="col-amount">{data.metadata.columns.propositions_2025}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.sections.map((section) => (
+          <>
+            <!-- En-tête de section -->
+            <tr class="section-header" style={`background-color: ${getSectionColor(section.type, section.highlight_color)}`}>
+              <td colspan="5" class="section-title">
+                <strong>{section.title}</strong>
+              </td>
+            </tr>
+            
+            <!-- Items de la section -->
+            {section.items.map((item) => (
+              <tr class="data-row">
+                <td class="col-compte">{item.compte || ''}</td>
+                <td class="col-libelle">{item.libelle}</td>
+                <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
+                <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
+                <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
+              </tr>
+            ))}
+            
+            <!-- Total de section (si présent) -->
+            {section.total && (
+              <tr class="section-total" style={`background-color: ${getSectionColor(section.type, section.highlight_color)}`}>
+                <td class="col-compte"></td>
+                <td class="col-libelle"><strong>{section.total.libelle}</strong></td>
+                <td class="col-amount"><strong>{formatCurrency(section.total.prevus_2024)}</strong></td>
+                <td class="col-amount"><strong>{formatCurrency(section.total.realises_2024)}</strong></td>
+                <td class="col-amount"><strong>{formatCurrency(section.total.propositions_2025)}</strong></td>
+              </tr>
+            )}
+          </>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .financial-table-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+    overflow: hidden;
+  }
+
+  .table-header {
+    padding: 2rem 2rem 1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .table-header h2 {
+    color: white;
+    margin: 0 0 1rem 0;
+    font-family: var(--font-main);
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  .table-periods {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .period-tag {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    padding: 0;
+  }
+
+  .financial-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+  }
+
+  .financial-table thead {
+    background-color: var(--secondary);
+    color: white;
+  }
+
+  .financial-table th {
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .financial-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f1f3f4;
+    vertical-align: middle;
+  }
+
+  /* Alignements spécifiques */
+  .col-compte {
+    text-align: center;
+    font-weight: 600;
+    color: var(--secondary);
+    width: 8%;
+    min-width: 60px;
+  }
+
+  .col-libelle {
+    text-align: left;
+    width: 40%;
+    min-width: 200px;
+    color: var(--secondary);
+  }
+
+  .col-amount {
+    text-align: right;
+    min-width: 120px;
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+  }
+
+  /* Styles pour les en-têtes de section */
+  .section-header {
+    border-top: 2px solid var(--primary);
+  }
+
+  .section-header .section-title {
+    padding: 1rem 0.75rem;
+    font-size: 1.1rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+  }
+
+  /* Styles pour les totaux de section */
+  .section-total {
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .section-total td {
+    padding: 0.9rem 0.75rem;
+    font-size: 1rem;
+  }
+
+  .section-total strong {
+    color: var(--secondary);
+    font-weight: 700;
+  }
+
+  /* Styles pour les lignes de données */
+  .data-row:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+  }
+
+  .data-row td {
+    color: var(--secondary);
+  }
+
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .table-wrapper {
+      padding: 0 1rem;
+    }
+    
+    .financial-table {
+      font-size: 0.9rem;
+    }
+    
+    .financial-table th,
+    .financial-table td {
+      padding: 0.6rem 0.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .table-header {
+      padding: 1.5rem 1rem 1rem;
+    }
+    
+    .table-header h2 {
+      font-size: 1.5rem;
+    }
+    
+    .period-tag {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+    
+    .financial-table {
+      font-size: 0.8rem;
+    }
+    
+    .col-compte {
+      width: 10%;
+      min-width: 50px;
+    }
+    
+    .col-libelle {
+      width: 35%;
+      min-width: 150px;
+    }
+    
+    .col-amount {
+      width: 18%;
+      min-width: 100px;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .table-wrapper {
+      padding: 0 0.5rem;
+    }
+    
+    .financial-table th,
+    .financial-table td {
+      padding: 0.5rem 0.3rem;
+    }
+    
+    .section-title {
+      font-size: 1rem !important;
+    }
+  }
+</style> 

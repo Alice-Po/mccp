@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Chart from '../components/Chart.astro';
+import FinancialTable from '../components/FinancialTable.astro';
 import { readFileSync } from 'fs';
 
 interface DetailsOfOperatingExpenses2024 {
@@ -9,9 +10,13 @@ interface DetailsOfOperatingExpenses2024 {
   montant_realise: number;
 }
 
-// Lecture du fichier JSON réel
+// Lecture des données pour le graphique
 const jsonContent = readFileSync('public/assets/datas/details-of-operating-expenses-2024.json', 'utf-8');
 const data = JSON.parse(jsonContent);
+
+// Lecture des données pour le tableau comparatif
+const overviewContent = readFileSync('public/assets/datas/overview-of-operating-expenses-2024.json', 'utf-8');
+const overviewData = JSON.parse(overviewContent);
 
 // Utilisation des vraies données avec la bonne clé
 const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating_expenses_2024 as DetailsOfOperatingExpenses2024[];
@@ -38,6 +43,10 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
     <section class="budget-section">
       <h1>Budget 2024</h1>
       
+      <!-- Tableau financier comparatif -->
+      <FinancialTable data={overviewData} />
+      
+      <!-- Graphique détaillé des dépenses -->
       <Chart 
         data={depensesData}
         title="Détail des dépenses de fonctionnement 2024"
@@ -50,8 +59,9 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
 <style>
     main {
         width: auto;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
+        padding: 0 1rem;
     }
 
     /* Message d'avertissement - masqué par défaut */
@@ -136,7 +146,7 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
       
       .budget-section {
         display: block;
-        padding: 2rem 1rem;
+        padding: 2rem 0;
         width: 100%;
       }
     }
@@ -145,5 +155,24 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
       text-align: center;
       margin-bottom: 3rem;
       font-size: 2.5rem;
+      color: var(--primary);
+      font-family: var(--font-main);
+      font-weight: 700;
+    }
+
+    /* Espacement entre le tableau et le graphique */
+    .budget-section > :global(.financial-table-container) {
+      margin-bottom: 4rem;
+    }
+
+    /* Amélioration responsive pour les plus grandes résolutions */
+    @media (min-width: 1600px) {
+      main {
+        max-width: 1600px;
+      }
+      
+      .budget-section {
+        padding: 3rem 1rem;
+      }
     }
 </style>
