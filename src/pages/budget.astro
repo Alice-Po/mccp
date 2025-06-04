@@ -71,6 +71,18 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
     <!-- Contenu principal (masqué sur petits écrans) -->
     <section class="budget-section">
       <h1>Budget primitif 2025 pour la Commune de Putanges-le-Lac</h1>
+      <div class="download-section">
+        <a href="/assets/datas/Budget-primitif-2025-Putanges.pdf" class="download-pdf-btn" download>
+          <span class="download-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </span>
+          Télécharger le budget au format PDF
+        </a>
+      </div>
       
       <!-- Tableau financier - Section de fonctionnement -->
       <div id="section-fonctionnement" class="budget-anchor">
@@ -319,6 +331,65 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
     @media (min-width: 1400px) and (max-width: 1599px) {
       main {
         padding: 0 2rem 0 340px; /* Ajustement pour la sidebar plus compacte */
+      }
+    }
+
+    .download-section {
+      display: flex;
+      justify-content: center;
+      margin: -0.5rem 0 2.5rem;
+    }
+
+    .download-pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid var(--primary);
+      background: transparent;
+    }
+
+    .download-pdf-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .download-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .download-pdf-btn svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .download-pdf-btn:hover svg {
+      transform: translateY(2px);
+    }
+
+    @media (max-width: 768px) {
+      .download-section {
+        margin: -0.25rem 0 2rem;
+      }
+
+      .download-pdf-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+      
+      .download-pdf-btn svg {
+        width: 18px;
+        height: 18px;
       }
     }
 </style>
