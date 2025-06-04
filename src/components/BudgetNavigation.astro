@@ -527,4 +527,99 @@ const navItems: NavItem[] = [
   :global(html) {
     scroll-behavior: smooth;
   }
+
+  /* Styles pour les sections principales */
+  .nav-link[data-level="parent"] {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Styles pour les sous-sections */
+  .nav-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0;
+    border-left: 2px solid rgba(46, 139, 87, 0.1);
+    margin-left: 1.5rem;
+  }
+
+  /* Groupement visuel des éléments de même nature */
+  .nav-subitem {
+    margin-bottom: 0;
+  }
+
+  /* Espacement entre les groupes de même nature */
+  .nav-subitem:last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Style spécial pour les liens de type table-section */
+  .nav-link--table-section {
+    background-color: rgba(46, 139, 87, 0.03);
+    margin-bottom: 2px;
+  }
+
+  /* Style spécial pour les liens de type accordion */
+  .nav-link--accordion {
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(46, 139, 87, 0.05);
+    padding-top: 0.75rem;
+  }
+
+  /* Ajustement des icônes pour la hiérarchie */
+  .nav-link[data-level="parent"] .nav-icon {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+
+  .nav-link--table-section .nav-icon {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .nav-link--accordion .nav-icon {
+    color: var(--primary);
+    opacity: 0.8;
+  }
+
+  /* Styles pour les liens actifs */
+  .nav-link.active {
+    background-color: rgba(46, 139, 87, 0.1);
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .nav-link--table-section.active {
+    background-color: rgba(46, 139, 87, 0.15);
+  }
+
+  /* Ajustement des marges pour créer des groupes visuels */
+  .nav-item + .nav-item {
+    margin-top: 1rem;
+  }
+
+  /* Style pour les sections de détail */
+  .nav-link--accordion {
+    font-size: 0.9rem;
+    color: var(--secondary);
+  }
+
+  /* Ajout d'une ligne de séparation entre les sections principales */
+  .nav-item:not(:last-child) {
+    border-bottom: 1px solid rgba(46, 139, 87, 0.05);
+    padding-bottom: 1rem;
+  }
+
+  /* Ajustement de l'espacement des sous-éléments */
+  .nav-sublist .nav-link {
+    padding: 0.6rem 1rem;
+  }
+
+  /* Style spécial pour les sections principales repliées */
+  .nav-link[data-level="parent"][aria-expanded="true"] {
+    background-color: rgba(46, 139, 87, 0.05);
+  }
 </style>
