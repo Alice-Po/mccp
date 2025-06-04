@@ -64,11 +64,29 @@ function getSectionColor(type: string, highlight_color?: string): string {
 
 <div class="financial-table-container">
   <div class="table-header">
-    <h2>{data.metadata.title}</h2>
+    <div class="header-content">
+      <h2>{data.metadata.title}</h2>
+      <button class="download-btn" id="downloadBtn" aria-label="Télécharger les données">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </button>
+    </div>
     <!-- <div class="table-periods">
       <span class="period-tag">{data.metadata.periods.budget_2024}</span>
       <span class="period-tag">{data.metadata.periods.budget_2025}</span>
     </div> -->
+  </div>
+
+  <!-- Popup de téléchargement -->
+  <div class="download-popup" id="downloadPopup">
+    <div class="popup-content">
+      <h3>Téléchargement des données</h3>
+      <p>Le téléchargement des données sera bientôt disponible sous différents formats (CSV, Excel, PDF).</p>
+      <button class="close-popup" id="closePopup">Fermer</button>
+    </div>
   </div>
 
   <div class="table-wrapper">
@@ -128,6 +146,7 @@ function getSectionColor(type: string, highlight_color?: string): string {
 
 <style>
   .financial-table-container {
+    position: relative;
     background: white;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -142,28 +161,86 @@ function getSectionColor(type: string, highlight_color?: string): string {
     text-align: center;
   }
 
-  .table-header h2 {
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header-content h2 {
     color: white;
-    margin: 0 0 1rem 0;
+    margin: 0;
     font-family: var(--font-main);
     font-size: 1.8rem;
     font-weight: 600;
   }
 
-  .table-periods {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+  .download-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
   }
 
-  .period-tag {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
+  .download-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .download-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 2rem;
     border-radius: 1rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .popup-content h3 {
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+  }
+
+  .popup-content p {
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .close-popup {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .close-popup:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
   }
 
   .table-wrapper {
@@ -335,4 +412,36 @@ function getSectionColor(type: string, highlight_color?: string): string {
       font-size: 1rem !important;
     }
   }
-</style> 
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const downloadBtn = document.getElementById('downloadBtn');
+    const downloadPopup = document.getElementById('downloadPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    if (downloadBtn && downloadPopup && closePopup) {
+      downloadBtn.addEventListener('click', () => {
+        downloadPopup.style.display = 'flex';
+      });
+
+      closePopup.addEventListener('click', () => {
+        downloadPopup.style.display = 'none';
+      });
+
+      // Fermer la popup en cliquant en dehors
+      downloadPopup.addEventListener('click', (e) => {
+        if (e.target === downloadPopup) {
+          downloadPopup.style.display = 'none';
+        }
+      });
+
+      // Fermer la popup avec la touche Echap
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && downloadPopup.style.display === 'flex') {
+          downloadPopup.style.display = 'none';
+        }
+      });
+    }
+  });
+</script> 
