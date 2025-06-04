@@ -1,0 +1,304 @@
+{
+  "details_of_investment_expenses_2024": [
+    {
+      "compte": "1641",
+      "libelle": "Emprunts en euros",
+      "montant_realise": 75423.15
+    },
+    {
+      "compte": "165",
+      "libelle": "Dépôts et cautionnements reçus",
+      "montant_realise": 1160.00
+    },
+    {
+      "compte": "TOTAL 16",
+      "libelle": "REMBOURSEMENT D'EMPRUNTS ET DETTES",
+      "montant_realise": 76583.15,
+      "category": "total"
+    },
+    {
+      "compte": "2031",
+      "libelle": "Frais d'études",
+      "montant_realise": 7200.00
+    },
+    {
+      "compte": "2031-0030",
+      "libelle": "Frais d'études de recherche et de développeme",
+      "montant_realise": 19560.00
+    },
+    {
+      "compte": "2031-2021004",
+      "libelle": "Frais d'études de recherche et de développeme",
+      "montant_realise": 12546.72
+    },
+    {
+      "compte": "2051",
+      "libelle": "Concessions et droits similaires",
+      "montant_realise": 2082.05
+    },
+    {
+      "compte": "TOTAL 20",
+      "libelle": "IMMOBILISATIONS INCORPORELLES",
+      "montant_realise": 41388.77,
+      "category": "total"
+    },
+    {
+      "compte": "2041512",
+      "libelle": "Groupements de collectivités EPL et des colle",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "TOTAL 204",
+      "libelle": "SUBVENTIONS D'EQUIPEMENT VERSEES",
+      "montant_realise": 0.00,
+      "category": "total"
+    },
+    {
+      "compte": "2111",
+      "libelle": "Terrains nus",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2111-2021008",
+      "libelle": "Terrains nus",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2113",
+      "libelle": "Terrains aménagés autres que voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2113-2021004",
+      "libelle": "Terrains aménagés autres que voirie",
+      "montant_realise": 56663.71
+    },
+    {
+      "compte": "212",
+      "libelle": "Agencement et aménagement de terrains",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2121-2021004",
+      "libelle": "Plantations d'arbres et d'arbustes",
+      "montant_realise": 10175.91
+    },
+    {
+      "compte": "2128",
+      "libelle": "Agencement et aménagement de terrains",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2128-2021004",
+      "libelle": "Autres agencements et aménagements",
+      "montant_realise": 1105.20
+    },
+    {
+      "compte": "2131",
+      "libelle": "Bâtiments publics",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "21311",
+      "libelle": "Bâtiments publics",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2131B",
+      "libelle": "Autres bâtiments publics",
+      "montant_realise": 15199.69
+    },
+    {
+      "compte": "2131B-0029",
+      "libelle": "Bâtiments publics",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2132",
+      "libelle": "Bâtiments privés",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "21328",
+      "libelle": "Autres bâtiments privés",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2138",
+      "libelle": "Autres constructions",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2138-2021004",
+      "libelle": "Autres constructions",
+      "montant_realise": 3816.52
+    },
+    {
+      "compte": "2151",
+      "libelle": "Réseaux de voirie",
+      "montant_realise": 40878.84
+    },
+    {
+      "compte": "2151-0019",
+      "libelle": "Réseaux de voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2151-2020003",
+      "libelle": "Réseaux de voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2151-2021004",
+      "libelle": "Réseaux de voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2152",
+      "libelle": "Installations de voirie",
+      "montant_realise": 6469.93
+    },
+    {
+      "compte": "2152-2021004",
+      "libelle": "Installations de voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2153",
+      "libelle": "Réseaux divers",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "21588",
+      "libelle": "Autres réseaux",
+      "montant_realise": 71562.66
+    },
+    {
+      "compte": "21588-2021004",
+      "libelle": "Autres réseaux",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "21721",
+      "libelle": "Plantations d'arbres et d'arbustes",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "21752",
+      "libelle": "Installations de voirie",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2181",
+      "libelle": "Installations générales agencements et aménag",
+      "montant_realise": 6643.80
+    },
+    {
+      "compte": "21828",
+      "libelle": "Matériel de transport",
+      "montant_realise": 131509.36
+    },
+    {
+      "compte": "21828-2021004",
+      "libelle": "Autres matériels de transport",
+      "montant_realise": 2862.00
+    },
+    {
+      "compte": "21838-0021",
+      "libelle": "Matériel informatique",
+      "montant_realise": 9762.14
+    },
+    {
+      "compte": "21848-0021",
+      "libelle": "Matériel de bureau et mobilier",
+      "montant_realise": 7051.95
+    },
+    {
+      "compte": "2188",
+      "libelle": "Autres",
+      "montant_realise": 83917.89
+    },
+    {
+      "compte": "2188-2021004",
+      "libelle": "Autres",
+      "montant_realise": 13135.75
+    },
+    {
+      "compte": "TOTAL 21",
+      "libelle": "IMMOBILISATIONS CORPORELLES",
+      "montant_realise": 460654.75,
+      "category": "total"
+    },
+    {
+      "compte": "2313",
+      "libelle": "Constructions",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2316",
+      "libelle": "Restauration des biens historiques et culture",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "TOTAL 23",
+      "libelle": "IMMOBILISATIONS EN COURS",
+      "montant_realise": 0.00,
+      "category": "total"
+    },
+    {
+      "compte": "275",
+      "libelle": "Dépôts et cautionnements versés",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "27638",
+      "libelle": "CREANCES SUR DES COLLECTIVITES PUBLIQUES - CO",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "TOTAL 27",
+      "libelle": "AUTRES IMMOBILISATIONS FINANCIERES",
+      "montant_realise": 0.00,
+      "category": "total"
+    },
+    {
+      "compte": "192",
+      "libelle": "Plus ou moins-values sur cessions d'immobilis",
+      "montant_realise": 26928.63
+    },
+    {
+      "compte": "TOTAL 040",
+      "libelle": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS",
+      "montant_realise": 26928.63,
+      "category": "total"
+    },
+    {
+      "compte": "2031",
+      "libelle": "Frais d'études",
+      "montant_realise": 0.00
+    },
+    {
+      "compte": "2111",
+      "libelle": "Terrains nus",
+      "montant_realise": 4200.00
+    },
+    {
+      "compte": "238",
+      "libelle": "Avances versées sur commandes d'immobilisatio",
+      "montant_realise": 0.00,
+      "category": "OPERATIONS PATRIMONIALES"
+    },
+    {
+      "compte": "001",
+      "libelle": "Solde d'exécution de la section d'investissem",
+      "montant_realise": 1216147.42,
+      "category": "DEFICIT D'INVESTISSEMENT REPORTE"
+    },
+    {
+      "compte": "TOTAL GENERAL",
+      "libelle": "DEPENSES D'INVESTISSEMENT",
+      "montant_realise": 1825302.72,
+      "category": "total"
+    }
+  ]
+}
