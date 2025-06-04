@@ -3,302 +3,401 @@
     {
       "compte": "1641",
       "libelle": "Emprunts en euros",
-      "montant_realise": 75423.15
+      "montant_prevu": 75418.56,
+      "montant_realise": 75423.15,
+      "montant_propose": 80500.0,
+      "category": "REMBOURSEMENT D'EMPRUNTS ET DETTES"
     },
     {
       "compte": "165",
       "libelle": "Dépôts et cautionnements reçus",
-      "montant_realise": 1160.00
-    },
-    {
-      "compte": "TOTAL 16",
-      "libelle": "REMBOURSEMENT D'EMPRUNTS ET DETTES",
-      "montant_realise": 76583.15,
-      "category": "total"
+      "montant_prevu": 1500.00,
+      "montant_realise": 1160.00,
+      "montant_propose": 2000.0,
+      "category": "REMBOURSEMENT D'EMPRUNTS ET DETTES"
     },
     {
       "compte": "2031",
       "libelle": "Frais d'études",
-      "montant_realise": 7200.00
+      "montant_prevu": 80920.61,
+      "montant_realise": 7200.00,
+      "montant_propose": 152638.56,
+      "category": "IMMOBILISATIONS INCORPORELLES"
     },
     {
       "compte": "2031-0030",
       "libelle": "Frais d'études de recherche et de développeme",
-      "montant_realise": 19560.00
+      "montant_prevu": 147002.87,
+      "montant_realise": 19560.00,
+      "montant_propose": 127442.87,
+      "category": "IMMOBILISATIONS INCORPORELLES"
     },
     {
       "compte": "2031-2021004",
       "libelle": "Frais d'études de recherche et de développeme",
-      "montant_realise": 12546.72
+      "montant_prevu": 19494.69,
+      "montant_realise": 12546.72,
+      "montant_propose": 6947.97,
+      "category": "IMMOBILISATIONS INCORPORELLES"
     },
     {
       "compte": "2051",
       "libelle": "Concessions et droits similaires",
-      "montant_realise": 2082.05
-    },
-    {
-      "compte": "TOTAL 20",
-      "libelle": "IMMOBILISATIONS INCORPORELLES",
-      "montant_realise": 41388.77,
-      "category": "total"
+      "montant_prevu": 6000.00,
+      "montant_realise": 2082.05,
+      "montant_propose": 3000.0,
+      "category": "IMMOBILISATIONS INCORPORELLES"
     },
     {
       "compte": "2041512",
       "libelle": "Groupements de collectivités EPL et des colle",
-      "montant_realise": 0.00
-    },
-    {
-      "compte": "TOTAL 204",
-      "libelle": "SUBVENTIONS D'EQUIPEMENT VERSEES",
+      "montant_prevu": 0.00,
       "montant_realise": 0.00,
-      "category": "total"
+      "montant_propose": 50000.0,
+      "category": "SUBVENTIONS D'EQUIPEMENT VERSEES"
     },
     {
       "compte": "2111",
       "libelle": "Terrains nus",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 217029.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2111-2021008",
       "libelle": "Terrains nus",
-      "montant_realise": 0.00
+      "montant_prevu": 10000.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2113",
       "libelle": "Terrains aménagés autres que voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 30000.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2113-2021004",
       "libelle": "Terrains aménagés autres que voirie",
-      "montant_realise": 56663.71
+      "montant_prevu": 99570.36,
+      "montant_realise": 56663.71,
+      "montant_propose": 42906.65,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "212",
       "libelle": "Agencement et aménagement de terrains",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2121-2021004",
       "libelle": "Plantations d'arbres et d'arbustes",
-      "montant_realise": 10175.91
+      "montant_prevu": 0.00,
+      "montant_realise": 10175.91,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2128",
       "libelle": "Agencement et aménagement de terrains",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2128-2021004",
       "libelle": "Autres agencements et aménagements",
-      "montant_realise": 1105.20
+      "montant_prevu": 0.00,
+      "montant_realise": 1105.20,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2131",
       "libelle": "Bâtiments publics",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21311",
       "libelle": "Bâtiments publics",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2131B",
       "libelle": "Autres bâtiments publics",
-      "montant_realise": 15199.69
+      "montant_prevu": 0.00,
+      "montant_realise": 15199.69,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2131B-0029",
       "libelle": "Bâtiments publics",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2132",
       "libelle": "Bâtiments privés",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21328",
       "libelle": "Autres bâtiments privés",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2138",
       "libelle": "Autres constructions",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2138-2021004",
       "libelle": "Autres constructions",
-      "montant_realise": 3816.52
+      "montant_prevu": 0.00,
+      "montant_realise": 3816.52,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2151",
       "libelle": "Réseaux de voirie",
-      "montant_realise": 40878.84
+      "montant_prevu": 0.00,
+      "montant_realise": 40878.84,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2151-0019",
       "libelle": "Réseaux de voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2151-2020003",
       "libelle": "Réseaux de voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2151-2021004",
       "libelle": "Réseaux de voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2152",
       "libelle": "Installations de voirie",
-      "montant_realise": 6469.93
+      "montant_prevu": 0.00,
+      "montant_realise": 6469.93,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2152-2021004",
       "libelle": "Installations de voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2153",
       "libelle": "Réseaux divers",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 25000.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21588",
       "libelle": "Autres réseaux",
-      "montant_realise": 71562.66
+      "montant_prevu": 236244.04,
+      "montant_realise": 71562.66,
+      "montant_propose": 162920.05,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21588-2021004",
       "libelle": "Autres réseaux",
-      "montant_realise": 0.00
+      "montant_prevu": 67009.73,
+      "montant_realise": 0.00,
+      "montant_propose": 64147.73,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21721",
       "libelle": "Plantations d'arbres et d'arbustes",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 3328.80,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21752",
       "libelle": "Installations de voirie",
-      "montant_realise": 0.00
+      "montant_prevu": 0.00,
+      "montant_realise": 0.00,
+      "montant_propose": 30000.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2181",
       "libelle": "Installations générales agencements et aménag",
-      "montant_realise": 6643.80
+      "montant_prevu": 0.00,
+      "montant_realise": 6643.80,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21828",
       "libelle": "Matériel de transport",
-      "montant_realise": 131509.36
+      "montant_prevu": 128009.12,
+      "montant_realise": 131509.36,
+      "montant_propose": 62000.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21828-2021004",
       "libelle": "Autres matériels de transport",
-      "montant_realise": 2862.00
+      "montant_prevu": 0.00,
+      "montant_realise": 2862.00,
+      "montant_propose": 0.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21838-0021",
       "libelle": "Matériel informatique",
-      "montant_realise": 9762.14
+      "montant_prevu": 11700.00,
+      "montant_realise": 9762.14,
+      "montant_propose": 6937.86,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "21848-0021",
       "libelle": "Matériel de bureau et mobilier",
-      "montant_realise": 7051.95
+      "montant_prevu": 7550.00,
+      "montant_realise": 7051.95,
+      "montant_propose": 50498.05,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2188",
       "libelle": "Autres",
-      "montant_realise": 83917.89
+      "montant_prevu": 15600.00,
+      "montant_realise": 83217.29,
+      "montant_propose": 15000.0,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2188-2021004",
       "libelle": "Autres",
-      "montant_realise": 13135.75
-    },
-    {
-      "compte": "TOTAL 21",
-      "libelle": "IMMOBILISATIONS CORPORELLES",
-      "montant_realise": 460654.75,
-      "category": "total"
+      "montant_prevu": 15000.00,
+      "montant_realise": 13135.75,
+      "montant_propose": 1864.25,
+      "category": "IMMOBILISATIONS CORPORELLES"
     },
     {
       "compte": "2313",
       "libelle": "Constructions",
-      "montant_realise": 0.00
+      "montant_prevu": 70000.00,
+      "montant_realise": 0.00,
+      "montant_propose": 7714850.00,
+      "category": "IMMOBILISATIONS EN COURS"
     },
     {
       "compte": "2316",
       "libelle": "Restauration des biens historiques et culture",
-      "montant_realise": 0.00
-    },
-    {
-      "compte": "TOTAL 23",
-      "libelle": "IMMOBILISATIONS EN COURS",
+      "montant_prevu": 0.00,
       "montant_realise": 0.00,
-      "category": "total"
+      "montant_propose": 21600.0,
+      "category": "IMMOBILISATIONS EN COURS"
     },
     {
       "compte": "275",
       "libelle": "Dépôts et cautionnements versés",
-      "montant_realise": 0.00
+      "montant_prevu": 500.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "AUTRES IMMOBILISATIONS FINANCIERES"
     },
     {
       "compte": "27638",
       "libelle": "CREANCES SUR DES COLLECTIVITES PUBLIQUES - CO",
-      "montant_realise": 0.00
-    },
-    {
-      "compte": "TOTAL 27",
-      "libelle": "AUTRES IMMOBILISATIONS FINANCIERES",
+      "montant_prevu": 275841.88,
       "montant_realise": 0.00,
-      "category": "total"
+      "montant_propose": 500000.0,
+      "category": "AUTRES IMMOBILISATIONS FINANCIERES"
     },
     {
       "compte": "192",
       "libelle": "Plus ou moins-values sur cessions d'immobilis",
-      "montant_realise": 26928.63
-    },
-    {
-      "compte": "TOTAL 040",
-      "libelle": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS",
+      "montant_prevu": 37313.96,
       "montant_realise": 26928.63,
-      "category": "total"
+      "montant_propose": 0.0,
+      "category": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS"
     },
     {
       "compte": "2031",
       "libelle": "Frais d'études",
-      "montant_realise": 0.00
+      "montant_prevu": 50000.00,
+      "montant_realise": 0.00,
+      "montant_propose": 0.0,
+      "category": "OPERATIONS PATRIMONIALES"
     },
     {
       "compte": "2111",
       "libelle": "Terrains nus",
-      "montant_realise": 4200.00
+      "montant_prevu": 0.00,
+      "montant_realise": 4200.00,
+      "montant_propose": 400000.0,
+      "category": "OPERATIONS PATRIMONIALES"
     },
     {
       "compte": "238",
       "libelle": "Avances versées sur commandes d'immobilisatio",
+      "montant_prevu": 50000.0,
       "montant_realise": 0.00,
+      "montant_propose": 0.0,
       "category": "OPERATIONS PATRIMONIALES"
     },
     {
       "compte": "001",
       "libelle": "Solde d'exécution de la section d'investissem",
+      "montant_prevu": 1216147.42,
       "montant_realise": 1216147.42,
+      "montant_propose": 0.0,
       "category": "DEFICIT D'INVESTISSEMENT REPORTE"
-    },
-    {
-      "compte": "TOTAL GENERAL",
-      "libelle": "DEPENSES D'INVESTISSEMENT",
-      "montant_realise": 1825302.72,
-      "category": "total"
     }
   ]
 }

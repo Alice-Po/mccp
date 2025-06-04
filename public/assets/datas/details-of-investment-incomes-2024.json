@@ -125,7 +125,8 @@
             "libelle": "Autre matériel et outillage de voirie",
             "montant_prevu": 8162.00,
             "montant_realise": 8162.00,
-            "montant_propose": 0.00
+            "montant_propose": 0.00,
+            "category": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS"
         },
         {
             "compte": "280415343",
@@ -158,14 +159,6 @@
             "montant_realise": 0.00,
             "montant_propose": 199457.21,
             "category": "EXCEDENT ANTERIEUR REPORTE"
-        },
-        {
-            "compte": "TOTAL GENERAL",
-            "libelle": "RECETTES D'INVESTISSEMENT",
-            "montant_prevu": 4225271.01,
-            "montant_realise": 2024759.93,
-            "montant_propose": 4467464.47,
-            "category": "total"
         }
     ]
 }
