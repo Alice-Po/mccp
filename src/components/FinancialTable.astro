@@ -87,7 +87,7 @@ function getSectionColor(type: string, highlight_color?: string): string {
           <>
             <!-- En-tête de section -->
             <tr class="section-header" style={`background-color: ${getSectionColor(section.type, section.highlight_color)}`}>
-              <td colspan="5" class="section-title">
+              <td colspan="5" class="section-title" id={section.type === 'expenses' ? 'depenses-fonctionnement' : section.type === 'revenues' ? 'recettes-fonctionnement' : undefined}>
                 <strong>{section.title}</strong>
               </td>
             </tr>
@@ -220,6 +220,7 @@ function getSectionColor(type: string, highlight_color?: string): string {
   /* Styles pour les en-têtes de section */
   .section-header {
     border-top: 2px solid var(--primary);
+    scroll-margin-top: 120px; /* Compensation pour le header et la sidebar */
   }
 
   .section-header .section-title {
@@ -229,6 +230,7 @@ function getSectionColor(type: string, highlight_color?: string): string {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-bottom: none;
+    scroll-margin-top: 120px; /* Compensation pour le header et la sidebar */
   }
 
   /* Styles pour les totaux de section */
