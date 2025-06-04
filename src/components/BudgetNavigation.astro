@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
   {
     id: 'section-fonctionnement',
     label: 'Section de fonctionnement',
-    icon: '📋',
+    icon: '◾',
     type: 'table',
     children: [
       {
@@ -33,15 +33,7 @@ const navItems: NavItem[] = [
         label: 'Recettes de fonctionnement',
         icon: '➥',
         type: 'table-section'
-      }
-    ]
-  },
-  {
-    id: 'detail-section-fonctionnement',
-    label: 'Détail de la section de fonctionnement',
-    icon: '📊',
-    type: 'section',
-    children: [
+      },
       {
         id: 'detail-depenses-fonctionnement',
         label: 'Détail des Dépenses de fonctionnement',
@@ -58,11 +50,40 @@ const navItems: NavItem[] = [
       }
     ]
   },
+
   {
     id: 'section-investissement',
     label: 'Section d\'investissement',
-    icon: '💼',
-    type: 'table'
+    icon: '◾',
+    type: 'table',
+     children: [
+      {
+        id: 'depenses-investissement',
+        label: 'Dépenses d\'investissement',
+        icon: '➥',
+        type: 'table-section'
+      },
+      {
+        id: 'recettes-investissement', 
+        label: 'Recettes d\'investissement',
+        icon: '➥',
+        type: 'table-section'
+      },
+      {
+        id: 'detail-depenses-investissement',
+        label: 'Détail des Dépenses d\'investissement',
+        icon: '📈',
+        type: 'accordion',
+        openAccordion: true
+      },
+      {
+        id: 'detail-recettes-investissement',
+        label: 'Détail des Recettes d\'investissement', 
+        icon: '📈',
+        type: 'accordion',
+        openAccordion: true
+      }
+    ]
   }
 ];
 ---
