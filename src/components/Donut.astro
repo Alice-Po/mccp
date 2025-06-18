@@ -1,0 +1,421 @@
+---
+interface DonutItem {
+  label: string;
+  compte: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+  color: string;
+}
+
+interface Props {
+  data: DonutItem[];
+  type: 'expenses' | 'revenues';
+  drillDownData?: Record<string, any[]>;
+}
+
+const { data, type, drillDownData = {} } = Astro.props;
+
+const periods = [
+  { key: 'prevus_2024', label: 'Prévus pour 2024' },
+  { key: 'realises_2024', label: 'Réalisés en 2024' },
+  { key: 'propositions_2025', label: 'Propositions pour 2025' }
+];
+const defaultPeriod = 'propositions_2025';
+const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="donut-period-toggle">
+  {periods.map((p) => (
+    <button type="button" class="toggle-btn" data-period={p.key} aria-current={p.key === defaultPeriod ? 'true' : 'false'}>{p.label}</button>
+  ))}
+</div>
+
+<div class="donut-container">
+  <div class="chart-wrapper">
+    <canvas id={chartId} width="400" height="400"></canvas>
+    <div class="center-text">
+      <div class="total-amount" id={`total-${chartId}`}></div>
+      <div class="total-label" id={`label-${chartId}`}></div>
+    </div>
+  </div>
+  
+  <div class="legend" id={`legend-${chartId}`}></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script define:vars={{ rawData: data, type, drillDownData, chartId, periods, defaultPeriod }}>
+  let chartInstance = null;
+  let currentPeriod = defaultPeriod;
+
+  function getChartData(period) {
+    return rawData.map(item => ({
+      label: item.label,
+      value: item[period] || 0,
+      compte: item.compte,
+      color: item.color
+    }));
+  }
+
+  function updateChart(period) {
+    const chartData = getChartData(period);
+    const labels = chartData.map(item => item.label);
+    const values = chartData.map(item => item.value);
+    const colors = chartData.map(item => item.color);
+    const total = values.reduce((sum, v) => sum + v, 0);
+
+    // Update chart
+    if (chartInstance) {
+      chartInstance.data.labels = labels;
+      chartInstance.data.datasets[0].data = values;
+      chartInstance.data.datasets[0].backgroundColor = colors;
+      chartInstance.update();
+    }
+
+    // Update total and label
+    const totalEl = document.getElementById(`total-${chartId}`);
+    if (totalEl) {
+      totalEl.textContent = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(total);
+    }
+    const labelEl = document.getElementById(`label-${chartId}`);
+    if (labelEl) {
+      const periodLabel = periods.find(p => p.key === period)?.label || '';
+      labelEl.textContent = `${type === 'expenses' ? 'Dépenses' : 'Recettes'} - ${periodLabel}`;
+    }
+
+    // Update legend
+    const legendEl = document.getElementById(`legend-${chartId}`);
+    if (legendEl) {
+      legendEl.innerHTML = '';
+      chartData.forEach((item, idx) => {
+        const legendItem = document.createElement('div');
+        legendItem.className = 'legend-item';
+        legendItem.setAttribute('data-compte', item.compte);
+        legendItem.innerHTML = `
+          <div class="legend-color" style="background-color: ${item.color}"></div>
+          <div class="legend-text">
+            <div class="legend-label">${item.label}</div>
+            <div class="legend-value">${item.value.toLocaleString('fr-FR')} €</div>
+          </div>
+        `;
+        legendItem.addEventListener('click', function() {
+          if (item.compte && drillDownData[item.compte]) {
+            showDrillDown(drillDownData[item.compte], item.label);
+          }
+        });
+        legendEl.appendChild(legendItem);
+      });
+    }
+  }
+
+  window.addEventListener('load', () => {
+    // Initial chart
+    const chartData = getChartData(defaultPeriod);
+    const labels = chartData.map(item => item.label);
+    const values = chartData.map(item => item.value);
+    const colors = chartData.map(item => item.color);
+    const total = values.reduce((sum, v) => sum + v, 0);
+
+    const canvas = document.getElementById(chartId);
+    const ctx = canvas.getContext('2d');
+    chartInstance = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: colors,
+          borderWidth: 2,
+          borderColor: '#fff',
+          hoverBorderWidth: 3,
+          hoverBorderColor: '#333'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        onClick: (event, elements) => {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            const chartData = getChartData(currentPeriod);
+            const compte = chartData[index].compte;
+            if (compte && drillDownData[compte]) {
+              showDrillDown(drillDownData[compte], chartData[index].label);
+            }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed;
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${context.label}: ${new Intl.NumberFormat('fr-FR', {
+                  style: 'currency',
+                  currency: 'EUR',
+                  minimumFractionDigits: 0
+                }).format(value)} (${percentage}%)`;
+              }
+            }
+          }
+        },
+        animation: {
+          animateRotate: true,
+          animateScale: true,
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+
+    // Initial legend and total
+    updateChart(defaultPeriod);
+
+    // Onglets/toggle listeners
+    document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const period = this.getAttribute('data-period');
+        if (period && period !== currentPeriod) {
+          currentPeriod = period;
+          // Met à jour l'état visuel des onglets
+          document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(b => b.setAttribute('aria-current', b === this ? 'true' : 'false'));
+          updateChart(period);
+        }
+      });
+    });
+  });
+
+  function showDrillDown(detailedData, categoryName) {
+    // Créer une modal ou un nouveau graphique pour le drill-down
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    `;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      width: 440px;
+      height: 440px;
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    `;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    closeBtn.style.cssText = `
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    `;
+    closeBtn.onclick = () => modal.remove();
+
+    const title = document.createElement('h3');
+    title.textContent = `Détail: ${categoryName}`;
+    title.style.marginBottom = '1rem';
+    title.style.textAlign = 'center';
+
+    const drillDownCanvas = document.createElement('canvas');
+    drillDownCanvas.width = 400;
+    drillDownCanvas.height = 400;
+    drillDownCanvas.style.display = 'block';
+
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(title);
+    modalContent.appendChild(drillDownCanvas);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Créer le graphique de drill-down
+    const drillDownCtx = drillDownCanvas.getContext('2d');
+    if (drillDownCtx) {
+      const drillDownChart = new Chart(drillDownCtx, {
+        type: 'doughnut',
+        data: {
+          labels: detailedData.map(item => item.label),
+          datasets: [{
+            data: detailedData.map(item => item.value),
+            backgroundColor: detailedData.map((_, i) => 
+              `hsl(${i * 360 / detailedData.length}, 70%, 60%)`
+            ),
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: false, // Désactive le responsive pour éviter le bug
+          maintainAspectRatio: false,
+          cutout: '60%',
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = context.parsed;
+                  return `${context.label}: ${new Intl.NumberFormat('fr-FR', {
+                    style: 'currency',
+                    currency: 'EUR',
+                    minimumFractionDigits: 0
+                  }).format(value)}`;
+                }
+              }
+            }
+          },
+          animation: {
+            animateRotate: true,
+            animateScale: true,
+            duration: 800
+          }
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  .donut-period-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .toggle-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2.5px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+  .toggle-btn[aria-current="true"] {
+    color: #1976d2;
+    border-bottom: 2.5px solid #1976d2;
+    background: #f5faff;
+  }
+  .toggle-btn:focus {
+    outline: 2px solid #1976d2;
+  }
+  .donut-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .chart-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .total-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.25rem;
+  }
+
+  .total-label {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .legend-item:hover {
+    background-color: #f5f5f5;
+  }
+
+  .legend-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .legend-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.125rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .legend-value {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .donut-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .chart-wrapper {
+      margin-bottom: 1rem;
+    }
+  }
+</style>

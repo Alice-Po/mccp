@@ -5,6 +5,7 @@ import FinancialTable from '../components/FinancialTable.astro';
 import ChartAccordion from '../components/ChartAccordion.astro';
 import BudgetNavigation from '../components/BudgetNavigation.astro';
 import { readFileSync } from 'fs';
+import Donut from '../components/Donut.astro';
 
 interface DetailsOfOperatingExpenses2024 {
   compte: string;
@@ -46,6 +47,57 @@ const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating
 const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_operating_incomes_2024;
 const depensesInvestData = investmentExpensesData.details_of_investment_expenses_2024;
 const recettesInvestData = investmentIncomesData.details_of_investment_revenues_2024;
+
+// Charger les données overview
+const overviewBudgetData = JSON.parse(readFileSync('public/assets/datas/overview-of-operating-section-2024.json', 'utf-8'));
+
+// Fonction pour générer des couleurs cohérentes
+function getColorForCategory(label: string, type: 'expenses' | 'revenues'): string {
+  const colors = {
+    expenses: [
+      '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+      '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+    ],
+    revenues: [
+      '#52C41A', '#1890FF', '#722ED1', '#13C2C2', '#FA8C16',
+      '#EB2F96', '#A0D911', '#2F54EB', '#FA541C', '#722ED1'
+    ]
+  };
+  
+  const colorIndex = label.length % colors[type].length;
+  return colors[type][colorIndex];
+}
+
+// Préparer les données pour les dépenses (multi-périodes)
+const expensesSection = overviewBudgetData.sections.find((s: any) => s.type === 'expenses');
+const expensesData = expensesSection?.items.map((item: any) => ({
+  label: item.libelle,
+  compte: item.compte,
+  prevus_2024: item.prevus_2024 || 0,
+  realises_2024: item.realises_2024 || 0,
+  propositions_2025: item.propositions_2025 || 0,
+  color: getColorForCategory(item.libelle, 'expenses')
+})) || [];
+
+// Préparer les données pour les recettes (multi-périodes)
+const revenuesSection = overviewBudgetData.sections.find((s: any) => s.type === 'revenues');
+const revenuesData = revenuesSection?.items.map((item: any) => ({
+  label: item.libelle,
+  compte: item.compte,
+  prevus_2024: item.prevus_2024 || 0,
+  realises_2024: item.realises_2024 || 0,
+  propositions_2025: item.propositions_2025 || 0,
+  color: getColorForCategory(item.libelle, 'revenues')
+})) || [];
+
+// Données de drill-down pour les charges de personnel
+const personnelDrillDown = {
+  "012": [
+    { label: "Rémunérations", value: 430000 },
+    { label: "Cotisations sociales", value: 55000 },
+    { label: "Autres charges", value: 15000 }
+  ]
+};
 ---
 
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
@@ -88,11 +140,33 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
       <div id="section-fonctionnement" class="budget-anchor">
         <FinancialTable data={overviewData} />
       </div>
+
+     
       
       <!-- Section détails de fonctionnement -->
       <div id="detail-section-fonctionnement" class="budget-anchor">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+          <div  id="detail-depenses-fonctionnement" class="bg-white rounded-lg shadow-lg p-6 budget-anchor chart-section">
+            <h2 class="text-xl font-semibold mb-4">Dépenses de fonctionnement</h2>
+            <Donut 
+              data={expensesData}
+              type="expenses"
+              period="propositions_2025"
+              drillDownData={personnelDrillDown}
+            />
+          </div>
+          
+          <div id="detail-recettes-fonctionnement" class="bg-white rounded-lg shadow-lg p-6 budget-anchor chart-section">
+            <h2 class="text-xl font-semibold mb-4">Recettes de fonctionnement</h2>
+            <Donut 
+              data={revenuesData}
+              type="revenues"
+              period="propositions_2025"
+            />
+          </div>
+        </div>
         <!-- Accordéon pour les dépenses de fonctionnement -->
-        <ChartAccordion title="Détail des dépenses de fonctionnement 2024">
+        <!-- <ChartAccordion title="Détail des dépenses de fonctionnement 2024">
           <div id="detail-depenses-fonctionnement" class="budget-anchor chart-section">
             <Chart 
               data={depensesData}
@@ -106,10 +180,10 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
               ]}
             />
           </div>
-        </ChartAccordion>
+        </ChartAccordion> -->
         
         <!-- Accordéon pour les recettes de fonctionnement -->
-        <ChartAccordion title="Détail des recettes de fonctionnement 2024">
+        <!-- <ChartAccordion title="Détail des recettes de fonctionnement 2024">
           <div id="detail-recettes-fonctionnement" class="budget-anchor chart-section">
             <Chart 
               data={recettesData}
@@ -123,7 +197,7 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
               ]}
             />
           </div>
-        </ChartAccordion>
+        </ChartAccordion> -->
       </div>
 
       <!-- Tableau financier - Section d'investissement -->
@@ -168,6 +242,8 @@ const recettesInvestData = investmentIncomesData.details_of_investment_revenues_
         </ChartAccordion>
       </div>
     </section>
+
+    
   </main>
 </Layout>
 
