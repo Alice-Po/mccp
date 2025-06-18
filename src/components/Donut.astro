@@ -12,24 +12,14 @@ interface Props {
   data: DonutItem[];
   type: 'expenses' | 'revenues';
   drillDownData?: Record<string, any[]>;
+  activePeriod: string;
+  periods: { key: string; label: string; }[];
 }
 
-const { data, type, drillDownData = {} } = Astro.props;
+const { data, type, drillDownData = {}, activePeriod, periods } = Astro.props;
 
-const periods = [
-  { key: 'prevus_2024', label: 'Prévus pour 2024' },
-  { key: 'realises_2024', label: 'Réalisés en 2024' },
-  { key: 'propositions_2025', label: 'Propositions pour 2025' }
-];
-const defaultPeriod = 'propositions_2025';
 const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
 ---
-
-<div class="donut-period-toggle">
-  {periods.map((p) => (
-    <button type="button" class="toggle-btn" data-period={p.key} aria-current={p.key === defaultPeriod ? 'true' : 'false'}>{p.label}</button>
-  ))}
-</div>
 
 <div class="donut-container">
   <div class="chart-wrapper">
@@ -44,9 +34,9 @@ const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script define:vars={{ rawData: data, type, drillDownData, chartId, periods, defaultPeriod }}>
+<script define:vars={{ rawData: data, type, drillDownData, chartId, periods, activePeriod }}>
   let chartInstance = null;
-  let currentPeriod = defaultPeriod;
+  let currentPeriod = activePeriod;
 
   function getChartData(period) {
     return rawData.map(item => ({
@@ -110,7 +100,7 @@ const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
 
   window.addEventListener('load', () => {
     // Initial chart
-    const chartData = getChartData(defaultPeriod);
+    const chartData = getChartData(activePeriod);
     const labels = chartData.map(item => item.label);
     const values = chartData.map(item => item.value);
     const colors = chartData.map(item => item.color);
@@ -171,19 +161,15 @@ const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
     });
 
     // Initial legend and total
-    updateChart(defaultPeriod);
+    updateChart(activePeriod);
 
-    // Onglets/toggle listeners
-    document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const period = this.getAttribute('data-period');
-        if (period && period !== currentPeriod) {
-          currentPeriod = period;
-          // Met à jour l'état visuel des onglets
-          document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(b => b.setAttribute('aria-current', b === this ? 'true' : 'false'));
-          updateChart(period);
-        }
-      });
+    // Écouter les changements de période depuis le composant parent
+    document.addEventListener('periodChanged', (event) => {
+      const newPeriod = event.detail.period;
+      if (newPeriod && newPeriod !== currentPeriod) {
+        currentPeriod = newPeriod;
+        updateChart(newPeriod);
+      }
     });
   });
 
@@ -300,32 +286,6 @@ const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
 </script>
 
 <style>
-  .donut-period-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .toggle-btn {
-    background: none;
-    border: none;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 2.5px solid transparent;
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s;
-    border-radius: 0.25rem 0.25rem 0 0;
-  }
-  .toggle-btn[aria-current="true"] {
-    color: #1976d2;
-    border-bottom: 2.5px solid #1976d2;
-    background: #f5faff;
-  }
-  .toggle-btn:focus {
-    outline: 2px solid #1976d2;
-  }
   .donut-container {
     display: flex;
     gap: 2rem;

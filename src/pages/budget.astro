@@ -6,6 +6,7 @@ import ChartAccordion from '../components/ChartAccordion.astro';
 import BudgetNavigation from '../components/BudgetNavigation.astro';
 import { readFileSync } from 'fs';
 import Donut from '../components/Donut.astro';
+import BudgetTabs from '../components/BudgetTabs.astro';
 
 interface DetailsOfOperatingExpenses2024 {
   compte: string;
@@ -148,21 +149,26 @@ const personnelDrillDown = {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           <div  id="detail-depenses-fonctionnement" class="bg-white rounded-lg shadow-lg p-6 budget-anchor chart-section">
             <h2 class="text-xl font-semibold mb-4">Dépenses de fonctionnement</h2>
-            <Donut 
+            <BudgetTabs 
+  data={expensesData} 
+  type="expenses" 
+  drillDownData={personnelDrillDown}
+/>
+            <!-- <Donut 
               data={expensesData}
               type="expenses"
               period="propositions_2025"
               drillDownData={personnelDrillDown}
-            />
+            /> -->
           </div>
           
           <div id="detail-recettes-fonctionnement" class="bg-white rounded-lg shadow-lg p-6 budget-anchor chart-section">
             <h2 class="text-xl font-semibold mb-4">Recettes de fonctionnement</h2>
-            <Donut 
+            <!-- <Donut 
               data={revenuesData}
               type="revenues"
               period="propositions_2025"
-            />
+            /> -->
           </div>
         </div>
         <!-- Accordéon pour les dépenses de fonctionnement -->

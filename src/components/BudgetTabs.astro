@@ -1,0 +1,120 @@
+---
+import Donut from './Donut.astro';
+
+interface DonutItem {
+  label: string;
+  compte: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+  color: string;
+}
+
+interface Props {
+  data: DonutItem[];
+  type: 'expenses' | 'revenues';
+  drillDownData?: Record<string, any[]>;
+}
+
+const { data, type, drillDownData = {} } = Astro.props;
+
+const periods = [
+  { key: 'prevus_2024', label: 'Prévus pour 2024' },
+  { key: 'realises_2024', label: 'Réalisés en 2024' },
+  { key: 'propositions_2025', label: 'Propositions pour 2025' }
+];
+const defaultPeriod = 'propositions_2025';
+---
+
+<div class="budget-tabs-container">
+  <div class="donut-period-toggle">
+    {periods.map((p) => (
+      <button 
+        type="button" 
+        class="toggle-btn" 
+        data-period={p.key} 
+        aria-current={p.key === defaultPeriod ? 'true' : 'false'}
+      >
+        {p.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="donut-wrapper">
+    <Donut 
+      data={data} 
+      type={type} 
+      drillDownData={drillDownData}
+      activePeriod={defaultPeriod}
+      periods={periods}
+    />
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script define:vars={{ periods, defaultPeriod }}>
+  let currentPeriod = defaultPeriod;
+
+  window.addEventListener('load', () => {
+    // Gestion des onglets/toggle
+    document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const period = this.getAttribute('data-period');
+        if (period && period !== currentPeriod) {
+          currentPeriod = period;
+          
+          // Met à jour l'état visuel des onglets
+          document.querySelectorAll('.donut-period-toggle .toggle-btn').forEach(b => 
+            b.setAttribute('aria-current', b === this ? 'true' : 'false')
+          );
+          
+          // Émet un événement personnalisé pour notifier le composant enfant
+          const event = new CustomEvent('periodChanged', {
+            detail: { period: period }
+          });
+          document.dispatchEvent(event);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .budget-tabs-container {
+    width: 100%;
+  }
+
+  .donut-period-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2.5px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+
+  .toggle-btn[aria-current="true"] {
+    color: #1976d2;
+    border-bottom: 2.5px solid #1976d2;
+    background: #f5faff;
+  }
+
+  .toggle-btn:focus {
+    outline: 2px solid #1976d2;
+  }
+
+  .donut-wrapper {
+    width: 100%;
+  }
+</style>
