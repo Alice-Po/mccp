@@ -1,424 +1,750 @@
 {
     "details_of_operating_expenses_2024": [
         {
+            "compte": "60221",
+            "libelle": "Combustibles et carburants",
+            "description": "Combustibles et carburants",
+            "montant_prevu": 0.00,
+            "montant_realise": 0.00,
+            "montant_propose": 0.00,
+            "category": "CHARGES A CARACTERE GENERAL"
+        },
+        {
             "compte": "6042",
-            "libelle": "Achats de prestations de services (autres que",
-            "montant_realise": 2638.05
+            "libelle": "Achats de prestations de services (autres que ceux inscrits au compte 608)",
+            "description": "Achats de prestations de services (autres que ceux inscrits au compte 608)",
+            "montant_prevu": 2400.00,
+            "montant_realise": 2638.05,
+            "montant_propose": 2700.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60611",
             "libelle": "Eau et assainissement",
-            "montant_realise": 11928.15
+            "description": "Eau et assainissement",
+            "montant_prevu": 12000.00,
+            "montant_realise": 11928.15,
+            "montant_propose": 13000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60612",
-            "libelle": "Energie - Electricite",
-            "montant_realise": 65602.50
+            "libelle": "Energie - Electricité",
+            "description": "Energie - Electricité",
+            "montant_prevu": 100000.00,
+            "montant_realise": 65602.50,
+            "montant_propose": 75000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60621",
             "libelle": "Combustibles",
-            "montant_realise": 13721.24
+            "description": "Combustibles",
+            "montant_prevu": 12000.00,
+            "montant_realise": 13721.24,
+            "montant_propose": 14000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60622",
             "libelle": "Carburants",
-            "montant_realise": 11818.15
+            "description": "Carburants",
+            "montant_prevu": 13000.00,
+            "montant_realise": 11818.15,
+            "montant_propose": 13000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60623",
             "libelle": "Alimentation",
-            "montant_realise": 240.67
+            "description": "Alimentation",
+            "montant_prevu": 350.00,
+            "montant_realise": 240.67,
+            "montant_propose": 350.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60631",
             "libelle": "Fournitures d'entretien",
-            "montant_realise": 3137.55
+            "description": "Fournitures d'entretien",
+            "montant_prevu": 2000.00,
+            "montant_realise": 3137.55,
+            "montant_propose": 3000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60632",
-            "libelle": "Fournitures de petit equipement",
-            "montant_realise": 10630.86
+            "libelle": "Fournitures de petit équipement",
+            "description": "Fournitures de petit équipement",
+            "montant_prevu": 14000.00,
+            "montant_realise": 10630.86,
+            "montant_propose": 14000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60633",
             "libelle": "Fournitures de voirie",
-            "montant_realise": 6827.20
+            "description": "Fournitures de voirie",
+            "montant_prevu": 3000.00,
+            "montant_realise": 6827.20,
+            "montant_propose": 3000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "60636",
-            "libelle": "Habillement et vetements de travail",
-            "montant_realise": 2027.78
+            "libelle": "Habillement et vêtements de travail",
+            "description": "Habillement et vêtements de travail",
+            "montant_prevu": 2500.00,
+            "montant_realise": 2027.78,
+            "montant_propose": 8000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6064",
             "libelle": "Fournitures administratives",
-            "montant_realise": 6615.52
+            "description": "Fournitures administratives",
+            "montant_prevu": 8500.00,
+            "montant_realise": 6615.52,
+            "montant_propose": 8500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6068",
-            "libelle": "Autres matieres et fournitures",
-            "montant_realise": 4450.22
+            "libelle": "Autres matières et fournitures",
+            "description": "Autres matières et fournitures",
+            "montant_prevu": 6000.00,
+            "montant_realise": 4450.22,
+            "montant_propose": 6000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "611",
             "libelle": "Contrats de prestations de services",
-            "montant_realise": 13650.83
+            "description": "Contrats de prestations de services",
+            "montant_prevu": 19000.00,
+            "montant_realise": 13650.83,
+            "montant_propose": 24000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6132",
-            "libelle": "Locations immobilieres",
-            "montant_realise": 7232.02
+            "libelle": "Locations immobilières",
+            "description": "Locations immobilières",
+            "montant_prevu": 15000.00,
+            "montant_realise": 7232.02,
+            "montant_propose": 10000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "61358",
             "libelle": "Autres",
-            "montant_realise": 5878.87
+            "description": "Autres",
+            "montant_prevu": 0.00,
+            "montant_realise": 5878.87,
+            "montant_propose": 1000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "61521",
             "libelle": "Terrains",
-            "montant_realise": 25381.04
+            "description": "Terrains",
+            "montant_prevu": 28000.00,
+            "montant_realise": 25381.04,
+            "montant_propose": 28000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
-            "compte": "615221",
-            "libelle": "Batiments publics",
-            "montant_realise": 5532.31
+            "compte": "61522I",
+            "libelle": "Bâtiments publics",
+            "description": "Bâtiments publics",
+            "montant_prevu": 40000.00,
+            "montant_realise": 5532.31,
+            "montant_propose": 40000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
-            "compte": "615228",
+            "compte": "61522B",
             "libelle": "Autres bâtiments",
-            "montant_realise": 19557.04
+            "description": "Autres bâtiments",
+            "montant_prevu": 30000.00,
+            "montant_realise": 19557.04,
+            "montant_propose": 20000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "615231",
             "libelle": "Voiries",
-            "montant_realise": 21006.78
+            "description": "Voiries",
+            "montant_prevu": 150000.00,
+            "montant_realise": 21006.78,
+            "montant_propose": 210000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "615232",
             "libelle": "Réseaux",
-            "montant_realise": 3440.36
+            "description": "Réseaux",
+            "montant_prevu": 40000.00,
+            "montant_realise": 3440.36,
+            "montant_propose": 100000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "61551",
             "libelle": "Matériel roulant",
-            "montant_realise": 12391.32
+            "description": "Matériel roulant",
+            "montant_prevu": 20000.00,
+            "montant_realise": 12391.32,
+            "montant_propose": 15000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "61558",
             "libelle": "Autres biens mobiliers",
-            "montant_realise": 1341.75
+            "description": "Autres biens mobiliers",
+            "montant_prevu": 10000.00,
+            "montant_realise": 1341.75,
+            "montant_propose": 10000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6156",
             "libelle": "Maintenance",
-            "montant_realise": 40275.95
+            "description": "Maintenance",
+            "montant_prevu": 30000.00,
+            "montant_realise": 40275.95,
+            "montant_propose": 42000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6161",
             "libelle": "Multirisques",
-            "montant_realise": 26127.96
+            "description": "Multirisques",
+            "montant_prevu": 23000.00,
+            "montant_realise": 26127.96,
+            "montant_propose": 28000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "617",
             "libelle": "Etudes et recherches",
-            "montant_realise": 0.00
+            "description": "Etudes et recherches",
+            "montant_prevu": 1000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6182",
             "libelle": "Divers",
-            "montant_realise": 2901.81
+            "description": "Divers",
+            "montant_prevu": 3000.00,
+            "montant_realise": 2901.81,
+            "montant_propose": 3000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6183",
-            "libelle": "Frais de formation (personnel extérieur à la)",
-            "montant_realise": 0.00
+            "libelle": "Frais de formation (personnel extérieur à la collectivité)",
+            "description": "Frais de formation (personnel extérieur à la collectivité)",
+            "montant_prevu": 1500.00,
+            "montant_realise": 0.00,
+            "montant_propose": 0.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6184",
             "libelle": "Versements à des organismes de formation",
-            "montant_realise": 5028.00
+            "description": "Versements à des organismes de formation",
+            "montant_prevu": 6000.00,
+            "montant_realise": 5028.00,
+            "montant_propose": 10000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6225",
             "libelle": "Indemnités au comptable et aux régisseurs",
-            "montant_realise": 160.00
+            "description": "Indemnités au comptable et aux régisseurs",
+            "montant_prevu": 300.00,
+            "montant_realise": 160.00,
+            "montant_propose": 300.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "62268",
             "libelle": "Autres honoraires conseils",
-            "montant_realise": 20942.44
+            "description": "Autres honoraires conseils",
+            "montant_prevu": 42000.00,
+            "montant_realise": 20942.44,
+            "montant_propose": 25000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6227",
             "libelle": "Frais d'actes et de contentieux",
-            "montant_realise": 0.00
+            "description": "Frais d'actes et de contentieux",
+            "montant_prevu": 2000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 2500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6228",
             "libelle": "Divers",
-            "montant_realise": 0.00
+            "description": "Divers",
+            "montant_prevu": 3000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 1000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6231",
             "libelle": "Annonces et insertions",
-            "montant_realise": 4412.42
+            "description": "Annonces et insertions",
+            "montant_prevu": 5500.00,
+            "montant_realise": 4112.42,
+            "montant_propose": 4500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6232",
             "libelle": "Fêtes et cérémonies",
-            "montant_realise": 35794.22
+            "description": "Fêtes et cérémonies",
+            "montant_prevu": 40000.00,
+            "montant_realise": 35794.22,
+            "montant_propose": 40000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6238",
             "libelle": "Divers",
-            "montant_realise": 1159.20
+            "description": "Divers",
+            "montant_prevu": 2000.00,
+            "montant_realise": 1159.20,
+            "montant_propose": 1500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6241",
             "libelle": "Transports de biens et transports collectifs",
-            "montant_realise": 28.00
+            "description": "Transports de biens et transports collectifs",
+            "montant_prevu": 500.00,
+            "montant_realise": 28.00,
+            "montant_propose": 500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
-            "compte": "6261",
+            "compte": "6251",
             "libelle": "Frais d'affranchissement",
-            "montant_realise": 1948.49
+            "description": "Frais d'affranchissement",
+            "montant_prevu": 2500.00,
+            "montant_realise": 1948.49,
+            "montant_propose": 2500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6262",
             "libelle": "Frais de télécommunications",
-            "montant_realise": 19811.20
+            "description": "Frais de télécommunications",
+            "montant_prevu": 21000.00,
+            "montant_realise": 19811.20,
+            "montant_propose": 21000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "627",
             "libelle": "Services bancaires et assimilés",
-            "montant_realise": 281.36
+            "description": "Services bancaires et assimilés",
+            "montant_prevu": 200.00,
+            "montant_realise": 281.36,
+            "montant_propose": 300.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6281",
             "libelle": "Concours divers (cotisations)",
-            "montant_realise": 4810.18
+            "description": "Concours divers (cotisations)",
+            "montant_prevu": 5000.00,
+            "montant_realise": 4810.18,
+            "montant_propose": 5000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6283",
             "libelle": "Frais de nettoyage des locaux",
-            "montant_realise": 649.26
+            "description": "Frais de nettoyage des locaux",
+            "montant_prevu": 2000.00,
+            "montant_realise": 649.26,
+            "montant_propose": 2500.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "62878",
-            "libelle": "A ddes tiers",
-            "montant_realise": 2656.83
+            "libelle": "A des tiers",
+            "description": "A des tiers",
+            "montant_prevu": 700.00,
+            "montant_realise": 2656.83,
+            "montant_propose": 0.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6288",
             "libelle": "Autres",
-            "montant_realise": 12698.86
+            "description": "Autres",
+            "montant_prevu": 12000.00,
+            "montant_realise": 12698.86,
+            "montant_propose": 12000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "63512",
-            "libelle": "Autres impôts taxes et versements assimilés s",
-            "montant_realise": 18897.00
+            "libelle": "Autres impôts taxes et versements assimilés sur rémunérations (administration des impôts)",
+            "description": "Autres impôts taxes et versements assimilés sur rémunérations (administration des impôts)",
+            "montant_prevu": 25000.00,
+            "montant_realise": 18897.00,
+            "montant_propose": 20000.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "637",
-            "libelle": "Autres impôts taxes et versements assimilés (",
-            "montant_realise": 0.00
+            "libelle": "Autres impôts taxes et versements assimilés (administration des impôts)",
+            "description": "Autres impôts taxes et versements assimilés (administration des impôts)",
+            "montant_prevu": 400.00,
+            "montant_realise": 0.00,
+            "montant_propose": 400.00,
+            "category": "CHARGES A CARACTERE GENERAL"
         },
         {
             "compte": "6215",
-            "libelle": "Personnel affecté par la collectivité de ratt",
-            "montant_realise": 0.00
+            "libelle": "Personnel affecté par la collectivité de rattachement",
+            "description": "Personnel affecté par la collectivité de rattachement",
+            "montant_prevu": 20000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 0.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6217",
             "libelle": "Personnel affecté par la commune membre du GF",
-            "montant_realise": 0.00
+            "description": "Personnel affecté par la commune membre du GF",
+            "montant_prevu": 0.00,
+            "montant_realise": 0.00,
+            "montant_propose": 36000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6332",
             "libelle": "Cotisations versées au FNAL",
-            "montant_realise": 328.02
+            "description": "Cotisations versées au FNAL",
+            "montant_prevu": 1000.00,
+            "montant_realise": 329.02,
+            "montant_propose": 1000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6336",
-            "libelle": "Cotisations au centre national et aux CDG de",
-            "montant_realise": 8538.04
+            "libelle": "Cotisations au centre national et aux CDG de formation du personnel communal",
+            "description": "Cotisations au centre national et aux CDG de formation du personnel communal",
+            "montant_prevu": 9200.00,
+            "montant_realise": 8538.04,
+            "montant_propose": 9500.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6338",
-            "libelle": "Autres impôts taxes et versements assimilés s",
-            "montant_realise": 985.11
+            "libelle": "Autres impôts taxes et versements assimilés sur rémunérations (autres organismes)",
+            "description": "Autres impôts taxes et versements assimilés sur rémunérations (autres organismes)",
+            "montant_prevu": 1500.00,
+            "montant_realise": 985.11,
+            "montant_propose": 1500.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "64111",
             "libelle": "Rémunération principale",
-            "montant_realise": 158946.75
+            "description": "Rémunération principale",
+            "montant_prevu": 180000.00,
+            "montant_realise": 158906.75,
+            "montant_propose": 170000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "64131",
             "libelle": "Rémunérations",
-            "montant_realise": 169098.71
+            "description": "Rémunérations",
+            "montant_prevu": 210000.00,
+            "montant_realise": 189098.71,
+            "montant_propose": 260000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6451",
             "libelle": "Cotisations à l'URSSAF",
-            "montant_realise": 80779.71
+            "description": "Cotisations à l'URSSAF",
+            "montant_prevu": 100000.00,
+            "montant_realise": 80779.71,
+            "montant_propose": 100000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6453",
             "libelle": "Cotisations aux Caisses de retraite",
-            "montant_realise": 48146.64
+            "description": "Cotisations aux Caisses de retraite",
+            "montant_prevu": 70000.00,
+            "montant_realise": 48146.64,
+            "montant_propose": 70000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6454",
             "libelle": "Cotisations aux ASSEDIC",
-            "montant_realise": 8460.22
+            "description": "Cotisations aux ASSEDIC",
+            "montant_prevu": 9000.00,
+            "montant_realise": 8460.22,
+            "montant_propose": 9500.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6455",
             "libelle": "Cotisations pour assurance du personnel",
-            "montant_realise": 14385.36
+            "description": "Cotisations pour assurance du personnel",
+            "montant_prevu": 13000.00,
+            "montant_realise": 14385.36,
+            "montant_propose": 16300.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6456",
-            "libelle": "Versement au F,N,C, du supplément familial",
-            "montant_realise": 0.00
+            "libelle": "Versement au C.O.S ou supplément familial",
+            "description": "Versement au C.O.S ou supplément familial",
+            "montant_prevu": 2500.00,
+            "montant_realise": 0.00,
+            "montant_propose": 2500.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6474",
             "libelle": "Versement aux autres oeuvres sociales",
-            "montant_realise": 2604.00
+            "description": "Versement aux autres oeuvres sociales",
+            "montant_prevu": 9000.00,
+            "montant_realise": 2604.00,
+            "montant_propose": 7000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6478",
             "libelle": "Autres charges sociales diverses",
-            "montant_realise": 39372.52
+            "description": "Autres charges sociales diverses",
+            "montant_prevu": 13000.00,
+            "montant_realise": 39372.52,
+            "montant_propose": 15000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "6488",
             "libelle": "Autres charges de personnel",
-            "montant_realise": 0.00
+            "description": "Autres charges de personnel",
+            "montant_prevu": 6000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 5000.00,
+            "category": "CHARGES DE PERSONNEL"
         },
         {
             "compte": "7391111",
-            "libelle": "Dégrèvement de taxe foncière sur les propriét",
-            "montant_realise": 1059.00
+            "libelle": "Dégrèvement de taxe foncière sur les propriétés bâties",
+            "montant_prevu": 2000.00,
+            "montant_realise": 1059.00,
+            "montant_propose": 2000.00,
+            "category": "ATTENUATION DE PRODUITS"
         },
         {
             "compte": "739221",
             "libelle": "FNGIR",
-            "montant_realise": 60969.00
+            "description": "FNGIR",
+            "montant_prevu": 60969.00,
+            "montant_realise": 60969.00,
+            "montant_propose": 60969.00,
+            "category": "ATTENUATION DE PRODUITS"
         },
         {
             "compte": "73952",
             "libelle": "Fraction compensatoire de la CVAE",
-            "montant_realise": 312.00
+            "description": "Fraction compensatoire de la CVAE",
+            "montant_prevu": 0.00,
+            "montant_realise": 312.00,
+            "montant_propose": 0.00,
+            "category": "ATTENUATION DE PRODUITS"
         },
         {
             "compte": "65134",
             "libelle": "Aides",
-            "montant_realise": 0.00
+            "description": "Aides",
+            "montant_prevu": 350.00,
+            "montant_realise": 0.00,
+            "montant_propose": 350.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65311",
             "libelle": "Indemnités de fonction",
-            "montant_realise": 123343.70
+            "description": "Indemnités de fonction",
+            "montant_prevu": 126000.00,
+            "montant_realise": 123343.70,
+            "montant_propose": 126000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65313",
             "libelle": "Cotisations de retraite",
-            "montant_realise": 5171.61
+            "description": "Cotisations de retraite",
+            "montant_prevu": 5500.00,
+            "montant_realise": 5171.61,
+            "montant_propose": 5500.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65314",
             "libelle": "Cotisations de sécurité sociale - part patron",
-            "montant_realise": 7874.76
+            "description": "Cotisations de sécurité sociale - part patron",
+            "montant_prevu": 9000.00,
+            "montant_realise": 7874.76,
+            "montant_propose": 8000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65315",
             "libelle": "Formation",
-            "montant_realise": 0.00
+            "description": "Formation",
+            "montant_prevu": 1000.00,
+            "montant_realise": 0.00,
+            "montant_propose": 1000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65568",
             "libelle": "Autres contributions",
-            "montant_realise": 225.00
+            "description": "Autres contributions",
+            "montant_prevu": 5000.00,
+            "montant_realise": 225.00,
+            "montant_propose": 5000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "6558",
             "libelle": "Autres contributions obligatoires",
-            "montant_realise": 1922.02
+            "description": "Autres contributions obligatoires",
+            "montant_prevu": 3000.00,
+            "montant_realise": 1922.02,
+            "montant_propose": 2000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
-            "compte": "657363",
+            "compte": "657368",
             "libelle": "CCAS-CIAS",
-            "montant_realise": 1500.00
+            "description": "CCAS-CIAS",
+            "montant_prevu": 1500.00,
+            "montant_realise": 1500.00,
+            "montant_propose": 3000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65748",
             "libelle": "Autres personnes de droit privé",
-            "montant_realise": 9578.00
+            "description": "Autres personnes de droit privé",
+            "montant_prevu": 9000.00,
+            "montant_realise": 9578.00,
+            "montant_propose": 9000.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65882",
             "libelle": "Autres charges diverses de gestion courante",
-            "montant_realise": 0.00
+            "description": "Autres charges diverses de gestion courante",
+            "montant_prevu": 920711.53,
+            "montant_realise": 0.00,
+            "montant_propose": 762862.14,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "65888",
             "libelle": "Autres",
-            "montant_realise": 9009.94
+            "description": "Autres",
+            "montant_prevu": 10750.00,
+            "montant_realise": 9009.94,
+            "montant_propose": 10750.00,
+            "category": "AUTRES CHARGES DE GESTION COURANTE"
         },
         {
             "compte": "66111",
             "libelle": "Intérêts réglés à l'échéance",
-            "montant_realise": 4893.68
+            "description": "Intérêts réglés à l'échéance",
+            "montant_prevu": 7151.00,
+            "montant_realise": 4893.68,
+            "montant_propose": 4200.00,
+            "category": "CHARGES FINANCIERES"
         },
         {
             "compte": "673",
             "libelle": "Titres annulés (sur exercices antérieurs)",
-            "montant_realise": 339.80
+            "description": "Titres annulés (sur exercices antérieurs)",
+            "montant_prevu": 1000.00,
+            "montant_realise": 339.80,
+            "montant_propose": 1000.00,
+            "category": "CHARGES SPECIFIQUES"
         },
         {
             "compte": "6815",
             "libelle": "Dotations aux amortissements aux dépréciation",
-            "montant_realise": 0.00
+            "description": "Dotations aux amortissements aux dépréciation",
+            "montant_prevu": 1200.00,
+            "montant_realise": 0.00,
+            "montant_propose": 1200.00,
+            "category": "DOTATIONS AUX AMORTISSEMENTS ET PROVIS."
         },
         {
             "compte": "6817",
-            "libelle": "Dotations aux dépréciations des actifs circul",
-            "montant_realise": 406.95
+            "libelle": "Dotations aux dépréciations des actifs circulants",
+            "description": "Dotations aux dépréciations des actifs circulants",
+            "montant_prevu": 0.00,
+            "montant_realise": 406.95,
+            "montant_propose": 0.00,
+            "category": "DOTATIONS AUX AMORTISSEMENTS ET PROVIS."
         },
         {
-            "compte": "23",
+            "compte": "023",
             "libelle": "Virement à la section d'investissement",
-            "montant_realise": 0.00
+            "description": "",
+            "montant_prevu": 886736.01,
+            "montant_realise": 0.00,
+            "montant_propose": 1578689.00,
+            "category": "VIREMENT A LA SECTION D'INVESTISSEMENT"
         },
         {
             "compte": "675",
             "libelle": "Valeur comptable des immobilisations cédées",
-            "montant_realise": 108876.91
+            "description": "Valeur comptable des immobilisations cédées",
+            "montant_prevu": 119263.24,
+            "montant_realise": 108876.91,
+            "montant_propose": 0.00,
+            "category": "CHARGES EXCEPTIONNELLES"
         },
         {
             "compte": "6761",
-            "libelle": "Différences sur réalisations (positives) tran",
-            "montant_realise": 6201.72
+            "libelle": "Différences sur réalisations (positives) transférées au compte de résultat",
+            "description": "Différences sur réalisations (positives) transférées au compte de résultat",
+            "montant_prevu": 6201.72,
+            "montant_realise": 6201.72,
+            "montant_propose": 0.00,
+            "category": "CHARGES EXCEPTIONNELLES"
         },
         {
             "compte": "6811",
-            "libelle": "Dotations aux amortissements des immobilisati",
-            "montant_realise": 10923.00
-        },
-        {
-            "compte": "Épargne nette",
-            "libelle": "Épargne nette",
-            "montant_realise": 199457.21
+            "libelle": "Dotations aux amortissements des immobilisations incorporelles et corporelles",
+            "description": "Dotations aux amortissements des immobilisations incorporelles et corporelles",
+            "montant_prevu": 10923.00,
+            "montant_realise": 10923.00,
+            "montant_propose": 60923.00,
+            "category": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS"
         }
-    ],
-    "resume": {
-        "nombre_de_comptes": 81,
-        "total_realise": 3516832.55,
-        "devise": "EUR"
-    }
+    ]
 }

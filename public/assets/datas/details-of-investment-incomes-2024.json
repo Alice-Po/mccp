@@ -3,6 +3,7 @@
         {
             "compte": "10222",
             "libelle": "FCTVA",
+            "description": "FCTVA",
             "montant_prevu": 132241.00,
             "montant_realise": 58849.67,
             "montant_propose": 283986.00,
@@ -11,6 +12,7 @@
         {
             "compte": "10226",
             "libelle": "Taxe d'aménagement",
+            "description": "Taxe d'aménagement",
             "montant_prevu": 0.00,
             "montant_realise": 1552.14,
             "montant_propose": 5000.00,
@@ -19,6 +21,7 @@
         {
             "compte": "1068",
             "libelle": "Excédents de fonctionnement capitalisés",
+            "description": "Excédents de fonctionnement capitalisés",
             "montant_prevu": 817171.28,
             "montant_realise": 817171.28,
             "montant_propose": 477195.26,
@@ -27,6 +30,7 @@
         {
             "compte": "1322",
             "libelle": "Régions",
+            "description": "Régions",
             "montant_prevu": 626793.20,
             "montant_realise": 427781.08,
             "montant_propose": 199012.00,
@@ -35,6 +39,7 @@
         {
             "compte": "1323",
             "libelle": "Départements",
+            "description": "Départements",
             "montant_prevu": 153550.00,
             "montant_realise": 0.00,
             "montant_propose": 153550.00,
@@ -43,6 +48,7 @@
         {
             "compte": "1328",
             "libelle": "Autres",
+            "description": "Autres",
             "montant_prevu": 0.00,
             "montant_realise": 202.65,
             "montant_propose": 0.00,
@@ -51,6 +57,7 @@
         {
             "compte": "13461",
             "libelle": "Dotation d'équipement des territoires ruraux",
+            "description": "Dotation d'équipement des territoires ruraux",
             "montant_prevu": 1301042.56,
             "montant_realise": 589001.48,
             "montant_propose": 712041.00,
@@ -59,6 +66,7 @@
         {
             "compte": "165",
             "libelle": "Dépôts et cautionnements reçus",
+            "description": "Dépôts et cautionnements reçus",
             "montant_prevu": 1500.00,
             "montant_realise": 0.00,
             "montant_propose": 1500.00,
@@ -67,6 +75,7 @@
         {
             "compte": "024",
             "libelle": "Produits des cessions d'immobilisations",
+            "description": "Produits des cessions d'immobilisations",
             "montant_prevu": 69849.00,
             "montant_realise": 0.00,
             "montant_propose": 396111.00,
@@ -75,6 +84,7 @@
         {
             "compte": "021",
             "libelle": "Virement de la section de fonctionnement",
+            "description": "Virement de la section de fonctionnement",
             "montant_prevu": 886736.01,
             "montant_realise": 0.00,
             "montant_propose": 1578689.00,
@@ -83,6 +93,7 @@
         {
             "compte": "192",
             "libelle": "Plus ou moins-values sur cessions d'immobilis",
+            "description": "Plus ou moins-values sur cessions d'immobilis",
             "montant_prevu": 6201.72,
             "montant_realise": 6201.72,
             "montant_propose": 0.00,
@@ -91,6 +102,7 @@
         {
             "compte": "21318",
             "libelle": "Autres bâtiments publics",
+            "description": "Autres bâtiments publics",
             "montant_prevu": 68798.28,
             "montant_realise": 68798.28,
             "montant_propose": 0.00,
@@ -99,6 +111,7 @@
         {
             "compte": "2138",
             "libelle": "Autres constructions",
+            "description": "Autres constructions",
             "montant_prevu": 10386.33,
             "montant_realise": 0.00,
             "montant_propose": 0.00,
@@ -107,6 +120,7 @@
         {
             "compte": "215731",
             "libelle": "Matériel roulant",
+            "description": "Matériel roulant",
             "montant_prevu": 27737.63,
             "montant_realise": 27737.63,
             "montant_propose": 0.00,
@@ -115,6 +129,7 @@
         {
             "compte": "215738",
             "libelle": "Autre matériel et outillage de voirie",
+            "description": "Autre matériel et outillage de voirie",
             "montant_prevu": 4179.00,
             "montant_realise": 4179.00,
             "montant_propose": 0.00,
@@ -123,6 +138,7 @@
         {
             "compte": "2175738",
             "libelle": "Autre matériel et outillage de voirie",
+            "description": "Autre matériel et outillage de voirie",
             "montant_prevu": 8162.00,
             "montant_realise": 8162.00,
             "montant_propose": 0.00,
@@ -131,6 +147,7 @@
         {
             "compte": "280415343",
             "libelle": "Projets d'infrastructures d'intérêt national",
+            "description": "Projets d'infrastructures d'intérêt national",
             "montant_prevu": 10923.00,
             "montant_realise": 10923.00,
             "montant_propose": 60923.00,
@@ -139,6 +156,7 @@
         {
             "compte": "2031",
             "libelle": "Frais d'études",
+            "description": "Frais d'études",
             "montant_prevu": 50000.00,
             "montant_realise": 4200.00,
             "montant_propose": 400000.00,
@@ -147,6 +165,7 @@
         {
             "compte": "238",
             "libelle": "Avances versées sur commandes d'immobilisatio",
+            "description": "Avances versées sur commandes d'immobilisatio",
             "montant_prevu": 50000.00,
             "montant_realise": 0.00,
             "montant_propose": 0.00,
@@ -155,6 +174,7 @@
         {
             "compte": "001",
             "libelle": "Solde d'exécution de la section d'investissem",
+            "description": "Solde d'exécution de la section d'investissem",
             "montant_prevu": 0.00,
             "montant_realise": 0.00,
             "montant_propose": 199457.21,
