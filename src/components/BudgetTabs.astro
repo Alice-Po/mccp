@@ -43,7 +43,7 @@ const defaultPeriod = 'propositions_2025';
   </div>
 
   <div class="chart-wrapper">
-    <div id="donut-container" class={defaultPeriod === 'comparaison' ? 'hidden' : ''}>
+    <div id="donut-container">
       <Donut 
         data={data} 
         type={type} 
@@ -53,7 +53,7 @@ const defaultPeriod = 'propositions_2025';
       />
     </div>
     
-    <div id="bar-container" class={defaultPeriod === 'comparaison' ? '' : 'hidden'}>
+    <div id="bar-container" class="hidden">
       <HorizontalBarChart 
         data={data} 
         type={type}
