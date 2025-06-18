@@ -82,9 +82,10 @@ const chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
         legendItem.className = 'legend-item';
         legendItem.setAttribute('data-compte', item.compte);
         legendItem.innerHTML = `
-          <div class="legend-color" style="background-color: ${item.color}"></div>
-          <div class="legend-text">
-            <div class="legend-label">${item.label}</div>
+          
+          <div class="legend-text" style="display: inline-flex;">
+            <div class="legend-color" style="background-color: ${item.color}"></div>
+            <div class="legend-label">${item.label}</div> 
             <div class="legend-value">${item.value.toLocaleString('fr-FR')} €</div>
           </div>
         `;
