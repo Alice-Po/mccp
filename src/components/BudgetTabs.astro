@@ -1,5 +1,6 @@
 ---
 import Donut from './Donut.astro';
+import HorizontalBarChart from './HorizontalBarChart.astro';
 
 interface DonutItem {
   label: string;
@@ -21,7 +22,8 @@ const { data, type, drillDownData = {} } = Astro.props;
 const periods = [
   { key: 'prevus_2024', label: 'Prévus pour 2024' },
   { key: 'realises_2024', label: 'Réalisés en 2024' },
-  { key: 'propositions_2025', label: 'Propositions pour 2025' }
+  { key: 'propositions_2025', label: 'Propositions pour 2025' },
+  { key: 'comparaison', label: 'Comparaison' }
 ];
 const defaultPeriod = 'propositions_2025';
 ---
@@ -40,20 +42,52 @@ const defaultPeriod = 'propositions_2025';
     ))}
   </div>
 
-  <div class="donut-wrapper">
-    <Donut 
-      data={data} 
-      type={type} 
-      drillDownData={drillDownData}
-      activePeriod={defaultPeriod}
-      periods={periods}
-    />
+  <div class="chart-wrapper">
+    <div id="donut-container" class={defaultPeriod === 'comparaison' ? 'hidden' : ''}>
+      <Donut 
+        data={data} 
+        type={type} 
+        drillDownData={drillDownData}
+        activePeriod={defaultPeriod}
+        periods={periods.filter(p => p.key !== 'comparaison')}
+      />
+    </div>
+    
+    <div id="bar-container" class={defaultPeriod === 'comparaison' ? '' : 'hidden'}>
+      <HorizontalBarChart 
+        data={data} 
+        type={type}
+        title={`${type === 'expenses' ? 'Dépenses' : 'Recettes'} - Comparaison des périodes`}
+      />
+    </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script define:vars={{ periods, defaultPeriod }}>
   let currentPeriod = defaultPeriod;
+
+  function updateChartDisplay(period) {
+    const donutContainer = document.getElementById('donut-container');
+    const barContainer = document.getElementById('bar-container');
+    const isComparison = period === 'comparaison';
+    
+    if (isComparison) {
+      // Afficher le graphique en barres
+      donutContainer.classList.add('hidden');
+      barContainer.classList.remove('hidden');
+    } else {
+      // Afficher le donut
+      donutContainer.classList.remove('hidden');
+      barContainer.classList.add('hidden');
+      
+      // Mettre à jour le donut
+      const event = new CustomEvent('periodChanged', {
+        detail: { period: period }
+      });
+      document.dispatchEvent(event);
+    }
+  }
 
   window.addEventListener('load', () => {
     // Gestion des onglets/toggle
@@ -68,11 +102,8 @@ const defaultPeriod = 'propositions_2025';
             b.setAttribute('aria-current', b === this ? 'true' : 'false')
           );
           
-          // Émet un événement personnalisé pour notifier le composant enfant
-          const event = new CustomEvent('periodChanged', {
-            detail: { period: period }
-          });
-          document.dispatchEvent(event);
+          // Met à jour l'affichage du graphique
+          updateChartDisplay(period);
         }
       });
     });
@@ -114,7 +145,11 @@ const defaultPeriod = 'propositions_2025';
     outline: 2px solid #1976d2;
   }
 
-  .donut-wrapper {
+  .chart-wrapper {
     width: 100%;
+  }
+
+  .hidden {
+    display: none !important;
   }
 </style>
