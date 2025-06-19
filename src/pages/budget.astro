@@ -6,7 +6,7 @@ import ChartAccordion from '../components/ChartAccordion.astro';
 import BudgetNavigation from '../components/BudgetNavigation.astro';
 import { readFileSync } from 'fs';
 import Donut from '../components/Donut.astro';
-import BudgetTabs from '../components/BudgetTabs.astro';
+import BudgetTabs from '../components/BudgetTabs.svelte';
 import { generateDrillDownData } from '../utils/drilldown';
 
 interface DetailsOfOperatingExpenses2024 {
@@ -227,6 +227,7 @@ const personnelDrillDown = {
   data={expensesData} 
   type="expenses" 
   drillDownData={personnelDrillDown}
+  client:load
 />
             <!-- <Donut 
               data={expensesData}
