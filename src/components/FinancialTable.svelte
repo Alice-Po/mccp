@@ -1,7 +1,7 @@
 <script lang="ts">
   export let data: OverviewData;
   export let drillDownData: { [key: string]: DrillDownItem[] };
-  import BudgetDrillDownModal from './BudgetDrillDownModal.svelte';
+  import FinancialTableDrillDownModal from './FinancialTableDrillDownModal.svelte';
   import { onMount } from 'svelte';
   import type { DrillDownItem } from '../utils/drilldown';
 
@@ -137,7 +137,16 @@
 
   <!-- Popup de téléchargement -->
   {#if showDownloadPopup}
-    <div class="download-popup" on:click|self={closeDownloadPopup}>
+    <div
+      class="download-popup"
+      role="dialog"
+      tabindex="0"
+      aria-modal="true"
+      on:click|self={closeDownloadPopup}
+      on:keydown={(e) => {
+        if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') closeDownloadPopup();
+      }}
+    >
       <div class="popup-content">
         <h3>Téléchargement des données</h3>
         <p>Le téléchargement des données sera bientôt disponible sous différents formats (CSV, Excel, PDF).</p>
@@ -174,7 +183,7 @@
           
           <!-- Items de la section -->
           {#each section.items as item}
-            <tr class="data-row" class:clickable={drillDownData[item.libelle] && drillDownData[item.libelle].length > 0} on:click={() => openDrillDown(item.libelle, section.type)}>
+            <tr class="data-row clickable" class:clickable={drillDownData[item.libelle] && drillDownData[item.libelle].length > 0} on:click={() => openDrillDown(item.libelle, section.type)}>
               <td class="col-compte">{item.compte || ''}</td>
               <td class="col-libelle">
                 {item.libelle}
@@ -205,7 +214,7 @@
 </div>
 
 <!-- Modal de drill-down -->
-<BudgetDrillDownModal 
+<FinancialTableDrillDownModal 
   isOpen={showDrillDownModal}
   title={selectedDrillDownTitle}
   data={selectedDrillDownData}
@@ -496,5 +505,9 @@
     .section-title {
       font-size: 1rem !important;
     }
+  }
+
+  .data-row.clickable {
+    cursor: pointer;
   }
 </style> 
