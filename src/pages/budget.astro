@@ -161,6 +161,53 @@ const personnelDrillDown = {
     { label: "Autres charges", value: 15000 }
   ]
 };
+
+// Préparation des données de drill-down pour l'investissement
+const investmentCategoryMapping = {
+  "REMBOURSEMENT D'EMPRUNTS ET DETTES": "REMBOURSEMENT D'EMPRUNTS ET DETTES",
+  "IMMOBILISATIONS INCORPORELLES": "IMMOBILISATIONS INCORPORELLES",
+  "SUBVENTIONS D'EQUIPEMENT VERSEES": "SUBVENTIONS D'EQUIPEMENT VERSEES",
+  "IMMOBILISATIONS CORPORELLES": "IMMOBILISATIONS CORPORELLES",
+  "IMMOBILISATIONS EN COURS": "IMMOBILISATIONS EN COURS",
+  "AUTRES IMMOBILISATIONS FINANCIERES": "AUTRES IMMOBILISATIONS FINANCIERES",
+  "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS",
+  "OPERATIONS PATRIMONIALES": "OPERATIONS PATRIMONIALES",
+  "DEFICIT D'INVESTISSEMENT REPORTE": "DEFICIT D'INVESTISSEMENT REPORTE",
+  // Recettes
+  "APPORTS, DOTATIONS ET RESERVES": "APPORTS, DOTATIONS ET RESERVES",
+  "SUBVENTIONS D'EQUIPEMENT": "SUBVENTIONS D'EQUIPEMENT",
+  "EMPRUNTS ET DETTES ASSIMILEES": "EMPRUNTS ET DETTES ASSIMILEES",
+  "PRODUITS DES CESSIONS": "PRODUITS DES CESSIONS",
+  "VIREMENT DE LA SECTION DE FONCTIONNEMENT": "VIREMENT DE LA SECTION DE FONCTIONNEMENT",
+  "EXCEDENT ANTERIEUR REPORTE": "EXCEDENT ANTERIEUR REPORTE"
+};
+
+const investmentDrillDownData: Record<string, any[]> = {};
+
+Object.entries(investmentCategoryMapping).forEach(([overviewCategory, detailCategory]) => {
+  const expensesForCategory = depensesInvestData.filter((item: any) => item.category === detailCategory);
+  const incomesForCategory = recettesInvestData.filter((item: any) => item.category === detailCategory);
+
+  if (expensesForCategory.length > 0) {
+    investmentDrillDownData[overviewCategory] = expensesForCategory.map((item: any) => ({
+      compte: item.compte,
+      libelle: item.libelle,
+      prevus_2024: item.montant_prevu || 0,
+      realises_2024: item.montant_realise || 0,
+      propositions_2025: item.montant_propose || 0,
+      type: 'expense'
+    }));
+  } else if (incomesForCategory.length > 0) {
+    investmentDrillDownData[overviewCategory] = incomesForCategory.map((item: any) => ({
+      compte: item.compte,
+      libelle: item.libelle,
+      prevus_2024: item.montant_prevu || 0,
+      realises_2024: item.montant_realise || 0,
+      propositions_2025: item.montant_propose || 0,
+      type: 'income'
+    }));
+  }
+});
 ---
 
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
@@ -270,7 +317,7 @@ const personnelDrillDown = {
 
       <!-- Tableau financier - Section d'investissement -->
       <div id="section-investissement" class="budget-anchor">
-        <FinancialTable data={investmentData} drillDownData={{}} client:load />
+        <FinancialTable data={investmentData} drillDownData={investmentDrillDownData} client:load />
       </div>
 
       <!-- Section détails d'investissement -->
