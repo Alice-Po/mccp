@@ -47,14 +47,14 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-/**
+<!-- /**
  * Props :
  * - isOpen : affichage de la modale
  * - title : titre de la modale
  * - data : données détaillées à afficher (DrillDownItem[])
  * - sectionType : type de section pour le code couleur
  * - onClose : callback de fermeture
- */
+ */ -->
 
 {#if isOpen}
   <div
