@@ -1,72 +1,87 @@
----
-interface OverviewData {
-  metadata: {
-    title: string;
-    periods: {
-      budget_2024: string;
-      actual_2024: string;
-      budget_2025: string;
+<script lang="ts">
+  interface OverviewData {
+    metadata: {
+      title: string;
+      periods: {
+        budget_2024: string;
+        actual_2024: string;
+        budget_2025: string;
+      };
+      columns: {
+        compte: string;
+        libelle: string;
+        prevus_2024: string;
+        realises_2024: string;
+        propositions_2025: string;
+        notes: string;
+      };
     };
-    columns: {
-      compte: string;
-      libelle: string;
-      prevus_2024: string;
-      realises_2024: string;
-      propositions_2025: string;
-      notes: string;
-    };
-  };
-  sections: Array<{
-    type: string;
-    title: string;
-    highlight_color?: string;
-    items: Array<{
-      compte?: string;
-      libelle: string;
-      prevus_2024: number;
-      realises_2024: number;
-      propositions_2025: number;
-      notes: string;
+    sections: Array<{
+      type: string;
+      title: string;
+      highlight_color?: string;
+      items: Array<{
+        compte?: string;
+        libelle: string;
+        prevus_2024: number;
+        realises_2024: number;
+        propositions_2025: number;
+        notes: string;
+      }>;
+      total?: {
+        libelle: string;
+        prevus_2024: number;
+        realises_2024: number;
+        propositions_2025: number;
+      };
     }>;
-    total?: {
-      libelle: string;
-      prevus_2024: number;
-      realises_2024: number;
-      propositions_2025: number;
-    };
-  }>;
-}
+  }
 
-interface Props {
-  data: OverviewData;
-}
+  export let data: OverviewData;
 
-const { data } = Astro.props;
+  let showDownloadPopup = false;
 
-// Fonction pour formater les montants en français
-function formatCurrency(amount: number): string {
-  return amount.toLocaleString('fr-FR', { 
-    minimumFractionDigits: 2, 
-    maximumFractionDigits: 2 
-  }) + ' €';
-}
+  // Fonction pour formater les montants en français
+  function formatCurrency(amount: number): string {
+    return amount.toLocaleString('fr-FR', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    }) + ' €';
+  }
 
-// Fonction pour déterminer la couleur de fond selon le type de section
-function getSectionColor(type: string, highlight_color?: string): string {
-  if (type === 'expenses') return '#FFF9C4'; // Jaune clair - fonctionnement
-  if (type === 'revenues') return '#E8F5E8'; // Vert clair - fonctionnement
-  if (type === 'investment_expenses') return '#FFE5B4'; // Orange clair - investissement
-  if (type === 'investment_revenues') return '#E5F3FF'; // Bleu clair - investissement
-  if (type === 'balance') return '#F0F4F8'; // Gris-bleu clair
-  return '#FFFFFF';
-}
----
+  // Fonction pour déterminer la couleur de fond selon le type de section
+  function getSectionColor(type: string, highlight_color?: string): string {
+    if (type === 'expenses') return '#FFF9C4'; // Jaune clair - fonctionnement
+    if (type === 'revenues') return '#E8F5E8'; // Vert clair - fonctionnement
+    if (type === 'investment_expenses') return '#FFE5B4'; // Orange clair - investissement
+    if (type === 'investment_revenues') return '#E5F3FF'; // Bleu clair - investissement
+    if (type === 'balance') return '#F0F4F8'; // Gris-bleu clair
+    return '#FFFFFF';
+  }
+
+  function toggleDownloadPopup() {
+    showDownloadPopup = !showDownloadPopup;
+  }
+
+  function closeDownloadPopup() {
+    showDownloadPopup = false;
+  }
+
+  // Gestion des événements clavier
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && showDownloadPopup) {
+      closeDownloadPopup();
+    }
+  }
+</script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div class="financial-table-container">
   <div class="table-header">
     <div class="header-content">
       <h2>{data.metadata.title}</h2>
-      <button class="download-btn" id="downloadBtn" aria-label="Télécharger les données">
+      <button class="download-btn" on:click={toggleDownloadPopup} aria-label="Télécharger les données">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
@@ -74,20 +89,18 @@ function getSectionColor(type: string, highlight_color?: string): string {
         </svg>
       </button>
     </div>
-    <!-- <div class="table-periods">
-      <span class="period-tag">{data.metadata.periods.budget_2024}</span>
-      <span class="period-tag">{data.metadata.periods.budget_2025}</span>
-    </div> -->
   </div>
 
   <!-- Popup de téléchargement -->
-  <div class="download-popup" id="downloadPopup">
-    <div class="popup-content">
-      <h3>Téléchargement des données</h3>
-      <p>Le téléchargement des données sera bientôt disponible sous différents formats (CSV, Excel, PDF).</p>
-      <button class="close-popup" id="closePopup">Fermer</button>
+  {#if showDownloadPopup}
+    <div class="download-popup" on:click|self={closeDownloadPopup}>
+      <div class="popup-content">
+        <h3>Téléchargement des données</h3>
+        <p>Le téléchargement des données sera bientôt disponible sous différents formats (CSV, Excel, PDF).</p>
+        <button class="close-popup" on:click={closeDownloadPopup}>Fermer</button>
+      </div>
     </div>
-  </div>
+  {/if}
 
   <div class="table-wrapper">
     <table class="financial-table">
@@ -101,44 +114,42 @@ function getSectionColor(type: string, highlight_color?: string): string {
         </tr>
       </thead>
       <tbody>
-        {data.sections.map((section) => (
-          <>
-            <!-- En-tête de section -->
-            <tr class="section-header" style={`background-color: ${getSectionColor(section.type, section.highlight_color)}`}>
-              <td colspan="5" class="section-title" id={
-                section.type === 'expenses' ? 'depenses-fonctionnement' : 
-                section.type === 'revenues' ? 'recettes-fonctionnement' :
-                section.type === 'investment_expenses' ? 'depenses-investissement' :
-                section.type === 'investment_revenues' ? 'recettes-investissement' :
-                undefined
-              }>
-                <strong>{section.title}</strong>
-              </td>
+        {#each data.sections as section}
+          <!-- En-tête de section -->
+          <tr class="section-header" style="background-color: {getSectionColor(section.type, section.highlight_color)}">
+            <td colspan="5" class="section-title" id={
+              section.type === 'expenses' ? 'depenses-fonctionnement' : 
+              section.type === 'revenues' ? 'recettes-fonctionnement' :
+              section.type === 'investment_expenses' ? 'depenses-investissement' :
+              section.type === 'investment_revenues' ? 'recettes-investissement' :
+              undefined
+            }>
+              <strong>{section.title}</strong>
+            </td>
+          </tr>
+          
+          <!-- Items de la section -->
+          {#each section.items as item}
+            <tr class="data-row">
+              <td class="col-compte">{item.compte || ''}</td>
+              <td class="col-libelle">{item.libelle}</td>
+              <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
+              <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
+              <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
             </tr>
-            
-            <!-- Items de la section -->
-            {section.items.map((item) => (
-              <tr class="data-row">
-                <td class="col-compte">{item.compte || ''}</td>
-                <td class="col-libelle">{item.libelle}</td>
-                <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
-                <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
-                <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
-              </tr>
-            ))}
-            
-            <!-- Total de section (si présent) -->
-            {section.total && (
-              <tr class="section-total" style={`background-color: ${getSectionColor(section.type, section.highlight_color)}`}>
-                <td class="col-compte"></td>
-                <td class="col-libelle"><strong>{section.total.libelle}</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(section.total.prevus_2024)}</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(section.total.realises_2024)}</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(section.total.propositions_2025)}</strong></td>
-              </tr>
-            )}
-          </>
-        ))}
+          {/each}
+          
+          <!-- Total de section (si présent) -->
+          {#if section.total}
+            <tr class="section-total" style="background-color: {getSectionColor(section.type, section.highlight_color)}">
+              <td class="col-compte"></td>
+              <td class="col-libelle"><strong>{section.total.libelle}</strong></td>
+              <td class="col-amount"><strong>{formatCurrency(section.total.prevus_2024)}</strong></td>
+              <td class="col-amount"><strong>{formatCurrency(section.total.realises_2024)}</strong></td>
+              <td class="col-amount"><strong>{formatCurrency(section.total.propositions_2025)}</strong></td>
+            </tr>
+          {/if}
+        {/each}
       </tbody>
     </table>
   </div>
@@ -193,7 +204,7 @@ function getSectionColor(type: string, highlight_color?: string): string {
   }
 
   .download-popup {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -412,36 +423,4 @@ function getSectionColor(type: string, highlight_color?: string): string {
       font-size: 1rem !important;
     }
   }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const downloadBtn = document.getElementById('downloadBtn');
-    const downloadPopup = document.getElementById('downloadPopup');
-    const closePopup = document.getElementById('closePopup');
-
-    if (downloadBtn && downloadPopup && closePopup) {
-      downloadBtn.addEventListener('click', () => {
-        downloadPopup.style.display = 'flex';
-      });
-
-      closePopup.addEventListener('click', () => {
-        downloadPopup.style.display = 'none';
-      });
-
-      // Fermer la popup en cliquant en dehors
-      downloadPopup.addEventListener('click', (e) => {
-        if (e.target === downloadPopup) {
-          downloadPopup.style.display = 'none';
-        }
-      });
-
-      // Fermer la popup avec la touche Echap
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && downloadPopup.style.display === 'flex') {
-          downloadPopup.style.display = 'none';
-        }
-      });
-    }
-  });
-</script> 
+</style> 
