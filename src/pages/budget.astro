@@ -43,14 +43,76 @@ const investmentExpensesData = JSON.parse(investmentExpensesContent);
 const investmentIncomesContent = readFileSync('public/assets/datas/details-of-investment-incomes-2024.json', 'utf-8');
 const investmentIncomesData = JSON.parse(investmentIncomesContent);
 
+// Lecture des données de détail pour le drill-down
+const detailExpensesContent = readFileSync('public/assets/datas/details-of-operating-expenses-2024.json', 'utf-8');
+const detailExpensesData = JSON.parse(detailExpensesContent);
+
+const detailIncomesContent = readFileSync('public/assets/datas/details-of-operating-incomes-2024.json', 'utf-8');
+const detailIncomesData = JSON.parse(detailIncomesContent);
+
 // Utilisation des vraies données avec les bonnes clés
 const depensesData: DetailsOfOperatingExpenses2024[] = data.details_of_operating_expenses_2024;
 const recettesData: DetailsOfOperatingIncomes2024[] = incomesData.details_of_operating_incomes_2024;
 const depensesInvestData = investmentExpensesData.details_of_investment_expenses_2024;
 const recettesInvestData = investmentIncomesData.details_of_investment_revenues_2024;
 
+// Données de détail pour le drill-down
+const detailExpenses = detailExpensesData.details_of_operating_expenses_2024;
+const detailIncomes = detailIncomesData.details_of_operating_incomes_2024;
+
 // Charger les données overview
 const overviewBudgetData = JSON.parse(readFileSync('public/assets/datas/overview-of-operating-section-2024.json', 'utf-8'));
+
+// Préparation des données de drill-down
+const drillDownData: Record<string, any[]> = {};
+
+// Mapping des catégories overview vers les données de détail
+const categoryMapping = {
+  'CHARGES A CARACTERE GENERAL': 'CHARGES A CARACTERE GENERAL',
+  'CHARGES DE PERSONNEL': 'CHARGES DE PERSONNEL',
+  'ATTENUATION DE PRODUITS': 'ATTENUATION DE PRODUITS',
+  'AUTRES CHARGES DE GESTION COURANTE': 'AUTRES CHARGES DE GESTION COURANTE',
+  'CHARGES FINANCIERES': 'CHARGES FINANCIERES',
+  'CHARGES SPECIFIQUES': 'CHARGES SPECIFIQUES',
+  'DOTATIONS AUX AMORTISSEMENTS ET PROVIS.': 'DOTATIONS AUX AMORTISSEMENTS ET PROVIS.',
+  'VIREMENT A LA SECTION D\'INVESTISSEMENT': 'VIREMENT A LA SECTION D\'INVESTISSEMENT',
+  'OPER. D\'ORDRE DE TRANSFERT ENTRE SECTIONS': 'OPER. D\'ORDRE DE TRANSFERT ENTRE SECTIONS',
+  'PRODUITS DES SERVICES ET DU DOMAINE': 'PRODUITS DES SERVICES ET DU DOMAINE',
+  'IMPOTS ET TAXES': 'IMPOTS ET TAXES',
+  'FISCALITE LOCALE': 'FISCALITE LOCALE',
+  'DOTATIONS ET PARTICIPATIONS': 'DOTATIONS ET PARTICIPATIONS',
+  'AUTRES PROD. DE GESTION COURANTE': 'AUTRES PROD. DE GESTION COURANTE',
+  'ATTENUATION DE CHARGES': 'ATTENUATION DE CHARGES',
+  'PRODUITS FINANCIERS': 'PRODUITS FINANCIERS',
+  'PRODUITS EXCEPTIONNELS': 'PRODUITS EXCEPTIONNELS',
+  'EXCEDENT REPORTE': 'EXCEDENT REPORTE'
+};
+
+// Préparer les données de drill-down pour chaque catégorie
+Object.entries(categoryMapping).forEach(([overviewCategory, detailCategory]) => {
+  const expensesForCategory = detailExpenses.filter((item: any) => item.category === detailCategory);
+  const incomesForCategory = detailIncomes.filter((item: any) => item.category === detailCategory);
+  
+  if (expensesForCategory.length > 0) {
+    drillDownData[overviewCategory] = expensesForCategory.map((item: any) => ({
+      compte: item.compte,
+      libelle: item.libelle,
+      prevus_2024: item.montant_prevu || 0,
+      realises_2024: item.montant_realise || 0,
+      propositions_2025: item.montant_propose || 0,
+      type: 'expense'
+    }));
+  } else if (incomesForCategory.length > 0) {
+    drillDownData[overviewCategory] = incomesForCategory.map((item: any) => ({
+      compte: item.compte,
+      libelle: item.libelle,
+      prevus_2024: item.montant_prevu || 0,
+      realises_2024: item.montant_realise || 0,
+      propositions_2025: item.montant_propose || 0,
+      type: 'income'
+    }));
+  }
+});
 
 // Fonction pour générer des couleurs cohérentes
 function getColorForCategory(label: string, type: 'expenses' | 'revenues'): string {
@@ -139,7 +201,7 @@ const personnelDrillDown = {
       
       <!-- Tableau financier - Section de fonctionnement -->
       <div id="section-fonctionnement" class="budget-anchor">
-        <FinancialTable data={overviewData} />
+        <FinancialTable data={overviewData} drillDownData={drillDownData} client:load />
       </div>
 
      
@@ -208,7 +270,7 @@ const personnelDrillDown = {
 
       <!-- Tableau financier - Section d'investissement -->
       <div id="section-investissement" class="budget-anchor">
-        <FinancialTable data={investmentData} />
+        <FinancialTable data={investmentData} drillDownData={{}} client:load />
       </div>
 
       <!-- Section détails d'investissement -->

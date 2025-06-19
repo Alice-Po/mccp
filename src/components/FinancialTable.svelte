@@ -1,4 +1,7 @@
 <script lang="ts">
+  import BudgetDrillDownModal from './BudgetDrillDownModal.svelte';
+  import { onMount } from 'svelte';
+
   interface OverviewData {
     metadata: {
       title: string;
@@ -37,9 +40,28 @@
     }>;
   }
 
+  interface DrillDownData {
+    [key: string]: Array<{
+      compte: string;
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+      type: 'expense' | 'income';
+    }>;
+  }
+
   export let data: OverviewData;
+  export let drillDownData: DrillDownData = {};
 
   let showDownloadPopup = false;
+  let showDrillDownModal = false;
+  let selectedDrillDownTitle = '';
+  let selectedDrillDownData: any[] = [];
+  let selectedSectionType = '';
+
+  // Test simple - log quand le composant se charge
+  console.log('🔍 FinancialTable - Composant chargé');
 
   // Fonction pour formater les montants en français
   function formatCurrency(amount: number): string {
@@ -67,10 +89,32 @@
     showDownloadPopup = false;
   }
 
+  // Fonction pour ouvrir le drill-down
+  function openDrillDown(libelle: string, sectionType: string) {
+    if (drillDownData[libelle] && drillDownData[libelle].length > 0) {
+      selectedDrillDownTitle = libelle;
+      selectedDrillDownData = drillDownData[libelle];
+      selectedSectionType = sectionType;
+      showDrillDownModal = true;
+    }
+  }
+
+  // Fonction pour fermer le drill-down
+  function closeDrillDownModal() {
+    showDrillDownModal = false;
+    selectedDrillDownTitle = '';
+    selectedDrillDownData = [];
+  }
+
   // Gestion des événements clavier
   function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Escape' && showDownloadPopup) {
-      closeDownloadPopup();
+    if (event.key === 'Escape') {
+      if (showDownloadPopup) {
+        closeDownloadPopup();
+      }
+      if (showDrillDownModal) {
+        closeDrillDownModal();
+      }
     }
   }
 </script>
@@ -130,9 +174,14 @@
           
           <!-- Items de la section -->
           {#each section.items as item}
-            <tr class="data-row">
+            <tr class="data-row" class:clickable={drillDownData[item.libelle] && drillDownData[item.libelle].length > 0} on:click={() => openDrillDown(item.libelle, section.type)}>
               <td class="col-compte">{item.compte || ''}</td>
-              <td class="col-libelle">{item.libelle}</td>
+              <td class="col-libelle">
+                {item.libelle}
+                {#if drillDownData[item.libelle] && drillDownData[item.libelle].length > 0}
+                  <span class="drill-down-indicator">🔍</span>
+                {/if}
+              </td>
               <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
               <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
               <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
@@ -154,6 +203,15 @@
     </table>
   </div>
 </div>
+
+<!-- Modal de drill-down -->
+<BudgetDrillDownModal 
+  isOpen={showDrillDownModal}
+  title={selectedDrillDownTitle}
+  data={selectedDrillDownData}
+  sectionType={selectedSectionType}
+  onClose={closeDrillDownModal}
+/>
 
 <style>
   .financial-table-container {
@@ -300,6 +358,7 @@
     width: 40%;
     min-width: 200px;
     color: var(--secondary);
+    position: relative;
   }
 
   .col-amount {
@@ -356,6 +415,21 @@
 
   .data-row td {
     color: var(--secondary);
+  }
+
+  /* Styles pour les lignes cliquables */
+  .clickable {
+    cursor: pointer;
+  }
+
+  .clickable:hover {
+    background-color: #e3f2fd !important;
+  }
+
+  .drill-down-indicator {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.7;
   }
 
   /* Responsive design */
