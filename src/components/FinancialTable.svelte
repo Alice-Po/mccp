@@ -1,6 +1,9 @@
 <script lang="ts">
+  export let data: OverviewData;
+  export let drillDownData: { [key: string]: DrillDownItem[] };
   import BudgetDrillDownModal from './BudgetDrillDownModal.svelte';
   import { onMount } from 'svelte';
+  import type { DrillDownItem } from '../utils/drilldown';
 
   interface OverviewData {
     metadata: {
@@ -51,13 +54,10 @@
     }>;
   }
 
-  export let data: OverviewData;
-  export let drillDownData: DrillDownData = {};
-
   let showDownloadPopup = false;
   let showDrillDownModal = false;
   let selectedDrillDownTitle = '';
-  let selectedDrillDownData: any[] = [];
+  let selectedDrillDownData: DrillDownItem[] = [];
   let selectedSectionType = '';
 
   // Test simple - log quand le composant se charge

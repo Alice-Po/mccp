@@ -1,26 +1,10 @@
 <script lang="ts">
-  interface DrillDownItem {
-    compte: string;
-    libelle: string;
-    prevus_2024: number;
-    realises_2024: number;
-    propositions_2025: number;
-    type: 'expense' | 'income';
-  }
-
-  interface Props {
-    isOpen: boolean;
-    title: string;
-    data: DrillDownItem[];
-    sectionType: string;
-    onClose: () => void;
-  }
-
   export let isOpen: boolean;
   export let title: string;
   export let data: DrillDownItem[];
   export let sectionType: string;
   export let onClose: () => void;
+  import type { DrillDownItem } from '../utils/drilldown';
 
   // Fonction pour formater les montants en français
   function formatCurrency(amount: number): string {
@@ -32,9 +16,9 @@
 
   // Calcul des totaux
   $: totals = {
-    prevus_2024: data.reduce((sum, item) => sum + item.prevus_2024, 0),
-    realises_2024: data.reduce((sum, item) => sum + item.realises_2024, 0),
-    propositions_2025: data.reduce((sum, item) => sum + item.propositions_2025, 0)
+    prevus_2024: data.reduce((sum: number, item: DrillDownItem) => sum + item.prevus_2024, 0),
+    realises_2024: data.reduce((sum: number, item: DrillDownItem) => sum + item.realises_2024, 0),
+    propositions_2025: data.reduce((sum: number, item: DrillDownItem) => sum + item.propositions_2025, 0)
   };
 
   // Gestion des événements clavier
@@ -63,8 +47,23 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
+/**
+ * Props :
+ * - isOpen : affichage de la modale
+ * - title : titre de la modale
+ * - data : données détaillées à afficher (DrillDownItem[])
+ * - sectionType : type de section pour le code couleur
+ * - onClose : callback de fermeture
+ */
+
 {#if isOpen}
-  <div class="modal-backdrop" on:click={handleBackdropClick}>
+  <div
+    class="modal-backdrop"
+    role="button"
+    tabindex="0"
+    on:click={handleBackdropClick}
+    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+  >
     <div class="modal-content">
       <div class="modal-header" style="background: {getSectionColor(sectionType)}">
         <h2>{title}</h2>
