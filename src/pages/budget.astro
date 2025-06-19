@@ -7,6 +7,7 @@ import BudgetNavigation from '../components/BudgetNavigation.astro';
 import { readFileSync } from 'fs';
 import Donut from '../components/Donut.astro';
 import BudgetTabs from '../components/BudgetTabs.astro';
+import { generateDrillDownData } from '../utils/drilldown';
 
 interface DetailsOfOperatingExpenses2024 {
   compte: string;
@@ -63,9 +64,6 @@ const detailIncomes = detailIncomesData.details_of_operating_incomes_2024;
 // Charger les données overview
 const overviewBudgetData = JSON.parse(readFileSync('public/assets/datas/overview-of-operating-section-2024.json', 'utf-8'));
 
-// Préparation des données de drill-down
-const drillDownData: Record<string, any[]> = {};
-
 // Mapping des catégories overview vers les données de détail
 const categoryMapping = {
   'CHARGES A CARACTERE GENERAL': 'CHARGES A CARACTERE GENERAL',
@@ -88,31 +86,45 @@ const categoryMapping = {
   'EXCEDENT REPORTE': 'EXCEDENT REPORTE'
 };
 
-// Préparer les données de drill-down pour chaque catégorie
-Object.entries(categoryMapping).forEach(([overviewCategory, detailCategory]) => {
-  const expensesForCategory = detailExpenses.filter((item: any) => item.category === detailCategory);
-  const incomesForCategory = detailIncomes.filter((item: any) => item.category === detailCategory);
-  
-  if (expensesForCategory.length > 0) {
-    drillDownData[overviewCategory] = expensesForCategory.map((item: any) => ({
-      compte: item.compte,
-      libelle: item.libelle,
-      prevus_2024: item.montant_prevu || 0,
-      realises_2024: item.montant_realise || 0,
-      propositions_2025: item.montant_propose || 0,
-      type: 'expense'
-    }));
-  } else if (incomesForCategory.length > 0) {
-    drillDownData[overviewCategory] = incomesForCategory.map((item: any) => ({
-      compte: item.compte,
-      libelle: item.libelle,
-      prevus_2024: item.montant_prevu || 0,
-      realises_2024: item.montant_realise || 0,
-      propositions_2025: item.montant_propose || 0,
-      type: 'income'
-    }));
-  }
-});
+const investmentCategoryMapping = {
+  "REMBOURSEMENT D'EMPRUNTS ET DETTES": "REMBOURSEMENT D'EMPRUNTS ET DETTES",
+  "IMMOBILISATIONS INCORPORELLES": "IMMOBILISATIONS INCORPORELLES",
+  "SUBVENTIONS D'EQUIPEMENT VERSEES": "SUBVENTIONS D'EQUIPEMENT VERSEES",
+  "IMMOBILISATIONS CORPORELLES": "IMMOBILISATIONS CORPORELLES",
+  "IMMOBILISATIONS EN COURS": "IMMOBILISATIONS EN COURS",
+  "AUTRES IMMOBILISATIONS FINANCIERES": "AUTRES IMMOBILISATIONS FINANCIERES",
+  "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS",
+  "OPERATIONS PATRIMONIALES": "OPERATIONS PATRIMONIALES",
+  "DEFICIT D'INVESTISSEMENT REPORTE": "DEFICIT D'INVESTISSEMENT REPORTE",
+  // Recettes
+  "APPORTS, DOTATIONS ET RESERVES": "APPORTS, DOTATIONS ET RESERVES",
+  "SUBVENTIONS D'EQUIPEMENT": "SUBVENTIONS D'EQUIPEMENT",
+  "EMPRUNTS ET DETTES ASSIMILEES": "EMPRUNTS ET DETTES ASSIMILEES",
+  "PRODUITS DES CESSIONS": "PRODUITS DES CESSIONS",
+  "VIREMENT DE LA SECTION DE FONCTIONNEMENT": "VIREMENT DE LA SECTION DE FONCTIONNEMENT",
+  "EXCEDENT ANTERIEUR REPORTE": "EXCEDENT ANTERIEUR REPORTE"
+};
+
+// Génération factorisée des drillDownData
+const overviewCategories = Object.keys(categoryMapping);
+const drillDownData = generateDrillDownData(
+  overviewCategories,
+  detailExpenses,
+  detailIncomes,
+  categoryMapping,
+  'expense',
+  'income'
+);
+
+const investmentOverviewCategories = Object.keys(investmentCategoryMapping);
+const investmentDrillDownData = generateDrillDownData(
+  investmentOverviewCategories,
+  depensesInvestData,
+  recettesInvestData,
+  investmentCategoryMapping,
+  'expense',
+  'income'
+);
 
 // Fonction pour générer des couleurs cohérentes
 function getColorForCategory(label: string, type: 'expenses' | 'revenues'): string {
@@ -162,54 +174,7 @@ const personnelDrillDown = {
   ]
 };
 
-// Préparation des données de drill-down pour l'investissement
-const investmentCategoryMapping = {
-  "REMBOURSEMENT D'EMPRUNTS ET DETTES": "REMBOURSEMENT D'EMPRUNTS ET DETTES",
-  "IMMOBILISATIONS INCORPORELLES": "IMMOBILISATIONS INCORPORELLES",
-  "SUBVENTIONS D'EQUIPEMENT VERSEES": "SUBVENTIONS D'EQUIPEMENT VERSEES",
-  "IMMOBILISATIONS CORPORELLES": "IMMOBILISATIONS CORPORELLES",
-  "IMMOBILISATIONS EN COURS": "IMMOBILISATIONS EN COURS",
-  "AUTRES IMMOBILISATIONS FINANCIERES": "AUTRES IMMOBILISATIONS FINANCIERES",
-  "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS": "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS",
-  "OPERATIONS PATRIMONIALES": "OPERATIONS PATRIMONIALES",
-  "DEFICIT D'INVESTISSEMENT REPORTE": "DEFICIT D'INVESTISSEMENT REPORTE",
-  // Recettes
-  "APPORTS, DOTATIONS ET RESERVES": "APPORTS, DOTATIONS ET RESERVES",
-  "SUBVENTIONS D'EQUIPEMENT": "SUBVENTIONS D'EQUIPEMENT",
-  "EMPRUNTS ET DETTES ASSIMILEES": "EMPRUNTS ET DETTES ASSIMILEES",
-  "PRODUITS DES CESSIONS": "PRODUITS DES CESSIONS",
-  "VIREMENT DE LA SECTION DE FONCTIONNEMENT": "VIREMENT DE LA SECTION DE FONCTIONNEMENT",
-  "EXCEDENT ANTERIEUR REPORTE": "EXCEDENT ANTERIEUR REPORTE"
-};
-
-const investmentDrillDownData: Record<string, any[]> = {};
-
-Object.entries(investmentCategoryMapping).forEach(([overviewCategory, detailCategory]) => {
-  const expensesForCategory = depensesInvestData.filter((item: any) => item.category === detailCategory);
-  const incomesForCategory = recettesInvestData.filter((item: any) => item.category === detailCategory);
-
-  if (expensesForCategory.length > 0) {
-    investmentDrillDownData[overviewCategory] = expensesForCategory.map((item: any) => ({
-      compte: item.compte,
-      libelle: item.libelle,
-      prevus_2024: item.montant_prevu || 0,
-      realises_2024: item.montant_realise || 0,
-      propositions_2025: item.montant_propose || 0,
-      type: 'expense'
-    }));
-  } else if (incomesForCategory.length > 0) {
-    investmentDrillDownData[overviewCategory] = incomesForCategory.map((item: any) => ({
-      compte: item.compte,
-      libelle: item.libelle,
-      prevus_2024: item.montant_prevu || 0,
-      realises_2024: item.montant_realise || 0,
-      propositions_2025: item.montant_propose || 0,
-      type: 'income'
-    }));
-  }
-});
 ---
-
 <Layout title="Budget 2024 - MCC Putanges-le-Lac">
   <main>
     <!-- Navigation sidebar -->
