@@ -1,7 +1,4 @@
-<script lang="ts">
-  import { onMount } from 'svelte';
-  import { createEventDispatcher } from 'svelte';
-
+<script context="module" lang="ts">
   export interface DonutItem {
     label: string;
     compte: string;
@@ -10,12 +7,21 @@
     propositions_2025: number;
     color: string;
   }
+</script>
 
-  export let data: DonutItem[];
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import DonutDrillDownModal from './DonutDrillDownModal.svelte';
+
+  export let data: DonutItem[] = [];
   export let type: 'expenses' | 'revenues';
   export let drillDownData: Record<string, any[]> = {};
   export let activePeriod: string;
   export let periods: { key: string; label: string }[] = [];
+
+  // DEBUG : afficher les clés côté client
+  console.log('Clés drillDownData côté client (Donut) :', Object.keys(drillDownData));
 
   let chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
   let chartInstance: any = null;
@@ -23,6 +29,9 @@
   let showModal = false;
   let modalData: any[] = [];
   let modalTitle = '';
+  let showDrillDownModal = false;
+  let selectedDrillDownData: any[] = [];
+  let selectedDrillDownTitle = '';
 
   const dispatch = createEventDispatcher();
 
@@ -73,9 +82,31 @@
     modalTitle = '';
   }
 
+  function openDrillDownModal(label: string) {
+    console.log('Tentative drilldown pour clé :', label);
+    if (drillDownData[label]) {
+      console.log('Données trouvées :', drillDownData[label]);
+    } else {
+      console.warn('Aucune donnée trouvée pour cette clé');
+    }
+    if (drillDownData[label] && drillDownData[label].length > 0) {
+      selectedDrillDownData = drillDownData[label];
+      selectedDrillDownTitle = `Détail: ${label}`;
+      showDrillDownModal = true;
+    }
+  }
+
+  function closeDrillDownModal() {
+    showDrillDownModal = false;
+    selectedDrillDownData = [];
+    selectedDrillDownTitle = '';
+  }
+
   onMount(async () => {
     // Chart.js doit être importé dynamiquement côté client
     const Chart = (await import('chart.js/auto')).default;
+    // DEBUG : afficher les clés de drillDownData
+    console.log('Clés de drillDownData :', Object.keys(drillDownData));
     const chartData = getChartData(activePeriod);
     const labels = chartData.map(item => item.label);
     const values = chartData.map(item => item.value);
@@ -106,8 +137,9 @@
             const index = elements[0].index;
             const chartData = getChartData(currentPeriod);
             const compte = chartData[index].compte;
-            if (compte && drillDownData[compte]) {
-              showDrillDown(drillDownData[compte], chartData[index].label);
+            const label = chartData[index].label;
+            if (compte) {
+              openDrillDownModal(label);
             }
           }
         },
@@ -155,12 +187,12 @@
       <div
         class="legend-item"
         data-compte={item.compte}
-        on:click={() => item.compte && drillDownData[item.compte] && showDrillDown(drillDownData[item.compte], item.label)}
+        on:click={() => item.compte && openDrillDownModal(item.label)}
         tabindex="0"
         role="button"
         on:keydown={(e) => {
-          if ((e.key === 'Enter' || e.key === ' ') && item.compte && drillDownData[item.compte]) {
-            showDrillDown(drillDownData[item.compte], item.label);
+          if ((e.key === 'Enter' || e.key === ' ') && item.compte) {
+            openDrillDownModal(item.label);
           }
         }}
       >
@@ -187,6 +219,14 @@
     </div>
   </div>
 {/if}
+
+<DonutDrillDownModal
+  isOpen={showDrillDownModal}
+  title={selectedDrillDownTitle}
+  drillDownData={selectedDrillDownData}
+  sectionType={type}
+  onClose={closeDrillDownModal}
+/>
 
 <style>
   .donut-container {

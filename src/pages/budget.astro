@@ -116,6 +116,9 @@ const drillDownData = generateDrillDownData(
   'income'
 );
 
+// DEBUG : afficher les clés de drillDownData
+console.log('Clés de drillDownData passées au Donut/BudgetTabs :', Object.keys(drillDownData));
+
 const investmentOverviewCategories = Object.keys(investmentCategoryMapping);
 const investmentDrillDownData = generateDrillDownData(
   investmentOverviewCategories,
@@ -226,7 +229,7 @@ const personnelDrillDown = {
             <BudgetTabs 
   data={expensesData} 
   type="expenses" 
-  drillDownData={personnelDrillDown}
+  drillDownData={drillDownData}
   client:load
 />
             <!-- <Donut 

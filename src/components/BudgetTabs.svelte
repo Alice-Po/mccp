@@ -17,6 +17,9 @@
   export let type: 'expenses' | 'revenues';
   export let drillDownData: Record<string, any[]> = {};
 
+  // DEBUG : afficher les clés côté client
+  console.log('Clés drillDownData côté client (BudgetTabs) :', Object.keys(drillDownData));
+
   const periods = [
     { key: 'prevus_2024', label: 'Prévus pour 2024' },
     { key: 'realises_2024', label: 'Réalisés en 2024' },
