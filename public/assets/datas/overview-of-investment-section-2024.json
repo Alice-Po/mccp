@@ -12,9 +12,9 @@
         "columns": {
             "compte": "Comptes",
             "libelle": "Libellés",
-            "prevus_2024": "Prévus",
-            "realises_2024": "Réalisés",
-            "propositions_2025": "Propositions",
+            "prevus_2024": "Prévus pour 2024",
+            "realises_2024": "Réalisés en 2024",
+            "propositions_2025": "Propositions pour 2025",
             "notes": "Notes"
         }
     },
