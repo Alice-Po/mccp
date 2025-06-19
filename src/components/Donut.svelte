@@ -14,14 +14,11 @@
   import { createEventDispatcher } from 'svelte';
   import DonutDrillDownModal from './DonutDrillDownModal.svelte';
 
-  export let data: DonutItem[] = [];
+  export let data: DonutItem[];
   export let type: 'expenses' | 'revenues';
   export let drillDownData: Record<string, any[]> = {};
   export let activePeriod: string;
   export let periods: { key: string; label: string }[] = [];
-
-  // DEBUG : afficher les clés côté client
-  console.log('Clés drillDownData côté client (Donut) :', Object.keys(drillDownData));
 
   let chartId = `donut-${type}-${Math.random().toString(36).substr(2, 9)}`;
   let chartInstance: any = null;
@@ -29,6 +26,8 @@
   let showModal = false;
   let modalData: any[] = [];
   let modalTitle = '';
+
+  // Drilldown modal state
   let showDrillDownModal = false;
   let selectedDrillDownData: any[] = [];
   let selectedDrillDownTitle = '';
@@ -82,13 +81,8 @@
     modalTitle = '';
   }
 
+  // Drilldown modal functions
   function openDrillDownModal(label: string) {
-    console.log('Tentative drilldown pour clé :', label);
-    if (drillDownData[label]) {
-      console.log('Données trouvées :', drillDownData[label]);
-    } else {
-      console.warn('Aucune donnée trouvée pour cette clé');
-    }
     if (drillDownData[label] && drillDownData[label].length > 0) {
       selectedDrillDownData = drillDownData[label];
       selectedDrillDownTitle = `Détail: ${label}`;
@@ -103,10 +97,7 @@
   }
 
   onMount(async () => {
-    // Chart.js doit être importé dynamiquement côté client
     const Chart = (await import('chart.js/auto')).default;
-    // DEBUG : afficher les clés de drillDownData
-    console.log('Clés de drillDownData :', Object.keys(drillDownData));
     const chartData = getChartData(activePeriod);
     const labels = chartData.map(item => item.label);
     const values = chartData.map(item => item.value);
@@ -136,9 +127,8 @@
           if (elements.length > 0) {
             const index = elements[0].index;
             const chartData = getChartData(currentPeriod);
-            const compte = chartData[index].compte;
             const label = chartData[index].label;
-            if (compte) {
+            if (label && drillDownData[label]) {
               openDrillDownModal(label);
             }
           }
@@ -187,11 +177,11 @@
       <div
         class="legend-item"
         data-compte={item.compte}
-        on:click={() => item.compte && openDrillDownModal(item.label)}
+        on:click={() => item.label && drillDownData[item.label] && openDrillDownModal(item.label)}
         tabindex="0"
         role="button"
         on:keydown={(e) => {
-          if ((e.key === 'Enter' || e.key === ' ') && item.compte) {
+          if ((e.key === 'Enter' || e.key === ' ') && item.label && drillDownData[item.label]) {
             openDrillDownModal(item.label);
           }
         }}
@@ -251,7 +241,7 @@
   .total-amount {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #1B365D;
     margin-bottom: 0.25rem;
   }
   .total-label {
@@ -281,13 +271,14 @@
     height: 1rem;
     border-radius: 50%;
     flex-shrink: 0;
+    margin-right: 0.75rem;
   }
   .legend-text {
     flex: 1;
     min-width: 0;
   }
   .legend-label {
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #333;
     margin-bottom: 0.125rem;
@@ -296,8 +287,10 @@
     text-overflow: ellipsis;
   }
   .legend-value {
-    font-size: 0.75rem;
-    color: #666;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #1B365D;
+    margin-left: 1.25rem;
   }
   .modal-backdrop {
     position: fixed;
