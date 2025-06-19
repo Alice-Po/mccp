@@ -117,6 +117,19 @@
       }
     }
   }
+
+  // Détecter le type de budget pour le téléchargement
+  function getCsvFileName(): string {
+    const title = data?.metadata?.title?.toLowerCase() || '';
+    if (title.includes('fonctionnement')) {
+      return '/assets/datas/Budget-primitif-2025-section-fonctionnement.csv';
+    }
+    if (title.includes('investissement')) {
+      return '/assets/datas/Budget-primitif-2025-section-investissement.csv';
+    }
+    // fallback
+    return '/assets/datas/Budget-primitif-2025-section-fonctionnement.csv';
+  }
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -125,35 +138,15 @@
   <div class="table-header">
     <div class="header-content">
       <h2>{data.metadata.title}</h2>
-      <button class="download-btn" on:click={toggleDownloadPopup} aria-label="Télécharger les données">
+      <a class="download-btn" href={getCsvFileName()} download aria-label="Télécharger les données">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
-      </button>
+      </a>
     </div>
   </div>
-
-  <!-- Popup de téléchargement -->
-  {#if showDownloadPopup}
-    <div
-      class="download-popup"
-      role="dialog"
-      tabindex="0"
-      aria-modal="true"
-      on:click|self={closeDownloadPopup}
-      on:keydown={(e) => {
-        if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') closeDownloadPopup();
-      }}
-    >
-      <div class="popup-content">
-        <h3>Téléchargement des données</h3>
-        <p>Le téléchargement des données sera bientôt disponible sous différents formats (CSV, Excel, PDF).</p>
-        <button class="close-popup" on:click={closeDownloadPopup}>Fermer</button>
-      </div>
-    </div>
-  {/if}
 
   <div class="table-wrapper">
     <table class="financial-table">
