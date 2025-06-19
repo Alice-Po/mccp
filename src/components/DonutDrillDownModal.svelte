@@ -87,11 +87,13 @@
         </div>
 
         <div class="modal-body">
-          <BudgetTabs
-            data={budgetTabsData}
-            type={sectionType.includes('expenses') ? 'expenses' : 'revenues'}
-            drillDownData={{}}
-          />
+          <div class="modal-chart-scroll-wrapper">
+            <BudgetTabs
+              data={budgetTabsData}
+              type={sectionType.includes('expenses') ? 'expenses' : 'revenues'}
+              drillDownData={{}}
+            />
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -177,6 +179,16 @@
     justify-content: center;
   }
 
+  .modal-chart-scroll-wrapper {
+    width: 100%;
+    max-height: 60vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   /* Légende du donut responsive */
   :global(.legend) {
     display: flex;
@@ -216,6 +228,11 @@
   .close-modal-btn:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
+  }
+
+  :global(canvas) {
+    max-height: 60vh;
+    height: auto !important;
   }
 
   @media (max-width: 1200px) {

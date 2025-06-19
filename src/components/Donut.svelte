@@ -85,7 +85,7 @@
   function openDrillDownModal(label: string) {
     if (drillDownData[label] && drillDownData[label].length > 0) {
       selectedDrillDownData = drillDownData[label];
-      selectedDrillDownTitle = `Détail: ${label}`;
+      selectedDrillDownTitle = label;
       showDrillDownModal = true;
     }
   }
