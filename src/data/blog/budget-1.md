@@ -1,7 +1,7 @@
 ---
 title: "Qu'est-ce qu'un budget municipal ?"
 description: "Quand on entend parler du budget municipal, on pense souvent à un document comptable compliqué, rempli de chiffres que seuls les spécialistes comprennent. Mais en réalité, le budget d'une commune, c'est bien plus que ça : c'est l'acte politique le plus important de la vie municipale."
-pubDate: 2025-05-09
+pubDate: 2025-06-19
 author: 'MCCP'
 image: '/assets/img/budget.png'
 tags: ['test']
