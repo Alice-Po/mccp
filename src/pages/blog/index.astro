@@ -16,6 +16,18 @@ function generateSlug(title: string) {
     .replace(/[^\w\s]/g, '')
     .replace(/\s+/g, '-');
 }
+
+// Configuration statique pour les articles de presse
+const pressArticles = [
+  {
+    title: "Le Mouvement citoyen des communes de Putanges veut créer une liste avec les habitants",
+    source: "Ouest-France",
+    date: "2025-07-05",
+    journaliste : "Danièle FOUREY",
+    description: "Le mouvement citoyen des communes de Putanges veut créer une liste avec les habitants",
+    pdfUrl: "/assets/img/Le Mou_ve_ment citoyen veut une liste avec les habi_tants.pdf"
+  }
+];
 ---
 
 <Layout title="Actualités - MCCP">
@@ -57,6 +69,32 @@ function generateSlug(title: string) {
           );
         })}
       </div>
+
+      <!-- Section Presse compacte -->
+      <section class="press-section">
+        <h2>Presse - On parle de nous !</h2>
+        <ul class="press-list">
+          {pressArticles.map(article => (
+            <li class="press-list-item">
+              <div class="press-info">
+                <div class="press-title">{article.title}</div>
+                <div class="press-meta">
+                  <span class="press-source">{article.source}</span>
+                  <span class="press-date">{new Date(article.date).toLocaleDateString('fr-FR')}</span>
+                  {article.journaliste && (
+                    <span class="press-journalist">par {article.journaliste}</span>
+                  )}
+                </div>
+                <div class="press-description">{article.description}</div>
+              </div>
+              <a href={article.pdfUrl} target="_blank" rel="noopener noreferrer" class="press-pdf-btn">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-text">PDF</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   </main>
 </Layout>
@@ -93,5 +131,110 @@ function generateSlug(title: string) {
   .home-icon {
     margin-right: 0.5rem;
     font-size: 1.2rem;
+  }
+
+  /* Section Presse compacte */
+  .press-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(46, 139, 87, 0.1);
+  }
+  .press-section h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  .press-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .press-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 1.1rem 1.5rem;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.2s;
+  }
+  .press-list-item:hover {
+    box-shadow: 0 4px 16px rgba(46,139,87,0.10);
+  }
+  .press-info {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .press-title {
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+  }
+  .press-meta {
+    font-size: 0.92rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+    display: flex;
+    gap: 1.2rem;
+  }
+  .press-source {
+    font-weight: 500;
+  }
+  .press-date {
+    font-style: italic;
+  }
+  .press-description {
+    font-size: 0.97rem;
+    color: #444;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+  .press-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.45rem 0.9rem;
+    font-weight: 500;
+    font-size: 0.98rem;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 4px rgba(46,139,87,0.08);
+  }
+  .press-pdf-btn:hover {
+    background: #2d8a5a;
+  }
+  .pdf-icon {
+    font-size: 1.15rem;
+    margin-right: 0.4em;
+  }
+  @media (max-width: 700px) {
+    .press-list-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 1rem 1rem;
+    }
+    .press-pdf-btn {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  .press-journalist {
+    font-size: 0.9em;
+    color: #888;
+    font-style: italic;
+    margin-left: 1.2rem;
   }
 </style> 

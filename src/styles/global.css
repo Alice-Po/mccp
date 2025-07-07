@@ -92,7 +92,8 @@ p {
   font-size: 1.3rem;
 }
 
-li span {
+/* Masquer les span dans la navigation principale uniquement */
+.main-nav li span {
   display: none;
 }
 
@@ -911,22 +912,22 @@ strong {
   .documents-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .document-card {
     flex-direction: column;
     text-align: center;
     padding: 1.5rem;
   }
-  
+
   .document-icon {
     margin-right: 0;
     margin-bottom: 1rem;
   }
-  
+
   .document-info {
     text-align: center;
   }
-  
+
   .document-info p {
     text-align: center;
   }
