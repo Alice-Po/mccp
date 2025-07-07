@@ -8,6 +8,8 @@ tags: ['test']
 draft: false
 ---
 
+Quand on entend parler du budget municipal, on pense souvent à un document comptable compliqué, rempli de chiffres que seuls les spécialistes comprennent. Mais en réalité, le budget d'une commune, c'est bien plus que ça : c'est l'acte politique le plus important de la vie municipale.
+
 ## Voter un budget, c'est déléguer
 
 Quand le conseil municipal vote le budget, il autorise le maire et ses adjoints à dépenser l'argent public selon les priorités définies ensemble. Le budget n'est pas qu'un acte de prévision, c'est surtout un acte d'autorisation. Une fois voté, l'équipe municipale est liée par ce vote et ne peut pas dépasser les plafonds décidés.

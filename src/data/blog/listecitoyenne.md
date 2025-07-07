@@ -8,6 +8,8 @@ tags: ['test']
 draft: false
 ---
 
+Depuis quelques années, nous entendons de plus en plus parler de 'listes citoyennes' ou 'listes participatives' lors des élections municipales. Mais concrètement, qu'est-ce que cela signifie pour notre commune et ses habitants ? Explications simples.
+
 ## Une nouvelle façon de faire vivre la démocratie locale
 
 Une liste citoyenne et participative, c'est avant tout une équipe qui souhaite redonner aux habitants un rôle actif dans les décisions qui concernent leur vie quotidienne.
