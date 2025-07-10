@@ -28,7 +28,7 @@ const pressArticles = [
     date: "2025-07-05",
     journaliste : "Danièle FOUREY",
     description: "Le mouvement citoyen des communes de Putanges veut créer une liste avec les habitants",
-    pdfUrl: "/assets/img/Le Mou_ve_ment citoyen veut une liste avec les habi_tants.pdf"
+    url: "https://www.ouest-france.fr/normandie/putanges-le-lac-61210/municipales-le-mouvement-citoyen-des-communes-de-putanges-veut-creer-une-liste-avec-les-habitants-3412c6d8-3408-11f0-b184-9fce0c190a12"
   }
 ];
 ---
@@ -90,9 +90,9 @@ const pressArticles = [
                 </div>
                 <div class="press-description">{article.description}</div>
               </div>
-              <a href={article.pdfUrl} target="_blank" rel="noopener noreferrer" class="press-pdf-btn">
+              <a href={article.url} target="_blank" rel="noopener noreferrer" class="press-pdf-btn">
                 <span class="pdf-icon">📄</span>
-                <span class="pdf-text">PDF</span>
+                <span class="pdf-text">Lien</span>
               </a>
             </li>
           ))}
