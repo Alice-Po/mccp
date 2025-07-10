@@ -2,7 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from 'astro:content';
 
-const posts = await getCollection('blog');
+// Récupérer tous les articles non-brouillons
+const posts = await getCollection('blog', ({ data }) => {
+  return !data.draft;
+});
 console.log('Posts récupérés:', posts); // Debug
 
 const sortedPosts = posts.sort((a, b) => 

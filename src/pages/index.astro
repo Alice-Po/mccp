@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import "../styles/global.css";
 
 // Récupérer les articles de blog
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 // Trier par date et prendre les 3 plus récents
 const recentPosts = allPosts

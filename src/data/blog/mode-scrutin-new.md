@@ -5,7 +5,7 @@ pubDate: 2025-07-07
 author: 'MCCP'
 image: '/assets/img/new-scrutin-mode.png'
 tags: ['test']
-draft: false
+draft: true
 ---
 
 En 2026, notre commune organisera de nouvelles élections municipales. Avec le passage de 32 à 19 conseillers municipaux, il nous paraît important d'expliquer simplement comment fonctionnera ce scrutin.
