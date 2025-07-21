@@ -13,4 +13,12 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    // Autorise le viewer PDF.js hébergé sur mozilla.github.io à charger les PDF locaux
+    server: {
+      headers: {
+        'Access-Control-Allow-Origin': 'https://mozilla.github.io',
+      },
+    },
+  },
 });

@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DocumentArborescence from '../components/DocumentArborescence.svelte';
+import PdfViewer from '../components/PdfViewer.svelte';
+---
+
+<Layout title="Conseils Municipaux - MCCP">
+  <main class="conseils-main">
+    <!-- Container deux colonnes -->
+    <div class="conseils-container" id="conseilsContainer">
+      <!-- Colonne 1 : Arborescence des documents -->
+      <div class="arborescence-column" id="arborescenceColumn">
+        <DocumentArborescence client:load />
+      </div>
+      
+      <!-- Colonne 2 : Viewer PDF -->
+      <div class="viewer-column" id="viewerColumn">
+        <PdfViewer client:load />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let isMobileViewerMode = false;
+
+    // Fonction pour vérifier si on est en mode mobile
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    // Fonction pour basculer entre arborescence et viewer en mobile
+    function toggleMobileView(showViewer = false) {
+      const container = document.getElementById('conseilsContainer');
+      const arborescenceColumn = document.getElementById('arborescenceColumn');
+      const viewerColumn = document.getElementById('viewerColumn');
+
+      if (!container || !arborescenceColumn || !viewerColumn) return;
+
+      if (isMobile()) {
+        if (showViewer) {
+          // Mode viewer : cacher arborescence, montrer viewer
+          container.classList.add('mobile-viewer-mode');
+          arborescenceColumn.classList.add('mobile-hidden');
+          viewerColumn.classList.add('mobile-visible');
+          isMobileViewerMode = true;
+        } else {
+          // Mode arborescence : montrer arborescence, cacher viewer
+          container.classList.remove('mobile-viewer-mode');
+          arborescenceColumn.classList.remove('mobile-hidden');
+          viewerColumn.classList.remove('mobile-visible');
+          isMobileViewerMode = false;
+        }
+      }
+    }
+
+    // Écouter le retour depuis le viewer mobile
+    document.addEventListener('mobileBackToArborescence', () => {
+      console.log('📡 Page - Retour à l\'arborescence mobile');
+      toggleMobileView(false);
+    });
+
+    // Écouter la sélection de documents depuis DocumentArborescence
+    document.addEventListener('documentSelected', (event: any) => {
+      console.log('📡 Page - Événement documentSelected reçu:', event);
+      const doc = event.detail?.doc;
+      console.log('📡 Page - Document extrait:', doc);
+      
+      if (doc && doc.name) {
+        console.log('📡 Page - Traitement document:', doc.name);
+        
+        // Construire l'URL du PDF
+        const pdfUrl : string = doc.path;
+        console.log('📡 Page - URL PDF:', pdfUrl);
+        
+        // En mobile, basculer vers le viewer
+        if (isMobile()) {
+          toggleMobileView(true);
+        }
+        
+        // Mettre à jour le composant PdfViewer via événement personnalisé
+        const updateEvent = new CustomEvent('updatePdfViewer', {
+          detail: {
+            pdfUrl: pdfUrl,
+            documentTitle: getDocumentTitle(doc),
+            isVisible: true,
+            isMobile: isMobile()
+          }
+        });
+        document.dispatchEvent(updateEvent);
+        console.log('📡 Page - Événement updatePdfViewer envoyé:', updateEvent.detail);
+      } else {
+        console.log('❌ Page - Document invalide:', doc);
+      }
+    });
+
+    // Gérer le redimensionnement de la fenêtre
+    window.addEventListener('resize', () => {
+      if (!isMobile() && isMobileViewerMode) {
+        // Si on repasse en desktop, réinitialiser la vue
+        toggleMobileView(false);
+      }
+    });
+
+    function getDocumentTitle(doc: any) {
+      if (doc.eventDate) {
+        try {
+          const d = new Date(doc.eventDate);
+          return 'Compte rendu du ' + d.toLocaleDateString('fr-FR');
+        } catch {}
+      }
+      return doc.name.replace('_readable.pdf', '').replace(/[-_]/g, ' ');
+    }
+  });
+</script>
+
+<style>
+  .conseils-main {
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #f9fafb;
+  }
+
+  .conseils-container {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    transition: all 0.3s ease;
+  }
+
+  /* Colonne arborescence */
+  .arborescence-column {
+    width: 25%;
+    min-width: 300px;
+    height: 100vh;
+    min-height: 100vh;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  /* Colonne viewer */
+  .viewer-column {
+    width: 75%;
+    height: 100vh;
+    min-height: 100vh;
+    opacity: 1;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  /* Responsive Desktop */
+  @media (max-width: 1024px) {
+    .arborescence-column {
+      width: 30%;
+      min-width: 250px;
+    }
+
+    .viewer-column {
+      width: 70%;
+    }
+  }
+
+  /* Responsive Mobile */
+  @media (max-width: 768px) {
+    .conseils-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Par défaut mobile : arborescence visible, viewer caché */
+    .arborescence-column {
+      width: 100%;
+      height: 100vh;
+      min-width: auto;
+      position: relative;
+      transform: translateX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .viewer-column {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(100%); /* Hors écran à droite */
+      transition: transform 0.3s ease;
+    }
+
+    /* Mode viewer mobile : arborescence cachée, viewer visible */
+    .mobile-viewer-mode .arborescence-column.mobile-hidden {
+      transform: translateX(-100%); /* Glisse vers la gauche */
+    }
+
+    .mobile-viewer-mode .viewer-column.mobile-visible {
+      transform: translateX(0); /* Glisse pour être visible */
+    }
+  }
+
+  /* Masquer la margin du main global pour cette page */
+  :global(.conseils-main) {
+    max-width: none !important;
+    margin: 0 !important;
+  }
+</style>
