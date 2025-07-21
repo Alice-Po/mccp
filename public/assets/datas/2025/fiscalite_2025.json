@@ -1,0 +1,20 @@
+[
+    {
+        "type_taxe": "taxe sur le foncier bâti",
+        "taux_vote_commune_putanges": "41,25 %",
+        "taux_moyen_communes_francaises_comparables": "33,81 %",
+        "commentaire": "taxe acquittée par tous les propriétaires en fonction de la valeur locative du bien qu'ils possèdent"
+    },
+    {
+        "type_taxe": "taxe sur le foncier non bâti",
+        "taux_vote_commune_putanges": "22,39 %",
+        "taux_moyen_communes_francaises_comparables": "45,15 %",
+        "commentaire": "taxe acquittée par tous les propriétaires terriens en fonction de la valeur des terrains détenus"
+    },
+    {
+        "type_taxe": "cotisation foncière des entreprises",
+        "taux_vote_commune_putanges": "13,81 %",
+        "taux_moyen_communes_francaises_comparables": "21,98 %",
+        "commentaire": "taxe acquittée par les entreprises et les professionnels en fonction de la surface des locaux qu'ils exploitent"
+    }
+]
