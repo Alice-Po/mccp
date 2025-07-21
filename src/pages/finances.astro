@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DonutChart from '../components/DonutChart.svelte';
+import { aggregateData, type BudgetItem } from '../utils/budget-data';
+
+// Charger les données budgétaires
+console.log('🔄 Finances - Chargement des données...');
+
+// Essayer d'abord un import direct du fichier
+let budgetData: BudgetItem[] = [];
+try {
+  // Import direct depuis le public folder
+  budgetData = await import('../../public/assets/datas/2025/base_budget_2025.json').then(module => module.default as BudgetItem[]);
+  console.log('📊 Finances - Import direct réussi:', budgetData?.length, 'éléments');
+} catch (importError) {
+  console.log('⚠️ Finances - Import direct échoué, essai fetch:', importError);
+  
+  // Fallback avec fetch
+  try {
+    const response = await fetch('/assets/datas/2025/base_budget_2025.json');
+    console.log('📡 Finances - Réponse fetch:', response.status, response.ok);
+    budgetData = await response.json();
+    console.log('📊 Finances - Fetch réussi:', budgetData?.length, 'éléments');
+  } catch (fetchError) {
+    console.error('❌ Finances - Fetch échoué:', fetchError);
+    budgetData = [];
+  }
+}
+
+console.log('📈 Finances - Données budgétaires finales:', budgetData?.length, 'éléments');
+
+// Agréger les données pour le donut de base : Fonctionnement > Dépenses > regroupement_focale_n1
+console.log('🔧 Finances - Agrégation des données...');
+const chartData = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
+console.log('📊 Finances - Données agrégées:', chartData?.length, 'groupes');
+console.log('📊 Finances - Données chartData:', chartData);
+---
+
+<Layout title="Finances - MCCP">
+  <main class="finances-main">
+    <div class="finances-container">
+      <!-- En-tête -->
+      <header class="finances-header">
+        <h1>Finances municipales</h1>
+        <p>Visualisation des données budgétaires 2025</p>
+      </header>
+
+      <!-- Section test du composant DonutChart -->
+      <section class="chart-section">
+        <DonutChart 
+          data={chartData}
+          title="Dépenses - Réalisations 2024"
+          client:load
+        />
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .finances-main {
+    min-height: 100vh;
+    padding: 2rem 0;
+    background-color: #f9fafb;
+  }
+
+  .finances-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .finances-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .finances-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+  }
+
+  .finances-header p {
+    font-size: 1.1rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .chart-section {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .finances-main {
+      padding: 1rem 0;
+    }
+
+    .finances-header h1 {
+      font-size: 2rem;
+    }
+
+    .finances-header p {
+      font-size: 1rem;
+    }
+
+    .chart-section {
+      padding: 1.5rem;
+    }
+  }
+</style>
