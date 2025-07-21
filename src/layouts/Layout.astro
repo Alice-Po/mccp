@@ -4,18 +4,10 @@ interface Props {
 }
 
 import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.svelte";
 import "../styles/global.css";
 
 const { title } = Astro.props;
-
-// Définir les liens de navigation
-const navLinks = [
-  { href: "/", text: "Accueil" },
-  { href: "/blog", text: "Actualités" },
-  { href: "/retroplanning", text: "Rétro-planning" },
-  { href: "/budget", text: "Budget" },
-  // Ajoutez d'autres liens selon vos besoins
-];
 ---
 
 <html lang="fr">
@@ -40,50 +32,10 @@ const navLinks = [
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="logo">
-          <a href="/">MCCP</a>
-        </div>
-        
-        <nav class="main-nav">
-          <button class="mobile-menu-toggle" aria-label="Menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-          
-          <ul class="nav-links">
-            {navLinks.map(link => (
-              <li>
-                <a href={link.href} class={Astro.url.pathname === link.href ? 'active' : ''}>
-                  {link.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <Navbar currentPath={Astro.url.pathname} client:load />
     
     <slot />
     <Footer />
-    
-    <script>
-      // Script pour le menu mobile
-      document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (mobileMenuToggle && navLinks) {
-          mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('open');
-            navLinks.classList.toggle('open');
-            document.body.classList.toggle('menu-open');
-          });
-        }
-      });
-    </script>
   </body>
 </html>
 
