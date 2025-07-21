@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * SCRIPT DE CONVERSION BUDGET CSV VERS JSON
- * ========================================
+ * SCRIPT DE CONVERSION COMPARAISON CSV VERS JSON
+ * ==============================================
  *
  * DESCRIPTION
  * -----------
- * Ce script convertit un fichier CSV de données budgétaires en format JSON structuré.
- * Il est spécialement conçu pour traiter les fichiers de budget municipal avec les colonnes
+ * Ce script convertit un fichier CSV de données de comparaison budgétaire en format JSON structuré.
+ * Il est spécialement conçu pour traiter les fichiers de comparaison entre communes avec les colonnes
  * françaises standard et produire un JSON compatible avec les applications web.
  *
  * FONCTIONNALITÉS
@@ -16,56 +16,48 @@
  * - Conversion des en-têtes français vers des clés JSON normalisées
  * - Nettoyage et conversion automatique des données numériques (suppression €, espaces)
  * - Conversion des champs financiers en nombres JavaScript
- * - Conversion des champs textuels français en booléens ("oui"→true, "non"→false)
+ * - Conversion des champs textuels français en booléens ("Oui"→true, "Non"→false)
  * - Validation des données d'entrée
  * - Gestion des erreurs et messages informatifs
  * - Génération automatique du nom de fichier de sortie
  *
  * UTILISATION
  * -----------
- * node scripts/convert-budget-csv-to-json.js [chemin-fichier-csv]
+ * node scripts/convert-comparaison-csv-to-json.js [chemin-fichier-csv]
  *
  * Exemples :
- * node scripts/convert-budget-csv-to-json.js public/assets/datas/2025/base_budget_2025.csv
- * node scripts/convert-budget-csv-to-json.js data/budget.csv
+ * node scripts/convert-comparaison-csv-to-json.js public/assets/datas/2025/base_comparaison_2025.csv
+ * node scripts/convert-comparaison-csv-to-json.js data/comparaison.csv
  *
  * ENTRÉE
  * ------
  * Fichier CSV avec les colonnes suivantes (séparées par point-virgule) :
- * - DÉPENSES/RECETTES
- * - SECTION
- * - COMPTE
- * - LIBELLE
- * - regroupement : focale n°1
- * - regroupement : focale n°2
- * - pour comparaison prévision / réalisation (selon focale n°1)
- * - CHAPITRE (officiel)
- * - PREVISIONS_2024
- * - REALISATIONS_2024
- * - PROPOSITIONS_2025
- * - TAUX_EXECUTION_2024
- * - EVOLUTION_2024_2025_ABSOLUE
- * - EVOLUTION_2024_2025_RELATIVE
+ * - exercice
+ * - département
+ * - commune rurale
+ * - commune touristique
+ * - tranche revenu par habitant
+ * - commune
+ * - agrégat
+ * - montant
+ * - population
+ * - montant par habitant
  *
  * SORTIE
  * ------
  * Fichier JSON avec structure :
  * [
  *   {
- *     "DÉPENSES/RECETTES": "DEPENSES",
- *     "SECTION": "FONCTIONNEMENT",
- *     "COMPTE": "60221",
- *     "LIBELLE": "Combustibles et carburants",
- *     "regroupement_focale_n1": "dépenses courantes de fonctionnement",
- *     "regroupement_focale_n2": "fluides : eau, énergie et carburants",
- *     "pour_comparaison_prévision_réalisation": true,
- *     "CHAPITRE_officiel": "CHARGES A CARACTERE GENERAL",
- *     "PREVISIONS_2024": 0,
- *     "REALISATIONS_2024": 0,
- *     "PROPOSITIONS_2025": 0,
- *     "TAUX_EXECUTION_2024": 0,
- *     "EVOLUTION_2024_2025_ABSOLUE": 0,
- *     "EVOLUTION_2024_2025_RELATIVE": 0
+ *     "exercice": "2023",
+ *     "département": "Calvados",
+ *     "commune_rurale": true,
+ *     "commune_touristique": false,
+ *     "tranche_revenu_par_habitant": "3",
+ *     "commune": "Colomby-Anguerny",
+ *     "agrégat": "Achats et charges externes",
+ *     "montant": 88368.03,
+ *     "population": 1276,
+ *     "montant_par_habitant": 69.25
  *   },
  *   ...
  * ]
@@ -88,7 +80,7 @@
  *
  * VERSION
  * -------
- * 1.0.0 -  initial version
+ * 1.0.0 - Version initiale
  *
  * LICENCE
  * -------
@@ -105,6 +97,7 @@ import { parseCSVLine, mapHeaders, convertLineToJSON } from './utils/csv-parser.
 
 import { validateInputFile, generateOutputPath, showHelp } from './utils/file-utils.js';
 
+// Équivalent de __filename pour ES modules
 const __filename = fileURLToPath(import.meta.url);
 
 /**
@@ -122,35 +115,23 @@ const CONFIG = {
 
   // Mapping des en-têtes CSV vers les clés JSON
   COLUMN_MAPPING: {
-    'DÉPENSES/RECETTES': 'DÉPENSES/RECETTES',
-    SECTION: 'SECTION',
-    COMPTE: 'COMPTE',
-    LIBELLE: 'LIBELLE',
-    'regroupement : focale n°1': 'regroupement_focale_n1',
-    'regroupement : focale n°2': 'regroupement_focale_n2',
-    'pour comparaison prévision / réalisation (selon focale n°1)':
-      'pour_comparaison_prévision_réalisation',
-    'CHAPITRE (officiel)': 'CHAPITRE_officiel',
-    PREVISIONS_2024: 'PREVISIONS_2024',
-    REALISATIONS_2024: 'REALISATIONS_2024',
-    PROPOSITIONS_2025: 'PROPOSITIONS_2025',
-    TAUX_EXECUTION_2024: 'TAUX_EXECUTION_2024',
-    EVOLUTION_2024_2025_ABSOLUE: 'EVOLUTION_2024_2025_ABSOLUE',
-    EVOLUTION_2024_2025_RELATIVE: 'EVOLUTION_2024_2025_RELATIVE',
+    exercice: 'exercice',
+    département: 'département',
+    'commune rurale': 'commune_rurale',
+    'commune touristique': 'commune_touristique',
+    'tranche revenu par habitant': 'tranche_revenu_par_habitant',
+    commune: 'commune',
+    agrégat: 'agrégat',
+    montant: 'montant',
+    population: 'population',
+    'montant par habitant': 'montant_par_habitant',
   },
 
   // Champs qui doivent être traités comme des nombres
-  NUMERIC_FIELDS: [
-    'PREVISIONS_2024',
-    'REALISATIONS_2024',
-    'PROPOSITIONS_2025',
-    'TAUX_EXECUTION_2024',
-    'EVOLUTION_2024_2025_ABSOLUE',
-    'EVOLUTION_2024_2025_RELATIVE',
-  ],
+  NUMERIC_FIELDS: ['montant', 'population', 'montant_par_habitant'],
 
   // Champs qui doivent être traités comme des booléens
-  BOOLEAN_FIELDS: ['pour_comparaison_prévision_réalisation'],
+  BOOLEAN_FIELDS: ['commune_rurale', 'commune_touristique'],
 };
 
 /**
@@ -247,16 +228,16 @@ async function main() {
     if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
       showHelp(
         basename(__filename),
-        'SCRIPT DE CONVERSION BUDGET CSV → JSON',
-        `node ${basename(__filename)} public/assets/datas/2025/base_budget_2025.csv`
+        'SCRIPT DE CONVERSION COMPARAISON CSV → JSON',
+        `node ${basename(__filename)} public/assets/datas/2025/base_comparaison_2025.csv`
       );
       process.exit(0);
     }
 
     const inputPath = args[0];
 
-    console.log('🚀 DÉMARRAGE DE LA CONVERSION CSV → JSON');
-    console.log('==========================================\n');
+    console.log('🚀 DÉMARRAGE DE LA CONVERSION COMPARAISON CSV → JSON');
+    console.log('================================================\n');
 
     // Validation du fichier d'entrée
     if (!validateInputFile(inputPath)) {
