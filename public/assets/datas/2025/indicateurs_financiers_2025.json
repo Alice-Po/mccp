@@ -1,0 +1,42 @@
+[
+    {
+        "critere": "épargne nette",
+        "definition_critere": "L'épargne nette mesure la capacité de la commune à financer des investissements, après prise en compte du remboursement en capital des emprunts.",
+        "valeur_putanges_le_lac_par_habitant": "261,43 €",
+        "mediane_echantillon_par_habitant": "109,50 €",
+        "classement_putanges_le_lac_sur_129": "13",
+        "premier_decile_par_habitant": "260,38 €",
+        "dernier_decile_par_habitant": "17,56 €",
+        "commentaires": "La commune de Putanges-le-Lac dispose d'une épargne nette élevée. Au sein de l'échantillon, seules deux communes ornaises présentent un niveau d'épargne supérieur. Ce niveau s'explique à la fois par la faiblesse de l'endettement et par l'excédent des recettes de fonctionnement sur les dépenses de fonctionnement."
+    },
+    {
+        "critere": "encours de dette",
+        "definition_critere": "L'encours de dette est égal au montant en capital que la commune doit rembourser aux différents établissement prêteurs.",
+        "valeur_putanges_le_lac_par_habitant": "239,55 €",
+        "mediane_echantillon_par_habitant": "428,29 €",
+        "classement_putanges_le_lac_sur_129": "101",
+        "premier_decile_par_habitant": "1 061,00 €",
+        "dernier_decile_par_habitant": "113,63 €",
+        "commentaires": "La commune de Putanges compte parmi les communes les moins endettées de l'échantillon. Au sein de l'échantillon, seules cinq communes ornaises présentent un niveau d'endettement inférieur."
+    },
+    {
+        "critere": "subventions aux personnes de droit privé",
+        "definition_critere": "Ce poste recense principalement les subventions versées aux associations intervenant sur le territoire.",
+        "valeur_putanges_le_lac_par_habitant": "2,85 €",
+        "mediane_echantillon_par_habitant": "9,64 €",
+        "classement_putanges_le_lac_sur_129": "121",
+        "premier_decile_par_habitant": "25,69 €",
+        "dernier_decile_par_habitant": "3,32 €",
+        "commentaires": "La commune de Putanges-le-Lac soutient financièrement très peu les associations de son territoire. Au sein de l'échantillon, elle est la commune ornaise qui intervient le moins en la matière."
+    },
+    {
+        "critere": "dotation globale de fonctionnement",
+        "definition_critere": "La DGF versée par l'État est, avec la fiscalité, la principale ressource financière de la commune.",
+        "valeur_putanges_le_lac_par_habitant": "383,16 €",
+        "mediane_echantillon_par_habitant": "213,61 €",
+        "classement_putanges_le_lac_sur_129": "6",
+        "premier_decile_par_habitant": "328,84 €",
+        "dernier_decile_par_habitant": "102,23 €",
+        "commentaires": "La commune de Putanges-le-Lac perçoit, chaque année, un niveau élevé de dotation en provenance de l'État. Cela s'explique par sa nature de commune nouvelle, par la faiblesse des bases fiscales ainsi que par le contexte socio-économique du territoire."
+    }
+]
