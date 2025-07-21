@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import DonutChart from '../components/DonutChart.svelte';
+import FinanceNavigation from '../components/FinanceNavigation.svelte';
 import { aggregateData, type BudgetItem } from '../utils/budget-data';
 
 // Charger les données budgétaires
@@ -29,94 +30,149 @@ try {
 
 console.log('📈 Finances - Données budgétaires finales:', budgetData?.length, 'éléments');
 
-// Préparer les données pour les deux onglets : Dépenses et Recettes
+// Préparer les données pour toutes les sections
 console.log('🔧 Finances - Agrégation des données...');
 
-const depensesData = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
-const recettesData = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1');
+const fonctionnementDepenses = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
+const fonctionnementRecettes = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1');
+const investissementDepenses = aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1');
+const investissementRecettes = aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1');
 
-console.log('📊 Finances - Données dépenses:', depensesData?.length, 'groupes');
-console.log('📊 Finances - Données recettes:', recettesData?.length, 'groupes');
+console.log('📊 Finances - Données fonctionnement dépenses:', fonctionnementDepenses?.length, 'groupes');
+console.log('📊 Finances - Données fonctionnement recettes:', fonctionnementRecettes?.length, 'groupes');
+console.log('📊 Finances - Données investissement dépenses:', investissementDepenses?.length, 'groupes');
+console.log('📊 Finances - Données investissement recettes:', investissementRecettes?.length, 'groupes');
 
-// Données par défaut (dépenses)
-const initialData = depensesData;
+// Données par défaut (fonctionnement dépenses)
+const initialData = fonctionnementDepenses;
 ---
 
 <Layout title="Finances - MCCP">
   <main class="finances-main">
-    <div class="finances-container">
-      <!-- En-tête -->
-      <header class="finances-header">
-        <h1>Finances municipales</h1>
-        <p>Visualisation des données budgétaires 2025</p>
-      </header>
+    <div class="finances-layout">
+      <!-- Navigation fixe à gauche -->
+      <aside class="finances-sidebar">
+        <FinanceNavigation client:load />
+      </aside>
 
-      <!-- Section graphique avec onglets -->
-      <section class="chart-section">
-        <!-- Onglets -->
-        <div class="tabs-container">
-          <div class="tabs">
-            <button class="tab tab-active" data-tab="depenses">
-              Dépenses
-            </button>
-            <button class="tab" data-tab="recettes">
-              Recettes
-            </button>
+      <!-- Contenu principal à droite -->
+      <div class="finances-content">
+        <!-- En-tête -->
+        <header class="finances-header">
+          <h1>Finances municipales</h1>
+          <p>Visualisation des données budgétaires 2025</p>
+        </header>
+
+                <!-- Section Fonctionnement -->
+        <section class="chart-section" id="section-fonctionnement">
+          <div class="section-header">
+            <h2>Section de fonctionnement</h2>
+            <p>Analyse des dépenses et recettes de fonctionnement</p>
           </div>
-        </div>
+          
+          <!-- Onglets Fonctionnement -->
+          <div class="tabs-container">
+            <div class="tabs">
+              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement">
+                Dépenses
+              </button>
+              <button class="tab" data-tab="recettes" data-section="fonctionnement">
+                Recettes
+              </button>
+            </div>
+          </div>
 
-        <!-- Graphique DonutChart -->
-        <div class="chart-wrapper">
-          <DonutChart 
-            data={initialData}
-            title="Dépenses - Réalisations 2024"
-            client:load
-          />
-        </div>
-      </section>
+          <!-- Graphique Fonctionnement -->
+          <div class="chart-wrapper" id="chart-fonctionnement">
+            <DonutChart 
+              data={fonctionnementDepenses}
+              title="Dépenses - Fonctionnement - Réalisations 2024"
+              chartId="chart-fonctionnement"
+              client:load
+            />
+          </div>
+        </section>
 
-      <!-- Script pour gérer les onglets -->
-      <script define:vars={{ depensesData, recettesData }}>
+        <!-- Section Investissement -->
+        <section class="chart-section" id="section-investissement">
+          <div class="section-header">
+            <h2>Section d'investissement</h2>
+            <p>Analyse des dépenses et recettes d'investissement</p>
+          </div>
+          
+          <!-- Onglets Investissement -->
+          <div class="tabs-container">
+            <div class="tabs">
+              <button class="tab tab-active" data-tab="depenses" data-section="investissement">
+                Dépenses
+              </button>
+              <button class="tab" data-tab="recettes" data-section="investissement">
+                Recettes
+              </button>
+            </div>
+          </div>
+
+          <!-- Graphique Investissement -->
+          <div class="chart-wrapper" id="chart-investissement">
+            <DonutChart 
+              data={investissementDepenses}
+              title="Dépenses - Investissement - Réalisations 2024"
+              chartId="chart-investissement"
+              client:load
+            />
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Script pour gérer la navigation et les onglets -->
+      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes }}>
         document.addEventListener('DOMContentLoaded', () => {
-          console.log('🎛️ Finances - Initialisation onglets');
-          console.log('📊 depensesData:', depensesData);
-          console.log('📊 recettesData:', recettesData);
+          
+          // Données mappées par navigation
+          const dataMap = {
+            'depenses-fonctionnement': { data: fonctionnementDepenses, type: 'depenses', section: 'fonctionnement' },
+            'recettes-fonctionnement': { data: fonctionnementRecettes, type: 'recettes', section: 'fonctionnement' },
+            'depenses-investissement': { data: investissementDepenses, type: 'depenses', section: 'investissement' },
+            'recettes-investissement': { data: investissementRecettes, type: 'recettes', section: 'investissement' }
+          };
 
           const tabs = document.querySelectorAll('.tab');
-          const chartWrapper = document.querySelector('.chart-wrapper');
           
-          let currentData = depensesData;
-          let currentTitle = "Dépenses - Réalisations 2024";
 
-          function updateChart(data, title) {
-            console.log('🔄 Finances - Mise à jour chart:', { data: data?.length, title });
-            
+          
+
+
+
+
+          function updateChart(data, title, chartId) {
             // Dispatch un événement personnalisé pour mettre à jour le composant Svelte
             const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title }
+              detail: { data, title, chartId }
             });
             document.dispatchEvent(updateEvent);
           }
 
+          // Gestion des onglets par section
           tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-              console.log('🎯 Finances - Clic onglet:', tab.dataset.tab);
+              const tabType = tab.dataset.tab;
+              const section = tab.dataset.section;
 
-              // Mettre à jour les styles des onglets
-              tabs.forEach(t => t.classList.remove('tab-active'));
+              // Mettre à jour les styles des onglets de la même section
+              const sectionTabs = document.querySelectorAll(`[data-section="${section}"]`);
+              sectionTabs.forEach(t => t.classList.remove('tab-active'));
               tab.classList.add('tab-active');
 
               // Déterminer les nouvelles données
-              if (tab.dataset.tab === 'depenses') {
-                currentData = depensesData;
-                currentTitle = "Dépenses - Réalisations 2024";
-              } else {
-                currentData = recettesData;
-                currentTitle = "Recettes - Réalisations 2024";
+              const dataKey = `${tabType}-${section}`;
+              const config = dataMap[dataKey];
+              
+              if (config) {
+                const chartId = `chart-${section}`;
+                const title = `${tabType === 'depenses' ? 'Dépenses' : 'Recettes'} - ${section === 'fonctionnement' ? 'Fonctionnement' : 'Investissement'} - Réalisations 2024`;
+                updateChart(config.data, title, chartId);
               }
-
-              // Mettre à jour le graphique
-              updateChart(currentData, currentTitle);
             });
           });
         });
@@ -128,19 +184,33 @@ const initialData = depensesData;
 <style>
   .finances-main {
     min-height: 100vh;
-    padding: 2rem 0;
     background-color: #f9fafb;
+    max-width: 1600px;
   }
 
-  .finances-container {
-    max-width: 1200px;
+  .finances-layout {
+    display: flex;
+    gap: 2rem;
+    min-height: 100vh;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 2rem;
+  }
+
+  .finances-sidebar {
+    flex-shrink: 0;
+  }
+
+  .finances-content {
+    flex: 1;
+    min-width: 0;
   }
 
   .finances-header {
-    text-align: center;
-    margin-bottom: 3rem;
+    text-align: left;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(46, 139, 87, 0.1);
   }
 
   .finances-header h1 {
@@ -163,6 +233,27 @@ const initialData = depensesData;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(46, 139, 87, 0.1);
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
   }
 
   .tabs-container {
@@ -208,9 +299,37 @@ const initialData = depensesData;
   }
 
   /* Responsive */
+  @media (max-width: 1400px) {
+    .finances-layout {
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .finances-layout {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .finances-sidebar {
+      order: 2;
+    }
+
+    .finances-content {
+      order: 1;
+    }
+
+    .finances-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  }
+
   @media (max-width: 768px) {
-    .finances-main {
-      padding: 1rem 0;
+    .finances-layout {
+      padding: 0.5rem;
     }
 
     .finances-header h1 {

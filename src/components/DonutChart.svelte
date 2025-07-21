@@ -22,6 +22,7 @@
 
   export let data: AggregatedData[] = [];
   export let title = '';
+  export let chartId = 'default';
 
   let canvasElement: HTMLCanvasElement;
   let chart: Chart | null = null;
@@ -162,13 +163,19 @@
     const handleUpdateChart = (event: CustomEvent) => {
       console.log('📡 DonutChart - Événement updateChart reçu:', event.detail);
       
-      const { data: newData, title: newTitle } = event.detail;
+      const { data: newData, title: newTitle, chartId: targetChartId } = event.detail;
+      
+      // Vérifier si cet événement est destiné à ce composant
+      if (targetChartId && targetChartId !== chartId) {
+        console.log('⏭️ DonutChart - Événement ignoré (chartId différent):', { targetChartId, chartId });
+        return;
+      }
       
       // Mettre à jour les props
       data = newData || [];
       title = newTitle || title;
       
-      console.log('🔄 DonutChart - Props mises à jour:', { dataLength: data.length, title });
+      console.log('🔄 DonutChart - Props mises à jour:', { dataLength: data.length, title, chartId });
     };
 
     // Écouter l'événement personnalisé
