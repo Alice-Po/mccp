@@ -29,11 +29,17 @@ try {
 
 console.log('📈 Finances - Données budgétaires finales:', budgetData?.length, 'éléments');
 
-// Agréger les données pour le donut de base : Fonctionnement > Dépenses > regroupement_focale_n1
+// Préparer les données pour les deux onglets : Dépenses et Recettes
 console.log('🔧 Finances - Agrégation des données...');
-const chartData = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
-console.log('📊 Finances - Données agrégées:', chartData?.length, 'groupes');
-console.log('📊 Finances - Données chartData:', chartData);
+
+const depensesData = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
+const recettesData = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1');
+
+console.log('📊 Finances - Données dépenses:', depensesData?.length, 'groupes');
+console.log('📊 Finances - Données recettes:', recettesData?.length, 'groupes');
+
+// Données par défaut (dépenses)
+const initialData = depensesData;
 ---
 
 <Layout title="Finances - MCCP">
@@ -45,14 +51,76 @@ console.log('📊 Finances - Données chartData:', chartData);
         <p>Visualisation des données budgétaires 2025</p>
       </header>
 
-      <!-- Section test du composant DonutChart -->
+      <!-- Section graphique avec onglets -->
       <section class="chart-section">
-        <DonutChart 
-          data={chartData}
-          title="Dépenses - Réalisations 2024"
-          client:load
-        />
+        <!-- Onglets -->
+        <div class="tabs-container">
+          <div class="tabs">
+            <button class="tab tab-active" data-tab="depenses">
+              💰 Dépenses
+            </button>
+            <button class="tab" data-tab="recettes">
+              💵 Recettes
+            </button>
+          </div>
+        </div>
+
+        <!-- Graphique DonutChart -->
+        <div class="chart-wrapper">
+          <DonutChart 
+            data={initialData}
+            title="Dépenses - Réalisations 2024"
+            client:load
+          />
+        </div>
       </section>
+
+      <!-- Script pour gérer les onglets -->
+      <script define:vars={{ depensesData, recettesData }}>
+        document.addEventListener('DOMContentLoaded', () => {
+          console.log('🎛️ Finances - Initialisation onglets');
+          console.log('📊 depensesData:', depensesData);
+          console.log('📊 recettesData:', recettesData);
+
+          const tabs = document.querySelectorAll('.tab');
+          const chartWrapper = document.querySelector('.chart-wrapper');
+          
+          let currentData = depensesData;
+          let currentTitle = "Dépenses - Réalisations 2024";
+
+          function updateChart(data, title) {
+            console.log('🔄 Finances - Mise à jour chart:', { data: data?.length, title });
+            
+            // Dispatch un événement personnalisé pour mettre à jour le composant Svelte
+            const updateEvent = new CustomEvent('updateChart', {
+              detail: { data, title }
+            });
+            document.dispatchEvent(updateEvent);
+          }
+
+          tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              console.log('🎯 Finances - Clic onglet:', tab.dataset.tab);
+
+              // Mettre à jour les styles des onglets
+              tabs.forEach(t => t.classList.remove('tab-active'));
+              tab.classList.add('tab-active');
+
+              // Déterminer les nouvelles données
+              if (tab.dataset.tab === 'depenses') {
+                currentData = depensesData;
+                currentTitle = "Dépenses - Réalisations 2024";
+              } else {
+                currentData = recettesData;
+                currentTitle = "Recettes - Réalisations 2024";
+              }
+
+              // Mettre à jour le graphique
+              updateChart(currentData, currentTitle);
+            });
+          });
+        });
+      </script>
     </div>
   </main>
 </Layout>
@@ -97,6 +165,45 @@ console.log('📊 Finances - Données chartData:', chartData);
     margin-bottom: 2rem;
   }
 
+  .tabs-container {
+    margin-bottom: 2rem;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid #f1f5f9;
+    margin-bottom: 1rem;
+  }
+
+  .tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .tab:hover {
+    color: var(--primary);
+    background-color: #f8fafc;
+  }
+
+  .tab-active {
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+    background-color: #f8fafc;
+  }
+
+  .chart-wrapper {
+    min-height: 400px;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .finances-main {
@@ -113,6 +220,19 @@ console.log('📊 Finances - Données chartData:', chartData);
 
     .chart-section {
       padding: 1.5rem;
+    }
+
+    .tabs-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.625rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .chart-wrapper {
+      min-height: 300px;
     }
   }
 </style>

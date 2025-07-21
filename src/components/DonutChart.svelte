@@ -158,6 +158,27 @@
   onMount(() => {
     console.log('🎬 DonutChart - Component mounted');
     createChart();
+
+    // Écouter les événements de mise à jour depuis la page
+    const handleUpdateChart = (event: CustomEvent) => {
+      console.log('📡 DonutChart - Événement updateChart reçu:', event.detail);
+      
+      const { data: newData, title: newTitle } = event.detail;
+      
+      // Mettre à jour les props
+      data = newData || [];
+      title = newTitle || title;
+      
+      console.log('🔄 DonutChart - Props mises à jour:', { dataLength: data.length, title });
+    };
+
+    // Écouter l'événement personnalisé
+    document.addEventListener('updateChart', handleUpdateChart as EventListener);
+
+    // Cleanup dans onDestroy
+    return () => {
+      document.removeEventListener('updateChart', handleUpdateChart as EventListener);
+    };
   });
 
   onDestroy(() => {
