@@ -86,11 +86,10 @@
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 1,
+        maintainAspectRatio: false,
         cutout: '60%',
         layout: {
-          padding: 20
+          padding: 10
         },
         plugins: {
           legend: {
@@ -220,6 +219,7 @@
           on:mouseleave={handleLegendLeave}
           role="button"
           tabindex="0"
+          title={item.label}
         >
           <div 
             class="legend-color" 
@@ -241,7 +241,7 @@
 <style>
   .donut-chart {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -254,25 +254,23 @@
   }
 
   .chart-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .chart-canvas-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    flex-shrink: 0;
+    width: 400px;
+    height: 400px;
   }
 
   .chart-canvas {
     width: 100%;
-    height: auto;
-    max-width: 400px;
+    height: 100%;
   }
 
   .center-overlay {
@@ -286,26 +284,26 @@
   }
 
   .center-total-amount {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--secondary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1B365D;
     font-family: var(--font-main);
     margin-bottom: 0.25rem;
   }
 
   .center-total-label {
-    font-size: 0.9rem;
-    color: #6b7280;
+    font-size: 0.875rem;
+    color: #666;
     font-family: var(--font-main);
   }
 
   .chart-legend {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.375rem;
+    gap: 0.5rem;
     max-height: 400px;
     overflow-y: auto;
-    padding-right: 0.5rem;
     scrollbar-width: thin;
     scrollbar-color: #d1d5db #f9fafb;
   }
@@ -331,23 +329,21 @@
   .legend-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     padding: 0.5rem;
     border-radius: 0.375rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
     flex-shrink: 0;
   }
 
-  .legend-item:hover,
-  .legend-item.hovered {
-    background-color: #f9fafb;
-    transform: translateX(4px);
+  .legend-item:hover {
+    background-color: #f5f5f5;
   }
 
   .legend-color {
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -355,45 +351,56 @@
   .legend-content {
     flex: 1;
     min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .legend-label {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    color: var(--secondary);
-    margin-bottom: 0.125rem;
+    color: #333;
     text-transform: capitalize;
     line-height: 1.2;
+    flex: 1;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .legend-value {
     display: flex;
     align-items: center;
-    gap: 0.375rem;
-    flex-wrap: wrap;
+    gap: 0.25rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
   }
 
   .legend-amount {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--primary);
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #1B365D;
     white-space: nowrap;
   }
 
   .legend-percentage {
-    font-size: 0.8rem;
-    color: #6b7280;
+    font-size: 0.85rem;
+    color: #666;
     white-space: nowrap;
+    margin-left: 0.25rem;
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .chart-container {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chart-canvas-container {
+      width: 350px;
+      height: 350px;
+      margin-bottom: 1rem;
     }
 
     .chart-title {
@@ -402,7 +409,7 @@
     }
 
     .center-total-amount {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .center-total-label {
@@ -410,34 +417,35 @@
     }
 
     .chart-legend {
+      width: 100%;
       max-height: 300px;
-      gap: 0.25rem;
+      gap: 0.4rem;
     }
 
     .legend-item {
-      padding: 0.375rem;
-      gap: 0.375rem;
+      padding: 0.4rem;
+      gap: 0.6rem;
     }
 
     .legend-color {
-      width: 0.75rem;
-      height: 0.75rem;
+      width: 0.9rem;
+      height: 0.9rem;
     }
 
     .legend-label {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .legend-amount {
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .legend-percentage {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
     }
 
     .legend-value {
-      gap: 0.25rem;
+      margin-left: 0.5rem;
     }
   }
 </style> 

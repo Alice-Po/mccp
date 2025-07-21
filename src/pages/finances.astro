@@ -57,10 +57,10 @@ const initialData = depensesData;
         <div class="tabs-container">
           <div class="tabs">
             <button class="tab tab-active" data-tab="depenses">
-              💰 Dépenses
+              Dépenses
             </button>
             <button class="tab" data-tab="recettes">
-              💵 Recettes
+              Recettes
             </button>
           </div>
         </div>
@@ -171,33 +171,36 @@ const initialData = depensesData;
 
   .tabs {
     display: flex;
-    gap: 0.5rem;
-    border-bottom: 2px solid #f1f5f9;
-    margin-bottom: 1rem;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .tab {
     background: none;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     font-size: 1rem;
-    font-weight: 500;
-    color: #64748b;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2.5px solid transparent;
     cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s ease;
-    position: relative;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+    border-radius: 0.25rem 0.25rem 0 0;
   }
 
   .tab:hover {
-    color: var(--primary);
-    background-color: #f8fafc;
+    color: #1976d2;
+  }
+
+  .tab:focus {
+    outline: 2px solid #1976d2;
   }
 
   .tab-active {
-    color: var(--primary) !important;
-    border-bottom-color: var(--primary) !important;
-    background-color: #f8fafc;
+    color: #1976d2 !important;
+    border-bottom-color: #1976d2 !important;
+    background-color: #f5faff;
   }
 
   .chart-wrapper {
@@ -223,11 +226,16 @@ const initialData = depensesData;
     }
 
     .tabs-container {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tabs {
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
     }
 
     .tab {
-      padding: 0.625rem 1rem;
+      padding: 0.5rem 1rem;
       font-size: 0.9rem;
     }
 
