@@ -102,7 +102,7 @@
 <style>
   .finance-navigation {
     position: sticky;
-    top: 2rem;
+    top: 120px;
     width: 320px;
     background: white;
     border-radius: 1rem;
@@ -112,7 +112,7 @@
     backdrop-filter: blur(10px);
     font-family: var(--font-main);
     height: fit-content;
-    max-height: calc(100vh - 4rem);
+    max-height: calc(100vh - 140px);
     overflow-y: auto;
   }
 

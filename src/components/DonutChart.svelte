@@ -196,9 +196,6 @@
 </script>
 
 <div class="donut-chart">
-  {#if title}
-    <h3 class="chart-title">{title}</h3>
-  {/if}
 
   <div class="chart-container">
     <!-- Graphique Chart.js -->
