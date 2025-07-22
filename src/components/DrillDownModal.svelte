@@ -1,37 +1,39 @@
 <!--
   =============================================================================
-  COMPOSANT: DRILL DOWN MODAL - MODAL POUR AFFICHAGE DU NIVEAU 2
+  COMPOSANT: DRILL DOWN MODAL - MODAL POUR AFFICHAGE DU NIVEAU 2 (SVELTE 5)
   =============================================================================
   
   Modal qui s'ouvre lors du clic sur un segment du donut principal
   Affiche un nouveau donut avec les données de niveau 2 (regroupement_focale_n2)
+  ⚡ Migré vers les runes Svelte 5
 -->
 
 <script lang="ts">
-  import { createEventDispatcher, onMount, onDestroy } from 'svelte';
   import DonutChart from './DonutChart.svelte';
   import type { AggregatedData, BudgetItem } from '../utils/budget-data';
   import { aggregateDataLevel2 } from '../utils/budget-data';
 
-  const dispatch = createEventDispatcher();
-
-  export let budgetData: BudgetItem[] = [];
+  // Props avec les runes Svelte 5
+  let { budgetData = [] }: { budgetData: BudgetItem[] } = $props();
   
-  let isOpen = false;
-  let selectedCategory = '';
-  let section = '';
-  let type = '';
-  let valueField: keyof BudgetItem = 'REALISATIONS_2024';
+  // État local réactif avec $state
+  let isOpen = $state(false);
+  let selectedCategory = $state('');
+  let section = $state('');
+  let type = $state('');
+  let valueField = $state<keyof BudgetItem>('REALISATIONS_2024');
 
-  $: level2Data = selectedCategory && budgetData.length > 0 
-    ? aggregateDataLevel2(budgetData, section, type, valueField, selectedCategory)
-    : [];
+  // Valeurs dérivées avec $derived
+  let level2Data = $derived(
+    selectedCategory && budgetData.length > 0 
+      ? aggregateDataLevel2(budgetData, section, type, valueField, selectedCategory)
+      : []
+  );
 
-  $: modalTitle = `${selectedCategory} - ${section} ${type}`;
+  let modalTitle = $derived(`${selectedCategory} - ${section} ${type}`);
 
   function closeModal() {
     isOpen = false;
-    dispatch('close');
     
     // Dispatcher un événement global pour informer la page
     if (typeof document !== 'undefined') {
@@ -67,18 +69,17 @@
     console.log('📋 DrillDownModal - État mis à jour:', { isOpen, selectedCategory, section, type });
   }
 
-  onMount(() => {
+  // Effet pour gérer les event listeners (remplace onMount/onDestroy)
+  $effect(() => {
     // Vérifier que nous sommes côté client
     if (typeof document !== 'undefined') {
       // Écouter l'événement d'ouverture de la modal
       document.addEventListener('openDrillDownModal', handleOpenModal as EventListener);
-    }
-  });
-
-  onDestroy(() => {
-    // Nettoyer les event listeners
-    if (typeof document !== 'undefined') {
-      document.removeEventListener('openDrillDownModal', handleOpenModal as EventListener);
+      
+      // Cleanup automatique lors de la destruction du composant
+      return () => {
+        document.removeEventListener('openDrillDownModal', handleOpenModal as EventListener);
+      };
     }
   });
 </script>
@@ -89,15 +90,15 @@
     class="modal-backdrop" 
     role="dialog" 
     aria-modal="true"
-    on:click={handleBackdropClick}
-    on:keydown={handleKeydown}
+    onclick={handleBackdropClick}
+    onkeydown={handleKeydown}
   >
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">{modalTitle}</h2>
         <button 
           class="modal-close" 
-          on:click={closeModal}
+          onclick={closeModal}
           aria-label="Fermer la modal"
         >
           ✕
@@ -119,7 +120,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-secondary" on:click={closeModal}>
+        <button class="btn-secondary" onclick={closeModal}>
           Fermer
         </button>
       </div>
