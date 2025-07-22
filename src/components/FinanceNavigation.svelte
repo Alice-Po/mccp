@@ -1,17 +1,15 @@
-<!-- Navigation fixe pour les finances -->
+<!-- Navigation fixe pour les finances (SVELTE 5) -->
 
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   interface NavItem {
     id: string;
     label: string;
   }
 
-  // State
-  let activeItem = 'section-fonctionnement';
+  // État local réactif avec $state
+  let activeItem = $state('section-fonctionnement');
 
-  // Navigation items
+  // Navigation items (constante, pas besoin de rune)
   const navItems: NavItem[] = [
     {
       id: 'section-fonctionnement',
@@ -26,47 +24,51 @@
   // Actions
   function selectItem(itemId: string) {
     activeItem = itemId;
-    
     const element = document.getElementById(itemId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  // Intersection Observer
-  onMount(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-            const sectionId = entry.target.id;
-            if (sectionId && navItems.find(item => item.id === sectionId)) {
-              activeItem = sectionId;
-            }
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '-10% 0px -10% 0px',
-        threshold: [0.1, 0.5, 0.9]
-      }
-    );
+  // Effet pour gérer l'Intersection Observer (section la plus proche du centre du viewport)
+  $effect(() => {
+    if (typeof document === 'undefined') return;
 
-    // Observer les sections
-    setTimeout(() => {
-      const sections = ['section-fonctionnement', 'section-investissement'];
-      sections.forEach(sectionId => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          observer.observe(element);
+    const sectionIds = navItems.map(item => item.id);
+    const sectionElements = sectionIds
+      .map(id => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+
+    if (sectionElements.length === 0) return;
+
+    function updateActiveSection() {
+      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      let minDistance = Infinity;
+      let closestSectionId = activeItem;
+      for (const el of sectionElements) {
+        const rect = el.getBoundingClientRect();
+        const sectionCenter = rect.top + window.scrollY + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSectionId = el.id;
         }
-      });
-    }, 100);
+      }
+      if (closestSectionId !== activeItem) {
+        activeItem = closestSectionId;
+      }
+    }
+
+    // Mettre à jour lors du scroll et du resize
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    // Appel initial
+    updateActiveSection();
 
     // Cleanup
     return () => {
-      observer.disconnect();
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
     };
   });
 </script>

@@ -1,0 +1,11 @@
+---
+description: Style rules
+globs:
+alwaysApply: false
+---
+
+- Use the less as possible css inside component
+- Use the maximum the style from MCCP/src/styles/global.css
+- Keep the css centralise in /src/styles/global.css
+
+@/src/styles/global.css
