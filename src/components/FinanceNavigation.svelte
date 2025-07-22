@@ -4,30 +4,59 @@
   interface NavItem {
     id: string;
     label: string;
+    type: 'donut' | 'bar';
   }
 
   // État local réactif avec $state
   let activeItem = $state('section-fonctionnement');
 
-  // Navigation items (constante, pas besoin de rune)
+  // Navigation items avec types d'icônes
   const navItems: NavItem[] = [
     {
       id: 'section-budget-fonctionnement',
-      label: 'Budget fonctionnement'
+      label: 'Budget fonctionnement',
+      type: 'donut'
     },
     {
       id: 'section-comparaison-fonctionnement',
-      label: 'Comparaison fonctionnement'
+      label: 'Comparaison fonctionnement',
+      type: 'bar'
     },
     {
       id: 'section-budget-investissement',
-      label: 'Budget investissement'
+      label: 'Budget investissement',
+      type: 'donut'
     },
     {
       id: 'section-comparaison-investissement',
-      label: 'Comparaison investissement'
+      label: 'Comparaison investissement',
+      type: 'bar'
     }
   ];
+
+  // Fonction pour obtenir l'icône SVG selon le type
+  function getIcon(type: 'donut' | 'bar'): string {
+    if (type === 'donut') {
+      // Icône donut/camembert
+      return `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C13.3132 2 14.6136 2.25866 15.8268 2.7612C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 10.6868 2.25866 9.38642 2.7612 8.17317C3.26375 6.95991 4.00035 5.85752 4.92893 4.92893C5.85752 4.00035 6.95991 3.26375 8.17317 2.7612C9.38642 2.25866 10.6868 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 2V12L19.0711 4.92893" stroke="currentColor" stroke-width="2" fill="rgba(46, 139, 87, 0.3)"/>
+        </svg>
+      `;
+    } else {
+      // Icône graphique en barres
+      return `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor" opacity="0.7"/>
+          <rect x="10" y="8" width="4" height="13" rx="1" fill="currentColor" opacity="0.8"/>
+          <rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor"/>
+          <line x1="2" y1="22" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="2" y1="22" x2="2" y2="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+  }
 
   // Actions
   function selectItem(itemId: string) {
@@ -95,6 +124,9 @@
           aria-current={activeItem === item.id ? 'location' : undefined}
           onclick={() => selectItem(item.id)}
         >
+          <span class="nav-icon">
+            {@html getIcon(item.type)}
+          </span>
           <span class="nav-label">{item.label}</span>
         </button>
       </li>
@@ -152,7 +184,8 @@
   .nav-link {
     display: flex;
     align-items: center;
-    padding: 0.5rem 1rem;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
     background: none;
     border: none;
     border-left: 3px solid transparent;
@@ -164,6 +197,27 @@
     color: var(--primary);
     transition: all 0.3s ease;
     position: relative;
+  }
+
+  .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+    transition: all 0.3s ease;
+  }
+
+  :global(.nav-link.active .nav-icon) {
+    color: var(--primary);
+    transform: scale(1.1);
+  }
+
+  .nav-link:hover .nav-icon {
+    transform: scale(1.05);
+    color: var(--primary-dark);
   }
 
   .nav-link:hover {
@@ -211,10 +265,11 @@
   }
 
   .nav-label {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     white-space: nowrap;
     flex: 1;
+    line-height: 1.2;
   }
 
   .nav-footer {
