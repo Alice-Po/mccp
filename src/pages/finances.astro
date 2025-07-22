@@ -7,33 +7,22 @@ import HorizontalBarChart from '../components/HorizontalBarChart.svelte';
 import { aggregateData, type BudgetItem, aggregateByChapitre } from '../utils/budget-data';
 
 // Charger les données budgétaires
-console.log('🔄 Finances - Chargement des données...');
-
-// Essayer d'abord un import direct du fichier
 let budgetData: BudgetItem[] = [];
 try {
   // Import direct depuis le public folder
   budgetData = await import('../../public/assets/datas/2025/base_budget_2025.json').then(module => module.default as BudgetItem[]);
-  console.log('📊 Finances - Import direct réussi:', budgetData?.length, 'éléments');
 } catch (importError) {
-  console.log('⚠️ Finances - Import direct échoué, essai fetch:', importError);
-  
   // Fallback avec fetch
   try {
     const response = await fetch('/assets/datas/2025/base_budget_2025.json');
-    console.log('📡 Finances - Réponse fetch:', response.status, response.ok);
     budgetData = await response.json();
-    console.log('📊 Finances - Fetch réussi:', budgetData?.length, 'éléments');
   } catch (fetchError) {
-    console.error('❌ Finances - Fetch échoué:', fetchError);
+    console.error('❌ Finances - Erreur chargement données:', fetchError);
     budgetData = [];
   }
 }
 
-console.log('📈 Finances - Données budgétaires finales:', budgetData?.length, 'éléments');
-
 // Préparer les données pour toutes les sections
-console.log('🔧 Finances - Agrégation des données...');
 
 const fonctionnementDepenses = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1');
 const fonctionnementRecettes = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1');
@@ -45,15 +34,6 @@ const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTION
 const fonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
 const investissementDepensesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES');
 const investissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES');
-
-
-console.log('📊 Finances - Données fonctionnement dépenses:', fonctionnementDepenses?.length, 'groupes');
-console.log('📊 Finances - Données fonctionnement recettes:', fonctionnementRecettes?.length, 'groupes');
-console.log('📊 Finances - Données investissement dépenses:', investissementDepenses?.length, 'groupes');
-console.log('📊 Finances - Données investissement recettes:', investissementRecettes?.length, 'groupes');
-
-// Données par défaut (fonctionnement dépenses)
-const initialData = fonctionnementDepenses;
 ---
 
 <Layout title="Finances - MCCP">
@@ -228,56 +208,104 @@ const initialData = fonctionnementDepenses;
       <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre, investissementDepensesChapitre, investissementRecettesChapitre }}>
         document.addEventListener('DOMContentLoaded', () => {
           
-          // Données mappées par navigation
-          const dataMap = {
-            'depenses-fonctionnement': { data: fonctionnementDepenses, type: 'depenses', section: 'fonctionnement' },
-            'recettes-fonctionnement': { data: fonctionnementRecettes, type: 'recettes', section: 'fonctionnement' },
-            'depenses-investissement': { data: investissementDepenses, type: 'depenses', section: 'investissement' },
-            'recettes-investissement': { data: investissementRecettes, type: 'recettes', section: 'investissement' }
+          // ===== CONFIGURATION DES DONNÉES =====
+          const chartConfigs = {
+            'donut-tabs-fonctionnement': {
+              chartId: 'chart-fonctionnement',
+              section: 'Fonctionnement',
+              dataMap: {
+                depenses: fonctionnementDepenses,
+                recettes: fonctionnementRecettes
+              }
+            },
+            'donut-tabs-investissement': {
+              chartId: 'chart-investissement', 
+              section: 'Investissement',
+              dataMap: {
+                depenses: investissementDepenses,
+                recettes: investissementRecettes
+              }
+            },
+            'bar-tabs-fonctionnement': {
+              chartId: 'bar-fonctionnement',
+              section: 'Fonctionnement',
+              dataMap: {
+                depenses: { data: fonctionnementDepensesChapitre, type: 'expenses' },
+                recettes: { data: fonctionnementRecettesChapitre, type: 'revenues' }
+              }
+            },
+            'bar-tabs-investissement': {
+              chartId: 'bar-investissement',
+              section: 'Investissement', 
+              dataMap: {
+                depenses: { data: investissementDepensesChapitre, type: 'expenses' },
+                recettes: { data: investissementRecettesChapitre, type: 'revenues' }
+              }
+            }
           };
 
-          const tabs = document.querySelectorAll('.tab');
-          
-
-          
-
-
-
-
-          function updateChart(data, title, chartId) {
-            // Dispatch un événement personnalisé pour mettre à jour le composant Svelte
-            const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title, chartId }
-            });
+          // ===== FONCTIONS UTILITAIRES =====
+          function dispatchChartUpdate(config) {
+            const updateEvent = new CustomEvent('updateChart', { detail: config });
             document.dispatchEvent(updateEvent);
           }
 
-          // Gestion des onglets par section
-          tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-              const tabType = tab.dataset.tab;
-              const section = tab.dataset.section;
+          function generateTitle(tabType, section, isBarChart = false) {
+            const typeLabel = tabType === 'depenses' ? 'Dépenses' : 'Recettes';
+            const prefix = isBarChart ? 'Comparaison des' : '';
+            const suffix = isBarChart ? 'par chapitre (Prévus, Réalisés, Propositions)' : '- Réalisations 2024';
+            return `${prefix} ${typeLabel} - ${section} ${suffix}`.trim();
+          }
 
-              // Mettre à jour les styles des onglets de la même section
-              const sectionTabs = document.querySelectorAll(`[data-section="${section}"]`);
-              sectionTabs.forEach(t => t.classList.remove('tab-active'));
-              tab.classList.add('tab-active');
-
-              // Déterminer les nouvelles données
-              const dataKey = `${tabType}-${section}`;
-              const config = dataMap[dataKey];
+          // ===== GESTIONNAIRE D'ONGLETS GÉNÉRIQUE =====
+          function createTabManager(selectorId, config) {
+            const tabs = document.querySelectorAll(`#${selectorId} .tab`);
+            const isBarChart = selectorId.includes('bar-tabs');
+            
+            function updateChart(tabType) {
+              const dataConfig = config.dataMap[tabType];
+              const title = generateTitle(tabType, config.section, isBarChart);
               
-              if (config) {
-                const chartId = `chart-${section}`;
-                const title = `${tabType === 'depenses' ? 'Dépenses' : 'Recettes'} - ${section === 'fonctionnement' ? 'Fonctionnement' : 'Investissement'} - Réalisations 2024`;
-                updateChart(config.data, title, chartId);
+              if (isBarChart) {
+                // Configuration pour les bar charts
+                dispatchChartUpdate({
+                  data: dataConfig.data,
+                  title: title,
+                  chartId: config.chartId,
+                  type: dataConfig.type
+                });
+              } else {
+                // Configuration pour les donut charts
+                dispatchChartUpdate({
+                  data: dataConfig,
+                  title: title,
+                  chartId: config.chartId
+                });
               }
+            }
+            
+            // Setup des event listeners
+            tabs.forEach(tab => {
+              tab.addEventListener('click', () => {
+                // Mise à jour des styles
+                tabs.forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                
+                // Mise à jour du graphique
+                updateChart(tab.dataset.tab);
+              });
             });
+            
+            // Initialisation par défaut
+            updateChart('depenses');
+          }
+
+          // ===== INITIALISATION DES GESTIONNAIRES D'ONGLETS =====
+          Object.entries(chartConfigs).forEach(([selectorId, config]) => {
+            createTabManager(selectorId, config);
           });
 
-          // === GESTION DU DRILL-DOWN ===
-          
-          // État de la modal
+          // ===== GESTION DU DRILL-DOWN =====
           let currentModalState = {
             isOpen: false,
             selectedCategory: '',
@@ -287,48 +315,32 @@ const initialData = fonctionnementDepenses;
           };
 
           // Écouter les événements de clic sur les segments du donut
-          console.log('🎧 Finances - Event listener ajouté pour segmentClick');
           document.addEventListener('segmentClick', (event) => {
-            console.log('🎯 Finances - Événement segmentClick reçu:', event.detail);
-            
             const { category } = event.detail;
             
-            // Nouvelle approche: déterminer la section à partir du donut cliqué
+            // Déterminer la section à partir du donut cliqué
             let section = '';
             let type = '';
             
-            // Vérifier quel donut a été cliqué en cherchant dans quelle section se trouve la catégorie
+            // Vérifier dans quelle section se trouve la catégorie
             const isFonctionnementCategory = fonctionnementDepenses.some(item => item.label === category) || 
                                            fonctionnementRecettes.some(item => item.label === category);
             const isInvestissementCategory = investissementDepenses.some(item => item.label === category) || 
                                            investissementRecettes.some(item => item.label === category);
             
-            console.log('🔍 Finances - Détection de la source:', {
-              category,
-              isFonctionnementCategory,
-              isInvestissementCategory
-            });
-            
             if (isFonctionnementCategory) {
               section = 'FONCTIONNEMENT';
-              // Déterminer le type basé sur l'onglet actif de fonctionnement
               const activeFonctionnementTab = document.querySelector('#donut-tabs-fonctionnement .tab-active');
               type = activeFonctionnementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
-              console.log('✅ Finances - Section déterminée: FONCTIONNEMENT, Type:', type);
             } else if (isInvestissementCategory) {
               section = 'INVESTISSEMENT';
-              // Déterminer le type basé sur l'onglet actif d'investissement
               const activeInvestissementTab = document.querySelector('#donut-tabs-investissement .tab-active');
               type = activeInvestissementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
-              console.log('✅ Finances - Section déterminée: INVESTISSEMENT, Type:', type);
             } else {
-              // Par défaut si aucune correspondance
+              // Par défaut
               section = 'FONCTIONNEMENT';
               type = 'DEPENSES';
-              console.log('⚠️ Finances - Catégorie non trouvée, défaut: FONCTIONNEMENT/DEPENSES');
             }
-
-            console.log('📊 Finances - Contexte modal:', { category, section, type });
 
             // Mettre à jour l'état de la modal
             currentModalState = {
@@ -348,145 +360,8 @@ const initialData = fonctionnementDepenses;
 
           // Écouter la fermeture de la modal
           document.addEventListener('closeDrillDownModal', () => {
-            console.log('❌ Finances - Fermeture de la modal');
             currentModalState.isOpen = false;
           });
-
-          // Onglets Donut Fonctionnement
-          const donutTabs = document.querySelectorAll('#donut-tabs-fonctionnement .tab');
-          console.log('🔧 Finances - Setup onglets donut fonctionnement:', donutTabs.length);
-          
-          function updateDonutChart(tabType) {
-            console.log('📊 Finances - updateDonutChart appelé avec:', tabType);
-            let data, title;
-            if (tabType === 'recettes') {
-              data = fonctionnementRecettes;
-              title = 'Recettes - Fonctionnement - Réalisations 2024';
-            } else {
-              data = fonctionnementDepenses;
-              title = 'Dépenses - Fonctionnement - Réalisations 2024';
-            }
-            console.log('📤 Finances - Dispatch updateChart pour donut:', {
-              chartId: 'chart-fonctionnement',
-              dataLength: data?.length || 0,
-              title: title.substring(0, 50) + '...'
-            });
-            const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title, chartId: 'chart-fonctionnement' }
-            });
-            document.dispatchEvent(updateEvent);
-          }
-          donutTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-              console.log('🖱️ Finances - Clic sur onglet donut:', tab.dataset.tab);
-              donutTabs.forEach(t => t.classList.remove('tab-active'));
-              tab.classList.add('tab-active');
-              const tabType = tab.dataset.tab;
-              updateDonutChart(tabType);
-            });
-          });
-          updateDonutChart('depenses');
-
-          // Onglets Donut Investissement
-          const donutTabsInvest = document.querySelectorAll('#donut-tabs-investissement .tab');
-          console.log('🔧 Finances - Setup onglets donut investissement:', donutTabsInvest.length);
-          
-          function updateDonutChartInvest(tabType) {
-            console.log('📊 Finances - updateDonutChartInvest appelé avec:', tabType);
-            let data, title;
-            if (tabType === 'recettes') {
-              data = investissementRecettes;
-              title = 'Recettes - Investissement - Réalisations 2024';
-            } else {
-              data = investissementDepenses;
-              title = 'Dépenses - Investissement - Réalisations 2024';
-            }
-            console.log('📤 Finances - Dispatch updateChart pour donut investissement:', {
-              chartId: 'chart-investissement',
-              dataLength: data?.length || 0,
-              title: title.substring(0, 50) + '...'
-            });
-            const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title, chartId: 'chart-investissement' }
-            });
-            document.dispatchEvent(updateEvent);
-          }
-          donutTabsInvest.forEach(tab => {
-            tab.addEventListener('click', () => {
-              console.log('🖱️ Finances - Clic sur onglet donut investissement:', tab.dataset.tab);
-              donutTabsInvest.forEach(t => t.classList.remove('tab-active'));
-              tab.classList.add('tab-active');
-              const tabType = tab.dataset.tab;
-              updateDonutChartInvest(tabType);
-            });
-          });
-          updateDonutChartInvest('depenses');
-
-          // Onglets BarChart Fonctionnement
-          const barTabs = document.querySelectorAll('#bar-tabs-fonctionnement .tab');
-          function updateBarChart(tabType) {
-            let data, type, title;
-            if (tabType === 'recettes') {
-              data = fonctionnementRecettesChapitre;
-              type = 'revenues';
-              title = 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)';
-            } else {
-              data = fonctionnementDepensesChapitre;
-              type = 'expenses';
-              title = 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)';
-            }
-            const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title, chartId: 'bar-fonctionnement', type }
-            });
-            document.dispatchEvent(updateEvent);
-          }
-          barTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-              barTabs.forEach(t => t.classList.remove('tab-active'));
-              tab.classList.add('tab-active');
-              const tabType = tab.dataset.tab;
-              updateBarChart(tabType);
-            });
-          });
-          updateBarChart('depenses');
-
-          // Onglets BarChart Investissement
-          const barTabsInvest = document.querySelectorAll('#bar-tabs-investissement .tab');
-          console.log('🔧 Finances - Setup onglets investissement:', barTabsInvest.length);
-          
-          function updateBarChartInvest(tabType) {
-            console.log('📊 Finances - updateBarChartInvest appelé avec:', tabType);
-            let data, type, title;
-            if (tabType === 'recettes') {
-              data = investissementRecettesChapitre;
-              type = 'revenues';
-              title = 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)';
-            } else {
-              data = investissementDepensesChapitre;
-              type = 'expenses';
-              title = 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)';
-            }
-            console.log('📤 Finances - Dispatch updateChart pour investissement:', {
-              chartId: 'bar-investissement',
-              type,
-              dataLength: data?.length || 0,
-              title: title.substring(0, 50) + '...'
-            });
-            const updateEvent = new CustomEvent('updateChart', {
-              detail: { data, title, chartId: 'bar-investissement', type }
-            });
-            document.dispatchEvent(updateEvent);
-          }
-          barTabsInvest.forEach(tab => {
-            tab.addEventListener('click', () => {
-              console.log('🖱️ Finances - Clic sur onglet investissement:', tab.dataset.tab);
-              barTabsInvest.forEach(t => t.classList.remove('tab-active'));
-              tab.classList.add('tab-active');
-              const tabType = tab.dataset.tab;
-              updateBarChartInvest(tabType);
-            });
-          });
-          updateBarChartInvest('depenses');
 
         });
       </script>
