@@ -39,6 +39,7 @@
 
     const canvas = document.getElementById(chartId) as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     chartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -95,8 +96,9 @@
           x: {
             beginAtZero: true,
             ticks: {
-              callback: function(value: number) {
-                return value.toLocaleString('fr-FR') + ' €';
+              callback: function(value: string | number) {
+                const n = typeof value === 'string' ? parseFloat(value) : value;
+                return n.toLocaleString('fr-FR') + ' €';
               },
               font: { size: 13 }
             },
@@ -125,28 +127,33 @@
   });
 </script>
 
-<div class="bar-chart-container">
+<div class="bar-chart-container chart-wrapper">
   {#if title}
     <h3 class="bar-chart-title">{title}</h3>
   {/if}
   <canvas id={chartId} height={Math.max(300, data.length * 40)}></canvas>
 </div>
 
+<!-- Harmonisation du style avec la section donut -->
 <style>
-.bar-chart-container {
+.bar-chart-container.chart-wrapper {
   width: 100%;
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 16px 0 rgba(30,54,93,0.07);
   padding: 2rem 2rem 1.5rem 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .bar-chart-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #1976d2;
-  text-align: center;
+  color: var(--primary);
+  text-align: left;
+  font-family: var(--font-main);
 }
 canvas {
   width: 100% !important;

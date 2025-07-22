@@ -3,7 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import DonutChart from '../components/DonutChart.svelte';
 import DrillDownModal from '../components/DrillDownModal.svelte';
 import FinanceNavigation from '../components/FinanceNavigation.svelte';
-import { aggregateData, type BudgetItem } from '../utils/budget-data';
+import HorizontalBarChart from '../components/HorizontalBarChart.svelte';
+import { aggregateData, type BudgetItem, aggregateByChapitre } from '../utils/budget-data';
 
 // Charger les données budgétaires
 console.log('🔄 Finances - Chargement des données...');
@@ -38,6 +39,9 @@ const fonctionnementDepenses = aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPE
 const fonctionnementRecettes = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1');
 const investissementDepenses = aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1');
 const investissementRecettes = aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1');
+
+// Préparer les données pour le bar chart fonctionnement/dépenses par chapitre
+const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES');
 
 console.log('📊 Finances - Données fonctionnement dépenses:', fonctionnementDepenses?.length, 'groupes');
 console.log('📊 Finances - Données fonctionnement recettes:', fonctionnementRecettes?.length, 'groupes');
@@ -91,6 +95,14 @@ const initialData = fonctionnementDepenses;
               client:load
             />
           </div>
+
+          <!-- Bar chart de comparaison par chapitre -->
+          <HorizontalBarChart 
+            data={fonctionnementDepensesChapitre}
+            type="expenses"
+            title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+            client:load
+          />
         </section>
 
         <!-- Section Investissement -->
@@ -440,5 +452,8 @@ const initialData = fonctionnementDepenses;
     .chart-wrapper {
       min-height: 300px;
     }
+  }
+  @media (max-width: 900px) {
+    /* Supprimer .chart-stack et .bar-chart-wrapper */
   }
 </style>

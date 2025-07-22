@@ -212,3 +212,73 @@ export function generateColors(count: number): string[] {
 
   return colors;
 }
+
+/**
+ * Agrège les données par CHAPITRE_officiel pour une section et un type donnés
+ * Retourne un tableau d'objets avec label, compte, prevus_2024, realises_2024, propositions_2025, color
+ */
+export interface BarItem {
+  label: string;
+  compte: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+  color: string;
+}
+
+export function aggregateByChapitre(
+  data: BudgetItem[],
+  section: 'FONCTIONNEMENT' | 'INVESTISSEMENT',
+  type: 'DEPENSES' | 'RECETTES'
+): BarItem[] {
+  // Filtrer les données selon les critères
+  const filteredData = data.filter(
+    (item) => item.SECTION === section && item['DÉPENSES/RECETTES'] === type
+  );
+
+  // Grouper par CHAPITRE_officiel
+  const grouped = new Map<string, BudgetItem[]>();
+  filteredData.forEach((item) => {
+    const key = item.CHAPITRE_officiel;
+    if (!grouped.has(key)) {
+      grouped.set(key, []);
+    }
+    grouped.get(key)!.push(item);
+  });
+
+  // Palette de couleurs (réutilise les couleurs du donut)
+  const palette = [
+    '#1976d2',
+    '#43a047',
+    '#fbc02d',
+    '#ac502b',
+    '#1b365d',
+    '#90caf9',
+    '#e57373',
+    '#8d6e63',
+    '#388e3c',
+    '#ffb300',
+  ];
+
+  // Construire le résultat
+  let colorIndex = 0;
+  const result: BarItem[] = [];
+  grouped.forEach((items, label) => {
+    const prevus_2024 = items.reduce((sum, item) => sum + (item.PREVISIONS_2024 || 0), 0);
+    const realises_2024 = items.reduce((sum, item) => sum + (item.REALISATIONS_2024 || 0), 0);
+    const propositions_2025 = items.reduce((sum, item) => sum + (item.PROPOSITIONS_2025 || 0), 0);
+    if (prevus_2024 > 0 || realises_2024 > 0 || propositions_2025 > 0) {
+      result.push({
+        label,
+        compte: items[0].COMPTE,
+        prevus_2024,
+        realises_2024,
+        propositions_2025,
+        color: palette[colorIndex % palette.length],
+      });
+      colorIndex++;
+    }
+  });
+  // Trier par montant réalisé décroissant
+  return result.sort((a, b) => b.realises_2024 - a.realises_2024);
+}
