@@ -40,8 +40,9 @@ const fonctionnementRecettes = aggregateData(budgetData, 'FONCTIONNEMENT', 'RECE
 const investissementDepenses = aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1');
 const investissementRecettes = aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1');
 
-// Préparer les données pour le bar chart fonctionnement/dépenses par chapitre
+// Préparer les données pour le bar chart fonctionnement/dépenses et recettes par chapitre
 const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES');
+const fonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
 
 console.log('📊 Finances - Données fonctionnement dépenses:', fonctionnementDepenses?.length, 'groupes');
 console.log('📊 Finances - Données fonctionnement recettes:', fonctionnementRecettes?.length, 'groupes');
@@ -73,19 +74,19 @@ const initialData = fonctionnementDepenses;
             <h2>Section de fonctionnement 2024</h2>
           </div>
           
-          <!-- Onglets Fonctionnement -->
-          <div class="tabs-container">
+          <!-- Onglets Donut Fonctionnement -->
+          <div class="tabs-container" id="donut-tabs-fonctionnement">
             <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement">
+              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-donut">
                 Dépenses
               </button>
-              <button class="tab" data-tab="recettes" data-section="fonctionnement">
+              <button class="tab" data-tab="recettes" data-section="fonctionnement-donut">
                 Recettes
               </button>
             </div>
           </div>
 
-          <!-- Graphique Fonctionnement -->
+          <!-- Graphique Fonctionnement (Donut) -->
           <div class="chart-wrapper" id="chart-fonctionnement">
             <DonutChart 
               data={fonctionnementDepenses}
@@ -96,13 +97,27 @@ const initialData = fonctionnementDepenses;
             />
           </div>
 
-          <!-- Bar chart de comparaison par chapitre -->
-          <HorizontalBarChart 
-            data={fonctionnementDepensesChapitre}
-            type="expenses"
-            title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
-            client:load
-          />
+          <!-- Onglets BarChart Fonctionnement -->
+          <div class="tabs-container" id="bar-tabs-fonctionnement">
+            <div class="tabs">
+              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
+                Dépenses
+              </button>
+              <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
+                Recettes
+              </button>
+            </div>
+          </div>
+
+          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
+          <div class="chart-wrapper" id="bar-fonctionnement">
+            <HorizontalBarChart 
+              data={fonctionnementDepensesChapitre}
+              type="expenses"
+              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+              client:load
+            />
+          </div>
         </section>
 
         <!-- Section Investissement -->
@@ -144,7 +159,7 @@ const initialData = fonctionnementDepenses;
     />
 
     <!-- Script pour gérer la navigation et les onglets -->
-      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes }}>
+      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre }}>
         document.addEventListener('DOMContentLoaded', () => {
           
           // Données mappées par navigation
@@ -261,6 +276,60 @@ const initialData = fonctionnementDepenses;
             console.log('❌ Finances - Fermeture de la modal');
             currentModalState.isOpen = false;
           });
+
+          // Onglets Donut Fonctionnement
+          const donutTabs = document.querySelectorAll('#donut-tabs-fonctionnement .tab');
+          function updateDonutChart(tabType) {
+            let data, title;
+            if (tabType === 'recettes') {
+              data = fonctionnementRecettes;
+              title = 'Recettes - Fonctionnement - Réalisations 2024';
+            } else {
+              data = fonctionnementDepenses;
+              title = 'Dépenses - Fonctionnement - Réalisations 2024';
+            }
+            const updateEvent = new CustomEvent('updateChart', {
+              detail: { data, title, chartId: 'chart-fonctionnement' }
+            });
+            document.dispatchEvent(updateEvent);
+          }
+          donutTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              donutTabs.forEach(t => t.classList.remove('tab-active'));
+              tab.classList.add('tab-active');
+              const tabType = tab.dataset.tab;
+              updateDonutChart(tabType);
+            });
+          });
+          updateDonutChart('depenses');
+
+          // Onglets BarChart Fonctionnement
+          const barTabs = document.querySelectorAll('#bar-tabs-fonctionnement .tab');
+          function updateBarChart(tabType) {
+            let data, type, title;
+            if (tabType === 'recettes') {
+              data = fonctionnementRecettesChapitre;
+              type = 'revenues';
+              title = 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)';
+            } else {
+              data = fonctionnementDepensesChapitre;
+              type = 'expenses';
+              title = 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)';
+            }
+            const updateEvent = new CustomEvent('updateChart', {
+              detail: { data, title, chartId: 'bar-fonctionnement', type }
+            });
+            document.dispatchEvent(updateEvent);
+          }
+          barTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              barTabs.forEach(t => t.classList.remove('tab-active'));
+              tab.classList.add('tab-active');
+              const tabType = tab.dataset.tab;
+              updateBarChart(tabType);
+            });
+          });
+          updateBarChart('depenses');
 
         });
       </script>

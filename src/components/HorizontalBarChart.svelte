@@ -1,28 +1,19 @@
-<script context="module" lang="ts">
-  export interface BarItem {
-    label: string;
-    compte: string;
-    prevus_2024: number;
-    realises_2024: number;
-    propositions_2025: number;
-    color: string;
-  }
-</script>
-
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  // Svelte 5 runes migration
+  import { onDestroy } from 'svelte';
 
-  export let data: BarItem[] = [];
-  export let type: 'expenses' | 'revenues';
-  export let title: string = '';
+  // Props avec $props
+  let { data = [], type = 'expenses', title = '', chartId = 'bar-fonctionnement' } = $props();
 
-  let chartId = `bar-${type}-${Math.random().toString(36).substr(2, 9)}`;
-  let chartInstance: any = null;
+  // État local avec $state
+  let chartInstance = $state<any>(null);
+  let canvasElement: HTMLCanvasElement | null = null;
 
+  // Palette et labels
   const periodColors = {
-    prevus_2024: '#90caf9', // bleu clair
-    realises_2024: '#43a047', // vert
-    propositions_2025: '#fbc02d' // jaune/orange
+    prevus_2024: '#90caf9',
+    realises_2024: '#43a047',
+    propositions_2025: '#fbc02d'
   };
   const periodLabels = {
     prevus_2024: 'Prévus 2024',
@@ -30,38 +21,37 @@
     propositions_2025: 'Propositions 2025'
   };
 
-  onMount(async () => {
+  // Fonction de rendu du graphique
+  async function renderChart(currentData: any[], currentType: string, currentTitle: string) {
     const Chart = (await import('chart.js/auto')).default;
-    const labels = data.map(item => item.label);
-    const prevus = data.map(item => item.prevus_2024);
-    const realises = data.map(item => item.realises_2024);
-    const proposes = data.map(item => item.propositions_2025);
-
-    const canvas = document.getElementById(chartId) as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+    if (!canvasElement) return;
+    const ctx = canvasElement.getContext('2d');
     if (!ctx) return;
     chartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: currentData.map((item: any) => item.label),
         datasets: [
           {
             label: periodLabels.prevus_2024,
-            data: prevus,
+            data: currentData.map((item: any) => item.prevus_2024),
             backgroundColor: periodColors.prevus_2024,
             borderRadius: 6,
             maxBarThickness: 24
           },
           {
             label: periodLabels.realises_2024,
-            data: realises,
+            data: currentData.map((item: any) => item.realises_2024),
             backgroundColor: periodColors.realises_2024,
             borderRadius: 6,
             maxBarThickness: 24
           },
           {
             label: periodLabels.propositions_2025,
-            data: proposes,
+            data: currentData.map((item: any) => item.propositions_2025),
             backgroundColor: periodColors.propositions_2025,
             borderRadius: 6,
             maxBarThickness: 24
@@ -118,6 +108,24 @@
         }
       }
     });
+  }
+
+  // Effet principal : (ré)affiche le graphique à chaque changement de props
+  $effect(() => {
+    renderChart(data, type, title);
+  });
+
+  // Effet pour écouter l'événement updateChart (comme DonutChart)
+  $effect(() => {
+    function handleUpdateChart(event: CustomEvent) {
+      const { data: newData, title: newTitle, chartId: targetChartId, type: newType } = event.detail;
+      if (targetChartId && targetChartId !== chartId) return;
+      renderChart(newData || [], newType || type, newTitle || title);
+    }
+    document.addEventListener('updateChart', handleUpdateChart as EventListener);
+    return () => {
+      document.removeEventListener('updateChart', handleUpdateChart as EventListener);
+    };
   });
 
   onDestroy(() => {
@@ -131,7 +139,7 @@
   {#if title}
     <h3 class="bar-chart-title">{title}</h3>
   {/if}
-  <canvas id={chartId} height={Math.max(300, data.length * 40)}></canvas>
+  <canvas bind:this={canvasElement} id={chartId} height={Math.max(300, data.length * 40)}></canvas>
 </div>
 
 <!-- Harmonisation du style avec la section donut -->
