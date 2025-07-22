@@ -97,6 +97,73 @@ export function aggregateData(
 }
 
 /**
+ * Agrège les données par regroupement_focale_n2 pour une catégorie regroupement_focale_n1 donnée
+ * Utilisé pour le drill-down dans les graphiques
+ */
+export function aggregateDataLevel2(
+  data: BudgetItem[],
+  section: string,
+  type: string,
+  valueField: keyof BudgetItem,
+  selectedN1Category: string
+): AggregatedData[] {
+  console.log('📊 aggregateDataLevel2 - Paramètres:', {
+    dataLength: data.length,
+    section,
+    type,
+    valueField,
+    selectedN1Category,
+  });
+
+  // Filtrer par section, type et catégorie N1
+  const filteredData = data.filter((item) => {
+    const matchesSection = item.SECTION?.toUpperCase() === section.toUpperCase();
+    const matchesType = item['DÉPENSES/RECETTES']?.toUpperCase() === type.toUpperCase();
+    const matchesN1 = item.regroupement_focale_n1 === selectedN1Category;
+
+    return matchesSection && matchesType && matchesN1;
+  });
+
+  console.log('🔍 aggregateDataLevel2 - Données filtrées:', {
+    originalLength: data.length,
+    filteredLength: filteredData.length,
+    selectedN1Category,
+  });
+
+  // Grouper par regroupement_focale_n2
+  const groupedData = filteredData.reduce((acc, item) => {
+    const key = item.regroupement_focale_n2 || 'Non classé';
+    const value = Number(item[valueField]) || 0;
+
+    if (!acc[key]) {
+      acc[key] = 0;
+    }
+    acc[key] += value;
+
+    return acc;
+  }, {} as Record<string, number>);
+
+  console.log('📈 aggregateDataLevel2 - Données groupées:', groupedData);
+
+  // Convertir en format AggregatedData et trier
+  const result = Object.entries(groupedData)
+    .map(([label, value]) => {
+      // Récupérer les items pour cette catégorie
+      const items = filteredData.filter(
+        (item) => (item.regroupement_focale_n2 || 'Non classé') === label
+      );
+
+      return { label, value, items };
+    })
+    .filter((item) => item.value > 0)
+    .sort((a, b) => b.value - a.value);
+
+  console.log('✅ aggregateDataLevel2 - Résultat final:', result);
+
+  return result;
+}
+
+/**
  * Calcule le total d'une liste de données agrégées
  */
 export function calculateTotal(aggregatedData: AggregatedData[]): number {

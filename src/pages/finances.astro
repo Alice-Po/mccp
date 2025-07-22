@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import DonutChart from '../components/DonutChart.svelte';
+import DrillDownModal from '../components/DrillDownModal.svelte';
 import FinanceNavigation from '../components/FinanceNavigation.svelte';
 import { aggregateData, type BudgetItem } from '../utils/budget-data';
 
@@ -86,6 +87,7 @@ const initialData = fonctionnementDepenses;
               data={fonctionnementDepenses}
               title="Dépenses - Fonctionnement - Réalisations 2024"
               chartId="chart-fonctionnement"
+              enableDrillDown={true}
               client:load
             />
           </div>
@@ -115,12 +117,19 @@ const initialData = fonctionnementDepenses;
               data={investissementDepenses}
               title="Dépenses - Investissement - Réalisations 2024"
               chartId="chart-investissement"
+              enableDrillDown={true}
               client:load
             />
           </div>
         </section>
       </div>
     </div>
+
+    <!-- Modal de drill-down -->
+    <DrillDownModal 
+      budgetData={budgetData}
+      client:only="svelte"
+    />
 
     <!-- Script pour gérer la navigation et les onglets -->
       <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes }}>
@@ -172,6 +181,75 @@ const initialData = fonctionnementDepenses;
               }
             });
           });
+
+          // === GESTION DU DRILL-DOWN ===
+          
+          // État de la modal
+          let currentModalState = {
+            isOpen: false,
+            selectedCategory: '',
+            section: '',
+            type: '',
+            valueField: 'REALISATIONS_2024'
+          };
+
+          // Écouter les événements de clic sur les segments du donut
+          console.log('🎧 Finances - Event listener ajouté pour segmentClick');
+          document.addEventListener('segmentClick', (event) => {
+            console.log('🎯 Finances - Événement segmentClick reçu:', event.detail);
+            
+            const { category } = event.detail;
+            
+            // Déterminer la section et le type actuels
+            // Vérifier quelle section est visible (fonctionnement par défaut)
+            const fonctionnementSection = document.getElementById('section-fonctionnement');
+            const investissementSection = document.getElementById('section-investissement');
+            
+            // Déterminer la section active en fonction de la position du scroll ou des onglets visibles
+            let section = '';
+            let type = '';
+            
+            // Chercher l'onglet actif dans chaque section
+            const activeFonctionnementTab = document.querySelector('[data-section="fonctionnement"].tab-active');
+            const activeInvestissementTab = document.querySelector('[data-section="investissement"].tab-active');
+            
+            // Logique : si un onglet fonctionnement est actif, c'est cette section
+            if (activeFonctionnementTab) {
+              section = 'FONCTIONNEMENT';
+              type = activeFonctionnementTab.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
+            } else if (activeInvestissementTab) {
+              section = 'INVESTISSEMENT';
+              type = activeInvestissementTab.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
+            } else {
+              // Par défaut : fonctionnement dépenses
+              section = 'FONCTIONNEMENT';
+              type = 'DEPENSES';
+            }
+
+            console.log('📊 Finances - Contexte modal:', { category, section, type });
+
+            // Mettre à jour l'état de la modal
+            currentModalState = {
+              isOpen: true,
+              selectedCategory: category,
+              section,
+              type,
+              valueField: 'REALISATIONS_2024'
+            };
+
+            // Dispatcher l'événement pour ouvrir la modal
+            const openModalEvent = new CustomEvent('openDrillDownModal', {
+              detail: currentModalState
+            });
+            document.dispatchEvent(openModalEvent);
+          });
+
+          // Écouter la fermeture de la modal
+          document.addEventListener('closeDrillDownModal', () => {
+            console.log('❌ Finances - Fermeture de la modal');
+            currentModalState.isOpen = false;
+          });
+
         });
       </script>
     </div>
@@ -183,6 +261,10 @@ const initialData = fonctionnementDepenses;
     min-height: 100vh;
     background-color: #f9fafb;
     max-width: 1600px;
+  }
+
+  .finances-content section{
+    margin: 0 auto;
   }
 
   .finances-layout {

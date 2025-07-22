@@ -12,7 +12,7 @@
 -->
 
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import { Chart, registerables } from 'chart.js';
   import type { AggregatedData } from '../utils/budget-data';
   import { formatCurrency, generateColors, calculateTotal } from '../utils/budget-data';
@@ -20,9 +20,12 @@
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
+  const dispatch = createEventDispatcher();
+
   export let data: AggregatedData[] = [];
   export let title = '';
   export let chartId = 'default';
+  export let enableDrillDown = false; // Nouveau prop pour activer/désactiver le drill-down
 
   let canvasElement: HTMLCanvasElement;
   let chart: Chart | null = null;
@@ -122,7 +125,8 @@
         interaction: {
           intersect: false,
           mode: 'index'
-        }
+        },
+        onClick: enableDrillDown ? handleChartClick : undefined
       }
     });
   }
@@ -153,6 +157,39 @@
     // Retirer la surbrillance
     chart.setActiveElements([]);
     chart.update('active');
+  }
+
+  function handleChartClick(event: any, elements: any[]) {
+    if (!enableDrillDown || elements.length === 0) return;
+    
+    const elementIndex = elements[0].index;
+    const clickedData = data[elementIndex];
+    
+    console.log('🖱️ DonutChart - Clic sur segment:', {
+      elementIndex,
+      clickedData,
+      enableDrillDown
+    });
+
+    // Dispatcher l'événement Svelte (pour les composants parents)
+    dispatch('segmentClick', {
+      category: clickedData.label,
+      value: clickedData.value,
+      index: elementIndex
+    });
+
+    // Dispatcher aussi un événement DOM global (pour les pages Astro)
+    if (typeof document !== 'undefined') {
+      const customEvent = new CustomEvent('segmentClick', {
+        detail: {
+          category: clickedData.label,
+          value: clickedData.value,
+          index: elementIndex
+        }
+      });
+      document.dispatchEvent(customEvent);
+      console.log('📡 DonutChart - Événement DOM dispatché:', customEvent.detail);
+    }
   }
 
   onMount(() => {
