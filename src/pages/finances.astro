@@ -164,7 +164,7 @@ const initialData = fonctionnementDepenses;
           </div>
           
           <!-- Onglets Investissement -->
-          <div class="tabs-container">
+          <div class="tabs-container" id="donut-tabs-investissement">
             <div class="tabs">
               <button class="tab tab-active" data-tab="depenses" data-section="investissement">
                 Dépenses
@@ -386,6 +386,41 @@ const initialData = fonctionnementDepenses;
             });
           });
           updateDonutChart('depenses');
+
+          // Onglets Donut Investissement
+          const donutTabsInvest = document.querySelectorAll('#donut-tabs-investissement .tab');
+          console.log('🔧 Finances - Setup onglets donut investissement:', donutTabsInvest.length);
+          
+          function updateDonutChartInvest(tabType) {
+            console.log('📊 Finances - updateDonutChartInvest appelé avec:', tabType);
+            let data, title;
+            if (tabType === 'recettes') {
+              data = investissementRecettes;
+              title = 'Recettes - Investissement - Réalisations 2024';
+            } else {
+              data = investissementDepenses;
+              title = 'Dépenses - Investissement - Réalisations 2024';
+            }
+            console.log('📤 Finances - Dispatch updateChart pour donut investissement:', {
+              chartId: 'chart-investissement',
+              dataLength: data?.length || 0,
+              title: title.substring(0, 50) + '...'
+            });
+            const updateEvent = new CustomEvent('updateChart', {
+              detail: { data, title, chartId: 'chart-investissement' }
+            });
+            document.dispatchEvent(updateEvent);
+          }
+          donutTabsInvest.forEach(tab => {
+            tab.addEventListener('click', () => {
+              console.log('🖱️ Finances - Clic sur onglet donut investissement:', tab.dataset.tab);
+              donutTabsInvest.forEach(t => t.classList.remove('tab-active'));
+              tab.classList.add('tab-active');
+              const tabType = tab.dataset.tab;
+              updateDonutChartInvest(tabType);
+            });
+          });
+          updateDonutChartInvest('depenses');
 
           // Onglets BarChart Fonctionnement
           const barTabs = document.querySelectorAll('#bar-tabs-fonctionnement .tab');
