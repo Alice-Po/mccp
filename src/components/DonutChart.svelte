@@ -38,24 +38,34 @@
   // État local réactif avec $state
   let canvasElement = $state<HTMLCanvasElement>();
   let chart = $state<Chart | null>(null);
+  
+  // Variables d'état réactives pour les données du graphique
+  let currentData = $state<AggregatedData[]>(data);
+  let currentTitle = $state<string>(title);
 
-  // Valeurs dérivées avec $derived
-  let total = $derived(calculateTotal(data));
-  let colors = $derived(generateColors(data.length));
+  // Valeurs dérivées avec $derived basées sur les données actuelles
+  let total = $derived(calculateTotal(currentData));
+  let colors = $derived(generateColors(currentData.length));
+
+  // Synchroniser les props initiales avec l'état interne
+  $effect(() => {
+    currentData = data;
+    currentTitle = title;
+  });
 
   // Debug logs pour les props - effet réactif
   $effect(() => {
-    console.log('📊 DonutChart - Props reçues:', { 
-      dataLength: data?.length, 
-      title, 
+    console.log('📊 DonutChart - État actuel:', { 
+      dataLength: currentData?.length, 
+      title: currentTitle, 
       total,
-      data 
+      data: currentData 
     });
   });
 
-  // Effet pour la mise à jour du graphique quand les données changent
+  // Effet pour la mise à jour du graphique quand les données internes changent
   $effect(() => {
-    if (chart && data.length > 0) {
+    if (chart && currentData.length > 0) {
       console.log('🔄 DonutChart - Mise à jour du graphique');
       updateChart();
     }
@@ -64,13 +74,13 @@
   function createChart() {
     console.log('🎨 DonutChart - createChart appelée:', { 
       hasCanvas: !!canvasElement, 
-      dataLength: data.length 
+      dataLength: currentData.length 
     });
     
-    if (!canvasElement || data.length === 0) {
+    if (!canvasElement || currentData.length === 0) {
       console.log('❌ DonutChart - Création annulée:', { 
         hasCanvas: !!canvasElement, 
-        dataLength: data.length 
+        dataLength: currentData.length 
       });
       return;
     }
@@ -82,17 +92,17 @@
     }
 
     console.log('🎯 DonutChart - Création du chart avec:', {
-      labels: data.map(item => item.label),
-      values: data.map(item => item.value),
+      labels: currentData.map(item => item.label),
+      values: currentData.map(item => item.value),
       colors: colors
     });
 
     chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: data.map(item => item.label),
+        labels: currentData.map(item => item.label),
         datasets: [{
-          data: data.map(item => item.value),
+          data: currentData.map(item => item.value),
           backgroundColor: colors,
           borderColor: '#ffffff',
           borderWidth: 2,
@@ -146,8 +156,8 @@
   function updateChart() {
     if (!chart) return;
 
-    chart.data.labels = data.map(item => item.label);
-    chart.data.datasets[0].data = data.map(item => item.value);
+    chart.data.labels = currentData.map(item => item.label);
+    chart.data.datasets[0].data = currentData.map(item => item.value);
     chart.data.datasets[0].backgroundColor = colors;
     chart.update('active');
   }
@@ -175,7 +185,7 @@
     if (!enableDrillDown || elements.length === 0) return;
     
     const elementIndex = elements[0].index;
-    const clickedData = data[elementIndex];
+    const clickedData = currentData[elementIndex];
     
     console.log('🖱️ DonutChart - Clic sur segment:', {
       elementIndex,
@@ -221,8 +231,21 @@
         return;
       }
       
-      // Les données seront mises à jour automatiquement via les props
-      console.log('🔄 DonutChart - Mise à jour via événement');
+      // Mettre à jour les variables d'état réactives (approche Svelte 5)
+      console.log('🔄 DonutChart - Mise à jour des données réactives:', {
+        newDataLength: newData?.length || 0,
+        newTitle
+      });
+      
+      if (newData) {
+        // Mettre à jour les variables d'état - Svelte 5 se chargera du reste
+        currentData = newData;
+        if (newTitle) {
+          currentTitle = newTitle;
+        }
+        
+        console.log('✅ DonutChart - Variables d\'état mises à jour, réactivité Svelte en cours...');
+      }
     };
 
     // Écouter l'événement personnalisé
@@ -258,13 +281,13 @@
       <!-- Total au centre (overlay) -->
       <div class="center-overlay">
         <div class="center-total-amount">{formatCurrency(total)}</div>
-        <div class="center-total-label">{title}</div>
+        <div class="center-total-label">{currentTitle}</div>
       </div>
     </div>
 
     <!-- Légende personnalisée -->
     <div class="chart-legend">
-      {#each data as item, index}
+      {#each currentData as item, index}
         <div 
           class="legend-item"
           onmouseenter={() => handleLegendHover(index)}
