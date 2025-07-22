@@ -58,7 +58,24 @@ const initialData = fonctionnementDepenses;
 
 <Layout title="Finances - MCCP">
   <main class="finances-main">
-    <div class="finances-layout">
+    <!-- Message d'avertissement pour les petits écrans -->
+    <div class="screen-warning">
+      <div class="warning-content">
+        <h2>📊 Consultation des Finances</h2>
+        <p>Pour une meilleure expérience de consultation des données financières, nous vous recommandons d'utiliser un ordinateur ou un écran plus large.</p>
+        <div class="warning-details">
+          <p><strong>Résolution minimale recommandée :</strong> 1400px de largeur</p>
+          <p>Cette page contient des graphiques détaillés et des tableaux interactifs qui nécessitent plus d'espace d'affichage pour une lecture optimale.</p>
+        </div>
+        <div class="warning-actions">
+          <a href="/" class="btn-home">← Retour à l'accueil</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal (masqué sur petits écrans) -->
+    <div class="finances-section">
+      <div class="finances-layout">
       <!-- Navigation fixe à gauche -->
       <aside class="finances-sidebar">
         <FinanceNavigation client:load />
@@ -439,6 +456,7 @@ const initialData = fonctionnementDepenses;
         });
       </script>
     </div>
+    </div>
   </main>
 </Layout>
 
@@ -561,15 +579,38 @@ const initialData = fonctionnementDepenses;
     min-height: 400px;
   }
 
-  /* Responsive */
-  @media (max-width: 1400px) {
+  /* Affichage conditionnel basé sur la largeur d'écran */
+  @media (max-width: 1399px) {
+    .screen-warning {
+      display: flex;
+    }
+    
+    .finances-section {
+      display: none;
+    }
+  }
+
+  /* Styles pour écrans ≥ 1400px */
+  @media (min-width: 1400px) {
+    .screen-warning {
+      display: none;
+    }
+    
+    .finances-section {
+      display: block;
+    }
+  }
+
+  /* Responsive pour les grands écrans */
+  @media (min-width: 1400px) and (max-width: 1599px) {
     .finances-layout {
       gap: 1.5rem;
       padding: 1.5rem;
     }
   }
 
-  @media (max-width: 1200px) {
+  /* Responsive pour écrans moyens (seulement pour les grands écrans) */
+  @media (min-width: 1400px) and (max-width: 1600px) {
     .finances-layout {
       flex-direction: column;
       gap: 1rem;
@@ -588,45 +629,6 @@ const initialData = fonctionnementDepenses;
       text-align: center;
       margin-bottom: 1.5rem;
     }
-  }
-
-  @media (max-width: 768px) {
-    .finances-layout {
-      padding: 0.5rem;
-    }
-
-    .finances-header h1 {
-      font-size: 2rem;
-    }
-
-    .finances-header p {
-      font-size: 1rem;
-    }
-
-    .chart-section {
-      padding: 1.5rem;
-    }
-
-    .tabs-container {
-      margin-bottom: 1.25rem;
-    }
-
-    .tabs {
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .tab {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-
-    .chart-wrapper {
-      min-height: 300px;
-    }
-  }
-  @media (max-width: 900px) {
-    /* Supprimer .chart-stack et .bar-chart-wrapper */
   }
 
 
