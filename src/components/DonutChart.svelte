@@ -1,6 +1,6 @@
 <!--
   =============================================================================
-  COMPOSANT: DONUT CHART - GRAPHIQUE EN DONUT AVEC CHART.JS
+  COMPOSANT: DONUT CHART - GRAPHIQUE EN DONUT AVEC CHART.JS (SVELTE 5)
   =============================================================================
   
   Affiche un graphique en donut avec Chart.js
@@ -9,10 +9,10 @@
   - Légende personnalisée avec couleurs et valeurs
   - Animations et interactions
   - Formatage des montants en euros
+  ⚡ Migré vers les runes Svelte 5
 -->
 
 <script lang="ts">
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import { Chart, registerables } from 'chart.js';
   import type { AggregatedData } from '../utils/budget-data';
   import { formatCurrency, generateColors, calculateTotal } from '../utils/budget-data';
@@ -20,34 +20,46 @@
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
-  const dispatch = createEventDispatcher();
+  // Props avec les runes Svelte 5
+  let { 
+    data = [],
+    title = '',
+    chartId = 'default',
+    enableDrillDown = false,
+    onsegmentClick // Callback pour le clic sur segment
+  }: {
+    data: AggregatedData[];
+    title: string;
+    chartId: string;
+    enableDrillDown: boolean;
+    onsegmentClick?: (detail: { category: string; value: number; index: number }) => void;
+  } = $props();
 
-  export let data: AggregatedData[] = [];
-  export let title = '';
-  export let chartId = 'default';
-  export let enableDrillDown = false; // Nouveau prop pour activer/désactiver le drill-down
+  // État local réactif avec $state
+  let canvasElement = $state<HTMLCanvasElement>();
+  let chart = $state<Chart | null>(null);
 
-  let canvasElement: HTMLCanvasElement;
-  let chart: Chart | null = null;
+  // Valeurs dérivées avec $derived
+  let total = $derived(calculateTotal(data));
+  let colors = $derived(generateColors(data.length));
 
-  $: total = calculateTotal(data);
-  $: colors = generateColors(data.length);
-
-  // Debug logs pour les props
-  $: {
+  // Debug logs pour les props - effet réactif
+  $effect(() => {
     console.log('📊 DonutChart - Props reçues:', { 
       dataLength: data?.length, 
       title, 
       total,
       data 
     });
-  }
+  });
 
-  // Réactif : mise à jour du graphique quand les données changent
-  $: if (chart && data.length > 0) {
-    console.log('🔄 DonutChart - Mise à jour du graphique');
-    updateChart();
-  }
+  // Effet pour la mise à jour du graphique quand les données changent
+  $effect(() => {
+    if (chart && data.length > 0) {
+      console.log('🔄 DonutChart - Mise à jour du graphique');
+      updateChart();
+    }
+  });
 
   function createChart() {
     console.log('🎨 DonutChart - createChart appelée:', { 
@@ -171,14 +183,14 @@
       enableDrillDown
     });
 
-    // Dispatcher l'événement Svelte (pour les composants parents)
-    dispatch('segmentClick', {
+    // Utiliser le callback prop plutôt que createEventDispatcher
+    onsegmentClick?.({
       category: clickedData.label,
       value: clickedData.value,
       index: elementIndex
     });
 
-    // Dispatcher aussi un événement DOM global (pour les pages Astro)
+    // Dispatcher aussi un événement DOM global (pour compatibilité avec les pages Astro)
     if (typeof document !== 'undefined') {
       const customEvent = new CustomEvent('segmentClick', {
         detail: {
@@ -192,7 +204,8 @@
     }
   }
 
-  onMount(() => {
+  // Effet principal pour gérer le cycle de vie du chart (remplace onMount/onDestroy)
+  $effect(() => {
     console.log('🎬 DonutChart - Component mounted');
     createChart();
 
@@ -208,27 +221,25 @@
         return;
       }
       
-      // Mettre à jour les props
-      data = newData || [];
-      title = newTitle || title;
-      
-      console.log('🔄 DonutChart - Props mises à jour:', { dataLength: data.length, title, chartId });
+      // Les données seront mises à jour automatiquement via les props
+      console.log('🔄 DonutChart - Mise à jour via événement');
     };
 
     // Écouter l'événement personnalisé
-    document.addEventListener('updateChart', handleUpdateChart as EventListener);
-
-    // Cleanup dans onDestroy
-    return () => {
-      document.removeEventListener('updateChart', handleUpdateChart as EventListener);
-    };
-  });
-
-  onDestroy(() => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
+    if (typeof document !== 'undefined') {
+      document.addEventListener('updateChart', handleUpdateChart as EventListener);
     }
+
+    // Cleanup automatique lors de la destruction du composant
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('updateChart', handleUpdateChart as EventListener);
+      }
+      if (chart) {
+        chart.destroy();
+        chart = null;
+      }
+    };
   });
 </script>
 
@@ -256,8 +267,8 @@
       {#each data as item, index}
         <div 
           class="legend-item"
-          on:mouseenter={() => handleLegendHover(index)}
-          on:mouseleave={handleLegendLeave}
+          onmouseenter={() => handleLegendHover(index)}
+          onmouseleave={handleLegendLeave}
           role="button"
           tabindex="0"
           title={item.label}
