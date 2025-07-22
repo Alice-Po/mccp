@@ -69,6 +69,18 @@ const initialData = fonctionnementDepenses;
         <!-- En-tête -->
         <header class="finances-header">
           <h1>Finances municipales 2024</h1>
+          <div class="download-section">
+            <a href="/assets/datas/Budget-primitif-2025-Putanges.pdf" class="download-pdf-btn" download>
+              <span class="download-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </span>
+              Télécharger le budget au format PDF
+            </a>
+          </div>
         </header>
 
                 <!-- Section Fonctionnement -->
@@ -616,4 +628,48 @@ const initialData = fonctionnementDepenses;
   @media (max-width: 900px) {
     /* Supprimer .chart-stack et .bar-chart-wrapper */
   }
+
+
+  .download-section {
+      display: flex;
+      justify-content: center;
+      margin: -0.5rem 0 2.5rem;
+    }
+
+    .download-pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid var(--primary);
+      background: transparent;
+    }
+
+    .download-pdf-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .download-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .download-pdf-btn svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .download-pdf-btn:hover svg {
+      transform: translateY(2px);
+    }
 </style>
