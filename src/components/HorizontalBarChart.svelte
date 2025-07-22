@@ -188,9 +188,7 @@
 /* Section compacte pour le bar chart */
 .bar-chart-container.chart-wrapper {
   width: 100%;
-  background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 4px 16px 0 rgba(30,54,93,0.07);
   padding: 1.1rem 1rem 1rem 1rem;
   margin-bottom: 1.2rem;
   display: flex;
