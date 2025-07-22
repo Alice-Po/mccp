@@ -467,6 +467,69 @@ const initialData = fonctionnementDepenses;
     max-width: 1600px;
   }
 
+  /* Message d'avertissement - masqué par défaut */
+  .screen-warning {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  .warning-content {
+    max-width: 600px;
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #2e8b57;
+  }
+
+  .warning-content h2 {
+    color: #2e8b57;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .warning-content p {
+    color: #495057;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+
+  .warning-details {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    border-left: 4px solid #2e8b57;
+  }
+
+  .warning-details p {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .btn-home {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #2e8b57;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+  }
+
+  .btn-home:hover {
+    background: #1b5e39;
+    transform: translateY(-2px);
+  }
+
   .finances-content section{
     margin: 0 auto;
   }
@@ -609,27 +672,7 @@ const initialData = fonctionnementDepenses;
     }
   }
 
-  /* Responsive pour écrans moyens (seulement pour les grands écrans) */
-  @media (min-width: 1400px) and (max-width: 1600px) {
-    .finances-layout {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .finances-sidebar {
-      order: 2;
-    }
-
-    .finances-content {
-      order: 1;
-    }
-
-    .finances-header {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-  }
+  /* Styles normaux pour grands écrans - pas de modifications de layout */
 
 
   .download-section {
