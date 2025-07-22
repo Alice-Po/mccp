@@ -12,12 +12,20 @@
   // Navigation items (constante, pas besoin de rune)
   const navItems: NavItem[] = [
     {
-      id: 'section-fonctionnement',
-      label: 'Section de fonctionnement'
+      id: 'section-budget-fonctionnement',
+      label: 'Budget fonctionnement'
     },
     {
-      id: 'section-investissement',
-      label: 'Section d\'investissement'
+      id: 'section-comparaison-fonctionnement',
+      label: 'Comparaison fonctionnement'
+    },
+    {
+      id: 'section-budget-investissement',
+      label: 'Budget investissement'
+    },
+    {
+      id: 'section-comparaison-investissement',
+      label: 'Comparaison investissement'
     }
   ];
 

@@ -2,8 +2,19 @@
   // Svelte 5 runes migration
   import { onDestroy } from 'svelte';
 
-  // Props avec $props
-  let { data = [], type = 'expenses', title = '', chartId = 'bar-fonctionnement' } = $props();
+  // Props avec $props - CORRECTION: ne pas destructurer pour garder la réactivité
+  const props = $props<{
+    data?: any[];
+    type?: string;
+    title?: string;
+    chartId?: string;
+  }>();
+
+  // Variables dérivées réactives avec $derived
+  const data = $derived(props.data || []);
+  const type = $derived(props.type || 'expenses');
+  const title = $derived(props.title || '');
+  const chartId = $derived(props.chartId || 'bar-fonctionnement');
 
   // État local avec $state
   let chartInstance = $state<any>(null);
@@ -40,21 +51,21 @@
             data: currentData.map((item: any) => item.prevus_2024),
             backgroundColor: periodColors.prevus_2024,
             borderRadius: 6,
-            maxBarThickness: 24
+            maxBarThickness: 16 // plus compact
           },
           {
             label: periodLabels.realises_2024,
             data: currentData.map((item: any) => item.realises_2024),
             backgroundColor: periodColors.realises_2024,
             borderRadius: 6,
-            maxBarThickness: 24
+            maxBarThickness: 16 // plus compact
           },
           {
             label: periodLabels.propositions_2025,
             data: currentData.map((item: any) => item.propositions_2025),
             backgroundColor: periodColors.propositions_2025,
             borderRadius: 6,
-            maxBarThickness: 24
+            maxBarThickness: 16 // plus compact
           }
         ]
       },
@@ -110,20 +121,53 @@
     });
   }
 
-  // Effet principal : (ré)affiche le graphique à chaque changement de props
+  // Effet principal : (ré)affiche le graphique à chaque changement de props
   $effect(() => {
+    console.log('📊 HorizontalBarChart - $effect principal déclenché:', {
+      chartId,
+      data: data.length,
+      type,
+      title: title.substring(0, 50) + '...'
+    });
     renderChart(data, type, title);
   });
 
   // Effet pour écouter l'événement updateChart (comme DonutChart)
   $effect(() => {
     function handleUpdateChart(event: CustomEvent) {
+      console.log('🎯 HorizontalBarChart - Événement updateChart reçu:', {
+        eventDetail: event.detail,
+        currentChartId: chartId,
+        targetChartId: event.detail.chartId
+      });
+      
       const { data: newData, title: newTitle, chartId: targetChartId, type: newType } = event.detail;
-      if (targetChartId && targetChartId !== chartId) return;
+      
+      console.log('🔍 HorizontalBarChart - Comparaison chartId:', {
+        targetChartId,
+        currentChartId: chartId,
+        shouldUpdate: targetChartId === chartId
+      });
+      
+      if (targetChartId && targetChartId !== chartId) {
+        console.log('❌ HorizontalBarChart - Événement ignoré (mauvais chartId)');
+        return;
+      }
+      
+      console.log('✅ HorizontalBarChart - Mise à jour du graphique:', {
+        newData: newData?.length || 0,
+        newType,
+        newTitle: newTitle?.substring(0, 50) + '...'
+      });
+      
       renderChart(newData || [], newType || type, newTitle || title);
     }
+    
+    console.log('🔧 HorizontalBarChart - Setup événement updateChart pour chartId:', chartId);
     document.addEventListener('updateChart', handleUpdateChart as EventListener);
+    
     return () => {
+      console.log('🧹 HorizontalBarChart - Cleanup événement updateChart pour chartId:', chartId);
       document.removeEventListener('updateChart', handleUpdateChart as EventListener);
     };
   });
@@ -136,37 +180,27 @@
 </script>
 
 <div class="bar-chart-container chart-wrapper">
-  {#if title}
-    <h3 class="bar-chart-title">{title}</h3>
-  {/if}
   <canvas bind:this={canvasElement} id={chartId} height={Math.max(300, data.length * 40)}></canvas>
 </div>
 
 <!-- Harmonisation du style avec la section donut -->
 <style>
+/* Section compacte pour le bar chart */
 .bar-chart-container.chart-wrapper {
   width: 100%;
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 4px 16px 0 rgba(30,54,93,0.07);
-  padding: 2rem 2rem 1.5rem 2rem;
-  margin-bottom: 2.5rem;
+  padding: 1.1rem 1rem 1rem 1rem;
+  margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
-.bar-chart-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
-  text-align: left;
-  font-family: var(--font-main);
-}
 canvas {
   width: 100% !important;
-  min-height: 300px;
-  max-height: 900px;
+  min-height: 180px;
+  max-height: 600px;
   display: block;
 }
 </style> 

@@ -43,6 +43,9 @@ const investissementRecettes = aggregateData(budgetData, 'INVESTISSEMENT', 'RECE
 // Préparer les données pour le bar chart fonctionnement/dépenses et recettes par chapitre
 const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES');
 const fonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
+const investissementDepensesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES');
+const investissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES');
+
 
 console.log('📊 Finances - Données fonctionnement dépenses:', fonctionnementDepenses?.length, 'groupes');
 console.log('📊 Finances - Données fonctionnement recettes:', fonctionnementRecettes?.length, 'groupes');
@@ -69,7 +72,7 @@ const initialData = fonctionnementDepenses;
         </header>
 
                 <!-- Section Fonctionnement -->
-        <section class="chart-section" id="section-fonctionnement">
+        <section class="chart-section" id="section-budget-fonctionnement">
           <div class="section-header">
             <h2>Section de fonctionnement 2024</h2>
           </div>
@@ -96,6 +99,11 @@ const initialData = fonctionnementDepenses;
               client:load
             />
           </div>
+        </section>
+        <section class="chart-section" id="section-comparaison-fonctionnement">
+          <div class="section-header">
+            <h2>Comparaison fonctionnement 2024</h2>
+          </div>
 
           <!-- Onglets BarChart Fonctionnement -->
           <div class="tabs-container" id="bar-tabs-fonctionnement">
@@ -121,9 +129,9 @@ const initialData = fonctionnementDepenses;
         </section>
 
         <!-- Section Investissement -->
-        <section class="chart-section" id="section-investissement">
+        <section class="chart-section" id="section-budget-investissement">
           <div class="section-header">
-            <h2>Section d'investissement 2024</h2>
+            <h2>Budget d'investissement 2024</h2>
           </div>
           
           <!-- Onglets Investissement -->
@@ -149,6 +157,35 @@ const initialData = fonctionnementDepenses;
             />
           </div>
         </section>
+        <section class="chart-section" id="section-comparaison-investissement">
+          <div class="section-header">
+            <h2>Comparaison investissement 2024</h2>
+          </div>
+
+          <!-- Onglets BarChart Fonctionnement -->
+          <div class="tabs-container" id="bar-tabs-investissement">
+            <div class="tabs">
+              <button class="tab tab-active" data-tab="depenses" data-section="investissement-bar">
+                Dépenses
+              </button>
+              <button class="tab" data-tab="recettes" data-section="investissement-bar">
+                Recettes
+              </button>
+            </div>
+          </div>
+
+          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
+          <div class="chart-wrapper" id="bar-investissement">
+            <HorizontalBarChart 
+              data={investissementDepensesChapitre}
+              type="expenses"
+              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+              chartId="bar-investissement"
+              client:load
+            />
+          </div>
+        </section>
+
       </div>
     </div>
 
@@ -159,7 +196,7 @@ const initialData = fonctionnementDepenses;
     />
 
     <!-- Script pour gérer la navigation et les onglets -->
-      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre }}>
+      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre, investissementDepensesChapitre, investissementRecettesChapitre }}>
         document.addEventListener('DOMContentLoaded', () => {
           
           // Données mappées par navigation
@@ -330,6 +367,44 @@ const initialData = fonctionnementDepenses;
             });
           });
           updateBarChart('depenses');
+
+          // Onglets BarChart Investissement
+          const barTabsInvest = document.querySelectorAll('#bar-tabs-investissement .tab');
+          console.log('🔧 Finances - Setup onglets investissement:', barTabsInvest.length);
+          
+          function updateBarChartInvest(tabType) {
+            console.log('📊 Finances - updateBarChartInvest appelé avec:', tabType);
+            let data, type, title;
+            if (tabType === 'recettes') {
+              data = investissementRecettesChapitre;
+              type = 'revenues';
+              title = 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)';
+            } else {
+              data = investissementDepensesChapitre;
+              type = 'expenses';
+              title = 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)';
+            }
+            console.log('📤 Finances - Dispatch updateChart pour investissement:', {
+              chartId: 'bar-investissement',
+              type,
+              dataLength: data?.length || 0,
+              title: title.substring(0, 50) + '...'
+            });
+            const updateEvent = new CustomEvent('updateChart', {
+              detail: { data, title, chartId: 'bar-investissement', type }
+            });
+            document.dispatchEvent(updateEvent);
+          }
+          barTabsInvest.forEach(tab => {
+            tab.addEventListener('click', () => {
+              console.log('🖱️ Finances - Clic sur onglet investissement:', tab.dataset.tab);
+              barTabsInvest.forEach(t => t.classList.remove('tab-active'));
+              tab.classList.add('tab-active');
+              const tabType = tab.dataset.tab;
+              updateBarChartInvest(tabType);
+            });
+          });
+          updateBarChartInvest('depenses');
 
         });
       </script>
