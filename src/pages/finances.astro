@@ -264,30 +264,39 @@ const initialData = fonctionnementDepenses;
             
             const { category } = event.detail;
             
-            // Déterminer la section et le type actuels
-            // Vérifier quelle section est visible (fonctionnement par défaut)
-            const fonctionnementSection = document.getElementById('section-fonctionnement');
-            const investissementSection = document.getElementById('section-investissement');
-            
-            // Déterminer la section active en fonction de la position du scroll ou des onglets visibles
+            // Nouvelle approche: déterminer la section à partir du donut cliqué
             let section = '';
             let type = '';
             
-            // Chercher l'onglet actif dans chaque section
-            const activeFonctionnementTab = document.querySelector('[data-section="fonctionnement"].tab-active');
-            const activeInvestissementTab = document.querySelector('[data-section="investissement"].tab-active');
+            // Vérifier quel donut a été cliqué en cherchant dans quelle section se trouve la catégorie
+            const isFonctionnementCategory = fonctionnementDepenses.some(item => item.label === category) || 
+                                           fonctionnementRecettes.some(item => item.label === category);
+            const isInvestissementCategory = investissementDepenses.some(item => item.label === category) || 
+                                           investissementRecettes.some(item => item.label === category);
             
-            // Logique : si un onglet fonctionnement est actif, c'est cette section
-            if (activeFonctionnementTab) {
+            console.log('🔍 Finances - Détection de la source:', {
+              category,
+              isFonctionnementCategory,
+              isInvestissementCategory
+            });
+            
+            if (isFonctionnementCategory) {
               section = 'FONCTIONNEMENT';
-              type = activeFonctionnementTab.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
-            } else if (activeInvestissementTab) {
+              // Déterminer le type basé sur l'onglet actif de fonctionnement
+              const activeFonctionnementTab = document.querySelector('#donut-tabs-fonctionnement .tab-active');
+              type = activeFonctionnementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
+              console.log('✅ Finances - Section déterminée: FONCTIONNEMENT, Type:', type);
+            } else if (isInvestissementCategory) {
               section = 'INVESTISSEMENT';
-              type = activeInvestissementTab.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
+              // Déterminer le type basé sur l'onglet actif d'investissement
+              const activeInvestissementTab = document.querySelector('#donut-tabs-investissement .tab-active');
+              type = activeInvestissementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
+              console.log('✅ Finances - Section déterminée: INVESTISSEMENT, Type:', type);
             } else {
-              // Par défaut : fonctionnement dépenses
+              // Par défaut si aucune correspondance
               section = 'FONCTIONNEMENT';
               type = 'DEPENSES';
+              console.log('⚠️ Finances - Catégorie non trouvée, défaut: FONCTIONNEMENT/DEPENSES');
             }
 
             console.log('📊 Finances - Contexte modal:', { category, section, type });
