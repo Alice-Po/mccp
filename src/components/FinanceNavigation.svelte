@@ -4,7 +4,7 @@
   interface NavItem {
     id: string;
     label: string;
-    type: 'donut' | 'bar' | 'table' | 'indicator';
+    type: 'donut' | 'bar' | 'table' | 'indicator' | 'conclusion';
   }
 
   // État local réactif avec $state
@@ -41,11 +41,16 @@
       id: 'section-indicateurs-financiers',
       label: 'Indicateurs financiers',
       type: 'indicator'
+    },
+    {
+      id: 'section-conclusion',
+      label: 'Conclusion',
+      type: 'conclusion'
     }
   ];
 
   // Fonction pour obtenir l'icône SVG selon le type
-  function getIcon(type: 'donut' | 'bar' | 'table'): string {
+  function getIcon(type: 'donut' | 'bar' | 'table' | 'indicator' | 'conclusion'): string {
     if (type === 'donut') {
       // Icône donut/camembert
       return `
@@ -66,20 +71,37 @@
         </svg>
       `;
     } else if (type === 'indicator') {
-      // Icône graphique en barres
-      return `
-        <svg class="analysis-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-      `;
-    } else {
-      // Icône tableau/liste
+      // Icône dashboard/métriques
       return `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" fill="currentColor"/>
-          <circle cx="6" cy="7" r="1" fill="currentColor"/>
-          <circle cx="6" cy="12" r="1" fill="currentColor"/>
-          <circle cx="6" cy="17" r="1" fill="currentColor"/>
+          <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="rgba(46, 139, 87, 0.05)"/>
+          <rect x="5" y="14" width="3" height="4" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="9" y="11" width="3" height="7" rx="0.5" fill="currentColor" opacity="0.8"/>
+          <rect x="13" y="8" width="3" height="10" rx="0.5" fill="currentColor"/>
+          <circle cx="18" cy="8" r="1.5" fill="var(--primary)" opacity="0.8"/>
+          <path d="M6 6h12M6 7h8" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        </svg>
+      `;
+    } else if (type === 'conclusion') {
+      // Icône loupe
+      return `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+    } else {
+      // Icône fiscalité (calculatrice/impôts)
+      return `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="rgba(46, 139, 87, 0.1)"/>
+          <rect x="6" y="5" width="12" height="3" rx="1" fill="currentColor" opacity="0.3"/>
+          <circle cx="8" cy="12" r="1" fill="currentColor"/>
+          <circle cx="12" cy="12" r="1" fill="currentColor"/>
+          <circle cx="16" cy="12" r="1" fill="currentColor"/>
+          <circle cx="8" cy="15" r="1" fill="currentColor"/>
+          <circle cx="12" cy="15" r="1" fill="currentColor"/>
+          <circle cx="16" cy="15" r="1" fill="currentColor"/>
+          <rect x="14" y="17" width="4" height="2" rx="1" fill="currentColor"/>
         </svg>
       `;
     }

@@ -50,32 +50,17 @@
     return parseFloat(value.replace(/[^\d,.-]/g, '').replace(',', '.'));
   }
 
-  // Fonction pour déterminer la performance selon le classement
-  function getPerformanceLevel(classement: number, critere: string): 'excellent' | 'bon' | 'moyen' | 'faible' {
-    // Pour l'endettement, un classement élevé est bon (moins endetté)
-    if (critere === 'encours de dette') {
-      if (classement >= 100) return 'excellent';
-      if (classement >= 75) return 'bon';
-      if (classement >= 50) return 'moyen';
-      return 'faible';
-    }
+ 
     
-    // Pour les autres critères, un classement bas est bon
-    if (classement <= 20) return 'excellent';
-    if (classement <= 50) return 'bon';
-    if (classement <= 75) return 'moyen';
-    return 'faible';
-  }
+  
 
   // Calcul des données processées
   let processedData = $derived(data.map(item => {
     const classement = parseInt(item.classement_putanges_le_lac_sur_129);
-    const performance = getPerformanceLevel(classement, item.critere);
     
     return {
       ...item,
       classement,
-      performance,
       formattedName: formatCritereName(item.critere),
       putangesValue: parseValue(item.valeur_putanges_le_lac_par_habitant),
       medianeValue: parseValue(item.mediane_echantillon_par_habitant)
@@ -87,7 +72,6 @@
   <div class="indicateurs-intro">
     <p>Analyse des principaux indicateurs financiers de Putanges-le-Lac comparés aux communes françaises comparables.</p>
     <button class="help-button" onclick={openModal}>
-      <span class="help-icon">ℹ️</span>
       <span>Méthodologie de comparaison</span>
     </button>
   </div>
@@ -97,12 +81,7 @@
       <div class="indicator-card">
         <div class="indicator-header">
           <h3 class="indicator-name">{item.formattedName}</h3>
-          <div class="performance-badge {item.performance}">
-            {#if item.performance === 'excellent'}🥇
-            {:else if item.performance === 'bon'}🥈  
-            {:else if item.performance === 'moyen'}🥉
-            {:else}📊{/if}
-          </div>
+          
         </div>
 
         <div class="indicator-definition">
@@ -155,6 +134,29 @@
         </div>
       </div>
     {/each}
+  </div>
+
+  <!-- Section Conclusion -->
+  <div id="section-conclusion" class="conclusion-section">
+    <div class="conclusion-header">
+      <h2>
+        <svg class="conclusion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L15.09 8.26L22 9L17 14.74L18.18 22L12 18.27L5.82 22L7 14.74L2 9L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Conclusion
+      </h2>
+    </div>
+    <div class="conclusion-content">
+      <p>
+        La commune de Putanges-le-Lac présente une situation financière très saine. Elle est très peu endettée et dégage, chaque année, des marges de manœuvre budgétaires qui peuvent être mobilisées pour financer des projets d'équipement. Revers de cette situation financière, on peut relever le faible niveau d'intervention de la commune. C'est notamment le cas en matière de soutien au tissu associatif. C'est également le cas des projets d'équipement dont les réalisations sont très en-deça des inscriptions prévues dans le cadre du budget.
+      </p>
+      <p>
+        Le niveau de la pression fiscale peut également interroger : le taux de la taxe foncière est le 28ème le plus élevé sur l'échantillon des 113 communes de l'Orne de la même strate démographique (source OFGL). Putanges-le-Lac apparaît donc comme une commune qui mobilise beaucoup de moyens, tant auprès de l'État que des contribuables, pour une mise en oeuvre de services et de projets sur le territoire très prudente, voire insuffisante.
+      </p>
+      <p>
+        Il faut également noter la situation relative par rapport à la communauté de communes : alors que la communauté porte l'essentiel des services à la population, elle se trouve dans une situation financière tendue, aux antipodes de la commune principale. Ceci peut questionner la pertinence de l'équilibre fiscal trouvé entre communes et communauté.
+      </p>
+    </div>
   </div>
 
   <!-- Section Source -->
@@ -401,6 +403,55 @@
     flex-shrink: 0;
   }
 
+  /* Section Conclusion */
+  .conclusion-section {
+    margin-top: 3rem;
+    background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    border: 2px solid var(--primary);
+    box-shadow: 0 8px 30px rgba(46, 139, 87, 0.1);
+    position: relative;
+  }
+
+  .conclusion-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+
+  .conclusion-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .conclusion-icon {
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .conclusion-content p {
+    font-size: 1.1rem;
+    color: #374151;
+    line-height: 1.8;
+    margin: 0 0 1.5rem 0;
+    font-weight: 400;
+  }
+
+  .conclusion-content p:last-child {
+    margin-bottom: 0;
+  }
+
   .indicator-analysis .analysis-content p {
     font-size: 1rem;
     color: var(--secondary);
@@ -492,6 +543,20 @@
 
     .indicator-analysis .analysis-content p {
       font-size: 0.95rem;
+    }
+
+    .conclusion-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+    }
+
+    .conclusion-header h2 {
+      font-size: 1.4rem;
+    }
+
+    .conclusion-content p {
+      font-size: 1rem;
+      margin: 0 0 1rem 0;
     }
   }
 </style> 

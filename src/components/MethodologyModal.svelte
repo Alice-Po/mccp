@@ -137,7 +137,7 @@
           <li><strong>Population :</strong> Entre 1 000 et 3 000 habitants</li>
           <li><strong>Type :</strong> Communes rurales exclusivement</li>
           <li><strong>Exclusion :</strong> Communes touristiques écartées</li>
-          <li><strong>Homogénéité :</strong> Profil socio-économique similaire</li>
+          <li><strong>Homogénéité :</strong> Profil socio-économique similaire (Tranche de revenus)</li>
         </ul>
       </div>
 
