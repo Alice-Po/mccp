@@ -4,7 +4,7 @@
   interface NavItem {
     id: string;
     label: string;
-    type: 'donut' | 'bar';
+    type: 'donut' | 'bar' | 'table';
   }
 
   // État local réactif avec $state
@@ -31,11 +31,16 @@
       id: 'section-comparaison-investissement',
       label: 'Comparaison investissement',
       type: 'bar'
+    },
+    {
+      id: 'section-fiscalite',
+      label: 'Fiscalité locale',
+      type: 'table'
     }
   ];
 
   // Fonction pour obtenir l'icône SVG selon le type
-  function getIcon(type: 'donut' | 'bar'): string {
+  function getIcon(type: 'donut' | 'bar' | 'table'): string {
     if (type === 'donut') {
       // Icône donut/camembert
       return `
@@ -44,7 +49,7 @@
           <path d="M12 2V12L19.0711 4.92893" stroke="currentColor" stroke-width="2" fill="rgba(46, 139, 87, 0.3)"/>
         </svg>
       `;
-    } else {
+    } else if (type === 'bar') {
       // Icône graphique en barres
       return `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,6 +58,16 @@
           <rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor"/>
           <line x1="2" y1="22" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           <line x1="2" y1="22" x2="2" y2="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `;
+    } else {
+      // Icône tableau/liste
+      return `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" fill="currentColor"/>
+          <circle cx="6" cy="7" r="1" fill="currentColor"/>
+          <circle cx="6" cy="12" r="1" fill="currentColor"/>
+          <circle cx="6" cy="17" r="1" fill="currentColor"/>
         </svg>
       `;
     }

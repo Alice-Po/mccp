@@ -4,6 +4,7 @@ import DonutChart from '../components/DonutChart.svelte';
 import DrillDownModal from '../components/DrillDownModal.svelte';
 import FinanceNavigation from '../components/FinanceNavigation.svelte';
 import HorizontalBarChart from '../components/HorizontalBarChart.svelte';
+import FiscaliteTable from '../components/FiscaliteTable.svelte';
 import { aggregateData, type BudgetItem, aggregateByChapitre } from '../utils/budget-data';
 
 // Charger les données budgétaires
@@ -34,6 +35,22 @@ const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTION
 const fonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
 const investissementDepensesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES');
 const investissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES');
+
+// Charger les données de fiscalité
+interface FiscaliteItem {
+  type_taxe: string;
+  taux_vote_commune_putanges: string;
+  taux_moyen_communes_francaises_comparables: string;
+  commentaire: string;
+}
+
+let fiscaliteData: FiscaliteItem[] = [];
+try {
+  fiscaliteData = await import('../../public/assets/datas/2025/fiscalite_2025.json').then(module => module.default as FiscaliteItem[]);
+} catch (fiscaliteError) {
+  console.error('❌ Finances - Erreur chargement données fiscalité:', fiscaliteError);
+  fiscaliteData = [];
+}
 ---
 
 <Layout title="Finances - MCCP">
@@ -190,6 +207,21 @@ const investissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTIS
               type="expenses"
               title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
               chartId="bar-investissement"
+              client:load
+            />
+          </div>
+        </section>
+
+        <!-- Section Fiscalité -->
+        <section class="chart-section" id="section-fiscalite">
+          <div class="section-header">
+            <h2>Fiscalité locale 2025</h2>
+          </div>
+          
+          <!-- Tableau de fiscalité -->
+          <div class="chart-wrapper" id="fiscalite-wrapper">
+            <FiscaliteTable 
+              data={fiscaliteData}
               client:load
             />
           </div>
