@@ -152,7 +152,7 @@
 
 <nav class="finance-navigation">
   <div class="nav-header">
-    <h3>Navigation Finances</h3>
+    <h3>Sommaire</h3>
   </div>
   
   <ul class="nav-list">
