@@ -394,6 +394,8 @@
         </div>
       {/each}
     </div>
+
+
   </div>
 </div>
 
@@ -606,5 +608,46 @@
     .legend-value {
       margin-left: 0.5rem;
     }
+  }
+
+  .drill-down-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 0.85rem 1.5rem;
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    border: 2px solid var(--primary, #2e8b57);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 16px rgba(46, 139, 87, 0.08);
+    font-size: 1.08rem;
+    color: var(--primary, #2e8b57);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-align: center;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: box-shadow 0.2s;
+  }
+  .drill-down-legend:hover {
+    box-shadow: 0 8px 32px rgba(46, 139, 87, 0.13);
+  }
+  .legend-icon {
+    font-size: 1.3rem;
+    animation: gentle-pulse 2.2s ease-in-out infinite;
+    filter: drop-shadow(0 1px 2px rgba(46,139,87,0.12));
+  }
+  @keyframes gentle-pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.12); }
+  }
+  .legend-text {
+    user-select: none;
+    font-family: var(--font-main, 'Open Sans', Arial, sans-serif);
+    font-size: 1.08rem;
+    color: var(--primary, #2e8b57);
+    font-weight: 600;
   }
 </style> 

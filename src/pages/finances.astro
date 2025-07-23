@@ -183,6 +183,11 @@ try {
             <p>
               Le budget de fonctionnement correspond aux dépenses courantes : salaires des agents, électricité, chauffage, entretien des bâtiments, subventions aux associations… C'est un peu comme le budget familial mensuel : les charges fixes et les dépenses du quotidien.
             </p>
+            
+            <div class="drill-down-legend">
+              <span class="legend-icon">💡</span>
+              <span class="legend-text">Cliquez sur un segment pour voir le détail</span>
+            </div>
           </div>
           
           <!-- Onglets Donut Fonctionnement -->
@@ -236,6 +241,10 @@ try {
               <div class="accordion-header">
                 <h4>Comparaison détaillée par chapitre</h4>
                 <p>Analyse des écarts entre prévisions budgétaires et réalisations effectives</p>
+                <div class="drill-down-legend">
+                  <span class="legend-icon">💡</span>
+                  <span class="legend-text">Cliquez sur un segment pour voir le détail</span>
+                </div>
               </div>
               
               <!-- Onglets pour le graphique de comparaison -->
@@ -916,10 +925,6 @@ try {
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
   }
 
-  .comment-content {
-    /* Suppression du padding car il est maintenant dans .realization-comment */
-  }
-
   .comment-content h3 {
     font-size: 1.3rem;
     font-weight: 600;
@@ -1068,5 +1073,23 @@ try {
     .download-title {
       font-size: 1.2rem;
     }
+    
+
+  }  .drill-down-legend {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #ffa60021 0%, #f9fafb 100%);
+    border-radius: 1rem;
+    color: var(--secondary);
+    padding : 1rem;
+    border-left: 4px solid #ffa500;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+ 
+ 
+
   }
+  @keyframes gentle-pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.12); }
+  }
+
 </style>
