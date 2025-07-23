@@ -70,11 +70,10 @@
 </script>
 
 <div class="fiscalite-container">
-  <div class="fiscalite-intro">
-    <p>Comparaison des taux de fiscalité locale de Putanges-le-Lac avec la moyenne des communes françaises comparables.</p>
+  <div class="section-intro">
+    <p>La fiscalité locale, ce sont les impôts locaux payés par les habitants et les entreprises de la commune (Taxe sur le foncier bâti,Taxe sur le foncier non bâti, Cotisation foncière des entreprises). C’est la principale ressource que la commune maîtrise directement en fixant les taux d’imposition. Nous comparons ici les taux de fiscalité locale de Putanges-le-Lac avec la moyenne des communes françaises comparables.</p>
     <button class="help-button" onclick={openModal}>
-      <span class="help-icon">ℹ️</span>
-      <span>Méthodologie de comparaison</span>
+      <span>Voir la méthodologie de comparaison</span>
     </button>
   </div>
 
@@ -161,21 +160,6 @@
     margin: 0 auto;
   }
 
-  .fiscalite-intro {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    border-radius: 1rem;
-    border-left: 4px solid var(--primary);
-  }
-
-  .fiscalite-intro p {
-    font-size: 1.1rem;
-    color: #475569;
-    margin: 0 0 1rem 0;
-    line-height: 1.6;
-  }
 
   .help-button {
     background: transparent;
@@ -191,6 +175,7 @@
     gap: 0.5rem;
     transition: all 0.2s ease;
     text-decoration: none;
+    margin-bottom: 2rem;
   }
 
   .help-button:hover {
