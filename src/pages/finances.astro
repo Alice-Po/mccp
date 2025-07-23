@@ -104,17 +104,71 @@ try {
         <!-- En-tête -->
         <header class="finances-header">
           <h1>Finances municipales 2024</h1>
+          
+          <!-- Introduction -->
+          <div class="intro-section">
+            <div class="intro-content">
+              <p>
+                Pour comprendre au mieux les données présentées ci-dessous, nous vous recommandons vivement de lire au préalable notre article 
+                <a href="/blog/comment-lire-un-budget-communal-" class="intro-link">« Comment lire un budget communal ? »</a> 
+                qui vous donnera les clés de lecture essentielles.
+              </p>
+              <p>
+                Dans un souci de rendre le budget compréhensible au plus grand nombre, nous avons pris quelques largesses 
+                en termes de nomenclature budgétaire officielle. Cette adaptation permet aux citoyens de trouver l'information 
+                qu'ils cherchent plus facilement, sans se perdre dans les subtilités techniques de la comptabilité publique.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section de téléchargement -->
           <div class="download-section">
-            <a href="/assets/datas/Budget-primitif-2025-Putanges.pdf" class="download-pdf-btn" download>
-              <span class="download-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-              </span>
-              Télécharger le budget au format PDF
-            </a>
+            <h3 class="download-title">Documents de référence</h3>
+            <div class="download-buttons">
+              <a href="/assets/datas/Budget-primitif-2025-Putanges.pdf" class="download-btn download-pdf" download>
+                <span class="download-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                </span>
+                <span class="download-text">
+                  <span class="download-label">Budget complet</span>
+                  <span class="download-format">Format PDF</span>
+                </span>
+              </a>
+
+              <a href="/assets/datas/Budget-primitif-2025-section-fonctionnement.csv" class="download-btn download-csv" download>
+                <span class="download-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="9" y1="9" x2="15" y2="9"/>
+                    <line x1="9" y1="12" x2="15" y2="12"/>
+                    <line x1="9" y1="15" x2="15" y2="15"/>
+                  </svg>
+                </span>
+                <span class="download-text">
+                  <span class="download-label">Section fonctionnement</span>
+                  <span class="download-format">Format CSV</span>
+                </span>
+              </a>
+
+              <a href="/assets/datas/Budget-primitif-2025-section-investissement.csv" class="download-btn download-csv" download>
+                <span class="download-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="9" y1="9" x2="15" y2="9"/>
+                    <line x1="9" y1="12" x2="15" y2="12"/>
+                    <line x1="9" y1="15" x2="15" y2="15"/>
+                  </svg>
+                </span>
+                <span class="download-text">
+                  <span class="download-label">Section investissement</span>
+                  <span class="download-format">Format CSV</span>
+                </span>
+              </a>
+            </div>
           </div>
         </header>
 
@@ -650,14 +704,123 @@ try {
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--secondary);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  /* Introduction */
+  .intro-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--primary);
+  }
+
+  .intro-content p {
+    font-size: 1.1rem;
+    color: #374151;
+    line-height: 1.7;
     margin-bottom: 1rem;
   }
 
-  .finances-header p {
-    font-size: 1.1rem;
-    color: #6b7280;
-    max-width: 600px;
-    margin: 0 auto;
+  .intro-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .intro-link:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary);
+  }
+
+  /* Section de téléchargement */
+  .download-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(46, 139, 87, 0.1);
+  }
+
+  .download-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .download-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .download-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .download-pdf {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+  }
+
+  .download-pdf:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
+  }
+
+  .download-csv {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .download-csv:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.2);
+  }
+
+  .download-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .download-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .download-label {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .download-format {
+    font-size: 0.875rem;
+    opacity: 0.8;
   }
 
   .chart-section {
@@ -860,49 +1023,36 @@ try {
     }
   }
 
-  /* Styles normaux pour grands écrans - pas de modifications de layout */
-
-
-  .download-section {
-      display: flex;
-      justify-content: center;
-      margin: -0.5rem 0 2.5rem;
+  /* Responsive pour l'introduction et les téléchargements */
+  @media (max-width: 768px) {
+    .finances-header h1 {
+      font-size: 2rem;
     }
 
-    .download-pdf-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      text-decoration: none;
+    .intro-section {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-content p {
       font-size: 1rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border: 1px solid var(--primary);
-      background: transparent;
     }
 
-    .download-pdf-btn:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-1px);
+    .download-section {
+      padding: 1.5rem;
     }
 
-    .download-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .download-buttons {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
     }
 
-    .download-pdf-btn svg {
-      width: 20px;
-      height: 20px;
-      transition: transform 0.2s ease;
+    .download-btn {
+      padding: 0.875rem 1.25rem;
     }
 
-    .download-pdf-btn:hover svg {
-      transform: translateY(2px);
+    .download-title {
+      font-size: 1.2rem;
     }
+  }
 </style>
