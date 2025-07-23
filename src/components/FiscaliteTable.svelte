@@ -82,6 +82,9 @@
       <div class="tax-row">
         <div class="tax-header">
           <h3 class="tax-name">{item.formattedName}</h3>
+          <div class="tax-comment">
+            <p>{item.commentaire}</p>
+          </div>
         </div>
 
         <div class="tax-comparison">
@@ -123,10 +126,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="tax-comment">
-          <p>{item.commentaire}</p>
         </div>
       </div>
     {/each}
