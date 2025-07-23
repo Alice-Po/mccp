@@ -121,7 +121,7 @@ try {
                 <!-- Section Fonctionnement -->
         <section class="chart-section" id="section-budget-fonctionnement">
           <div class="section-header">
-            <h2>Section de fonctionnement 2024</h2>
+            <h2>Budget de fonctionnement 2024</h2>
           </div>
           
           <!-- Onglets Donut Fonctionnement -->
@@ -145,6 +145,60 @@ try {
               enableDrillDown={true}
               client:load
             />
+          </div>
+
+          <!-- Commentaire sur les réalisations -->
+          <div class="realization-comment">
+            <div class="comment-content">
+              <h3><svg class="analysis-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg> Analyse des réalisations budgétaires</h3>
+              <p>
+                Les données ci-dessus présentent les réalisations effectives de l'année 2024. 
+                Pour mieux comprendre l'écart entre les prévisions initiales et les montants réellement dépensés ou perçus, 
+                explorez le graphique de comparaison détaillé ci-dessous.
+              </p>
+              <div class="cta-container">
+                <button class="cta-accordion" onclick="toggleAccordion('accordion-fonctionnement')">
+                  <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
+                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordéon pour le graphique de comparaison -->
+          <div class="accordion-wrapper" id="accordion-fonctionnement">
+            <div class="accordion-content">
+              <div class="accordion-header">
+                <h4>Comparaison détaillée par chapitre</h4>
+                <p>Analyse des écarts entre prévisions budgétaires et réalisations effectives</p>
+              </div>
+              
+              <!-- Onglets pour le graphique de comparaison -->
+              <div class="tabs-container" id="bar-tabs-fonctionnement">
+                <div class="tabs">
+                  <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
+                    Dépenses
+                  </button>
+                  <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
+                    Recettes
+                  </button>
+                </div>
+              </div>
+
+              <!-- Graphique de comparaison -->
+              <div class="chart-wrapper" id="bar-fonctionnement">
+                <HorizontalBarChart 
+                  data={fonctionnementDepensesChapitre}
+                  type="expenses"
+                  title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+                  client:load
+                />
+              </div>
+            </div>
           </div>
         </section>
         
@@ -176,64 +230,62 @@ try {
               client:load
             />
           </div>
-        </section>
-        <section class="chart-section" id="section-comparaison-fonctionnement">
-          <div class="section-header">
-            <h2>Comparaison fonctionnement 2024</h2>
-          </div>
 
-          <!-- Onglets BarChart Fonctionnement -->
-          <div class="tabs-container" id="bar-tabs-fonctionnement">
-            <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
-                Dépenses
-              </button>
-              <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
-                Recettes
-              </button>
+          <!-- Commentaire sur les réalisations -->
+          <div class="realization-comment">
+            <div class="comment-content">
+              <h3><svg class="analysis-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg> Analyse des investissements réalisés</h3>
+              <p>
+                Cette section présente les investissements effectivement réalisés en 2024. 
+                Les projets d'équipement et d'infrastructure peuvent présenter des écarts significatifs 
+                entre les montants budgétés et les réalisations finales, souvent liés aux délais de mise en œuvre.
+              </p>
+              <div class="cta-container">
+                <button class="cta-accordion" onclick="toggleAccordion('accordion-investissement')">
+                  <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
+                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
-          <div class="chart-wrapper" id="bar-fonctionnement">
-            <HorizontalBarChart 
-              data={fonctionnementDepensesChapitre}
-              type="expenses"
-              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
-              client:load
-            />
-          </div>
-        </section>
+          <!-- Accordéon pour le graphique de comparaison -->
+          <div class="accordion-wrapper" id="accordion-investissement">
+            <div class="accordion-content">
+              <div class="accordion-header">
+                <h4>Comparaison détaillée par chapitre</h4>
+                <p>Suivi des projets d'investissement et de leurs réalisations</p>
+              </div>
+              
+              <!-- Onglets pour le graphique de comparaison -->
+              <div class="tabs-container" id="bar-tabs-investissement">
+                <div class="tabs">
+                  <button class="tab tab-active" data-tab="depenses" data-section="investissement-bar">
+                    Dépenses
+                  </button>
+                  <button class="tab" data-tab="recettes" data-section="investissement-bar">
+                    Recettes
+                  </button>
+                </div>
+              </div>
 
-        <section class="chart-section" id="section-comparaison-investissement">
-          <div class="section-header">
-            <h2>Comparaison investissement 2024</h2>
-          </div>
-
-          <!-- Onglets BarChart Fonctionnement -->
-          <div class="tabs-container" id="bar-tabs-investissement">
-            <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="investissement-bar">
-                Dépenses
-              </button>
-              <button class="tab" data-tab="recettes" data-section="investissement-bar">
-                Recettes
-              </button>
+              <!-- Graphique de comparaison -->
+              <div class="chart-wrapper" id="bar-investissement">
+                <HorizontalBarChart 
+                  data={investissementDepensesChapitre}
+                  type="expenses"
+                  title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+                  chartId="bar-investissement"
+                  client:load
+                />
+              </div>
             </div>
           </div>
-
-          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
-          <div class="chart-wrapper" id="bar-investissement">
-            <HorizontalBarChart 
-              data={investissementDepensesChapitre}
-              type="expenses"
-              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
-              chartId="bar-investissement"
-              client:load
-            />
-          </div>
         </section>
-
         <!-- Section Fiscalité -->
         <section class="chart-section" id="section-fiscalite">
           <div class="section-header">
@@ -308,6 +360,29 @@ try {
 
     <!-- Script pour gérer la navigation et les onglets -->
       <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre, investissementDepensesChapitre, investissementRecettesChapitre }}>
+        // Fonction pour gérer l'ouverture/fermeture des accordéons
+        function toggleAccordion(accordionId) {
+          const accordion = document.getElementById(accordionId);
+          const button = document.querySelector(`[onclick="toggleAccordion('${accordionId}')"]`);
+          
+          if (accordion && button) {
+            const isExpanded = accordion.classList.contains('expanded');
+            
+            if (isExpanded) {
+              accordion.classList.remove('expanded');
+              button.setAttribute('aria-expanded', 'false');
+              button.querySelector('.cta-text').textContent = 'Voir la comparaison prévisions vs réalisations';
+            } else {
+              accordion.classList.add('expanded');
+              button.setAttribute('aria-expanded', 'true');
+              button.querySelector('.cta-text').textContent = 'Masquer la comparaison';
+            }
+          }
+        }
+
+        // Rendre la fonction accessible globalement
+        window.toggleAccordion = toggleAccordion;
+
         document.addEventListener('DOMContentLoaded', () => {
           
           // ===== CONFIGURATION DES DONNÉES =====
@@ -652,6 +727,107 @@ try {
 
   .chart-wrapper {
     min-height: 400px;
+  }
+
+  /* Styles pour les commentaires et accordéons */
+  .realization-comment {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    border-left: 4px solid var(--secondary);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+  }
+
+  .comment-content {
+    /* Suppression du padding car il est maintenant dans .realization-comment */
+  }
+
+  .comment-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .comment-content p {
+    font-size: 1rem;
+    color: var(--secondary);
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+    font-weight: 500;
+  }
+
+  .cta-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta-accordion {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+  }
+
+  .cta-accordion:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 139, 87, 0.4);
+  }
+
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .cta-accordion[aria-expanded="true"] .cta-icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+  }
+
+  .accordion-wrapper.expanded {
+    max-height: 2000px; /* Valeur suffisamment grande pour le contenu */
+  }
+
+  .accordion-content {
+    padding: 2rem;
+    border-top: 1px solid rgba(46, 139, 87, 0.1);
+  }
+
+  .accordion-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .accordion-header h4 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .accordion-header p {
+    color: #6b7280;
+    font-size: 1rem;
+    margin: 0;
   }
 
   /* Affichage conditionnel basé sur la largeur d'écran */

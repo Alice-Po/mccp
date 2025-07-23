@@ -8,29 +8,19 @@
   }
 
   // État local réactif avec $state
-  let activeItem = $state('section-fonctionnement');
+  let activeItem = $state('section-budget-fonctionnement');
 
   // Navigation items avec types d'icônes
   const navItems: NavItem[] = [
     {
       id: 'section-budget-fonctionnement',
-      label: 'Budget fonctionnement',
+      label: 'Budget de fonctionnement',
       type: 'donut'
     },
     {
       id: 'section-budget-investissement',
-      label: 'Budget investissement',
+      label: 'Budget d\'investissement',
       type: 'donut'
-    },
-    {
-      id: 'section-comparaison-fonctionnement',
-      label: 'Comparaison fonctionnement',
-      type: 'bar'
-    },
-    {
-      id: 'section-comparaison-investissement',
-      label: 'Comparaison investissement',
-      type: 'bar'
     },
     {
       id: 'section-fiscalite',
