@@ -71,7 +71,7 @@
 
 <div class="fiscalite-container">
   <div class="section-intro">
-    <p>La fiscalité locale, ce sont les impôts locaux payés par les habitants et les entreprises de la commune (Taxe sur le foncier bâti,Taxe sur le foncier non bâti, Cotisation foncière des entreprises). C’est la principale ressource que la commune maîtrise directement en fixant les taux d’imposition. Nous comparons ici les taux de fiscalité locale de Putanges-le-Lac avec la moyenne des communes françaises comparables.</p>
+    <p>La fiscalité locale, ce sont les impôts locaux payés par les habitants et les entreprises de la commune (Taxe sur le foncier bâti, taxe sur le foncier non bâti, cotisation foncière des entreprises). C’est la principale ressource que la commune maîtrise directement en fixant les taux d’imposition. Nous comparons ici les taux de fiscalité locale de Putanges-le-Lac avec la moyenne des communes françaises comparables.</p>
     <button class="help-button" onclick={openModal}>
       <span>Voir la méthodologie de comparaison</span>
     </button>

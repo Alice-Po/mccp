@@ -69,10 +69,10 @@
 </script>
 
 <div class="indicateurs-container">
-  <div class="indicateurs-intro">
+  <div class="section-intro">
     <p>Analyse des principaux indicateurs financiers de Putanges-le-Lac comparés aux communes françaises comparables.</p>
     <button class="help-button" onclick={openModal}>
-      <span>Méthodologie de comparaison</span>
+      <span>Voir la méthodologie de comparaison</span>
     </button>
   </div>
 
@@ -147,23 +147,6 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-
-  .indicateurs-intro {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    border-radius: 1rem;
-    border-left: 4px solid var(--primary);
-  }
-
-  .indicateurs-intro p {
-    font-size: 1.1rem;
-    color: #475569;
-    margin: 0 0 1rem 0;
-    line-height: 1.6;
-  }
-
   .help-button {
     background: transparent;
     color: var(--primary);
@@ -178,6 +161,7 @@
     gap: 0.5rem;
     transition: all 0.2s ease;
     text-decoration: none;
+    margin-bottom: 2rem;
   }
 
   .help-button:hover {
