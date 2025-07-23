@@ -4,7 +4,7 @@
   interface NavItem {
     id: string;
     label: string;
-    type: 'donut' | 'bar' | 'table';
+    type: 'donut' | 'bar' | 'table' | 'indicator';
   }
 
   // État local réactif avec $state
@@ -36,6 +36,11 @@
       id: 'section-fiscalite',
       label: 'Fiscalité locale',
       type: 'table'
+    },
+    {
+      id: 'section-indicateurs-financiers',
+      label: 'Indicateurs financiers',
+      type: 'indicator'
     }
   ];
 
@@ -60,6 +65,13 @@
           <line x1="2" y1="22" x2="2" y2="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       `;
+    } else if (type === 'indicator') {
+      // Icône graphique en barres
+      return `
+        <svg class="analysis-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+      `;
     } else {
       // Icône tableau/liste
       return `
@@ -72,6 +84,7 @@
       `;
     }
   }
+  
 
   // Actions
   function selectItem(itemId: string) {

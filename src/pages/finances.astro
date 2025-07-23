@@ -5,6 +5,7 @@ import DrillDownModal from '../components/DrillDownModal.svelte';
 import FinanceNavigation from '../components/FinanceNavigation.svelte';
 import HorizontalBarChart from '../components/HorizontalBarChart.svelte';
 import FiscaliteTable from '../components/FiscaliteTable.svelte';
+import IndicateursFinanciers from '../components/IndicateursFinanciers.svelte';
 import { aggregateData, type BudgetItem, aggregateByChapitre } from '../utils/budget-data';
 
 // Charger les données budgétaires
@@ -50,6 +51,26 @@ try {
 } catch (fiscaliteError) {
   console.error('❌ Finances - Erreur chargement données fiscalité:', fiscaliteError);
   fiscaliteData = [];
+}
+
+// Charger les données des indicateurs financiers
+interface IndicateurFinancier {
+  critere: string;
+  definition_critere: string;
+  valeur_putanges_le_lac_par_habitant: string;
+  mediane_echantillon_par_habitant: string;
+  classement_putanges_le_lac_sur_129: string;
+  premier_decile_par_habitant: string;
+  dernier_decile_par_habitant: string;
+  commentaires: string;
+}
+
+let indicateursData: IndicateurFinancier[] = [];
+try {
+  indicateursData = await import('../../public/assets/datas/2025/indicateurs_financiers_2025.json').then(module => module.default as IndicateurFinancier[]);
+} catch (indicateursError) {
+  console.error('❌ Finances - Erreur chargement données indicateurs:', indicateursError);
+  indicateursData = [];
 }
 ---
 
@@ -222,6 +243,22 @@ try {
           <div class="chart-wrapper" id="fiscalite-wrapper">
             <FiscaliteTable 
               data={fiscaliteData}
+              client:load
+            />
+          </div>
+        </section>
+
+        <!-- Section Indicateurs Financiers -->
+        <section class="chart-section" id="section-indicateurs-financiers">
+          <div class="section-header">
+            <h2>Indicateurs financiers 2025</h2>
+            <p>Analyse des principaux indicateurs de santé financière</p>
+          </div>
+          
+          <!-- Indicateurs financiers -->
+          <div class="chart-wrapper" id="indicateurs-wrapper">
+            <IndicateursFinanciers 
+              data={indicateursData}
               client:load
             />
           </div>
