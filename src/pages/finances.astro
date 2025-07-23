@@ -147,34 +147,7 @@ try {
             />
           </div>
         </section>
-        <section class="chart-section" id="section-comparaison-fonctionnement">
-          <div class="section-header">
-            <h2>Comparaison fonctionnement 2024</h2>
-          </div>
-
-          <!-- Onglets BarChart Fonctionnement -->
-          <div class="tabs-container" id="bar-tabs-fonctionnement">
-            <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
-                Dépenses
-              </button>
-              <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
-                Recettes
-              </button>
-            </div>
-          </div>
-
-          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
-          <div class="chart-wrapper" id="bar-fonctionnement">
-            <HorizontalBarChart 
-              data={fonctionnementDepensesChapitre}
-              type="expenses"
-              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
-              client:load
-            />
-          </div>
-        </section>
-
+        
         <!-- Section Investissement -->
         <section class="chart-section" id="section-budget-investissement">
           <div class="section-header">
@@ -204,6 +177,34 @@ try {
             />
           </div>
         </section>
+        <section class="chart-section" id="section-comparaison-fonctionnement">
+          <div class="section-header">
+            <h2>Comparaison fonctionnement 2024</h2>
+          </div>
+
+          <!-- Onglets BarChart Fonctionnement -->
+          <div class="tabs-container" id="bar-tabs-fonctionnement">
+            <div class="tabs">
+              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
+                Dépenses
+              </button>
+              <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
+                Recettes
+              </button>
+            </div>
+          </div>
+
+          <!-- Bar chart de comparaison par chapitre, interactif avec ses propres onglets -->
+          <div class="chart-wrapper" id="bar-fonctionnement">
+            <HorizontalBarChart 
+              data={fonctionnementDepensesChapitre}
+              type="expenses"
+              title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+              client:load
+            />
+          </div>
+        </section>
+
         <section class="chart-section" id="section-comparaison-investissement">
           <div class="section-header">
             <h2>Comparaison investissement 2024</h2>
@@ -263,6 +264,38 @@ try {
             />
           </div>
         </section>
+        <!-- Section Conclusion -->
+  <div id="section-conclusion" class="conclusion-section">
+    <div class="conclusion-header">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        Conclusion
+      </h2>
+    </div>
+    <div class="conclusion-content">
+      <p>
+        La commune de Putanges-le-Lac présente une situation financière très saine. Elle est très peu endettée et dégage, chaque année, des marges de manœuvre budgétaires qui peuvent être mobilisées pour financer des projets d'équipement. Revers de cette situation financière, on peut relever le faible niveau d'intervention de la commune. C'est notamment le cas en matière de soutien au tissu associatif. C'est également le cas des projets d'équipement dont les réalisations sont très en-deça des inscriptions prévues dans le cadre du budget.
+      </p>
+      <p>
+        Le niveau de la pression fiscale peut également interroger : le taux de la taxe foncière est le 28ème le plus élevé sur l'échantillon des 113 communes de l'Orne de la même strate démographique (source OFGL). Putanges-le-Lac apparaît donc comme une commune qui mobilise beaucoup de moyens, tant auprès de l'État que des contribuables, pour une mise en oeuvre de services et de projets sur le territoire très prudente, voire insuffisante.
+      </p>
+      <p>
+        Il faut également noter la situation relative par rapport à la communauté de communes : alors que la communauté porte l'essentiel des services à la population, elle se trouve dans une situation financière tendue, aux antipodes de la commune principale. Ceci peut questionner la pertinence de l'équilibre fiscal trouvé entre communes et communauté.
+      </p>
+    </div>
+  </div>
+
+  <!-- Section Source -->
+  <div class="source-section">
+    <div class="source-content">
+      <span class="source-label">Sources :</span>
+      <span class="source-text">OFGL - Observatoire des finances et de la gestion publique locales • Direction générale des finances publiques</span>
+    </div>
+  </div>
+</div>
+
 
       </div>
     </div>

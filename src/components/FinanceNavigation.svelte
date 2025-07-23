@@ -18,14 +18,14 @@
       type: 'donut'
     },
     {
-      id: 'section-comparaison-fonctionnement',
-      label: 'Comparaison fonctionnement',
-      type: 'bar'
-    },
-    {
       id: 'section-budget-investissement',
       label: 'Budget investissement',
       type: 'donut'
+    },
+    {
+      id: 'section-comparaison-fonctionnement',
+      label: 'Comparaison fonctionnement',
+      type: 'bar'
     },
     {
       id: 'section-comparaison-investissement',

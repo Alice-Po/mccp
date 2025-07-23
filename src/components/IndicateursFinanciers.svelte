@@ -134,40 +134,10 @@
         </div>
       </div>
     {/each}
+  </div>    
   </div>
 
-  <!-- Section Conclusion -->
-  <div id="section-conclusion" class="conclusion-section">
-    <div class="conclusion-header">
-      <h2>
-        <svg class="conclusion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L15.09 8.26L22 9L17 14.74L18.18 22L12 18.27L5.82 22L7 14.74L2 9L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Conclusion
-      </h2>
-    </div>
-    <div class="conclusion-content">
-      <p>
-        La commune de Putanges-le-Lac présente une situation financière très saine. Elle est très peu endettée et dégage, chaque année, des marges de manœuvre budgétaires qui peuvent être mobilisées pour financer des projets d'équipement. Revers de cette situation financière, on peut relever le faible niveau d'intervention de la commune. C'est notamment le cas en matière de soutien au tissu associatif. C'est également le cas des projets d'équipement dont les réalisations sont très en-deça des inscriptions prévues dans le cadre du budget.
-      </p>
-      <p>
-        Le niveau de la pression fiscale peut également interroger : le taux de la taxe foncière est le 28ème le plus élevé sur l'échantillon des 113 communes de l'Orne de la même strate démographique (source OFGL). Putanges-le-Lac apparaît donc comme une commune qui mobilise beaucoup de moyens, tant auprès de l'État que des contribuables, pour une mise en oeuvre de services et de projets sur le territoire très prudente, voire insuffisante.
-      </p>
-      <p>
-        Il faut également noter la situation relative par rapport à la communauté de communes : alors que la communauté porte l'essentiel des services à la population, elle se trouve dans une situation financière tendue, aux antipodes de la commune principale. Ceci peut questionner la pertinence de l'équilibre fiscal trouvé entre communes et communauté.
-      </p>
-    </div>
-  </div>
-
-  <!-- Section Source -->
-  <div class="source-section">
-    <div class="source-content">
-      <span class="source-label">Sources :</span>
-      <span class="source-text">OFGL - Observatoire des finances et de la gestion publique locales • Direction générale des finances publiques</span>
-    </div>
-  </div>
-</div>
-
+  
 <!-- Utilisation du composant MethodologyModal -->
 <MethodologyModal isOpen={modalOpen} onClose={closeModal} />
 
