@@ -148,7 +148,8 @@
           intersect: false,
           mode: 'index'
         },
-        onClick: enableDrillDown ? handleChartClick : undefined
+        onClick: enableDrillDown ? handleChartClick : undefined,
+        onHover: enableDrillDown ? handleChartHover : undefined
       }
     });
   }
@@ -193,6 +194,15 @@
       enableDrillDown
     });
 
+    // Vérifier si le segment a suffisamment d'éléments pour justifier un drill-down
+    if (clickedData.items && clickedData.items.length <= 1) {
+      console.log('❌ DonutChart - Drill-down ignoré: pas assez d\'éléments détaillés');
+      
+      // Afficher un tooltip informatif
+      showNoDetailTooltip(elementIndex);
+      return;
+    }
+
     // Utiliser le callback prop plutôt que createEventDispatcher
     onsegmentClick?.({
       category: clickedData.label,
@@ -212,6 +222,80 @@
       document.dispatchEvent(customEvent);
       console.log('📡 DonutChart - Événement DOM dispatché:', customEvent.detail);
     }
+  }
+
+  // Variables pour gérer les effets hover
+  let hoveredSegmentIndex = $state<number | null>(null);
+  let searchIconPosition = $state<{x: number, y: number} | null>(null);
+
+  function showNoDetailTooltip(elementIndex: number) {
+    // Créer un tooltip temporaire pour indiquer qu'il n'y a pas de détail
+    const canvas = canvasElement;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const tooltip = document.createElement('div');
+    tooltip.className = 'no-detail-tooltip';
+    tooltip.textContent = 'Aucun détail supplémentaire disponible';
+    tooltip.style.cssText = `
+      position: fixed;
+      top: ${rect.top + rect.height / 2}px;
+      left: ${rect.left + rect.width / 2}px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      z-index: 1000;
+      pointer-events: none;
+    `;
+    
+    document.body.appendChild(tooltip);
+    
+    // Supprimer le tooltip après 2 secondes
+    setTimeout(() => {
+      if (tooltip.parentNode) {
+        tooltip.parentNode.removeChild(tooltip);
+      }
+    }, 2000);
+  }
+
+  function handleChartHover(event: any, elements: any[]) {
+    if (!enableDrillDown) return;
+
+    if (elements.length > 0) {
+      const elementIndex = elements[0].index;
+      const clickedData = currentData[elementIndex];
+      
+      // Vérifier si ce segment a un drill-down disponible
+      const hasValidDrillDown = clickedData.items && clickedData.items.length > 1;
+      
+      if (hasValidDrillDown) {
+        hoveredSegmentIndex = elementIndex;
+        
+        // Calculer la position pour l'icône de recherche
+        const canvas = canvasElement;
+        if (canvas) {
+          const rect = canvas.getBoundingClientRect();
+          searchIconPosition = {
+            x: event.offsetX || rect.width / 2,
+            y: event.offsetY || rect.height / 2
+          };
+        }
+      } else {
+        hoveredSegmentIndex = null;
+        searchIconPosition = null;
+      }
+    } else {
+      hoveredSegmentIndex = null;
+      searchIconPosition = null;
+    }
+  }
+
+  function handleChartLeave() {
+    hoveredSegmentIndex = null;
+    searchIconPosition = null;
   }
 
   // Effet principal pour gérer le cycle de vie du chart (remplace onMount/onDestroy)
