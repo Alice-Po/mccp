@@ -143,28 +143,53 @@
 
       <div class="methodology-section">
         <h3>Comment fonctionne la comparaison ?</h3>
-        <div class="explanation-box">
-          <h4>L'indicateur choisi</h4>
-          <p>
-            Nous utilisons les <strong>"frais de personnel par habitant"</strong> comme point de comparaison. 
-            Cet indicateur correspond aux salaires et charges que chaque commune dépense pour ses agents, 
-            rapporté au nombre d'habitants.
-          </p>
-          
-          <h4>Pourquoi cet indicateur ?</h4>
-          <p>
-            Les frais de personnel représentent souvent le plus gros poste de dépenses d'une commune. 
-            Comparer ces montants entre communes similaires permet de voir si une commune dépense 
-            plus ou moins que la moyenne pour ses services publics.
-          </p>
-
-          <h4>Comment on évite les cas exceptionnels ?</h4>
-          <p>
-            Certaines communes peuvent avoir des situations très particulières (fusion récente, 
-            gros projet en cours, etc.). Pour une comparaison équitable, nous retirons les communes 
-            avec des montants exceptionnellement hauts ou bas, ce qui nous donne une vision plus 
-            représentative de la "normale".
-          </p>
+        
+        <div >
+            <h4>L'indicateur choisi</h4>
+            <p>
+                Nous utilisons les <strong>"frais de personnel par habitant"</strong> comme référence de comparaison.
+                Cet indicateur mesure ce que chaque commune dépense annuellement pour rémunérer ses agents
+                (salaires, charges sociales, primes), divisé par le nombre d'habitants.
+            </p>
+            
+            <details class="technical-detail">
+                <summary>Détail technique : qu'est-ce qui est compté ?</summary>
+                <p><strong>Inclus :</strong> salaires bruts, cotisations patronales, primes et indemnités, formation du personnel</p>
+                <p><strong>Exclus :</strong> indemnités des élus (comptabilisées à part), prestations sous-traitées, personnel détaché d'autres collectivités</p>
+                <p><strong>Source :</strong> chapitre 012 du budget communal</p>
+            </details>
+            
+            <h4>Pourquoi cet indicateur ?</h4>
+            <p>
+                Les frais de personnel représentent <strong>60% en moyenne</strong> des dépenses
+                de fonctionnement des communes rurales. C'est un indicateur fiable qui reflète directement
+                les choix de la commune : niveau de service public, organisation administrative, politique salariale.
+            </p>
+            
+            <div class="highlight">
+                <strong>Avantage :</strong> Contrairement aux dépenses totales qui varient selon les transferts de compétences
+                vers l'intercommunalité, cet indicateur reste comparable entre communes.
+            </div>
+            
+            <h4>Traitement statistique</h4>
+            <p>
+                Pour éviter que des situations exceptionnelles faussent la comparaison, nous excluons automatiquement
+                les communes avec des montants anormalement élevés ou faibles <strong>(3 communes sur 132)</strong>.
+                Nous utilisons la médiane plutôt que la moyenne pour plus de robustesse.
+            </p>
+            
+            <details class="technical-detail">
+                <summary>Méthode d'exclusion des valeurs aberrantes</summary>
+                <p>Nous appliquons la règle des écarts interquartiles :</p>
+                <p>• <strong>Seuil bas :</strong> 9,71 € par habitant</p>
+                <p>• <strong>Seuil haut :</strong> 286,02 € par habitant</p>
+                <p><strong>Motifs d'exclusion typiques :</strong> fusion récente, transfert exceptionnel de personnel, situation de crise</p>
+            </details>
+            
+            <div class="highlight">
+                <strong>Limite importante :</strong> Cet indicateur ne renseigne pas sur la qualité des services rendus,
+                seulement sur leur coût. Il doit être interprété avec les autres données financières.
+            </div>
         </div>
         
         <div class="comparison-stats">
@@ -423,7 +448,50 @@
     font-size: 1rem;
     color: #0f172a;
     line-height: 1.7;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .explanation-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .technical-detail {
+    overflow: hidden;
+  }
+
+  .technical-detail summary {
+    padding: 0.5rem 0.75rem;    
+    cursor: pointer;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.2s ease;
+        font-size: 0.9rem;
+        margin: 0.75rem;
+
+  }
+
+  .technical-detail summary:hover {
+    background: #e2e8f0;
+  }
+
+  .technical-detail p {
+    padding: 0.75rem 1rem;
     margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .technical-detail p:not(:last-child) {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .highlight {
+    background: #fef3c7;
+    border-left: 3px solid #f59e0b;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    color: #92400e;
   }
 
   .comparison-stats {
@@ -714,17 +782,5 @@
       font-size: 0.85rem;
     }
 
-    /* Responsive pour la section d'explication */
-    .explanation-box {
-      padding: 1.5rem;
-    }
-
-    .explanation-box h4 {
-      font-size: 1rem;
-    }
-
-    .explanation-box p {
-      font-size: 0.95rem;
-    }
   }
 </style> 
