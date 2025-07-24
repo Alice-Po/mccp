@@ -25,6 +25,7 @@
   let isLoading = true;
   let error = null;
   let iframe;
+  let latestCR = null;
 
   function handleIframeLoad() {
     isLoading = false;
@@ -65,9 +66,58 @@
     }
   }
 
+  // Fonction pour charger le dernier CR municipal
+  async function loadLatestCR() {
+    try {
+      const response = await fetch('/assets/datas/ocr_index.json');
+      const data = await response.json();
+      
+      // Trier les CRs par date d'événement (du plus récent au plus ancien)
+      const sortedCRs = data
+        .filter(item => item.path.includes('CR-municipaux'))
+        .sort((a, b) => {
+          // D'abord par année (décroissant)
+          if (a.year !== b.year) return b.year - a.year;
+          
+          // Ensuite par date d'événement si disponible
+          if (a.eventDate && b.eventDate) {
+            return new Date(b.eventDate) - new Date(a.eventDate);
+          }
+          
+          // Sinon par date de modification
+          return b.mtime - a.mtime;
+        });
+      
+      if (sortedCRs.length > 0) {
+        latestCR = sortedCRs[0];
+        console.log('📄 PdfViewer - Dernier CR municipal chargé:', latestCR);
+      }
+    } catch (error) {
+      console.error('❌ PdfViewer - Erreur chargement index CR:', error);
+    }
+  }
+
+  // Fonction pour ouvrir le dernier CR municipal
+  function openLatestCR() {
+    if (latestCR) {
+      const event = new CustomEvent('updatePdfViewer', {
+        detail: {
+          pdfUrl: latestCR.path,
+          documentTitle: `CR Municipal du ${latestCR.eventDate || latestCR.year}`,
+          isVisible: true,
+          isMobile: isMobile
+        }
+      });
+      document.dispatchEvent(event);
+    }
+  }
+
   // Écouter les mises à jour depuis la page
   onMount(() => {
     console.log('🎬 PdfViewer - Composant monté, écoute des événements');
+    
+    // Charger le dernier CR municipal
+    loadLatestCR();
     
     const handleUpdate = (event) => {
       console.log('📺 PdfViewer - Événement updatePdfViewer reçu:', event);
@@ -178,6 +228,17 @@
         <div class="placeholder-icon">📄</div>
         <h3>Consulter un document</h3>
         <p>Sélectionnez un document dans l'arborescence de gauche pour le consulter dans cette zone. <strong>💡 Astuce :</strong> Utilisez <kbd>Ctrl+F</kbd> pour rechercher dans le document une fois ouvert</p>
+        
+        {#if latestCR}
+          <div class="cta-container">
+            <button class="cta-accordion" on:click={openLatestCR}>
+              <span class="cta-text">Consulter le dernier compte-rendu municipal</span>
+              <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+          </div>
+        {/if}
       </div>
     </div>
   {/if}
@@ -433,6 +494,43 @@
 
   .placeholder-tips strong {
     font-weight: 600;
+  }
+
+  /* Styles pour le CTA */
+  .cta-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .cta-accordion {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+  }
+
+  .cta-accordion:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 139, 87, 0.4);
+  }
+
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .cta-accordion:hover .cta-icon {
+    transform: translateX(3px);
   }
 
   /* Responsive */
