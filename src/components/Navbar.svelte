@@ -8,7 +8,6 @@
     { href: "/", text: "Accueil" },
     { href: "/blog", text: "Actualités" },
     { href: "/retroplanning", text: "Rétro-planning" },
-    { href: "/budget", text: "Budget" },
     {
       text: "Suivis Municipal",
       dropdown: [
