@@ -4,7 +4,7 @@
   export let data: DrillDownItem[];
   export let sectionType: string;
   export let onClose: () => void;
-  import type { DrillDownItem } from '../utils/drilldown';
+  import type { DrillDownItem } from '../../utils/drilldown';
 
   // Fonction pour formater les montants en français
   function formatCurrency(amount: number): string {

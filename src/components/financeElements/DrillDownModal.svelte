@@ -10,8 +10,8 @@
 
 <script lang="ts">
   import DonutChart from './DonutChart.svelte';
-  import type { AggregatedData, BudgetItem } from '../utils/budget-data';
-  import { aggregateDataLevel2 } from '../utils/budget-data';
+  import type { AggregatedData, BudgetItem } from '../../utils/budget-data';
+  import { aggregateDataLevel2 } from '../../utils/budget-data';
 
   // Props avec les runes Svelte 5
   let { budgetData = [] }: { budgetData: BudgetItem[] } = $props();

@@ -14,8 +14,8 @@
 
 <script lang="ts">
   import { Chart, registerables } from 'chart.js';
-  import type { AggregatedData } from '../utils/budget-data';
-  import { formatCurrency, generateColors, calculateTotal } from '../utils/budget-data';
+  import type { AggregatedData } from '../../utils/budget-data';
+  import { formatCurrency, generateColors, calculateTotal } from '../../utils/budget-data';
 
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);

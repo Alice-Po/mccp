@@ -3,7 +3,7 @@
   export let drillDownData: { [key: string]: DrillDownItem[] };
   import FinancialTableDrillDownModal from './FinancialTableDrillDownModal.svelte';
   import { onMount } from 'svelte';
-  import type { DrillDownItem } from '../utils/drilldown';
+  import type { DrillDownItem } from '../../utils/drilldown';
 
   interface OverviewData {
     metadata: {
