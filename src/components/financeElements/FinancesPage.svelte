@@ -73,7 +73,26 @@
 });
 
 function toggleAccordion(id: string) {
+  const wasClosed = !accordions[id];
   accordions[id] = !accordions[id];
+  
+  // Si l'accordion vient de s'ouvrir, scroller vers lui
+  if (wasClosed) {
+    setTimeout(() => {
+      const accordionElement = document.getElementById(id);
+      if (accordionElement) {
+        // Calculer la position avec un offset pour laisser de l'espace
+        const headerHeight = 80; // Hauteur approximative du header fixe
+        const offset = 20; // Espace supplémentaire
+        const elementTop = accordionElement.offsetTop - headerHeight - offset;
+        
+        window.scrollTo({
+          top: elementTop,
+          behavior: 'smooth'
+        });
+      }
+    }, 150); // Délai pour laisser l'animation d'ouverture se déclencher
+  }
 }
   
   // Configuration des libellés d'accordéon
