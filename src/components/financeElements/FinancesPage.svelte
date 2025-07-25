@@ -82,12 +82,22 @@
     };
 
         // Reactive tab states
-        let fonctionnementDonutTab = $state('depenses');
+    let fonctionnementDonutTab = $state('depenses');
     let fonctionnementBarTab = $state('depenses');
     let fonctionnementTableTab = $state('depenses');
     let investissementDonutTab = $state('depenses');
     let investissementBarTab = $state('depenses');
     
+    // Generate chart title
+    function generateDonutTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
+      const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
+      return `${typeLabel} - ${section} - Réalisations 2024`;
+    }
+
+    function generateFinancialTableTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
+      const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
+      return `${typeLabel} de ${section.toLowerCase()} détaillées`;
+    }
     
     
     // Chargement des données
@@ -291,7 +301,7 @@
           <div class="chart-wrapper" id="chart-fonctionnement">
             <DonutChart 
               data={fonctionnementDonutTab === 'depenses' ? fonctionnementDepenses : fonctionnementRecettes}
-              title="Dépenses - Fonctionnement - Réalisations 2024"
+              title={generateDonutTitle('Fonctionnement', fonctionnementDonutTab as 'depenses' | 'recettes')}
               chartId="chart-fonctionnement"
               enableDrillDown={true}
               client:load
@@ -862,7 +872,7 @@
       }
     
       .tabs-container {
-        margin-bottom: 2rem;
+        margin: 2rem 0;
       }
     
       .tabs {
