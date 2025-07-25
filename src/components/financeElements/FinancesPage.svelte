@@ -51,6 +51,16 @@
       type: '',
       valueField: 'REALISATIONS_2024'
     });
+    let accordions = $state({
+    'accordion-fonctionnement': false,
+    'accordion-fonctionnement-chapitre': false,
+    'accordion-investissement': false,
+    'accordion-investissement-chapitre': false
+  });
+
+  function toggleAccordion(id: string) {
+    accordions[id] = !accordions[id];
+  }
     
     // Configuration des libellés d'accordéon
     const ACCORDION_LABELS = {
@@ -72,27 +82,7 @@
       },
     };
     
-    // Fonction pour gérer l'accordéon
-    function toggleAccordion(accordionId: string) {
-      const accordion = document.getElementById(accordionId);
-      const button = document.querySelector(`[data-accordion="${accordionId}"]`) as HTMLButtonElement;
-      
-      if (accordion && button) {
-        const isExpanded = accordion.classList.contains('expanded');
-        
-        if (isExpanded) {
-          accordion.classList.remove('expanded');
-          button.setAttribute('aria-expanded', 'false');
-          const ctaText = button.querySelector('.cta-text') as HTMLElement;
-          if (ctaText) ctaText.textContent = ACCORDION_LABELS[accordionId]?.closed || 'Voir';
-        } else {
-          accordion.classList.add('expanded');
-          button.setAttribute('aria-expanded', 'true');
-          const ctaText = button.querySelector('.cta-text') as HTMLElement;
-          if (ctaText) ctaText.textContent = ACCORDION_LABELS[accordionId]?.open || 'Masquer';
-        }
-      }
-    }
+    
     
     // Chargement des données
     async function loadBudgetData() {
@@ -399,14 +389,21 @@
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement')}>
-                  <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
-                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement')} aria-expanded={accordions['accordion-fonctionnement']}>
+                  <span class="cta-text">
+                    {accordions['accordion-fonctionnement']
+                      ? ACCORDION_LABELS['accordion-fonctionnement'].open
+                      : ACCORDION_LABELS['accordion-fonctionnement'].closed}
+                  </span>                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
-                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement-chapitre')}>
-                  <span class="cta-text">Voir le tableau des dépenses par chapitre</span>
+                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement-chapitre')} aria-expanded={accordions['accordion-fonctionnement-chapitre']}>
+                  <span class="cta-text">
+                    {accordions['accordion-fonctionnement-chapitre']
+                      ? ACCORDION_LABELS['accordion-fonctionnement-chapitre'].open
+                      : ACCORDION_LABELS['accordion-fonctionnement-chapitre'].closed}
+                  </span>
                   <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
@@ -417,6 +414,8 @@
 
           <!-- Accordéon pour le graphique de comparaison -->
           <div class="accordion-wrapper" id="accordion-fonctionnement">
+            {#if accordions['accordion-fonctionnement']}
+
             <div class="accordion-content">
               <div class="accordion-header">
                 <h4>Comparaison détaillée par chapitre</h4>
@@ -445,10 +444,13 @@
                 />
               </div>
             </div>
+            {/if}
           </div>
+         
 
         <!-- Accordéon pour le tableau des dépenses et recettes par chapitre -->
         <div class="accordion-wrapper" id="accordion-fonctionnement-chapitre">
+          {#if accordions['accordion-fonctionnement-chapitre']}
           <div class="accordion-content">
             <div class="accordion-header">
               <h4>Tableau des dépenses et recettes par chapitre</h4>
@@ -478,6 +480,7 @@
               />
             </div>
           </div>
+          {/if}
         </div>
       </section>
         
@@ -531,7 +534,7 @@
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta" on:click={() => toggleAccordion('accordion-investissement')}>
+                <button class="cta" on:click={() => toggleAccordion('accordion-investissement')} aria-expanded={accordions['accordion-investissement']}>
                   <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
                   <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -543,6 +546,7 @@
 
           <!-- Accordéon pour le graphique de comparaison -->
           <div class="accordion-wrapper" id="accordion-investissement">
+            {#if accordions['accordion-investissement']}
             <div class="accordion-content">
               <div class="accordion-header">
                 <h4>Comparaison détaillée par chapitre</h4>
@@ -572,6 +576,7 @@
                 />
               </div>
             </div>
+            {/if}
           </div>
         </section>
         <!-- Section Fiscalité -->
@@ -999,14 +1004,6 @@
       }
       .cta.active .cta-icon {
         transform: rotate(180deg);
-      }
-    
-    
-      .accordion-wrapper {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        background: white;
       }
     
       .accordion-wrapper.expanded {
