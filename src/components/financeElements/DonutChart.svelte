@@ -29,14 +29,15 @@
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
-  // Props avec les runes Svelte 5, typées et valeurs par défaut explicites
-  let {
-    data = [],
-    title = '',
-    chartId = 'default',
-    enableDrillDown = false,
-    onSegmentClick
-  }: DonutChartProps = $props();
+  // Props idiomatiques Svelte 5
+  const props = $props();
+
+  const data = $derived(props.data || []);
+  const title = $derived(props.title || '');
+  const chartId = $derived(props.chartId || 'default');
+  const enableDrillDown = $derived(props.enableDrillDown ?? false);
+  const onSegmentClick = $derived(props.onSegmentClick);
+
 
   // État local réactif pour le canvas et le chart
   let canvasElement = $state<HTMLCanvasElement>();
@@ -56,12 +57,7 @@
   });
 
   function createChart() {
-
     if (!canvasElement || data.length === 0) {
-      console.log('❌ DonutChart - Création annulée:', {
-        hasCanvas: !!canvasElement,
-        dataLength: data.length
-      });
       return;
     }
 
@@ -158,7 +154,6 @@
     const clickedData = data[elementIndex];
 
     if (clickedData.items && clickedData.items.length <= 1) {
-      console.log('❌ DonutChart - Drill-down ignoré: pas assez d\'éléments détaillés');
       showNoDetailTooltip(elementIndex);
       return;
     }
@@ -252,13 +247,7 @@
       if (targetChartId && targetChartId !== chartId) {
         return;
       }
-      if (newData) {
-        // Mise à jour directe des props via Svelte 5 (si possible)
-        // Sinon, demander à l'utilisateur de passer de nouvelles props
-        // Ici, on ne modifie pas data/title car ce sont des props
-        // On log simplement pour information
 
-      }
     };
     if (typeof document !== 'undefined') {
       document.addEventListener('updateChart', handleUpdateChart as EventListener);
@@ -275,6 +264,8 @@
   });
 </script>
 
+<!-- Log à chaque rendu du composant -->
+{@html `<div style='display:none'>[DonutChart] Rendered with data length: ${data.length}</div>`}
 <div class="donut-chart">
   <div class="chart-container">
     <!-- Graphique Chart.js -->

@@ -129,15 +129,10 @@
   // Effet pour écouter l'événement updateChart (comme DonutChart)
   $effect(() => {
     function handleUpdateChart(event: CustomEvent) {
-      
-      const { data: newData, title: newTitle, chartId: targetChartId, type: newType } = event.detail;
-      
-      
+      const { data: newData,  chartId: targetChartId} = event.detail;
       if (targetChartId && targetChartId !== chartId) {
         return;
       }
-      
-      
       renderChart(newData);
     }
     
