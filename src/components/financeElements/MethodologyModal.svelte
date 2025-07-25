@@ -151,6 +151,7 @@
                 Cet indicateur mesure ce que chaque commune dépense annuellement pour rémunérer ses agents
                 (salaires, charges sociales, primes), divisé par le nombre d'habitants.
             </p>
+            <p>C'est un indicateur stable.</p>
             
             <details class="technical-detail">
                 <summary>Détail technique : qu'est-ce qui est compté ?</summary>
@@ -159,17 +160,7 @@
                 <p><strong>Source :</strong> chapitre 012 du budget communal</p>
             </details>
             
-            <h4>Pourquoi cet indicateur ?</h4>
-            <p>
-                Les frais de personnel représentent <strong>60% en moyenne</strong> des dépenses
-                de fonctionnement des communes rurales. C'est un indicateur fiable qui reflète directement
-                les choix de la commune : niveau de service public, organisation administrative, politique salariale.
-            </p>
-            
-            <div class="highlight">
-                <strong>Avantage :</strong> Contrairement aux dépenses totales qui varient selon les transferts de compétences
-                vers l'intercommunalité, cet indicateur reste comparable entre communes.
-            </div>
+        
             
             <h4>Traitement statistique</h4>
             <p>
@@ -181,8 +172,8 @@
             <details class="technical-detail">
                 <summary>Méthode d'exclusion des valeurs aberrantes</summary>
                 <p>Nous appliquons la règle des écarts interquartiles :</p>
-                <p>• <strong>Seuil bas :</strong> 9,71 € par habitant</p>
-                <p>• <strong>Seuil haut :</strong> 286,02 € par habitant</p>
+                <p>• <strong>Seuil bas (premier décile) :</strong> 9,71 € par habitant</p>
+                <p>• <strong>Seuil haut (dernier décile) :</strong> 286,02 € par habitant</p>
                 <p><strong>Motifs d'exclusion typiques :</strong> fusion récente, transfert exceptionnel de personnel, situation de crise</p>
             </details>
             
@@ -211,20 +202,6 @@
               <div class="stat-value">75<sup>e</sup></div>
               <div class="stat-desc">sur {communesData.length} communes</div>
             </div>
-          </div>
-          
-          <div class="decile-info">
-            <div class="decile-range">
-              <div class="decile-item">
-                <span class="decile-label">Premier décile :</span>
-                <span class="decile-value">286,02 €</span>
-              </div>
-              <div class="decile-item">
-                <span class="decile-label">Dernier décile :</span>
-                <span class="decile-value">9,71 €</span>
-              </div>
-            </div>
-          
           </div>
         </div>
       </div>

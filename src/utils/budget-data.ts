@@ -40,44 +40,29 @@ export function aggregateData(
   type: 'DEPENSES' | 'RECETTES',
   groupBy: 'regroupement_focale_n1' | 'regroupement_focale_n2' = 'regroupement_focale_n1'
 ): AggregatedData[] {
-  console.log('🔧 aggregateData - Début agrégation:', {
-    dataLength: data?.length,
-    section,
-    type,
-    groupBy,
-  });
-
   // Filtrer les données selon les critères
   const filteredData = data.filter(
     (item) => item.SECTION === section && item['DÉPENSES/RECETTES'] === type
   );
-
-  console.log('📊 aggregateData - Données filtrées:', filteredData?.length, 'éléments');
-  console.log('📊 aggregateData - Exemple données filtrées:', filteredData?.[0]);
 
   // Grouper par regroupement
   const grouped = new Map<string, BudgetItem[]>();
 
   filteredData.forEach((item) => {
     const key = item[groupBy];
-    console.log('🔑 aggregateData - Clé de regroupement:', key, 'pour item:', item.LIBELLE);
     if (!grouped.has(key)) {
       grouped.set(key, []);
     }
     grouped.get(key)!.push(item);
   });
 
-  console.log('📊 aggregateData - Groupes créés:', grouped.size);
-  grouped.forEach((items, label) => {
-    console.log(`📊 aggregateData - Groupe "${label}":`, items.length, 'éléments');
-  });
+  grouped.forEach((items, label) => {});
 
   // Calculer les totaux pour chaque groupe
   const result: AggregatedData[] = [];
 
   grouped.forEach((items, label) => {
     const total = items.reduce((sum, item) => sum + item.REALISATIONS_2024, 0);
-    console.log(`💰 aggregateData - Groupe "${label}": total = ${total} (REALISATIONS_2024)`);
 
     // Ignorer les groupes avec un total de 0
     if (total > 0) {
@@ -88,9 +73,6 @@ export function aggregateData(
       });
     }
   });
-
-  console.log('📊 aggregateData - Résultat final:', result.length, 'groupes avec valeurs > 0');
-  console.log('📊 aggregateData - Détail résultat:', result);
 
   // Trier par valeur décroissante
   return result.sort((a, b) => b.value - a.value);
@@ -107,14 +89,6 @@ export function aggregateDataLevel2(
   valueField: keyof BudgetItem,
   selectedN1Category: string
 ): AggregatedData[] {
-  console.log('📊 aggregateDataLevel2 - Paramètres:', {
-    dataLength: data.length,
-    section,
-    type,
-    valueField,
-    selectedN1Category,
-  });
-
   // Filtrer par section, type et catégorie N1
   const filteredData = data.filter((item) => {
     const matchesSection = item.SECTION?.toUpperCase() === section.toUpperCase();
@@ -122,12 +96,6 @@ export function aggregateDataLevel2(
     const matchesN1 = item.regroupement_focale_n1 === selectedN1Category;
 
     return matchesSection && matchesType && matchesN1;
-  });
-
-  console.log('🔍 aggregateDataLevel2 - Données filtrées:', {
-    originalLength: data.length,
-    filteredLength: filteredData.length,
-    selectedN1Category,
   });
 
   // Grouper par regroupement_focale_n2
@@ -143,8 +111,6 @@ export function aggregateDataLevel2(
     return acc;
   }, {} as Record<string, number>);
 
-  console.log('📈 aggregateDataLevel2 - Données groupées:', groupedData);
-
   // Convertir en format AggregatedData et trier
   const result = Object.entries(groupedData)
     .map(([label, value]) => {
@@ -157,8 +123,6 @@ export function aggregateDataLevel2(
     })
     .filter((item) => item.value > 0)
     .sort((a, b) => b.value - a.value);
-
-  console.log('✅ aggregateDataLevel2 - Résultat final:', result);
 
   return result;
 }
