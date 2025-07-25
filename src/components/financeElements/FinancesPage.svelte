@@ -62,6 +62,8 @@
       type: '',
       valueField: 'REALISATIONS_2024'
     });
+
+
     let accordions = $state({
     'accordion-fonctionnement': false,
     'accordion-fonctionnement-chapitre': false,
@@ -80,16 +82,16 @@
         closed: 'Voir la comparaison prévisions vs réalisations'
       },
       'accordion-fonctionnement-chapitre': {
-        open: 'Masquer le tableau des dépenses par chapitre',
-        closed: 'Voir le tableau des dépenses par chapitre'
+        open: 'Masquer le tableau des chapitres détaillés',
+        closed: 'Voir le tableau des chapitres détaillés'
       },
       'accordion-investissement': {
         open: 'Masquer la comparaison',
         closed: 'Voir la comparaison prévisions vs réalisations'
       },
       'accordion-investissement-chapitre': {
-        open: 'Masquer le tableau des dépenses par chapitre',
-        closed: 'Voir le tableau des dépenses par chapitre'
+        open: 'Masquer le tableau des chapitres détaillés',
+        closed: 'Voir le tableau des chapitres détaillés'
       },
     };
 
@@ -99,6 +101,8 @@
     let fonctionnementTableTab = $state('depenses');
     let investissementDonutTab = $state('depenses');
     let investissementBarTab = $state('depenses');
+    let investissementTableTab = $state('depenses');
+
     
     // Generate chart title
     function generateDonutTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
@@ -515,6 +519,17 @@
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
+                <button class="cta" on:click={() => toggleAccordion('accordion-investissement-chapitre')} aria-expanded={accordions['accordion-investissement-chapitre']}>
+                  <span class="cta-text">
+                    {accordions['accordion-investissement-chapitre']
+                      ? ACCORDION_LABELS['accordion-investissement-chapitre'].open
+                      : ACCORDION_LABELS['accordion-investissement-chapitre'].closed}
+                  </span>
+                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
               </div>
             </div>
           </div>
@@ -564,6 +579,51 @@
             </div>
             {/if}
           </div>
+         <!-- Accordéon pour le tableau des dépenses et recettes par chapitre -->
+        <div class="accordion-wrapper" id="accordion-investissement-chapitre">
+          {#if accordions['accordion-investissement-chapitre']}
+          <div class="accordion-content">
+            <div class="accordion-header">
+              <h4>Tableau des dépenses et recettes d'investissement par chapitre</h4>
+              <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
+            </div>
+            
+            <!-- Onglets pour le graphique de comparaison -->
+            <div class="tabs-container" id="bar-tabs-investissement-chapitre">
+              <div class="tabs">
+                <button 
+                  class="tab" 
+                  class:tab-active={investissementTableTab === 'depenses'} 
+                  on:click={() => investissementTableTab = 'depenses'}
+                  data-tab="depenses"
+                  data-section="investissement-table"
+                >
+                  Dépenses
+                </button>
+                <button 
+                  class="tab" 
+                  class:tab-active={investissementTableTab === 'recettes'} 
+                  on:click={() => investissementTableTab = 'recettes'}
+                  data-tab="recettes"
+                  data-section="investissement-table"
+                >
+                  Recettes
+                </button>
+              </div>
+            </div>
+
+            <!-- Graphique de comparaison -->
+            <div class="chart-wrapper" id="table-investissement-chapitre">
+              <FinancialTable 
+                data={investissementTableTab === 'depenses' ? overviewInvestissementDepenses : overviewInvestissementRecettes}
+                type={investissementTableTab === 'depenses' ? 'expenses' : 'revenues'}
+                title={generateFinancialTableTitle('Investissement', investissementTableTab as 'depenses' | 'recettes')}
+                rawData={investissementTableTab === 'depenses' ? financialTableInvestissementDepenses : financialTableInvestissementRecettes}
+              />
+            </div>
+          </div>
+          {/if}
+        </div>
         </section>
         <!-- Section Fiscalité -->
         <section class="chart-section" id="section-fiscalite">
