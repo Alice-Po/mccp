@@ -1,7 +1,14 @@
 <script lang="ts">
   export let isOpen: boolean;
   export let title: string;
-  export let data: DrillDownItem[];
+  export let data: Array<{
+    compte: string;
+    libelle: string;
+    prevus_2024: number;
+    realises_2024: number;
+    propositions_2025: number;
+    type: 'expense' | 'income';
+  }> = [];
   export let sectionType: string;
   export let onClose: () => void;
   import type { DrillDownItem } from '../../utils/drilldown';
@@ -14,11 +21,31 @@
     }) + ' €';
   }
 
+  // Fonction utilitaire pour calculer l'écart en pourcentage
+  function getEcartPourcentage(prevu: number, realise: number): number {
+    if (!prevu) return 0;
+    return ((realise - prevu) / prevu) * 100;
+  }
+  // Fonction utilitaire pour la classe couleur selon l'écart
+  function getEcartColorClass(ecart: number): string {
+    const abs = Math.abs(ecart);
+    if (abs < 5) return 'ecart-vert';
+    if (abs < 15) return 'ecart-orange';
+    return 'ecart-rouge';
+  }
+
   // Calcul des totaux
   $: totals = {
     prevus_2024: data.reduce((sum: number, item: DrillDownItem) => sum + item.prevus_2024, 0),
     realises_2024: data.reduce((sum: number, item: DrillDownItem) => sum + item.realises_2024, 0),
     propositions_2025: data.reduce((sum: number, item: DrillDownItem) => sum + item.propositions_2025, 0)
+  };
+
+  // Calcul des totaux généraux pour toutes les lignes
+  $: grandTotal = {
+    prevus_2024: data.reduce((sum, i) => sum + (i.prevus_2024 || 0), 0),
+    realises_2024: data.reduce((sum, i) => sum + (i.realises_2024 || 0), 0),
+    propositions_2025: data.reduce((sum, i) => sum + (i.propositions_2025 || 0), 0)
   };
 
   // Gestion des événements clavier
@@ -76,37 +103,52 @@
       </div>
 
       <div class="modal-body">
-        <div class="table-wrapper">
-          <table class="detail-table">
+        <div class="drilldown-table-wrapper">
+          <table class="drilldown-table">
             <thead>
               <tr>
-                <th class="col-compte">Compte</th>
-                <th class="col-libelle">Libellé</th>
-                <th class="col-amount">Prévus 2024</th>
-                <th class="col-amount">Réalisés 2024</th>
-                <th class="col-amount">Propositions 2025</th>
+                <th>Compte</th>
+                <th>Libellé</th>
+                <th>Prévus 2024</th>
+                <th>Réalisés 2024</th>
+                <th>Écart 2024 (%)</th>
+                <th>Propositions 2025</th>
               </tr>
             </thead>
             <tbody>
               {#each data as item}
-                <tr class="data-row">
-                  <td class="col-compte">{item.compte}</td>
-                  <td class="col-libelle">{item.libelle}</td>
-                  <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
-                  <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
-                  <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
+                <tr>
+                  <td>{item.compte}</td>
+                  <td>{item.libelle}</td>
+                  <td>{formatCurrency(item.prevus_2024)}</td>
+                  <td>{formatCurrency(item.realises_2024)}</td>
+                  <td class={getEcartColorClass(getEcartPourcentage(item.prevus_2024, item.realises_2024))}>
+                    {#if item.prevus_2024}
+                      {getEcartPourcentage(item.prevus_2024, item.realises_2024).toFixed(1)} %
+                    {:else}
+                      —
+                    {/if}
+                  </td>
+                  <td>{formatCurrency(item.propositions_2025)}</td>
                 </tr>
               {/each}
-              
-              <!-- Ligne de total -->
-              <tr class="total-row">
-                <td class="col-compte"></td>
-                <td class="col-libelle"><strong>Total</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(totals.prevus_2024)}</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(totals.realises_2024)}</strong></td>
-                <td class="col-amount"><strong>{formatCurrency(totals.propositions_2025)}</strong></td>
-              </tr>
             </tbody>
+            <tfoot>
+              <tr class="grand-total">
+                <td></td>
+                <td><strong>Total général</strong></td>
+                <td><strong>{formatCurrency(grandTotal.prevus_2024)}</strong></td>
+                <td><strong>{formatCurrency(grandTotal.realises_2024)}</strong></td>
+                <td class={getEcartColorClass(getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024))}><strong>
+                  {#if grandTotal.prevus_2024}
+                    {getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024).toFixed(1)} %
+                  {:else}
+                    —
+                  {/if}
+                </strong></td>
+                <td><strong>{formatCurrency(grandTotal.propositions_2025)}</strong></td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -184,105 +226,55 @@
     padding: 0;
   }
 
-  .table-wrapper {
+  .drilldown-table-wrapper {
     overflow-x: auto;
   }
 
-  .detail-table {
+  .drilldown-table {
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-main);
     font-size: 0.95rem;
   }
-
-  .detail-table thead {
-    background-color: var(--secondary);
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .detail-table th {
+  .drilldown-table th {
     padding: 1rem 0.75rem;
     text-align: left;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    background-color: var(--secondary);
+    color: white;
   }
-
-  .detail-table td {
+  .drilldown-table td {
     padding: 0.75rem;
     border-bottom: 1px solid #f1f3f4;
     vertical-align: middle;
-  }
-
-  .col-compte {
+    color: var(--secondary);
     text-align: center;
-    font-weight: 600;
-    color: var(--secondary);
-    width: 8%;
-    min-width: 60px;
   }
-
-  .col-libelle {
-    text-align: left;
-    width: 50%;
-    min-width: 250px;
-    color: var(--secondary);
-  }
-
-  .col-amount {
-    text-align: right;
-    min-width: 120px;
-    font-family: 'Courier New', monospace;
-    font-weight: 500;
-    color: var(--secondary);
-  }
-
-  .data-row:hover {
-    background-color: #f8f9fa;
-    transition: background-color 0.2s ease;
-  }
-
-  .total-row {
-    background-color: #f0f4f8;
-    border-top: 2px solid var(--primary);
-  }
-
-  .total-row td {
-    padding: 1rem 0.75rem;
-    font-size: 1rem;
-  }
-
-  .total-row strong {
-    color: var(--secondary);
+  .grand-total td {
+    font-size: 1.1rem;
     font-weight: 700;
+    color: var(--primary);
+    background: #f0f4f8;
+    padding: 1.1rem 0.75rem;
+    border-bottom: none;
   }
-
-  .modal-footer {
-    padding: 1.5rem 2rem;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
-    display: flex;
-    justify-content: flex-end;
+  .ecart-vert {
+    color: #228B22;
+    font-weight: bold;
+    background: #eafbe7;
   }
-
-  .close-modal-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s ease;
+  .ecart-orange {
+    color: #e67e22;
+    font-weight: bold;
+    background: #fff6e5;
   }
-
-  .close-modal-btn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
+  .ecart-rouge {
+    color: #c0392b;
+    font-weight: bold;
+    background: #fdeaea;
   }
 
   /* Responsive design */
@@ -292,12 +284,12 @@
       max-height: 95vh;
     }
     
-    .detail-table {
+    .drilldown-table {
       font-size: 0.9rem;
     }
     
-    .detail-table th,
-    .detail-table td {
+    .drilldown-table th,
+    .drilldown-table td {
       padding: 0.6rem 0.5rem;
     }
   }
@@ -315,7 +307,7 @@
       font-size: 1.3rem;
     }
     
-    .detail-table {
+    .drilldown-table {
       font-size: 0.8rem;
     }
     

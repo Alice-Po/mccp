@@ -145,6 +145,19 @@
     realises_2024: data.sections.reduce((sum, section) => sum + section.items.reduce((s, i) => s + (i.realises_2024 || 0), 0), 0),
     propositions_2025: data.sections.reduce((sum, section) => sum + section.items.reduce((s, i) => s + (i.propositions_2025 || 0), 0), 0)
   };
+
+  // Fonction utilitaire pour calculer l'écart en pourcentage
+  function getEcartPourcentage(prevu: number, realise: number): number {
+    if (!prevu) return 0;
+    return ((realise - prevu) / prevu) * 100;
+  }
+  // Fonction utilitaire pour la classe couleur selon l'écart
+  function getEcartColorClass(ecart: number): string {
+    const abs = Math.abs(ecart);
+    if (abs < 5) return 'ecart-vert';
+    if (abs < 15) return 'ecart-orange';
+    return 'ecart-rouge';
+  }
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -171,6 +184,7 @@
           <th class="col-libelle">{data.metadata.columns.libelle}</th>
           <th class="col-amount">{data.metadata.columns.prevus_2024}</th>
           <th class="col-amount">{data.metadata.columns.realises_2024}</th>
+          <th class="col-amount">Écart 2024 (%)</th>
           <th class="col-amount">{data.metadata.columns.propositions_2025}</th>
         </tr>
       </thead>
@@ -190,6 +204,13 @@
               </td>
               <td class="col-amount">{formatCurrency(item.prevus_2024)}</td>
               <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
+              <td class="col-amount {getEcartColorClass(getEcartPourcentage(item.prevus_2024, item.realises_2024))}">
+                {#if item.prevus_2024}
+                  {getEcartPourcentage(item.prevus_2024, item.realises_2024).toFixed(1)} %
+                {:else}
+                  —
+                {/if}
+              </td>
               <td class="col-amount">{formatCurrency(item.propositions_2025)}</td>
             </tr>
           {/each}
@@ -206,6 +227,13 @@
             <td class="col-libelle"><strong>Total général</strong></td>
             <td class="col-amount"><strong>{formatCurrency(grandTotal.prevus_2024)}</strong></td>
             <td class="col-amount"><strong>{formatCurrency(grandTotal.realises_2024)}</strong></td>
+            <td class="col-amount {getEcartColorClass(getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024))}"><strong>
+              {#if grandTotal.prevus_2024}
+                {getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024).toFixed(1)} %
+              {:else}
+                —
+              {/if}
+            </strong></td>
             <td class="col-amount"><strong>{formatCurrency(grandTotal.propositions_2025)}</strong></td>
           </tr>
         </tbody>
@@ -526,5 +554,20 @@
     background: #f0f4f8;
     padding: 1.1rem 0.75rem;
     border-bottom: none;
+  }
+  .ecart-vert {
+    color: #228B22;
+    font-weight: bold;
+    background: #eafbe7;
+  }
+  .ecart-orange {
+    color: #e67e22;
+    font-weight: bold;
+    background: #fff6e5;
+  }
+  .ecart-rouge {
+    color: #c0392b;
+    font-weight: bold;
+    background: #fdeaea;
   }
 </style> 

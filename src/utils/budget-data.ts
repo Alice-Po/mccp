@@ -286,6 +286,46 @@ export interface OverviewData {
   }>;
 }
 
+// Mapping des libellés de chapitres vers leur numéro
+export const CHAPITRE_NUMBERS_MAP: Record<string, string> = {
+  // Fonctionnement
+  'CHARGES A CARACTERE GENERAL': '011',
+  'CHARGES DE PERSONNEL': '012',
+  'ATTENUATION DE PRODUITS': '014',
+  'AUTRES CHARGES DE GESTION COURANTE': '65',
+  'CHARGES FINANCIERES': '66',
+  'CHARGES SPECIFIQUES': '67',
+  'DOTATIONS AUX AMORTISSEMENTS ET PROVIS.': '68',
+  "VIREMENT A LA SECTION D'INVESTISSEMENT": '023',
+  'CHARGES EXCEPTIONNELLES': '678',
+  "OPER. D'ORDRE DE TRANSFERT ENTRE SECTIONS": '042',
+  // Recettes fonctionnement
+  'PRODUITS DES SERVICES ET DU DOMAINE': '70',
+  'IMPOTS ET TAXES': '73',
+  'FISCALITE LOCALE': '731',
+  'DOTATIONS ET PARTICIPATIONS': '74',
+  'AUTRES PROD. DE GESTION COURANTE': '75',
+  'ATTENUATION DE CHARGES': '78',
+  'PRODUITS FINANCIERS': '76',
+  'PRODUITS EXCEPTIONNELS': '77',
+  'EXCEDENT REPORTE': '002',
+  // Investissement
+  'IMMOBILISATIONS INCORPORELLES': '20',
+  'IMMOBILISATIONS CORPORELLES': '21',
+  'IMMOBILISATIONS EN COURS': '23',
+  'AUTRES IMMOBILISATIONS FINANCIERES': '27',
+  "SUBVENTIONS D'EQUIPEMENT": '13',
+  'APPORTS DOTATIONS ET RESERVES': '10',
+  'PRODUITS DES CESSIONS': '024',
+  "REMBOURSEMENT D'EMPRUNTS ET DETTES": '16',
+  'EMPRUNTS ET DETTES ASSIMILEES': '165',
+  "DEFICIT D'INVESTISSEMENT REPORTE": '001',
+  'EXCEDENT ANTERIEUR REPORTE': '001',
+  'OPERATIONS PATRIMONIALES': '040',
+  "SUBVENTIONS D'EQUIPEMENT VERSEES": '204',
+  'VIREMENT DE LA SECTION DE FONCTIONNEMENT': '021',
+};
+
 /**
  * Transforme un tableau plat de BudgetItem en structure OverviewData pour FinancialTable.svelte
  * Chaque section = un chapitre, chaque item = total du chapitre (pas les articles détaillés)
@@ -311,7 +351,7 @@ export function buildOverviewDataByChapitre(
     const sectionTitle = chapitre;
     // Un seul item par section : le total du chapitre
     const totalItem = {
-      compte: '',
+      compte: CHAPITRE_NUMBERS_MAP[chapitre.toUpperCase()] || '', // mapping strict, pas de fallback
       libelle: chapitre, // le nom du chapitre
       prevus_2024: chapitreItems.reduce((sum, i) => sum + (i.PREVISIONS_2024 || 0), 0),
       realises_2024: chapitreItems.reduce((sum, i) => sum + (i.REALISATIONS_2024 || 0), 0),
