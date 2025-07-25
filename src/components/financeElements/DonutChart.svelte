@@ -129,8 +129,8 @@
     const elementIndex = elements[0].index;
     const clickedData = data[elementIndex];
 
-    // Vérifier si le drill-down est possible
-    if (!clickedData.items || clickedData.items.length <= 1) {
+   // Vérifier si le drill-down est possible (moins de 2 éléments = pas de détail)
+   if (!clickedData.items || clickedData.items.length < 2) {
       showNoDetailTooltip(elementIndex);
       return;
     }
