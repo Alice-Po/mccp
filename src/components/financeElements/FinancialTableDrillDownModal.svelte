@@ -153,9 +153,7 @@
         </div>
       </div>
 
-      <div class="modal-footer">
-        <button class="close-modal-btn" on:click={onClose}>Fermer</button>
-      </div>
+   
     </div>
   </div>
 {/if}
@@ -181,7 +179,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     max-width: 90vw;
     max-height: 90vh;
-    width: 1200px;
+    width: 900px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -189,7 +187,7 @@
   }
 
   .modal-header {
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.2rem;
     color: var(--secondary);
     display: flex;
     justify-content: space-between;
@@ -200,7 +198,7 @@
   .modal-header h2 {
     margin: 0;
     font-family: var(--font-main);
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--secondary);
   }
@@ -234,31 +232,39 @@
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-main);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+  }
+  .drilldown-table thead {
+    background-color: var(--secondary);
+    color: white;
   }
   .drilldown-table th {
-    padding: 1rem 0.75rem;
+    padding: 0.4rem 0.3rem;
     text-align: left;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     background-color: var(--secondary);
     color: white;
   }
   .drilldown-table td {
-    padding: 0.75rem;
+    padding: 0.4rem 0.3rem;
     border-bottom: 1px solid #f1f3f4;
     vertical-align: middle;
     color: var(--secondary);
     text-align: center;
+    font-size: 0.85rem;
+  }
+  .drilldown-table td:nth-child(2) {
+    text-align: left;
   }
   .grand-total td {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--primary);
     background: #f0f4f8;
-    padding: 1.1rem 0.75rem;
+    padding: 0.6rem 0.3rem;
     border-bottom: none;
   }
   .ecart-vert {
@@ -283,14 +289,12 @@
       width: 95vw;
       max-height: 95vh;
     }
-    
     .drilldown-table {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
-    
     .drilldown-table th,
     .drilldown-table td {
-      padding: 0.6rem 0.5rem;
+      padding: 0.3rem 0.2rem;
     }
   }
 
@@ -298,33 +302,18 @@
     .modal-backdrop {
       padding: 1rem;
     }
-    
     .modal-header {
-      padding: 1rem 1.5rem;
+      padding: 0.7rem 0.7rem;
     }
-    
     .modal-header h2 {
-      font-size: 1.3rem;
+      font-size: 1rem;
     }
-    
     .drilldown-table {
-      font-size: 0.8rem;
-    }
-    
-    .col-compte {
-      width: 10%;
-      min-width: 50px;
-    }
-    
-    .col-libelle {
-      width: 45%;
-      min-width: 200px;
-    }
-    
-    .col-amount {
-      width: 15%;
-      min-width: 100px;
       font-size: 0.75rem;
+    }
+    .drilldown-table th,
+    .drilldown-table td {
+      padding: 0.2rem 0.1rem;
     }
   }
 

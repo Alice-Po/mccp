@@ -184,7 +184,7 @@
           <th class="col-libelle">{data.metadata.columns.libelle}</th>
           <th class="col-amount">{data.metadata.columns.prevus_2024}</th>
           <th class="col-amount">{data.metadata.columns.realises_2024}</th>
-          <th class="col-amount">Écart 2024 (%)</th>
+          <th class="col-amount">Écart 2024 (€)</th>
           <th class="col-amount">{data.metadata.columns.propositions_2025}</th>
         </tr>
       </thead>
@@ -206,7 +206,7 @@
               <td class="col-amount">{formatCurrency(item.realises_2024)}</td>
               <td class="col-amount {getEcartColorClass(getEcartPourcentage(item.prevus_2024, item.realises_2024))}">
                 {#if item.prevus_2024}
-                  {getEcartPourcentage(item.prevus_2024, item.realises_2024).toFixed(1)} %
+                  {formatCurrency(item.realises_2024 - item.prevus_2024)}
                 {:else}
                   —
                 {/if}
@@ -229,7 +229,7 @@
             <td class="col-amount"><strong>{formatCurrency(grandTotal.realises_2024)}</strong></td>
             <td class="col-amount {getEcartColorClass(getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024))}"><strong>
               {#if grandTotal.prevus_2024}
-                {getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024).toFixed(1)} %
+                {formatCurrency(grandTotal.realises_2024 - grandTotal.prevus_2024)}
               {:else}
                 —
               {/if}
@@ -257,12 +257,12 @@
     background: white;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     overflow: hidden;
   }
 
   .table-header {
-    padding: 2rem 2rem 1rem;
+    padding: 1.2rem 1.2rem 0.7rem;
     background: var(--primary);
     color: white;
     text-align: center;
@@ -280,7 +280,7 @@
     color: white;
     margin: 0;
     font-family: var(--font-main);
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     font-weight: 600;
   }
 
@@ -288,7 +288,7 @@
     background: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.3rem;
     cursor: pointer;
     transition: all 0.2s ease;
     color: white;
@@ -359,7 +359,7 @@
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-main);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .financial-table thead {
@@ -368,16 +368,16 @@
   }
 
   .financial-table th {
-    padding: 1rem 0.75rem;
+    padding: 0.4rem 0.3rem;
     text-align: left;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .financial-table td {
-    padding: 0.75rem;
+    padding: 0.4rem 0.3rem;
     border-bottom: 1px solid #f1f3f4;
     vertical-align: middle;
   }
@@ -387,25 +387,26 @@
     text-align: center;
     font-weight: 600;
     color: var(--secondary);
-    width: 8%;
-    min-width: 60px;
+    width: 7%;
+    min-width: 40px;
   }
 
   .col-libelle {
     text-align: left;
-    width: 40%;
-    min-width: 200px;
+    width: 35%;
+    min-width: 120px;
     color: var(--secondary);
     position: relative;
   }
 
   .col-amount {
     text-align: right;
-    min-width: 120px;
+    min-width: 70px;
     font-family: 'Courier New', monospace;
     font-weight: 500;
     color: white;
     text-align: center;
+    font-size: 0.85rem;
   }
 
   /* Styles pour les en-têtes de section */
@@ -415,8 +416,8 @@
   }
 
   .section-header .section-title {
-    padding: 1rem 0.75rem;
-    font-size: 1.1rem;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.9rem;
     color: var(--secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -436,8 +437,8 @@
   }
 
   .section-total td {
-    padding: 0.9rem 0.75rem;
-    font-size: 1rem;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.9rem;
   }
 
   .section-total strong {
@@ -477,22 +478,22 @@
     }
     
     .financial-table {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .financial-table th,
     .financial-table td {
-      padding: 0.6rem 0.5rem;
+      padding: 0.3rem 0.2rem;
     }
   }
 
   @media (max-width: 768px) {
     .table-header {
-      padding: 1.5rem 1rem 1rem;
+      padding: 0.8rem 0.5rem 0.5rem;
     }
     
-    .table-header h2 {
-      font-size: 1.5rem;
+    .header-content h2 {
+      font-size: 1rem;
     }
     
     .period-tag {
@@ -501,22 +502,22 @@
     }
     
     .financial-table {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
     }
     
     .col-compte {
       width: 10%;
-      min-width: 50px;
+      min-width: 20px;
     }
     
     .col-libelle {
-      width: 35%;
-      min-width: 150px;
+      width: 30%;
+      min-width: 50px;
     }
     
     .col-amount {
       width: 18%;
-      min-width: 100px;
+      min-width: 30px;
       font-size: 0.75rem;
     }
   }
@@ -541,18 +542,18 @@
   }
 
   .grand-total-row {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     background: #f0f4f8;
     border-top: 2px solid var(--primary);
     border-radius: 0 0 1rem 1rem;
     box-shadow: 0 2px 8px rgba(46, 139, 87, 0.08);
   }
   .grand-total td {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--primary);
     background: #f0f4f8;
-    padding: 1.1rem 0.75rem;
+    padding: 0.6rem 0.3rem;
     border-bottom: none;
   }
   .ecart-vert {
