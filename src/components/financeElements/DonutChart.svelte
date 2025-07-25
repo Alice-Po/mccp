@@ -617,7 +617,7 @@
     gap: 0.75rem;
     margin-bottom: 1.5rem;
     padding: 0.85rem 1.5rem;
-    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    background: #f0fdf4;
     border: 2px solid var(--primary, #2e8b57);
     border-radius: 1.2rem;
     box-shadow: 0 4px 16px rgba(46, 139, 87, 0.08);

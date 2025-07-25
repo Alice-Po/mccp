@@ -200,7 +200,7 @@
 
   .nav-header {
     padding: 1rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: var(--primary);
     border-radius: 1rem 1rem 0 0;
   }
 

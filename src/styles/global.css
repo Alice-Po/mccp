@@ -104,7 +104,7 @@ strong {
   position: relative;
   display: inline-block;
   padding: 0 0.2rem;
-  background: linear-gradient(180deg, transparent 65%, rgba(46, 139, 87, 0.2) 65%);
+  background: rgba(46, 139, 87, 0.2);
 }
 
 /* Styles pour les sections spécifiques */

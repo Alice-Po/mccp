@@ -227,7 +227,7 @@
 
   .table-header {
     padding: 2rem 2rem 1rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: var(--primary);
     color: white;
     text-align: center;
   }

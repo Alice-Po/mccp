@@ -321,7 +321,7 @@
   }
 
   .modal-header {
-    background: linear-gradient(135deg, #2e8b57 0%, #1b5e39 100%);
+    background: #2e8b57;
     color: white;
     padding: 2rem;
     display: flex;
@@ -423,7 +423,7 @@
 
   /* Section d'explication vulgarisée */
   .explanation-box {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: #f0f9ff;
     border: 1px solid #bae6fd;
     border-radius: 1rem;
     padding: 2rem;
@@ -519,12 +519,12 @@
 
   .stat-item.highlight {
     border-color: #2e8b57;
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: #f0fdf4;
   }
 
   .stat-item.ranking {
     border-color: #f59e0b;
-    background: linear-gradient(135deg, #fefbf0 0%, #fef3c7 100%);
+    background: #fefbf0;
   }
 
   .stat-label {
@@ -633,7 +633,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #2e8b57 0%, #1b5e39 100%);
+    background: #2e8b57;
     color: white;
     text-decoration: none;
     border-radius: 0.5rem;
@@ -646,7 +646,7 @@
   .source-link:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
-    background: linear-gradient(135deg, #1b5e39 0%, #15492c 100%);
+    background: #1b5e39;
   }
 
   .link-icon {

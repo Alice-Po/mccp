@@ -253,12 +253,12 @@
   }
 
   .local-rate {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: #f0fdf4;
     border-color: #bbf7d0;
   }
 
   .reference-rate {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    background: #f1f5f9;
     border-color: #cbd5e1;
   }
 
@@ -367,7 +367,7 @@
   /* Section Analyse */
   .analysis-section {
     margin-top: 3rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: #f8fafc;
     border-radius: 1rem;
     padding: 2rem;
     border-left: 4px solid var(--secondary);
@@ -445,7 +445,7 @@
   }
 
   .modal-header {
-    background: linear-gradient(135deg, var(--primary) 0%, #1b5e39 100%);
+    background: var(--primary);
     color: white;
     padding: 2rem;
     display: flex;

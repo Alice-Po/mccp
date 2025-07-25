@@ -216,15 +216,15 @@
   }
 
   .performance-badge.excellent {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: #fef3c7;
   }
 
   .performance-badge.bon {
-    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    background: #e0f2fe;
   }
 
   .performance-badge.moyen {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: #f0fdf4;
   }
 
   .indicator-definition {
@@ -259,12 +259,12 @@
   }
 
   .local-value {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: #f0fdf4;
     border-color: #bbf7d0;
   }
 
   .reference-value {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    background: #f1f5f9;
     border-color: #cbd5e1;
   }
 
@@ -335,7 +335,7 @@
 
   .indicator-analysis {
     margin-top: 1.5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: #f8fafc;
     border-radius: 1rem;
     padding: 1.5rem;
     border-left: 4px solid var(--secondary);
@@ -360,7 +360,7 @@
   /* Section Conclusion */
   .conclusion-section {
     margin-top: 3rem;
-    background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+    background: #fefefe;
     border-radius: 1.5rem;
     padding: 2.5rem;
     border: 2px solid var(--primary);
@@ -375,7 +375,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    background: var(--primary);
     border-radius: 1.5rem 1.5rem 0 0;
   }
 
