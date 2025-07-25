@@ -8,13 +8,13 @@
     { href: "/", text: "Accueil" },
     { href: "/blog", text: "Actualités" },
     { href: "/retroplanning", text: "Rétro-planning" },
-    {
-      text: "Suivis Municipal",
-      dropdown: [
-        { href: "/finances", text: "Finances" },
-        { href: "/conseils-municipaux", text: "Conseils Municipaux" }
-      ]
-    }
+    // {
+    //   text: "Suivis Municipal",
+    //   dropdown: [
+    //     { href: "/finances", text: "Finances" },
+    //     { href: "/conseils-municipaux", text: "Conseils Municipaux" }
+    //   ]
+    // }
   ];
 
   let mobileMenuOpen = false;
