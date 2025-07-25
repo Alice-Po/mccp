@@ -71,12 +71,6 @@
       return;
     }
 
-    console.log('🎯 DonutChart - Création du chart avec:', {
-      labels: data.map(item => item.label),
-      values: data.map(item => item.value),
-      colors: colors
-    });
-
     chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
@@ -162,11 +156,7 @@
     if (!enableDrillDown || elements.length === 0) return;
     const elementIndex = elements[0].index;
     const clickedData = data[elementIndex];
-    console.log('🖱️ DonutChart - Clic sur segment:', {
-      elementIndex,
-      clickedData,
-      enableDrillDown
-    });
+
     if (clickedData.items && clickedData.items.length <= 1) {
       console.log('❌ DonutChart - Drill-down ignoré: pas assez d\'éléments détaillés');
       showNoDetailTooltip(elementIndex);
@@ -188,7 +178,6 @@
         }
       });
       document.dispatchEvent(customEvent);
-      console.log('📡 DonutChart - Événement DOM dispatché:', customEvent.detail);
     }
   }
 
@@ -257,13 +246,10 @@
 
   // Effet principal pour gérer le cycle de vie du chart (remplace onMount/onDestroy)
   $effect(() => {
-    console.log('🎬 DonutChart - Component mounted');
     createChart();
     const handleUpdateChart = (event: CustomEvent) => {
-      console.log('📡 DonutChart - Événement updateChart reçu:', event.detail);
       const { data: newData, title: newTitle, chartId: targetChartId } = event.detail;
       if (targetChartId && targetChartId !== chartId) {
-        console.log('⏭️ DonutChart - Événement ignoré (chartId différent):', { targetChartId, chartId });
         return;
       }
       if (newData) {
@@ -271,10 +257,7 @@
         // Sinon, demander à l'utilisateur de passer de nouvelles props
         // Ici, on ne modifie pas data/title car ce sont des props
         // On log simplement pour information
-        console.log('🔄 DonutChart - Données reçues pour mise à jour (props immuables):', {
-          newDataLength: newData?.length || 0,
-          newTitle
-        });
+
       }
     };
     if (typeof document !== 'undefined') {

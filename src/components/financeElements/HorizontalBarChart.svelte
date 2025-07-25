@@ -123,51 +123,28 @@
 
   // Effet principal : (ré)affiche le graphique à chaque changement de props
   $effect(() => {
-    console.log('📊 HorizontalBarChart - $effect principal déclenché:', {
-      chartId,
-      data: data.length,
-      type,
-      title: title.substring(0, 50) + '...'
-    });
+
     renderChart(data, type, title);
   });
 
   // Effet pour écouter l'événement updateChart (comme DonutChart)
   $effect(() => {
     function handleUpdateChart(event: CustomEvent) {
-      console.log('🎯 HorizontalBarChart - Événement updateChart reçu:', {
-        eventDetail: event.detail,
-        currentChartId: chartId,
-        targetChartId: event.detail.chartId
-      });
       
       const { data: newData, title: newTitle, chartId: targetChartId, type: newType } = event.detail;
       
-      console.log('🔍 HorizontalBarChart - Comparaison chartId:', {
-        targetChartId,
-        currentChartId: chartId,
-        shouldUpdate: targetChartId === chartId
-      });
       
       if (targetChartId && targetChartId !== chartId) {
-        console.log('❌ HorizontalBarChart - Événement ignoré (mauvais chartId)');
         return;
       }
       
-      console.log('✅ HorizontalBarChart - Mise à jour du graphique:', {
-        newData: newData?.length || 0,
-        newType,
-        newTitle: newTitle?.substring(0, 50) + '...'
-      });
       
       renderChart(newData || [], newType || type, newTitle || title);
     }
     
-    console.log('🔧 HorizontalBarChart - Setup événement updateChart pour chartId:', chartId);
     document.addEventListener('updateChart', handleUpdateChart as EventListener);
     
-    return () => {
-      console.log('🧹 HorizontalBarChart - Cleanup événement updateChart pour chartId:', chartId);
+    return () => {  
       document.removeEventListener('updateChart', handleUpdateChart as EventListener);
     };
   });
