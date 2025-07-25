@@ -81,6 +81,13 @@
         closed: 'Voir le tableau des dépenses par chapitre'
       },
     };
+
+        // Reactive tab states
+        let fonctionnementDonutTab = $state('depenses');
+    let fonctionnementBarTab = $state('depenses');
+    let fonctionnementTableTab = $state('depenses');
+    let investissementDonutTab = $state('depenses');
+    let investissementBarTab = $state('depenses');
     
     
     
@@ -117,100 +124,9 @@
     
     // Configuration des graphiques
     function setupChartManagers() {
-      const chartConfigs = {
-        'donut-tabs-fonctionnement': {
-          chartId: 'chart-fonctionnement',
-          section: 'Fonctionnement',
-          dataMap: {
-            depenses: fonctionnementDepenses,
-            recettes: fonctionnementRecettes
-          }
-        },
-        'donut-tabs-investissement': {
-          chartId: 'chart-investissement', 
-          section: 'Investissement',
-          dataMap: {
-            depenses: investissementDepenses,
-            recettes: investissementRecettes
-          }
-        },
-        'bar-tabs-fonctionnement': {
-          chartId: 'bar-fonctionnement',
-          section: 'Fonctionnement',
-          dataMap: {
-            depenses: { data: barChartFonctionnementDepensesChapitre, type: 'expenses' },
-            recettes: { data: barChartFonctionnementRecettesChapitre, type: 'revenues' }
-          }
-        },
-        'table-tabs-fonctionnement': {
-          chartId: 'table-fonctionnement',
-          section: 'Fonctionnement',
-          dataMap: {
-            depenses: { data: financialTableFonctionnementDepenses, type: 'expenses' },
-            recettes: { data: financialTableFonctionnementRecettes, type: 'revenues' }
-          }
-        },
-        'bar-tabs-investissement': {
-          chartId: 'bar-investissement',
-          section: 'Investissement', 
-          dataMap: {
-            depenses: { data: barChartInvestissementDepensesChapitre, type: 'expenses' },
-            recettes: { data: barChartInvestissementRecettesChapitre, type: 'revenues' }
-          }
-        }
+     
       };
     
-      function dispatchChartUpdate(config: any) {
-        const updateEvent = new CustomEvent('updateChart', { detail: config });
-        document.dispatchEvent(updateEvent);
-      }
-    
-      function generateTitle(tabType: string, section: string, isBarChart = false) {
-        const typeLabel = tabType === 'depenses' ? 'Dépenses' : 'Recettes';
-        const prefix = isBarChart ? 'Comparaison des' : '';
-        const suffix = isBarChart ? 'par chapitre (Prévus, Réalisés, Propositions)' : '- Réalisations 2024';
-        return `${prefix} ${typeLabel} - ${section} ${suffix}`.trim();
-      }
-    
-      function createTabManager(selectorId: string, config: any) {
-        const tabs = document.querySelectorAll(`#${selectorId} .tab`);
-        const isBarChart = selectorId.includes('bar-tabs');
-        
-        function updateChart(tabType: string) {
-          const dataConfig = config.dataMap[tabType];
-          const title = generateTitle(tabType, config.section, isBarChart);
-          
-          if (isBarChart) {
-            dispatchChartUpdate({
-              data: dataConfig.data,
-              title: title,
-              chartId: config.chartId,
-              type: dataConfig.type
-            });
-          } else {
-            dispatchChartUpdate({
-              data: dataConfig,
-              title: title,
-              chartId: config.chartId
-            });
-          }
-        }
-        
-        tabs.forEach(tab => {
-          tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('tab-active'));
-            tab.classList.add('tab-active');
-            updateChart((tab as HTMLElement).dataset.tab || 'depenses');
-          });
-        });
-        
-        updateChart('depenses');
-      }
-    
-      Object.entries(chartConfigs).forEach(([selectorId, config]) => {
-        createTabManager(selectorId, config);
-      });
-    }
     
     // Gestion des événements de drill-down
     function setupDrillDownEvents() {
@@ -358,20 +274,35 @@
           
           <!-- Onglets Donut Fonctionnement -->
           <div class="tabs-container" id="donut-tabs-fonctionnement">
-            <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-donut">
-                Dépenses
-              </button>
-              <button class="tab" data-tab="recettes" data-section="fonctionnement-donut">
-                Recettes
-              </button>
-            </div>
+           <!-- Fonctionnement Donut Tabs -->
+        <div class="tabs-container" id="donut-tabs-fonctionnement">
+          <div class="tabs">
+            <button 
+              class="tab" 
+              class:tab-active={fonctionnementDonutTab === 'depenses'} 
+              on:click={() => fonctionnementDonutTab = 'depenses'}
+              data-tab="depenses"
+              data-section="fonctionnement-donut"
+            >
+              Dépenses
+            </button>
+            <button 
+              class="tab" 
+              class:tab-active={fonctionnementDonutTab === 'recettes'} 
+              on:click={() => fonctionnementDonutTab = 'recettes'}
+              data-tab="recettes"
+              data-section="fonctionnement-donut"
+            >
+              Recettes
+            </button>
+          </div>
+        </div>
           </div>
 
           <!-- Graphique Fonctionnement (Donut) -->
           <div class="chart-wrapper" id="chart-fonctionnement">
             <DonutChart 
-              data={fonctionnementDepenses}
+              data={fonctionnementDonutTab === 'depenses' ? fonctionnementDepenses : fonctionnementRecettes}
               title="Dépenses - Fonctionnement - Réalisations 2024"
               chartId="chart-fonctionnement"
               enableDrillDown={true}
@@ -425,10 +356,22 @@
               <!-- Onglets pour le graphique de comparaison -->
               <div class="tabs-container" id="bar-tabs-fonctionnement">
                 <div class="tabs">
-                  <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-bar">
+                  <button 
+                    class="tab" 
+                    class:tab-active={fonctionnementBarTab === 'depenses'} 
+                    on:click={() => fonctionnementBarTab = 'depenses'}
+                    data-tab="depenses"
+                    data-section="fonctionnement-bar"
+                  >
                     Dépenses
                   </button>
-                  <button class="tab" data-tab="recettes" data-section="fonctionnement-bar">
+                  <button 
+                    class="tab" 
+                    class:tab-active={fonctionnementBarTab === 'recettes'} 
+                    on:click={() => fonctionnementBarTab = 'recettes'}
+                    data-tab="recettes"
+                    data-section="fonctionnement-bar"
+                  >
                     Recettes
                   </button>
                 </div>
@@ -437,10 +380,10 @@
               <!-- Graphique de comparaison -->
               <div class="chart-wrapper" id="bar-fonctionnement">
                 <HorizontalBarChart 
-                  data={barChartFonctionnementDepensesChapitre}
-                  type="expenses"
-                  title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
-                  client:load
+                  data={fonctionnementBarTab === 'depenses' ? barChartFonctionnementDepensesChapitre : barChartFonctionnementRecettesChapitre}
+                  type={fonctionnementBarTab === 'depenses' ? 'expenses' : 'revenues'}
+                  title={fonctionnementBarTab === 'depenses' ? 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)' : 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)'}
+                  chartId="bar-fonctionnement"
                 />
               </div>
             </div>
@@ -460,10 +403,22 @@
             <!-- Onglets pour le graphique de comparaison -->
             <div class="tabs-container" id="bar-tabs-fonctionnement-chapitre">
               <div class="tabs">
-                <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-table">
+                <button 
+                  class="tab" 
+                  class:tab-active={fonctionnementTableTab === 'depenses'} 
+                  on:click={() => fonctionnementTableTab = 'depenses'}
+                  data-tab="depenses"
+                  data-section="fonctionnement-table"
+                >
                   Dépenses
                 </button>
-                <button class="tab" data-tab="recettes" data-section="fonctionnement-table">
+                <button 
+                  class="tab" 
+                  class:tab-active={fonctionnementTableTab === 'recettes'} 
+                  on:click={() => fonctionnementTableTab = 'recettes'}
+                  data-tab="recettes"
+                  data-section="fonctionnement-table"
+                >
                   Recettes
                 </button>
               </div>
@@ -472,11 +427,10 @@
             <!-- Graphique de comparaison -->
             <div class="chart-wrapper" id="table-fonctionnement">
               <FinancialTable 
-                data={overviewFonctionnementDepenses}
-                type="expenses"
-                title="Dépenses de fonctionnement détaillées"
-                rawData={financialTableFonctionnementDepenses}
-                client:load
+                data={fonctionnementTableTab === 'depenses' ? overviewFonctionnementDepenses : []}
+                type={fonctionnementTableTab === 'depenses' ? 'expenses' : 'revenues'}
+                title={fonctionnementTableTab === 'depenses' ? 'Dépenses de fonctionnement détaillées' : ''}
+                rawData={fonctionnementTableTab === 'depenses' ? financialTableFonctionnementDepenses : financialTableFonctionnementRecettes}
               />
             </div>
           </div>
@@ -504,10 +458,22 @@
           <!-- Onglets Investissement -->
           <div class="tabs-container" id="donut-tabs-investissement">
             <div class="tabs">
-              <button class="tab tab-active" data-tab="depenses" data-section="investissement">
+              <button 
+                class="tab" 
+                class:tab-active={investissementDonutTab === 'depenses'} 
+                on:click={() => investissementDonutTab = 'depenses'}
+                data-tab="depenses"
+                data-section="investissement"
+              >
                 Dépenses
               </button>
-              <button class="tab" data-tab="recettes" data-section="investissement">
+              <button 
+                class="tab" 
+                class:tab-active={investissementDonutTab === 'recettes'} 
+                on:click={() => investissementDonutTab = 'recettes'}
+                data-tab="recettes"
+                data-section="investissement"
+              >
                 Recettes
               </button>
             </div>
@@ -516,11 +482,10 @@
           <!-- Graphique Investissement -->
           <div class="chart-wrapper" id="chart-investissement">
             <DonutChart 
-              data={investissementDepenses}
-              title="Dépenses - Investissement - Réalisations 2024"
+              data={investissementDonutTab === 'depenses' ? investissementDepenses : investissementRecettes}
+              title={investissementDonutTab === 'depenses' ? 'Dépenses - Investissement - Réalisations 2024' : 'Recettes - Investissement - Réalisations 2024'}
               chartId="chart-investissement"
               enableDrillDown={true}
-              client:load
             />
           </div>
 
@@ -556,10 +521,22 @@
               <!-- Onglets pour le graphique de comparaison -->
               <div class="tabs-container" id="bar-tabs-investissement">
                 <div class="tabs">
-                  <button class="tab tab-active" data-tab="depenses" data-section="investissement-bar">
+                  <button 
+                    class="tab" 
+                    class:tab-active={investissementBarTab === 'depenses'} 
+                    on:click={() => investissementBarTab = 'depenses'}
+                    data-tab="depenses"
+                    data-section="investissement-bar"
+                  >
                     Dépenses
                   </button>
-                  <button class="tab" data-tab="recettes" data-section="investissement-bar">
+                  <button 
+                    class="tab" 
+                    class:tab-active={investissementBarTab === 'recettes'} 
+                    on:click={() => investissementBarTab = 'recettes'}
+                    data-tab="recettes"
+                    data-section="investissement-bar"
+                  >
                     Recettes
                   </button>
                 </div>
@@ -568,11 +545,10 @@
               <!-- Graphique de comparaison -->
               <div class="chart-wrapper" id="bar-investissement">
                 <HorizontalBarChart 
-                  data={barChartInvestissementDepensesChapitre}
-                  type="expenses"
-                  title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
+                  data={investissementBarTab === 'depenses' ? barChartInvestissementDepensesChapitre : barChartInvestissementRecettesChapitre}
+                  type={investissementBarTab === 'depenses' ? 'expenses' : 'revenues'}
+                  title={investissementBarTab === 'depenses' ? 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)' : 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)'}
                   chartId="bar-investissement"
-                  client:load
                 />
               </div>
             </div>
