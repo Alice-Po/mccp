@@ -41,6 +41,18 @@
     let overviewFonctionnementDepenses = $derived(
       buildOverviewDataByChapitre(financialTableFonctionnementDepenses, 'Dépenses de fonctionnement détaillées')
     );
+
+    let overviewFonctionnementRecettes = $derived(
+      buildOverviewDataByChapitre(financialTableFonctionnementRecettes, 'Recettes de fonctionnement détaillées')
+    );  
+
+    let overviewInvestissementDepenses = $derived(
+      buildOverviewDataByChapitre(financialTableInvestissementDepenses, 'Dépenses d\'investissement détaillées')
+    );
+
+    let overviewInvestissementRecettes = $derived(  
+      buildOverviewDataByChapitre(financialTableInvestissementRecettes, 'Recettes d\'investissement détaillées')
+    );
     
     // État de la modal
     let currentModalState = $state({
@@ -425,9 +437,9 @@
             <!-- Graphique de comparaison -->
             <div class="chart-wrapper" id="table-fonctionnement">
               <FinancialTable 
-                data={fonctionnementTableTab === 'depenses' ? overviewFonctionnementDepenses : []}
+                data={fonctionnementTableTab === 'depenses' ? overviewFonctionnementDepenses : overviewFonctionnementRecettes}
                 type={fonctionnementTableTab === 'depenses' ? 'expenses' : 'revenues'}
-                title={fonctionnementTableTab === 'depenses' ? 'Dépenses de fonctionnement détaillées' : ''}
+                title={generateFinancialTableTitle('Fonctionnement', fonctionnementTableTab as 'depenses' | 'recettes')}
                 rawData={fonctionnementTableTab === 'depenses' ? financialTableFonctionnementDepenses : financialTableFonctionnementRecettes}
               />
             </div>
