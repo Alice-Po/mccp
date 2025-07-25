@@ -138,6 +138,13 @@
     // fallback
     return '/assets/datas/Budget-primitif-2025-section-fonctionnement.csv';
   }
+
+  // Calcul des totaux généraux pour toutes les sections/items
+  $: grandTotal = {
+    prevus_2024: data.sections.reduce((sum, section) => sum + section.items.reduce((s, i) => s + (i.prevus_2024 || 0), 0), 0),
+    realises_2024: data.sections.reduce((sum, section) => sum + section.items.reduce((s, i) => s + (i.realises_2024 || 0), 0), 0),
+    propositions_2025: data.sections.reduce((sum, section) => sum + section.items.reduce((s, i) => s + (i.propositions_2025 || 0), 0), 0)
+  };
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -191,6 +198,19 @@
         {/each}
       </tbody>
     </table>
+    <div class="grand-total-row">
+      <table class="financial-table">
+        <tbody>
+          <tr class="grand-total">
+            <td class="col-compte"></td>
+            <td class="col-libelle"><strong>Total général</strong></td>
+            <td class="col-amount"><strong>{formatCurrency(grandTotal.prevus_2024)}</strong></td>
+            <td class="col-amount"><strong>{formatCurrency(grandTotal.realises_2024)}</strong></td>
+            <td class="col-amount"><strong>{formatCurrency(grandTotal.propositions_2025)}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -490,5 +510,21 @@
 
   .data-row.clickable {
     cursor: pointer;
+  }
+
+  .grand-total-row {
+    margin-top: 1rem;
+    background: #f0f4f8;
+    border-top: 2px solid var(--primary);
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 2px 8px rgba(46, 139, 87, 0.08);
+  }
+  .grand-total td {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: #f0f4f8;
+    padding: 1.1rem 0.75rem;
+    border-bottom: none;
   }
 </style> 
