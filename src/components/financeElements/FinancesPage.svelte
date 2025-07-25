@@ -1,328 +1,327 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import DrillDownModal from './DrillDownModal.svelte';
-    import FinanceNavigation from './FinanceNavigation.svelte';
-    import HorizontalBarChart from './HorizontalBarChart.svelte';
-    import FiscaliteTable from './FiscaliteTable.svelte';
-    import DonutChart from './DonutChart.svelte';
-    import IndicateursFinanciers from './IndicateursFinanciers.svelte';
-    import FinancialTable from './FinancialTable.svelte';
-    import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
-    import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../types/finances';
-    // Variables réactives
-    let budgetData: BudgetItem[] = $state([]);
-    let fiscaliteData: FiscaliteItem[] = $state([]);
-    let indicateursData: IndicateurFinancier[] = $state([]);
-    
-    // Données calculées (dérivées)
-    let fonctionnementDepenses = $derived(aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1'));
-    let fonctionnementRecettes = $derived(aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1'));
-    let investissementDepenses = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1'));
-    let investissementRecettes = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1'));
-    
-    let barChartFonctionnementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES'));
-    let barChartFonctionnementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES'));
-    let barChartInvestissementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES'));
-    let barChartInvestissementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES'));
-    
-    let financialTableFonctionnementDepenses = $derived(
-      budgetData.filter(item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES')
-    );
-    let financialTableFonctionnementRecettes = $derived(
-      budgetData.filter(item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES')
-    );
-    let financialTableInvestissementDepenses = $derived(
-      budgetData.filter(item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES')
-    );
-    let financialTableInvestissementRecettes = $derived(
-      budgetData.filter(item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES')
-    );
-    
-    let overviewFonctionnementDepenses = $derived(
-      buildOverviewDataByChapitre(financialTableFonctionnementDepenses, 'Dépenses de fonctionnement détaillées')
-    );
+  import { onMount } from 'svelte';
+  import DrillDownModal from './DrillDownModal.svelte';
+  import FinanceNavigation from './FinanceNavigation.svelte';
+  import HorizontalBarChart from './HorizontalBarChart.svelte';
+  import FiscaliteTable from './FiscaliteTable.svelte';
+  import DonutChart from './DonutChart.svelte';
+  import IndicateursFinanciers from './IndicateursFinanciers.svelte';
+  import FinancialTable from './FinancialTable.svelte';
+  import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
+  import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../types/finances';
 
-    let overviewFonctionnementRecettes = $derived(
-      buildOverviewDataByChapitre(financialTableFonctionnementRecettes, 'Recettes de fonctionnement détaillées')
-    );  
+  // Variables réactives
+  let budgetData: BudgetItem[] = $state([]);
+  let fiscaliteData: FiscaliteItem[] = $state([]);
+  let indicateursData: IndicateurFinancier[] = $state([]);
+  
+  // Données calculées (dérivées)
+  let fonctionnementDepenses = $derived(aggregateData(budgetData, 'FONCTIONNEMENT', 'DEPENSES', 'regroupement_focale_n1'));
+  let fonctionnementRecettes = $derived(aggregateData(budgetData, 'FONCTIONNEMENT', 'RECETTES', 'regroupement_focale_n1'));
+  let investissementDepenses = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1'));
+  let investissementRecettes = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1'));
+  
+  let barChartFonctionnementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES'));
+  let barChartFonctionnementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES'));
+  let barChartInvestissementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES'));
+  let barChartInvestissementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES'));
+  
+  let financialTableFonctionnementDepenses = $derived(
+    budgetData.filter(item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES')
+  );
+  let financialTableFonctionnementRecettes = $derived(
+    budgetData.filter(item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES')
+  );
+  let financialTableInvestissementDepenses = $derived(
+    budgetData.filter(item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES')
+  );
+  let financialTableInvestissementRecettes = $derived(
+    budgetData.filter(item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES')
+  );
+  
+  let overviewFonctionnementDepenses = $derived(
+    buildOverviewDataByChapitre(financialTableFonctionnementDepenses, 'Dépenses de fonctionnement détaillées')
+  );
 
-    let overviewInvestissementDepenses = $derived(
-      buildOverviewDataByChapitre(financialTableInvestissementDepenses, 'Dépenses d\'investissement détaillées')
-    );
+  let overviewFonctionnementRecettes = $derived(
+    buildOverviewDataByChapitre(financialTableFonctionnementRecettes, 'Recettes de fonctionnement détaillées')
+  );  
 
-    let overviewInvestissementRecettes = $derived(  
-      buildOverviewDataByChapitre(financialTableInvestissementRecettes, 'Recettes d\'investissement détaillées')
-    );
-    
-    // État de la modal
-    let currentModalState = $state({
-      isOpen: false,
-      selectedCategory: '',
-      section: '',
-      type: '',
-      valueField: 'REALISATIONS_2024'
-    });
+  let overviewInvestissementDepenses = $derived(
+    buildOverviewDataByChapitre(financialTableInvestissementDepenses, 'Dépenses d\'investissement détaillées')
+  );
 
+  let overviewInvestissementRecettes = $derived(  
+    buildOverviewDataByChapitre(financialTableInvestissementRecettes, 'Recettes d\'investissement détaillées')
+  );
+  
+  // === PHASE 1: GESTION DE LA MODAL SIMPLIFIÉE ===
+  
+  // État de la modal simplifié - plus d'objet complexe !
+  let isModalOpen = $state(false);
+  let modalData = $state<{
+    category: string;
+    section: string;
+    type: string;
+  } | null>(null);
 
-    let accordions = $state({
-    'accordion-fonctionnement': false,
-    'accordion-fonctionnement-chapitre': false,
-    'accordion-investissement': false,
-    'accordion-investissement-chapitre': false
-  });
+  let accordions = $state({
+  'accordion-fonctionnement': false,
+  'accordion-fonctionnement-chapitre': false,
+  'accordion-investissement': false,
+  'accordion-investissement-chapitre': false
+});
 
-  function toggleAccordion(id: string) {
-    accordions[id] = !accordions[id];
+function toggleAccordion(id: string) {
+  accordions[id] = !accordions[id];
+}
+  
+  // Configuration des libellés d'accordéon
+  const ACCORDION_LABELS = {
+    'accordion-fonctionnement': {
+      open: 'Masquer la comparaison',
+      closed: 'Voir la comparaison prévisions vs réalisations'
+    },
+    'accordion-fonctionnement-chapitre': {
+      open: 'Masquer le tableau des chapitres détaillés',
+      closed: 'Voir le tableau des chapitres détaillés'
+    },
+    'accordion-investissement': {
+      open: 'Masquer la comparaison',
+      closed: 'Voir la comparaison prévisions vs réalisations'
+    },
+    'accordion-investissement-chapitre': {
+      open: 'Masquer le tableau des chapitres détaillés',
+      closed: 'Voir le tableau des chapitres détaillés'
+    },
+  };
+
+      // Reactive tab states
+  let fonctionnementDonutTab = $state('depenses');
+  let fonctionnementBarTab = $state('depenses');
+  let fonctionnementTableTab = $state('depenses');
+  let investissementDonutTab = $state('depenses');
+  let investissementBarTab = $state('depenses');
+  let investissementTableTab = $state('depenses');
+
+  
+  // Generate chart title
+  function generateDonutTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
+    const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
+    return `${typeLabel} - ${section} - Réalisations 2024`;
   }
-    
-    // Configuration des libellés d'accordéon
-    const ACCORDION_LABELS = {
-      'accordion-fonctionnement': {
-        open: 'Masquer la comparaison',
-        closed: 'Voir la comparaison prévisions vs réalisations'
-      },
-      'accordion-fonctionnement-chapitre': {
-        open: 'Masquer le tableau des chapitres détaillés',
-        closed: 'Voir le tableau des chapitres détaillés'
-      },
-      'accordion-investissement': {
-        open: 'Masquer la comparaison',
-        closed: 'Voir la comparaison prévisions vs réalisations'
-      },
-      'accordion-investissement-chapitre': {
-        open: 'Masquer le tableau des chapitres détaillés',
-        closed: 'Voir le tableau des chapitres détaillés'
-      },
-    };
 
-        // Reactive tab states
-    let fonctionnementDonutTab = $state('depenses');
-    let fonctionnementBarTab = $state('depenses');
-    let fonctionnementTableTab = $state('depenses');
-    let investissementDonutTab = $state('depenses');
-    let investissementBarTab = $state('depenses');
-    let investissementTableTab = $state('depenses');
-
-    
-    // Generate chart title
-    function generateDonutTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
-      const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
-      return `${typeLabel} - ${section} - Réalisations 2024`;
-    }
-
-    function generateFinancialTableTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
-      const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
-      return `${typeLabel} de ${section.toLowerCase()} détaillées`;
-    }
-    
-    
-    // Chargement des données
-    async function loadBudgetData() {
-      try {
-        const response = await fetch('/assets/datas/2025/base_budget_2025.json');
-        budgetData = await response.json();
-      } catch (error) {
-        console.error('❌ Finances - Erreur chargement données budget:', error);
-        budgetData = [];
+  function generateFinancialTableTitle(section: 'Fonctionnement' | 'Investissement', tab: 'depenses' | 'recettes') {
+    const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
+    return `${typeLabel} de ${section.toLowerCase()} détaillées`;
+  }
+  
+  // === PHASE 1: HANDLER SIMPLIFIÉ POUR L'OUVERTURE DE LA MODAL ===
+  
+  function handleSegmentClick(event: CustomEvent) {
+    try {
+      const { category } = event.detail;
+      console.log('🔍 Segment cliqué:', category);
+      
+      // Logique simplifiée pour déterminer section/type
+      let section = '';
+      let type = '';
+      
+      // Chercher dans quelle catégorie se trouve l'élément
+      if (fonctionnementDepenses.some(item => item.label === category)) {
+        section = 'FONCTIONNEMENT';
+        type = 'DEPENSES';
+      } else if (fonctionnementRecettes.some(item => item.label === category)) {
+        section = 'FONCTIONNEMENT';
+        type = 'RECETTES';
+      } else if (investissementDepenses.some(item => item.label === category)) {
+        section = 'INVESTISSEMENT';
+        type = 'DEPENSES';
+      } else if (investissementRecettes.some(item => item.label === category)) {
+        section = 'INVESTISSEMENT';
+        type = 'RECETTES';
+      } else {
+        console.warn('❌ Catégorie non trouvée:', category);
+        return;
       }
+      
+      console.log('✅ Modal data:', { category, section, type });
+      
+      // Ouvrir la modal avec les données simples
+      modalData = { category, section, type };
+      isModalOpen = true;
+      
+    } catch (error) {
+      console.error('❌ Erreur lors de l\'ouverture de la modal:', error);
     }
-    
-    async function loadFiscaliteData() {
-      try {
-        const response = await fetch('/assets/datas/2025/fiscalite_2025.json');
-        fiscaliteData = await response.json();
-      } catch (error) {
-        console.error('❌ Finances - Erreur chargement données fiscalité:', error);
-        fiscaliteData = [];
-      }
+  }
+
+  // Fonction simple pour fermer la modal
+  function closeModal() {
+    console.log('🔒 Fermeture de la modal');
+    isModalOpen = false;
+    modalData = null;
+  }
+  
+  // Chargement des données
+  async function loadBudgetData() {
+    try {
+      const response = await fetch('/assets/datas/2025/base_budget_2025.json');
+      budgetData = await response.json();
+    } catch (error) {
+      console.error('❌ Finances - Erreur chargement données budget:', error);
+      budgetData = [];
     }
-    
-    async function loadIndicateursData() {
-      try {
-        const response = await fetch('/assets/datas/2025/indicateurs_financiers_2025.json');
-        indicateursData = await response.json();
-      } catch (error) {
-        console.error('❌ Finances - Erreur chargement données indicateurs:', error);
-        indicateursData = [];
-      }
+  }
+  
+  async function loadFiscaliteData() {
+    try {
+      const response = await fetch('/assets/datas/2025/fiscalite_2025.json');
+      fiscaliteData = await response.json();
+    } catch (error) {
+      console.error('❌ Finances - Erreur chargement données fiscalité:', error);
+      fiscaliteData = [];
     }
-    
-    // Configuration des graphiques
-    function setupChartManagers() {
-     
-      };
-    
-    
-    // Gestion des événements de drill-down
-    function setupDrillDownEvents() {
-      document.addEventListener('segmentClick', (event: CustomEvent) => {
-        const { category } = event.detail;
-        
-        let section = '';
-        let type = '';
-        
-        const isFonctionnementCategory = fonctionnementDepenses.some(item => item.label === category) || 
-                                       fonctionnementRecettes.some(item => item.label === category);
-        const isInvestissementCategory = investissementDepenses.some(item => item.label === category) || 
-                                       investissementRecettes.some(item => item.label === category);
-        
-        if (isFonctionnementCategory) {
-          section = 'FONCTIONNEMENT';
-          const activeFonctionnementTab = document.querySelector('#donut-tabs-fonctionnement .tab-active') as HTMLElement;
-          type = activeFonctionnementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
-        } else if (isInvestissementCategory) {
-          section = 'INVESTISSEMENT';
-          const activeInvestissementTab = document.querySelector('#donut-tabs-investissement .tab-active') as HTMLElement;
-          type = activeInvestissementTab?.dataset.tab === 'recettes' ? 'RECETTES' : 'DEPENSES';
-        } else {
-          section = 'FONCTIONNEMENT';
-          type = 'DEPENSES';
-        }
-    
-        currentModalState = {
-          isOpen: true,
-          selectedCategory: category,
-          section,
-          type,
-          valueField: 'REALISATIONS_2024'
-        };
-    
-        const openModalEvent = new CustomEvent('openDrillDownModal', {
-          detail: currentModalState
-        });
-        document.dispatchEvent(openModalEvent);
-      });
-    
-      document.addEventListener('closeDrillDownModal', () => {
-        currentModalState.isOpen = false;
-      });
+  }
+  
+  async function loadIndicateursData() {
+    try {
+      const response = await fetch('/assets/datas/2025/indicateurs_financiers_2025.json');
+      indicateursData = await response.json();
+    } catch (error) {
+      console.error('❌ Finances - Erreur chargement données indicateurs:', error);
+      indicateursData = [];
     }
+  }
+  
+  // Configuration des graphiques
+  function setupChartManagers() {
+    // Peut être supprimé si inutilisé
+  };
+  
+  onMount(async () => {
+    // Charger toutes les données
+    await Promise.all([
+      loadBudgetData(),
+      loadFiscaliteData(),
+      loadIndicateursData()
+    ]);
+  
+    // Attendre que les données soient chargées avant de configurer les gestionnaires
+    setTimeout(() => {
+      setupChartManagers();
+    }, 100);
+  });
+</script>
+
+<!-- Contenu principal (masqué sur petits écrans) -->
+<div class="finances-section">
+<div class="finances-layout">
+<!-- Navigation fixe à gauche -->
+<aside class="finances-sidebar">
+  <FinanceNavigation client:load />
+</aside>
+
+<!-- Contenu principal à droite -->
+<div class="finances-content">
+  <!-- En-tête -->
+  <header class="finances-header">
+    <h1>Finances municipales 2024</h1>
     
-    onMount(async () => {
-      // Charger toutes les données
-      await Promise.all([
-        loadBudgetData(),
-        loadFiscaliteData(),
-        loadIndicateursData()
-      ]);
+    <!-- Introduction -->
+    <div class="intro-section">
+      <div class="intro-content">
+        <p>
+          Pour comprendre au mieux les données présentées ci-dessous, nous vous recommandons vivement de lire au préalable notre article 
+          <a href="/blog/comment-lire-un-budget-communal-" class="intro-link">« Comment lire un budget communal ? »</a> 
+          qui vous donnera les clés de lecture essentielles.
+        </p>
+        <p>
+          Dans un souci de rendre le budget compréhensible au plus grand nombre, nous avons pris quelques largesses 
+          en termes de nomenclature budgétaire officielle. Cette adaptation permet aux citoyens de trouver l'information 
+          qu'ils cherchent plus facilement, sans se perdre dans les subtilités techniques de la comptabilité publique.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section de téléchargement -->
+    <div class="cta-container">
+
+    <a href="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf" class="help-button" download>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span class="download-label">Budget complet</span>
+      <span class="download-format">PDF</span>
+    </a>
+    <a href="/assets/datas/2025/Budget-primitif-2025.ods" class="help-button" download>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span class="download-label">Budget complet</span>
+      <span class="download-format">ODS</span>
+    </a>
+    </div>
+  </header>
+
+          <!-- Section Fonctionnement -->
+  <section class="chart-section" id="section-budget-fonctionnement">
+    <div class="section-header">
+      <h2>Budget de fonctionnement 2024</h2>
+    </div>
+
+    <!-- Introduction section fonctionnement -->
+    <div class="section-intro">
+      <p>
+        Le budget de fonctionnement correspond aux dépenses courantes : salaires des agents, électricité, chauffage, entretien des bâtiments, subventions aux associations… C'est un peu comme le budget familial mensuel : les charges fixes et les dépenses du quotidien.
+      </p>
+      
+      <div class="drill-down-legend">
+        <span class="legend-icon">💡</span>
+        <span class="legend-text">Cliquez sur un segment pour voir le détail</span>
+      </div>
+    </div>
     
-      // Attendre que les données soient chargées avant de configurer les gestionnaires
-      setTimeout(() => {
-        setupChartManagers();
-        setupDrillDownEvents();
-      }, 100);
-    });
-    </script>
+    <!-- Onglets Donut Fonctionnement -->
+    <div class="tabs-container" id="donut-tabs-fonctionnement">
+     <!-- Fonctionnement Donut Tabs -->
+  <div class="tabs-container" id="donut-tabs-fonctionnement">
+    <div class="tabs">
+      <button 
+        class="tab" 
+        class:tab-active={fonctionnementDonutTab === 'depenses'} 
+        onclick={() => fonctionnementDonutTab = 'depenses'}
+        data-tab="depenses"
+        data-section="fonctionnement-donut"
+      >
+        Dépenses
+      </button>
+      <button 
+        class="tab" 
+        class:tab-active={fonctionnementDonutTab === 'recettes'} 
+        onclick={() => fonctionnementDonutTab = 'recettes'}
+        data-tab="recettes"
+        data-section="fonctionnement-donut"
+      >
+        Recettes
+      </button>
+    </div>
+  </div>
+    </div>
 
-    <!-- Contenu principal (masqué sur petits écrans) -->
-    <div class="finances-section">
-      <div class="finances-layout">
-      <!-- Navigation fixe à gauche -->
-      <aside class="finances-sidebar">
-        <FinanceNavigation client:load />
-      </aside>
-
-      <!-- Contenu principal à droite -->
-      <div class="finances-content">
-        <!-- En-tête -->
-        <header class="finances-header">
-          <h1>Finances municipales 2024</h1>
-          
-          <!-- Introduction -->
-          <div class="intro-section">
-            <div class="intro-content">
-              <p>
-                Pour comprendre au mieux les données présentées ci-dessous, nous vous recommandons vivement de lire au préalable notre article 
-                <a href="/blog/comment-lire-un-budget-communal-" class="intro-link">« Comment lire un budget communal ? »</a> 
-                qui vous donnera les clés de lecture essentielles.
-              </p>
-              <p>
-                Dans un souci de rendre le budget compréhensible au plus grand nombre, nous avons pris quelques largesses 
-                en termes de nomenclature budgétaire officielle. Cette adaptation permet aux citoyens de trouver l'information 
-                qu'ils cherchent plus facilement, sans se perdre dans les subtilités techniques de la comptabilité publique.
-              </p>
-            </div>
-          </div>
-
-          <!-- Section de téléchargement -->
-          <div class="cta-container">
-
-          <a href="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf" class="help-button" download>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            <span class="download-label">Budget complet</span>
-            <span class="download-format">PDF</span>
-          </a>
-          <a href="/assets/datas/2025/Budget-primitif-2025.ods" class="help-button" download>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            <span class="download-label">Budget complet</span>
-            <span class="download-format">ODS</span>
-          </a>
-          </div>
-        </header>
-
-                <!-- Section Fonctionnement -->
-        <section class="chart-section" id="section-budget-fonctionnement">
-          <div class="section-header">
-            <h2>Budget de fonctionnement 2024</h2>
-          </div>
-
-          <!-- Introduction section fonctionnement -->
-          <div class="section-intro">
-            <p>
-              Le budget de fonctionnement correspond aux dépenses courantes : salaires des agents, électricité, chauffage, entretien des bâtiments, subventions aux associations… C'est un peu comme le budget familial mensuel : les charges fixes et les dépenses du quotidien.
-            </p>
-            
-            <div class="drill-down-legend">
-              <span class="legend-icon">💡</span>
-              <span class="legend-text">Cliquez sur un segment pour voir le détail</span>
-            </div>
-          </div>
-          
-          <!-- Onglets Donut Fonctionnement -->
-          <div class="tabs-container" id="donut-tabs-fonctionnement">
-           <!-- Fonctionnement Donut Tabs -->
-        <div class="tabs-container" id="donut-tabs-fonctionnement">
-          <div class="tabs">
-            <button 
-              class="tab" 
-              class:tab-active={fonctionnementDonutTab === 'depenses'} 
-              on:click={() => fonctionnementDonutTab = 'depenses'}
-              data-tab="depenses"
-              data-section="fonctionnement-donut"
-            >
-              Dépenses
-            </button>
-            <button 
-              class="tab" 
-              class:tab-active={fonctionnementDonutTab === 'recettes'} 
-              on:click={() => fonctionnementDonutTab = 'recettes'}
-              data-tab="recettes"
-              data-section="fonctionnement-donut"
-            >
-              Recettes
-            </button>
-          </div>
-        </div>
-          </div>
-
-          <!-- Graphique Fonctionnement (Donut) -->
-          <div class="chart-wrapper" id="chart-fonctionnement">
-            <DonutChart 
-              data={fonctionnementDonutTab === 'depenses' ? fonctionnementDepenses : fonctionnementRecettes}
-              title={generateDonutTitle('Fonctionnement', fonctionnementDonutTab as 'depenses' | 'recettes')}
-              chartId="chart-fonctionnement"
-              enableDrillDown={true}
-              client:load
-            />
-          </div>
+    <div class="chart-wrapper" id="chart-fonctionnement">
+      <DonutChart 
+      data={fonctionnementDonutTab === 'depenses' ? fonctionnementDepenses : fonctionnementRecettes}
+      title={generateDonutTitle('Fonctionnement', fonctionnementDonutTab as 'depenses' | 'recettes')}
+      chartId="chart-fonctionnement"
+      enableDrillDown={true}
+      onsegmentclick={handleSegmentClick}
+    />
+    </div>
 
           <!-- Commentaire sur les réalisations -->
           <div class="realization-comment">
@@ -334,7 +333,7 @@
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement')} aria-expanded={accordions['accordion-fonctionnement']}>
+                <button class="cta" onclick={() => toggleAccordion('accordion-fonctionnement')} aria-expanded={accordions['accordion-fonctionnement']}>
                   <span class="cta-text">
                     {accordions['accordion-fonctionnement']
                       ? ACCORDION_LABELS['accordion-fonctionnement'].open
@@ -343,7 +342,7 @@
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
-                <button class="cta" on:click={() => toggleAccordion('accordion-fonctionnement-chapitre')} aria-expanded={accordions['accordion-fonctionnement-chapitre']}>
+                <button class="cta" onclick={() => toggleAccordion('accordion-fonctionnement-chapitre')} aria-expanded={accordions['accordion-fonctionnement-chapitre']}>
                   <span class="cta-text">
                     {accordions['accordion-fonctionnement-chapitre']
                       ? ACCORDION_LABELS['accordion-fonctionnement-chapitre'].open
@@ -373,7 +372,7 @@
                   <button 
                     class="tab" 
                     class:tab-active={fonctionnementBarTab === 'depenses'} 
-                    on:click={() => fonctionnementBarTab = 'depenses'}
+                    onclick={() => fonctionnementBarTab = 'depenses'}
                     data-tab="depenses"
                     data-section="fonctionnement-bar"
                   >
@@ -382,7 +381,7 @@
                   <button 
                     class="tab" 
                     class:tab-active={fonctionnementBarTab === 'recettes'} 
-                    on:click={() => fonctionnementBarTab = 'recettes'}
+                    onclick={() => fonctionnementBarTab = 'recettes'}
                     data-tab="recettes"
                     data-section="fonctionnement-bar"
                   >
@@ -420,7 +419,7 @@
                 <button 
                   class="tab" 
                   class:tab-active={fonctionnementTableTab === 'depenses'} 
-                  on:click={() => fonctionnementTableTab = 'depenses'}
+                  onclick={() => fonctionnementTableTab = 'depenses'}
                   data-tab="depenses"
                   data-section="fonctionnement-table"
                 >
@@ -429,7 +428,7 @@
                 <button 
                   class="tab" 
                   class:tab-active={fonctionnementTableTab === 'recettes'} 
-                  on:click={() => fonctionnementTableTab = 'recettes'}
+                  onclick={() => fonctionnementTableTab = 'recettes'}
                   data-tab="recettes"
                   data-section="fonctionnement-table"
                 >
@@ -475,7 +474,7 @@
               <button 
                 class="tab" 
                 class:tab-active={investissementDonutTab === 'depenses'} 
-                on:click={() => investissementDonutTab = 'depenses'}
+                onclick={() => investissementDonutTab = 'depenses'}
                 data-tab="depenses"
                 data-section="investissement"
               >
@@ -484,7 +483,7 @@
               <button 
                 class="tab" 
                 class:tab-active={investissementDonutTab === 'recettes'} 
-                on:click={() => investissementDonutTab = 'recettes'}
+                onclick={() => investissementDonutTab = 'recettes'}
                 data-tab="recettes"
                 data-section="investissement"
               >
@@ -500,6 +499,7 @@
               title={investissementDonutTab === 'depenses' ? 'Dépenses - Investissement - Réalisations 2024' : 'Recettes - Investissement - Réalisations 2024'}
               chartId="chart-investissement"
               enableDrillDown={true}
+              onsegmentclick={handleSegmentClick}
             />
           </div>
 
@@ -513,13 +513,13 @@
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta" on:click={() => toggleAccordion('accordion-investissement')} aria-expanded={accordions['accordion-investissement']}>
+                <button class="cta" onclick={() => toggleAccordion('accordion-investissement')} aria-expanded={accordions['accordion-investissement']}>
                   <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
                   <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
-                <button class="cta" on:click={() => toggleAccordion('accordion-investissement-chapitre')} aria-expanded={accordions['accordion-investissement-chapitre']}>
+                  <button class="cta" onclick={() => toggleAccordion('accordion-investissement-chapitre')} aria-expanded={accordions['accordion-investissement-chapitre']}>
                   <span class="cta-text">
                     {accordions['accordion-investissement-chapitre']
                       ? ACCORDION_LABELS['accordion-investissement-chapitre'].open
@@ -549,7 +549,7 @@
                   <button 
                     class="tab" 
                     class:tab-active={investissementBarTab === 'depenses'} 
-                    on:click={() => investissementBarTab = 'depenses'}
+                    onclick={() => investissementBarTab = 'depenses'}
                     data-tab="depenses"
                     data-section="investissement-bar"
                   >
@@ -558,7 +558,7 @@
                   <button 
                     class="tab" 
                     class:tab-active={investissementBarTab === 'recettes'} 
-                    on:click={() => investissementBarTab = 'recettes'}
+                    onclick={() => investissementBarTab = 'recettes'}
                     data-tab="recettes"
                     data-section="investissement-bar"
                   >
@@ -594,7 +594,7 @@
                 <button 
                   class="tab" 
                   class:tab-active={investissementTableTab === 'depenses'} 
-                  on:click={() => investissementTableTab = 'depenses'}
+                  onclick={() => investissementTableTab = 'depenses'}
                   data-tab="depenses"
                   data-section="investissement-table"
                 >
@@ -603,7 +603,7 @@
                 <button 
                   class="tab" 
                   class:tab-active={investissementTableTab === 'recettes'} 
-                  on:click={() => investissementTableTab = 'recettes'}
+                  onclick={() => investissementTableTab = 'recettes'}
                   data-tab="recettes"
                   data-section="investissement-table"
                 >
@@ -635,7 +635,6 @@
           <div class="chart-wrapper" id="fiscalite-wrapper">
             <FiscaliteTable 
               data={fiscaliteData}
-              client:load
             />
           </div>
         </section>
@@ -650,7 +649,6 @@
           <div class="chart-wrapper" id="indicateurs-wrapper">
             <IndicateursFinanciers 
               data={indicateursData}
-              client:load
             />
           </div>
         </section>
@@ -683,9 +681,11 @@
     </div>
 
     <!-- Modal de drill-down -->
-    <DrillDownModal 
+    <DrillDownModal
+      isOpen={isModalOpen}
       budgetData={budgetData}
-      client:only="svelte"
+      modalData={modalData}
+      onclose={closeModal}
     />
 
     

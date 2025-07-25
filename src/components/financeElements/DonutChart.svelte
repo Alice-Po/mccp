@@ -9,53 +9,40 @@
   - Légende personnalisée avec couleurs et valeurs
   - Animations et interactions
   - Formatage des montants en euros
-  ⚡ Migré vers les runes Svelte 5
+  ⚡ Refactorisé proprement pour Svelte 5
 -->
 
 <script lang="ts">
   import { Chart, registerables } from 'chart.js';
   import type { AggregatedData } from '../../utils/budget-data';
+  import type { DonutChartProps } from '../../finances';
   import { formatCurrency, generateColors, calculateTotal } from '../../utils/budget-data';
-
-  // Interface dédiée pour les props
-  interface DonutChartProps {
-    data?: AggregatedData[];
-    title?: string;
-    chartId?: string;
-    enableDrillDown?: boolean;
-    onSegmentClick?: (detail: { category: string; value: number; index: number }) => void;
-  }
 
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
-  // Props idiomatiques Svelte 5
-  const props = $props();
-
+  // Props idiomatiques Svelte 5 - PAS de destructuration pour garder la réactivité
+  const props = $props<DonutChartProps>();
+  // Valeurs dérivées réactives
   const data = $derived(props.data || []);
   const title = $derived(props.title || '');
   const chartId = $derived(props.chartId || 'default');
   const enableDrillDown = $derived(props.enableDrillDown ?? false);
-  const onSegmentClick = $derived(props.onSegmentClick);
+  const onsegmentclick = $derived(props.onsegmentclick);
 
-
-  // État local réactif pour le canvas et le chart
+  // État local réactif
   let canvasElement = $state<HTMLCanvasElement>();
   let chart = $state<Chart | null>(null);
 
-  // Valeurs dérivées avec $derived basées sur les props
-  let total = $derived(calculateTotal(data));
-  let colors = $derived(generateColors(data.length));
+  // Valeurs calculées dérivées
+  const total = $derived(calculateTotal(data));
+  const colors = $derived(generateColors(data.length));
 
+  // Variables pour gérer les effets hover
+  let hoveredSegmentIndex = $state<number | null>(null);
+  let searchIconPosition = $state<{x: number, y: number} | null>(null);
 
-
-  // Effet pour la mise à jour du graphique quand les données changent
-  $effect(() => {
-    if (chart && data.length > 0) {
-      updateChart();
-    }
-  });
-
+  // Fonction pour créer le graphique
   function createChart() {
     if (!canvasElement || data.length === 0) {
       return;
@@ -70,9 +57,9 @@
     chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: data.map(item => item.label),
+        labels: data.map((item: AggregatedData) => item.label),
         datasets: [{
-          data: data.map(item => item.value),
+          data: data.map((item: AggregatedData) => item.value),
           backgroundColor: colors,
           borderColor: '#ffffff',
           borderWidth: 2,
@@ -124,96 +111,52 @@
     });
   }
 
+ 
+  // Fonction pour mettre à jour le graphique
   function updateChart() {
     if (!chart) return;
 
-    chart.data.labels = data.map(item => item.label);
-    chart.data.datasets[0].data = data.map(item => item.value);
+    chart.data.labels = data.map((item: AggregatedData) => item.label);
+    chart.data.datasets[0].data = data.map((item: AggregatedData) => item.value);
     chart.data.datasets[0].backgroundColor = colors;
     chart.update('active');
   }
 
-  function handleLegendHover(index: number) {
-    if (!chart) return;
-    chart.setActiveElements([{
-      datasetIndex: 0,
-      index: index
-    }]);
-    chart.update('active');
-  }
-
-  function handleLegendLeave() {
-    if (!chart) return;
-    chart.setActiveElements([]);
-    chart.update('active');
-  }
-
+  // Gestion du clic sur le graphique - ÉVÉNEMENT SVELTE 5 NATIF
   function handleChartClick(event: any, elements: any[]) {
     if (!enableDrillDown || elements.length === 0) return;
+    
     const elementIndex = elements[0].index;
     const clickedData = data[elementIndex];
 
-    if (clickedData.items && clickedData.items.length <= 1) {
+    // Vérifier si le drill-down est possible
+    if (!clickedData.items || clickedData.items.length <= 1) {
       showNoDetailTooltip(elementIndex);
       return;
     }
-    // Utiliser le callback prop plutôt que createEventDispatcher
-    onSegmentClick?.({
-      category: clickedData.label,
-      value: clickedData.value,
-      index: elementIndex
-    });
-    // Dispatcher aussi un événement DOM global (pour compatibilité avec les pages Astro)
-    if (typeof document !== 'undefined') {
-      const customEvent = new CustomEvent('segmentClick', {
-        detail: {
-          category: clickedData.label,
-          value: clickedData.value,
-          index: elementIndex
-        }
-      });
-      document.dispatchEvent(customEvent);
-    }
-  }
 
-  // Variables pour gérer les effets hover
-  let hoveredSegmentIndex = $state<number | null>(null);
-  let searchIconPosition = $state<{x: number, y: number} | null>(null);
-
-  function showNoDetailTooltip(elementIndex: number) {
-    const canvas = canvasElement;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const tooltip = document.createElement('div');
-    tooltip.className = 'no-detail-tooltip';
-    tooltip.textContent = 'Aucun détail supplémentaire disponible';
-    tooltip.style.cssText = `
-      position: fixed;
-      top: ${rect.top + rect.height / 2}px;
-      left: ${rect.left + rect.width / 2}px;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
-      z-index: 1000;
-      pointer-events: none;
-    `;
-    document.body.appendChild(tooltip);
-    setTimeout(() => {
-      if (tooltip.parentNode) {
-        tooltip.parentNode.removeChild(tooltip);
+    // Créer et appeler l'événement Svelte 5
+    const customEvent = new CustomEvent('segmentclick', {
+      detail: {
+        category: clickedData.label,
+        value: clickedData.value,
+        index: elementIndex
       }
-    }, 2000);
+    });
+
+    // Appeler le callback prop directement (syntaxe Svelte 5)
+    onsegmentclick?.(customEvent);
   }
 
+  // Gestion du hover sur le graphique
   function handleChartHover(event: any, elements: any[]) {
     if (!enableDrillDown) return;
+    
     if (elements.length > 0) {
       const elementIndex = elements[0].index;
       const clickedData = data[elementIndex];
       const hasValidDrillDown = clickedData.items && clickedData.items.length > 1;
+      
       if (hasValidDrillDown) {
         hoveredSegmentIndex = elementIndex;
         const canvas = canvasElement;
@@ -234,28 +177,65 @@
     }
   }
 
-  function handleChartLeave() {
-    hoveredSegmentIndex = null;
-    searchIconPosition = null;
+  // Gestion du hover sur la légende
+  function handleLegendHover(index: number) {
+    if (!chart) return;
+    chart.setActiveElements([{
+      datasetIndex: 0,
+      index: index
+    }]);
+    chart.update('active');
   }
 
-  // Effet principal pour gérer le cycle de vie du chart (remplace onMount/onDestroy)
+  function handleLegendLeave() {
+    if (!chart) return;
+    chart.setActiveElements([]);
+    chart.update('active');
+  }
+
+  // Afficher tooltip "pas de détail"
+  function showNoDetailTooltip(elementIndex: number) {
+    const canvas = canvasElement;
+    if (!canvas) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const tooltip = document.createElement('div');
+    tooltip.className = 'no-detail-tooltip';
+    tooltip.textContent = 'Aucun détail supplémentaire disponible';
+    tooltip.style.cssText = `
+      position: fixed;
+      top: ${rect.top + rect.height / 2}px;
+      left: ${rect.left + rect.width / 2}px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      z-index: 1000;
+      pointer-events: none;
+    `;
+    
+    document.body.appendChild(tooltip);
+    setTimeout(() => {
+      if (tooltip.parentNode) {
+        tooltip.parentNode.removeChild(tooltip);
+      }
+    }, 2000);
+  }
+
+  // Effet pour la mise à jour du graphique quand les données changent
+  $effect(() => {
+    if (chart && data.length > 0) {
+      updateChart();
+    }
+  });
+
+  // Effet principal pour gérer le cycle de vie du chart
   $effect(() => {
     createChart();
-    const handleUpdateChart = (event: CustomEvent) => {
-      const { data: newData, title: newTitle, chartId: targetChartId } = event.detail;
-      if (targetChartId && targetChartId !== chartId) {
-        return;
-      }
-
-    };
-    if (typeof document !== 'undefined') {
-      document.addEventListener('updateChart', handleUpdateChart as EventListener);
-    }
+    
     return () => {
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('updateChart', handleUpdateChart as EventListener);
-      }
       if (chart) {
         chart.destroy();
         chart = null;
@@ -263,25 +243,25 @@
     };
   });
 </script>
-
-<!-- Log à chaque rendu du composant -->
-{@html `<div style='display:none'>[DonutChart] Rendered with data length: ${data.length}</div>`}
 <div class="donut-chart">
   <div class="chart-container">
-    <!-- Graphique Chart.js -->
+    <!-- Graphique Chart.js avec gestion des événements -->
     <div class="chart-canvas-container">
       <canvas 
         bind:this={canvasElement}
         class="chart-canvas"
         role="img"
         aria-label="Graphique en donut : {title}"
+
       ></canvas>
+      
       <!-- Total au centre (overlay) -->
       <div class="center-overlay">
         <div class="center-total-amount">{formatCurrency(total)}</div>
         <div class="center-total-label">{title}</div>
       </div>
     </div>
+
     <!-- Légende personnalisée -->
     <div class="chart-legend">
       {#each data as item, index}

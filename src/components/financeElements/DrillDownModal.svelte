@@ -5,80 +5,84 @@
   
   Modal qui s'ouvre lors du clic sur un segment du donut principal
   Affiche un nouveau donut avec les données de niveau 2 (regroupement_focale_n2)
-  ⚡ Migré vers les runes Svelte 5
+  ⚡ Refactorisé proprement pour Svelte 5 - Phase 1
 -->
 
 <script lang="ts">
   import DonutChart from './DonutChart.svelte';
-  import type { AggregatedData, BudgetItem } from '../../utils/budget-data';
   import { aggregateDataLevel2 } from '../../utils/budget-data';
+  import type { BudgetItem, DrillDownModalProps } from '../../finances';
 
-  // Props avec les runes Svelte 5
-  let { budgetData = [] }: { budgetData: BudgetItem[] } = $props();
-  
-  // État local réactif avec $state
-  let isOpen = $state(false);
-  let selectedCategory = $state('');
-  let section = $state('');
-  let type = $state('');
-  let valueField = $state<keyof BudgetItem>('REALISATIONS_2024');
+  // Props idiomatiques Svelte 5 - PAS de destructuration !
+  const props = $props();
 
-  // Valeurs dérivées avec $derived
-  let level2Data = $derived(
-    selectedCategory && budgetData.length > 0 
-      ? aggregateDataLevel2(budgetData, section, type, valueField, selectedCategory)
-      : []
-  );
+  // Valeurs dérivées réactives - maintenant ça marche !
+  const isOpen = $derived(props.isOpen);
+  const budgetData = $derived(props.budgetData || []);
+  const modalData = $derived(props.modalData);
+  const onclose = $derived(props.onclose);
 
-  let modalTitle = $derived(`${selectedCategory} - ${section} ${type}`);
+  // Titre de la modal dérivé
+  const modalTitle = $derived(() => {
+    if (!modalData) return '';
+    return `${modalData.category} - ${modalData.section} ${modalData.type}`;
+  });
 
-  function closeModal() {
-    isOpen = false;
-    
-    // Dispatcher un événement global pour informer la page
-    if (typeof document !== 'undefined') {
-      const closeEvent = new CustomEvent('closeDrillDownModal');
-      document.dispatchEvent(closeEvent);
+  // Données de niveau 2 dérivées
+  const level2Data = $derived(() => {
+    if (!modalData || !budgetData.length) {
+      console.log('❌ Pas de données pour la modal:', { modalData: !!modalData, budgetDataLength: budgetData.length });
+      return [];
     }
+    
+    console.log('🔍 Agrégation des données niveau 2:', {
+      section: modalData.section,
+      type: modalData.type,
+      category: modalData.category,
+      budgetDataLength: budgetData.length
+    });
+    
+    const result = aggregateDataLevel2(
+      budgetData,
+      modalData.section,
+      modalData.type,
+      'REALISATIONS_2024', // Champ de valeur fixe
+      modalData.category
+    );
+    
+    console.log('✅ Données niveau 2 générées:', result);
+    return result;
+  });
+
+  // Fonctions de gestion des événements
+  function closeModal() {
+    console.log('🔒 Fermeture modal via bouton');
+    onclose?.();
   }
 
   function handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
+      console.log('🔒 Fermeture modal via Échap');
       closeModal();
     }
   }
 
   function handleBackdropClick(event: MouseEvent) {
     if (event.target === event.currentTarget) {
+      console.log('🔒 Fermeture modal via backdrop');
       closeModal();
     }
   }
 
-  // Écouter les événements d'ouverture de la modal
-  function handleOpenModal(event: CustomEvent) {
-    console.log('🔔 DrillDownModal - Événement openDrillDownModal reçu:', event.detail);
-    
-    const { isOpen: shouldOpen, selectedCategory: category, section: sec, type: typ, valueField: field } = event.detail;
-    
-    isOpen = shouldOpen;
-    selectedCategory = category;
-    section = sec;
-    type = typ;
-    valueField = field;
-    
-    console.log('📋 DrillDownModal - État mis à jour:', { isOpen, selectedCategory, section, type });
-  }
-
-  // Effet pour gérer les event listeners (remplace onMount/onDestroy)
+  // Effet pour gérer le focus et le scroll
   $effect(() => {
-    // Vérifier que nous sommes côté client
-    if (typeof document !== 'undefined') {
-      // Écouter l'événement d'ouverture de la modal
-      document.addEventListener('openDrillDownModal', handleOpenModal as EventListener);
+    if (isOpen) {
+      console.log('📖 Modal ouverte - désactiver scroll');
+      document.body.style.overflow = 'hidden';
       
-      // Cleanup automatique lors de la destruction du composant
       return () => {
-        document.removeEventListener('openDrillDownModal', handleOpenModal as EventListener);
+        console.log('📖 Modal fermée - réactiver scroll');
+        document.body.style.overflow = '';
       };
     }
   });
@@ -95,7 +99,7 @@
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title">{modalTitle}</h2>
+        <h2 class="modal-title">{modalTitle()}</h2>
         <button 
           class="modal-close" 
           onclick={closeModal}
@@ -106,15 +110,24 @@
       </div>
 
       <div class="modal-body">
-        {#if level2Data.length > 0}
+        {#if level2Data().length > 0}
           <DonutChart 
-            data={level2Data} 
+            data={level2Data()} 
             title="Détail par sous-catégorie"
-            chartId="drill-down-{selectedCategory}"
+            chartId="drill-down-{modalData?.category || 'default'}"
+            enableDrillDown={false}
           />
         {:else}
           <div class="no-data">
-            <p>Aucune donnée disponible pour cette catégorie</p>
+            <div class="no-data-icon">📊</div>
+            <p>Aucune sous-catégorie disponible pour cette catégorie</p>
+            {#if modalData}
+              <div class="debug-info">
+                <small>
+                  Recherche dans: {modalData.section} - {modalData.type} - {modalData.category}
+                </small>
+              </div>
+            {/if}
           </div>
         {/if}
       </div>
@@ -127,7 +140,6 @@
     </div>
   </div>
 {/if}
-
 <style>
   .modal-backdrop {
     position: fixed;

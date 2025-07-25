@@ -25,3 +25,27 @@ export interface IndicateurFinancier {
   dernier_decile_par_habitant: string;
   commentaires: string;
 }
+
+// Types pour les composants de graphiques
+export interface DonutChartProps {
+  data: AggregatedData[];
+  title: string;
+  chartId: string;
+  enableDrillDown?: boolean;
+  onsegmentclick: (detail: { category: string; value: number; index: number }) => void;
+}
+
+// Types pour les modales
+export interface DrillDownModalProps {
+  isOpen: boolean;
+  budgetData: BudgetItem[];
+  modalData: {
+    category: string;
+    section: string;
+    type: string;
+  } | null;
+  onclose: () => void;
+}
+
+// Import du type AggregatedData depuis budget-data
+import type { AggregatedData } from './utils/budget-data';
