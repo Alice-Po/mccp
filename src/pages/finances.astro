@@ -6,7 +6,8 @@ import FinanceNavigation from '../components/financeElements/FinanceNavigation.s
 import HorizontalBarChart from '../components/financeElements/HorizontalBarChart.svelte';
 import FiscaliteTable from '../components/financeElements/FiscaliteTable.svelte';
 import IndicateursFinanciers from '../components/financeElements/IndicateursFinanciers.svelte';
-import { aggregateData, type BudgetItem, aggregateByChapitre } from '../utils/budget-data';
+import FinancialTable from '../components/financeElements/FinancialTable.svelte';
+import { aggregateData, type BudgetItem, aggregateByChapitre, buildOverviewDataByChapitre } from '../utils/budget-data';
 
 // Charger les données budgétaires
 let budgetData: BudgetItem[] = [];
@@ -32,10 +33,26 @@ const investissementDepenses = aggregateData(budgetData, 'INVESTISSEMENT', 'DEPE
 const investissementRecettes = aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1');
 
 // Préparer les données pour le bar chart fonctionnement/dépenses et recettes par chapitre
-const fonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES');
-const fonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
-const investissementDepensesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES');
-const investissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES');
+// RENOMMAGE pour expliciter l'usage bar chart
+const barChartFonctionnementDepensesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES');
+const barChartFonctionnementRecettesChapitre = aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES');
+const barChartInvestissementDepensesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES');
+const barChartInvestissementRecettesChapitre = aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES');
+
+// Préparer les données pour FinancialTable.svelte (tableau détaillé par poste)
+const financialTableFonctionnementDepenses = budgetData.filter(
+  item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES'
+);
+const financialTableFonctionnementRecettes = budgetData.filter(
+  item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES'
+);
+const financialTableInvestissementDepenses = budgetData.filter(
+  item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES'
+);
+const financialTableInvestissementRecettes = budgetData.filter(
+  item => item.SECTION === 'INVESTISSEMENT' && item['DÉPENSES/RECETTES'] === 'RECETTES'
+);
+const overviewFonctionnementDepenses = buildOverviewDataByChapitre(financialTableFonctionnementDepenses, 'Dépenses de fonctionnement détaillées');
 
 // Charger les données de fiscalité
 interface FiscaliteItem {
@@ -207,8 +224,14 @@ try {
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta-accordion" onclick="toggleAccordion('accordion-fonctionnement')">
+                <button class="cta" onclick="toggleAccordion('accordion-fonctionnement')">
                   <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
+                  <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <button class="cta" onclick="toggleAccordion('accordion-fonctionnement-chapitre')">
+                  <span class="cta-text">Voir le tableau des dépenses par chapitre</span>
                   <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
@@ -240,7 +263,7 @@ try {
               <!-- Graphique de comparaison -->
               <div class="chart-wrapper" id="bar-fonctionnement">
                 <HorizontalBarChart 
-                  data={fonctionnementDepensesChapitre}
+                  data={barChartFonctionnementDepensesChapitre}
                   type="expenses"
                   title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
                   client:load
@@ -249,6 +272,40 @@ try {
             </div>
           </div>
         </section>
+
+        <!-- Accordéon pour le tableau des dépenses et recettes par chapitre -->
+        <div class="accordion-wrapper" id="accordion-fonctionnement-chapitre">
+          <div class="accordion-content">
+            <div class="accordion-header">
+              <h4>Tableau des dépenses et recettes par chapitre</h4>
+              <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
+            </div>
+            
+            <!-- Onglets pour le graphique de comparaison -->
+            <div class="tabs-container" id="bar-tabs-fonctionnement-chapitre">
+              <div class="tabs">
+                <button class="tab tab-active" data-tab="depenses" data-section="fonctionnement-table">
+                  Dépenses
+                </button>
+                <button class="tab" data-tab="recettes" data-section="fonctionnement-table">
+                  Recettes
+                </button>
+              </div>
+            </div>
+
+            <!-- Graphique de comparaison -->
+            <div class="chart-wrapper" id="table-fonctionnement">
+              <FinancialTable 
+                data={overviewFonctionnementDepenses}
+                type="expenses"
+                title="Dépenses de fonctionnement détaillées"
+                rawData={financialTableFonctionnementDepenses}
+                client:load
+              />
+            </div>
+          </div>
+        </div>
+      </section>
         
         <!-- Section Investissement -->
         <section class="chart-section" id="section-budget-investissement">
@@ -300,7 +357,7 @@ try {
                 Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
               </p>
               <div class="cta-container">
-                <button class="cta-accordion" onclick="toggleAccordion('accordion-investissement')">
+                <button class="cta" onclick="toggleAccordion('accordion-investissement')">
                   <span class="cta-text">Voir la comparaison prévisions vs réalisations</span>
                   <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -333,7 +390,7 @@ try {
               <!-- Graphique de comparaison -->
               <div class="chart-wrapper" id="bar-investissement">
                 <HorizontalBarChart 
-                  data={investissementDepensesChapitre}
+                  data={barChartInvestissementDepensesChapitre}
                   type="expenses"
                   title="Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)"
                   chartId="bar-investissement"
@@ -407,7 +464,7 @@ try {
     />
 
     <!-- Script pour gérer la navigation et les onglets -->
-      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, fonctionnementDepensesChapitre, fonctionnementRecettesChapitre, investissementDepensesChapitre, investissementRecettesChapitre }}>
+      <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, barChartFonctionnementDepensesChapitre, barChartFonctionnementRecettesChapitre, barChartInvestissementDepensesChapitre, barChartInvestissementRecettesChapitre, financialTableFonctionnementDepenses, financialTableFonctionnementRecettes, financialTableInvestissementDepenses, financialTableInvestissementRecettes }}>
         // Fonction pour gérer l'ouverture/fermeture des accordéons
         function toggleAccordion(accordionId) {
           const accordion = document.getElementById(accordionId);
@@ -455,16 +512,24 @@ try {
               chartId: 'bar-fonctionnement',
               section: 'Fonctionnement',
               dataMap: {
-                depenses: { data: fonctionnementDepensesChapitre, type: 'expenses' },
-                recettes: { data: fonctionnementRecettesChapitre, type: 'revenues' }
+                depenses: { data: barChartFonctionnementDepensesChapitre, type: 'expenses' },
+                recettes: { data: barChartFonctionnementRecettesChapitre, type: 'revenues' }
+              }
+            },
+            'table-tabs-fonctionnement': {
+              chartId: 'table-fonctionnement',
+              section: 'Fonctionnement',
+              dataMap: {
+                depenses: { data: financialTableFonctionnementDepenses, type: 'expenses' },
+                recettes: { data: financialTableFonctionnementRecettes, type: 'revenues' }
               }
             },
             'bar-tabs-investissement': {
               chartId: 'bar-investissement',
               section: 'Investissement', 
               dataMap: {
-                depenses: { data: investissementDepensesChapitre, type: 'expenses' },
-                recettes: { data: investissementRecettesChapitre, type: 'revenues' }
+                depenses: { data: barChartInvestissementDepensesChapitre, type: 'expenses' },
+                recettes: { data: barChartInvestissementRecettesChapitre, type: 'revenues' }
               }
             }
           };
@@ -919,7 +984,7 @@ try {
     justify-content: center;
   }
 
-  .cta-accordion {
+  .cta{
     background: var(--primary);
     color: white;
     border: none;

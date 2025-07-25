@@ -246,3 +246,108 @@ export function aggregateByChapitre(
   // Trier par montant réalisé décroissant
   return result.sort((a, b) => b.realises_2024 - a.realises_2024);
 }
+
+// Type pour la table financière détaillée
+export interface OverviewData {
+  metadata: {
+    title: string;
+    periods: {
+      budget_2024: string;
+      actual_2024: string;
+      budget_2025: string;
+    };
+    columns: {
+      compte: string;
+      libelle: string;
+      prevus_2024: string;
+      realises_2024: string;
+      propositions_2025: string;
+      notes: string;
+    };
+  };
+  sections: Array<{
+    type: string;
+    title: string;
+    highlight_color?: string;
+    items: Array<{
+      compte?: string;
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+      notes: string;
+    }>;
+    total?: {
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+    };
+  }>;
+}
+
+/**
+ * Transforme un tableau plat de BudgetItem en structure OverviewData pour FinancialTable.svelte
+ * Chaque section = un chapitre, chaque item = total du chapitre (pas les articles détaillés)
+ * @param items BudgetItem[]
+ * @param title string
+ * @returns OverviewData
+ */
+export function buildOverviewDataByChapitre(
+  items: BudgetItem[],
+  title: string = 'Tableau financier par chapitre'
+): OverviewData {
+  // Regrouper par CHAPITRE_officiel
+  const grouped = new Map<string, BudgetItem[]>();
+  items.forEach((item) => {
+    const key = item.CHAPITRE_officiel || 'Non classé';
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key)!.push(item);
+  });
+
+  // Générer les sections (un chapitre = une section)
+  const sections = Array.from(grouped.entries()).map(([chapitre, chapitreItems]) => {
+    const sectionType = chapitreItems[0]?.regroupement_focale_n1 || 'Autre';
+    const sectionTitle = chapitre;
+    // Un seul item par section : le total du chapitre
+    const totalItem = {
+      compte: '',
+      libelle: chapitre, // le nom du chapitre
+      prevus_2024: chapitreItems.reduce((sum, i) => sum + (i.PREVISIONS_2024 || 0), 0),
+      realises_2024: chapitreItems.reduce((sum, i) => sum + (i.REALISATIONS_2024 || 0), 0),
+      propositions_2025: chapitreItems.reduce((sum, i) => sum + (i.PROPOSITIONS_2025 || 0), 0),
+      notes: '',
+    };
+    return {
+      type: sectionType,
+      title: sectionTitle,
+      items: [totalItem],
+      total: {
+        libelle: 'Total ' + chapitre,
+        prevus_2024: totalItem.prevus_2024,
+        realises_2024: totalItem.realises_2024,
+        propositions_2025: totalItem.propositions_2025,
+      },
+    };
+  });
+
+  // Métadonnées génériques
+  const metadata = {
+    title,
+    periods: {
+      budget_2024: 'Prévus 2024',
+      actual_2024: 'Réalisés 2024',
+      budget_2025: 'Propositions 2025',
+    },
+    columns: {
+      compte: 'Compte',
+      libelle: 'Chapitre',
+      prevus_2024: 'Prévus 2024',
+      realises_2024: 'Réalisés 2024',
+      propositions_2025: 'Propositions 2025',
+      notes: 'Notes',
+    },
+  };
+
+  return { metadata, sections };
+}

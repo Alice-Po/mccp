@@ -1,9 +1,10 @@
 <script lang="ts">
   export let data: OverviewData;
-  export let drillDownData: { [key: string]: DrillDownItem[] };
+  export let rawData: BudgetItem[]; // nouvelle prop : tableau brut
   import FinancialTableDrillDownModal from './FinancialTableDrillDownModal.svelte';
   import { onMount } from 'svelte';
   import type { DrillDownItem } from '../../utils/drilldown';
+  import type { BudgetItem } from '../../utils/budget-data';
 
   interface OverviewData {
     metadata: {
@@ -43,17 +44,6 @@
     }>;
   }
 
-  interface DrillDownData {
-    [key: string]: Array<{
-      compte: string;
-      libelle: string;
-      prevus_2024: number;
-      realises_2024: number;
-      propositions_2025: number;
-      type: 'expense' | 'income';
-    }>;
-  }
-
   let showDownloadPopup = false;
   let showDrillDownModal = false;
   let selectedDrillDownTitle = '';
@@ -89,13 +79,31 @@
     showDownloadPopup = false;
   }
 
-  // Fonction pour ouvrir le drill-down
+  // Drill-down dynamique : filtrer rawData sur le libellé cliqué
   function openDrillDown(libelle: string, sectionType: string) {
-    if (drillDownData[libelle] && drillDownData[libelle].length > 0) {
+    console.log('[DrillDown] Clic sur libelle:', libelle, 'sectionType:', sectionType);
+    if (!rawData) {
+      console.log('[DrillDown] Pas de rawData');
+      return;
+    }
+    // On prend tous les postes du budget qui ont ce libellé (pour la section concernée)
+    const details = rawData.filter(item => item.CHAPITRE_officiel === libelle);
+    console.log('[DrillDown] Résultat du filtrage:', details);
+    if (details.length > 0) {
       selectedDrillDownTitle = libelle;
-      selectedDrillDownData = drillDownData[libelle];
+      selectedDrillDownData = details.map(item => ({
+        compte: item.COMPTE,
+        libelle: item.LIBELLE,
+        prevus_2024: item.PREVISIONS_2024 || 0,
+        realises_2024: item.REALISATIONS_2024 || 0,
+        propositions_2025: item.PROPOSITIONS_2025 || 0,
+        type: sectionType.includes('revenu') ? 'income' : 'expense'
+      }));
       selectedSectionType = sectionType;
       showDrillDownModal = true;
+      console.log('[DrillDown] Données passées à la modale:', selectedDrillDownData);
+    } else {
+      console.log('[DrillDown] Aucun détail trouvé pour ce libellé');
     }
   }
 
@@ -161,26 +169,15 @@
       </thead>
       <tbody>
         {#each data.sections as section}
-          <!-- En-tête de section -->
-          <tr class="section-header" style="background-color: {getSectionColor(section.type, section.highlight_color)}">
-            <td colspan="5" class="section-title" id={
-              section.type === 'expenses' ? 'depenses-fonctionnement' : 
-              section.type === 'revenues' ? 'recettes-fonctionnement' :
-              section.type === 'investment_expenses' ? 'depenses-investissement' :
-              section.type === 'investment_revenues' ? 'recettes-investissement' :
-              undefined
-            }>
-              <strong>{section.title}</strong>
-            </td>
-          </tr>
+
           
           <!-- Items de la section -->
           {#each section.items as item}
-            <tr class="data-row clickable" class:clickable={drillDownData[item.libelle] && drillDownData[item.libelle].length > 0} on:click={() => openDrillDown(item.libelle, section.type)}>
+            <tr class="data-row clickable" on:click={() => openDrillDown(item.libelle, section.type)}>
               <td class="col-compte">{item.compte || ''}</td>
               <td class="col-libelle">
                 {item.libelle}
-                {#if drillDownData[item.libelle] && drillDownData[item.libelle].length > 0}
+                {#if rawData && rawData.some(r => r.LIBELLE === item.libelle)}
                   <span class="drill-down-indicator">🔍</span>
                 {/if}
               </td>
@@ -190,16 +187,7 @@
             </tr>
           {/each}
           
-          <!-- Total de section (si présent) -->
-          {#if section.total}
-            <tr class="section-total" style="background-color: {getSectionColor(section.type, section.highlight_color)}">
-              <td class="col-compte"></td>
-              <td class="col-libelle"><strong>{section.total.libelle}</strong></td>
-              <td class="col-amount"><strong>{formatCurrency(section.total.prevus_2024)}</strong></td>
-              <td class="col-amount"><strong>{formatCurrency(section.total.realises_2024)}</strong></td>
-              <td class="col-amount"><strong>{formatCurrency(section.total.propositions_2025)}</strong></td>
-            </tr>
-          {/if}
+        
         {/each}
       </tbody>
     </table>
