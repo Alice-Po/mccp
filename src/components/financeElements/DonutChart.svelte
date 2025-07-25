@@ -17,70 +17,50 @@
   import type { AggregatedData } from '../../utils/budget-data';
   import { formatCurrency, generateColors, calculateTotal } from '../../utils/budget-data';
 
+  // Interface dédiée pour les props
+  interface DonutChartProps {
+    data?: AggregatedData[];
+    title?: string;
+    chartId?: string;
+    enableDrillDown?: boolean;
+    onSegmentClick?: (detail: { category: string; value: number; index: number }) => void;
+  }
+
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
-  // Props avec les runes Svelte 5
-  let { 
+  // Props avec les runes Svelte 5, typées et valeurs par défaut explicites
+  let {
     data = [],
     title = '',
     chartId = 'default',
     enableDrillDown = false,
-    onsegmentClick // Callback pour le clic sur segment
-  }: {
-    data: AggregatedData[];
-    title: string;
-    chartId: string;
-    enableDrillDown: boolean;
-    onsegmentClick?: (detail: { category: string; value: number; index: number }) => void;
-  } = $props();
+    onSegmentClick
+  }: DonutChartProps = $props();
 
-  // État local réactif avec $state
+  // État local réactif pour le canvas et le chart
   let canvasElement = $state<HTMLCanvasElement>();
   let chart = $state<Chart | null>(null);
-  
-  // Variables d'état réactives pour les données du graphique
-  let currentData = $state<AggregatedData[]>(data);
-  let currentTitle = $state<string>(title);
 
-  // Valeurs dérivées avec $derived basées sur les données actuelles
-  let total = $derived(calculateTotal(currentData));
-  let colors = $derived(generateColors(currentData.length));
+  // Valeurs dérivées avec $derived basées sur les props
+  let total = $derived(calculateTotal(data));
+  let colors = $derived(generateColors(data.length));
 
-  // Synchroniser les props initiales avec l'état interne
+
+
+  // Effet pour la mise à jour du graphique quand les données changent
   $effect(() => {
-    currentData = data;
-    currentTitle = title;
-  });
-
-  // Debug logs pour les props - effet réactif
-  $effect(() => {
-    console.log('📊 DonutChart - État actuel:', { 
-      dataLength: currentData?.length, 
-      title: currentTitle, 
-      total,
-      data: currentData 
-    });
-  });
-
-  // Effet pour la mise à jour du graphique quand les données internes changent
-  $effect(() => {
-    if (chart && currentData.length > 0) {
-      console.log('🔄 DonutChart - Mise à jour du graphique');
+    if (chart && data.length > 0) {
       updateChart();
     }
   });
 
   function createChart() {
-    console.log('🎨 DonutChart - createChart appelée:', { 
-      hasCanvas: !!canvasElement, 
-      dataLength: currentData.length 
-    });
-    
-    if (!canvasElement || currentData.length === 0) {
-      console.log('❌ DonutChart - Création annulée:', { 
-        hasCanvas: !!canvasElement, 
-        dataLength: currentData.length 
+
+    if (!canvasElement || data.length === 0) {
+      console.log('❌ DonutChart - Création annulée:', {
+        hasCanvas: !!canvasElement,
+        dataLength: data.length
       });
       return;
     }
@@ -92,17 +72,17 @@
     }
 
     console.log('🎯 DonutChart - Création du chart avec:', {
-      labels: currentData.map(item => item.label),
-      values: currentData.map(item => item.value),
+      labels: data.map(item => item.label),
+      values: data.map(item => item.value),
       colors: colors
     });
 
     chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: currentData.map(item => item.label),
+        labels: data.map(item => item.label),
         datasets: [{
-          data: currentData.map(item => item.value),
+          data: data.map(item => item.value),
           backgroundColor: colors,
           borderColor: '#ffffff',
           borderWidth: 2,
@@ -157,16 +137,14 @@
   function updateChart() {
     if (!chart) return;
 
-    chart.data.labels = currentData.map(item => item.label);
-    chart.data.datasets[0].data = currentData.map(item => item.value);
+    chart.data.labels = data.map(item => item.label);
+    chart.data.datasets[0].data = data.map(item => item.value);
     chart.data.datasets[0].backgroundColor = colors;
     chart.update('active');
   }
 
   function handleLegendHover(index: number) {
     if (!chart) return;
-    
-    // Mettre en surbrillance le segment correspondant
     chart.setActiveElements([{
       datasetIndex: 0,
       index: index
@@ -176,40 +154,30 @@
 
   function handleLegendLeave() {
     if (!chart) return;
-    
-    // Retirer la surbrillance
     chart.setActiveElements([]);
     chart.update('active');
   }
 
   function handleChartClick(event: any, elements: any[]) {
     if (!enableDrillDown || elements.length === 0) return;
-    
     const elementIndex = elements[0].index;
-    const clickedData = currentData[elementIndex];
-    
+    const clickedData = data[elementIndex];
     console.log('🖱️ DonutChart - Clic sur segment:', {
       elementIndex,
       clickedData,
       enableDrillDown
     });
-
-    // Vérifier si le segment a suffisamment d'éléments pour justifier un drill-down
     if (clickedData.items && clickedData.items.length <= 1) {
       console.log('❌ DonutChart - Drill-down ignoré: pas assez d\'éléments détaillés');
-      
-      // Afficher un tooltip informatif
       showNoDetailTooltip(elementIndex);
       return;
     }
-
     // Utiliser le callback prop plutôt que createEventDispatcher
-    onsegmentClick?.({
+    onSegmentClick?.({
       category: clickedData.label,
       value: clickedData.value,
       index: elementIndex
     });
-
     // Dispatcher aussi un événement DOM global (pour compatibilité avec les pages Astro)
     if (typeof document !== 'undefined') {
       const customEvent = new CustomEvent('segmentClick', {
@@ -229,10 +197,8 @@
   let searchIconPosition = $state<{x: number, y: number} | null>(null);
 
   function showNoDetailTooltip(elementIndex: number) {
-    // Créer un tooltip temporaire pour indiquer qu'il n'y a pas de détail
     const canvas = canvasElement;
     if (!canvas) return;
-
     const rect = canvas.getBoundingClientRect();
     const tooltip = document.createElement('div');
     tooltip.className = 'no-detail-tooltip';
@@ -250,10 +216,7 @@
       z-index: 1000;
       pointer-events: none;
     `;
-    
     document.body.appendChild(tooltip);
-    
-    // Supprimer le tooltip après 2 secondes
     setTimeout(() => {
       if (tooltip.parentNode) {
         tooltip.parentNode.removeChild(tooltip);
@@ -263,18 +226,12 @@
 
   function handleChartHover(event: any, elements: any[]) {
     if (!enableDrillDown) return;
-
     if (elements.length > 0) {
       const elementIndex = elements[0].index;
-      const clickedData = currentData[elementIndex];
-      
-      // Vérifier si ce segment a un drill-down disponible
+      const clickedData = data[elementIndex];
       const hasValidDrillDown = clickedData.items && clickedData.items.length > 1;
-      
       if (hasValidDrillDown) {
         hoveredSegmentIndex = elementIndex;
-        
-        // Calculer la position pour l'icône de recherche
         const canvas = canvasElement;
         if (canvas) {
           const rect = canvas.getBoundingClientRect();
@@ -302,42 +259,27 @@
   $effect(() => {
     console.log('🎬 DonutChart - Component mounted');
     createChart();
-
-    // Écouter les événements de mise à jour depuis la page
     const handleUpdateChart = (event: CustomEvent) => {
       console.log('📡 DonutChart - Événement updateChart reçu:', event.detail);
-      
       const { data: newData, title: newTitle, chartId: targetChartId } = event.detail;
-      
-      // Vérifier si cet événement est destiné à ce composant
       if (targetChartId && targetChartId !== chartId) {
         console.log('⏭️ DonutChart - Événement ignoré (chartId différent):', { targetChartId, chartId });
         return;
       }
-      
-      // Mettre à jour les variables d'état réactives (approche Svelte 5)
-      console.log('🔄 DonutChart - Mise à jour des données réactives:', {
-        newDataLength: newData?.length || 0,
-        newTitle
-      });
-      
       if (newData) {
-        // Mettre à jour les variables d'état - Svelte 5 se chargera du reste
-        currentData = newData;
-        if (newTitle) {
-          currentTitle = newTitle;
-        }
-        
-        console.log('✅ DonutChart - Variables d\'état mises à jour, réactivité Svelte en cours...');
+        // Mise à jour directe des props via Svelte 5 (si possible)
+        // Sinon, demander à l'utilisateur de passer de nouvelles props
+        // Ici, on ne modifie pas data/title car ce sont des props
+        // On log simplement pour information
+        console.log('🔄 DonutChart - Données reçues pour mise à jour (props immuables):', {
+          newDataLength: newData?.length || 0,
+          newTitle
+        });
       }
     };
-
-    // Écouter l'événement personnalisé
     if (typeof document !== 'undefined') {
       document.addEventListener('updateChart', handleUpdateChart as EventListener);
     }
-
-    // Cleanup automatique lors de la destruction du composant
     return () => {
       if (typeof document !== 'undefined') {
         document.removeEventListener('updateChart', handleUpdateChart as EventListener);
@@ -351,7 +293,6 @@
 </script>
 
 <div class="donut-chart">
-
   <div class="chart-container">
     <!-- Graphique Chart.js -->
     <div class="chart-canvas-container">
@@ -361,17 +302,15 @@
         role="img"
         aria-label="Graphique en donut : {title}"
       ></canvas>
-      
       <!-- Total au centre (overlay) -->
       <div class="center-overlay">
         <div class="center-total-amount">{formatCurrency(total)}</div>
-        <div class="center-total-label">{currentTitle}</div>
+        <div class="center-total-label">{title}</div>
       </div>
     </div>
-
     <!-- Légende personnalisée -->
     <div class="chart-legend">
-      {#each currentData as item, index}
+      {#each data as item, index}
         <div 
           class="legend-item"
           onmouseenter={() => handleLegendHover(index)}
@@ -394,8 +333,6 @@
         </div>
       {/each}
     </div>
-
-
   </div>
 </div>
 
