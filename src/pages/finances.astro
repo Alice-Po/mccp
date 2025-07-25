@@ -465,6 +465,26 @@ try {
 
     <!-- Script pour gérer la navigation et les onglets -->
       <script define:vars={{ fonctionnementDepenses, fonctionnementRecettes, investissementDepenses, investissementRecettes, barChartFonctionnementDepensesChapitre, barChartFonctionnementRecettesChapitre, barChartInvestissementDepensesChapitre, barChartInvestissementRecettesChapitre, financialTableFonctionnementDepenses, financialTableFonctionnementRecettes, financialTableInvestissementDepenses, financialTableInvestissementRecettes }}>
+        // Ajoute une constante de configuration pour les textes des boutons accordéon
+        const ACCORDION_LABELS = {
+          'accordion-fonctionnement': {
+            open: 'Masquer la comparaison',
+            closed: 'Voir la comparaison prévisions vs réalisations'
+          },
+          'accordion-fonctionnement-chapitre': {
+            open: 'Masquer le tableau des dépenses par chapitre',
+            closed: 'Voir le tableau des dépenses par chapitre'
+          },
+          'accordion-investissement': {
+            open: 'Masquer la comparaison',
+            closed: 'Voir la comparaison prévisions vs réalisations'
+          },
+          'accordion-investissement-chapitre': {
+            open: 'Masquer le tableau des dépenses par chapitre',
+            closed: 'Voir le tableau des dépenses par chapitre'
+          },
+        };
+
         // Fonction pour gérer l'ouverture/fermeture des accordéons
         function toggleAccordion(accordionId) {
           const accordion = document.getElementById(accordionId);
@@ -476,11 +496,11 @@ try {
             if (isExpanded) {
               accordion.classList.remove('expanded');
               button.setAttribute('aria-expanded', 'false');
-              button.querySelector('.cta-text').textContent = 'Voir la comparaison prévisions vs réalisations';
+              button.querySelector('.cta-text').textContent = ACCORDION_LABELS[accordionId]?.closed || 'Voir';
             } else {
               accordion.classList.add('expanded');
               button.setAttribute('aria-expanded', 'true');
-              button.querySelector('.cta-text').textContent = 'Masquer la comparaison';
+              button.querySelector('.cta-text').textContent = ACCORDION_LABELS[accordionId]?.open || 'Masquer';
             }
           }
         }
@@ -985,11 +1005,14 @@ try {
   }
 
   .cta{
-    background: var(--primary);
-    color: white;
-    border: none;
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+   
     padding: 0.75rem 1.5rem;
-    border-radius: 2rem;
+    border-radius: 0.75rem;
+    margin: 0 1rem;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
@@ -997,7 +1020,6 @@ try {
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
   }
 
   .cta-accordion:hover {
@@ -1010,9 +1032,17 @@ try {
     transition: transform 0.3s ease;
   }
 
-  .cta-accordion[aria-expanded="true"] .cta-icon {
+
+  .cta[aria-expanded="true"] {
+    background: var(--primary);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+  }
+  .cta.active .cta-icon {
     transform: rotate(180deg);
   }
+
 
   .accordion-wrapper {
     max-height: 0;
