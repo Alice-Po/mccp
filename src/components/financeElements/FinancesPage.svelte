@@ -9,7 +9,6 @@
     import FinancialTable from './FinancialTable.svelte';
     import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
     import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../types/finances';
-    
     // Variables réactives
     let budgetData: BudgetItem[] = $state([]);
     let fiscaliteData: FiscaliteItem[] = $state([]);
@@ -220,37 +219,26 @@
           </div>
 
           <!-- Section de téléchargement -->
-          <div class="download-section">
-            <h3 class="download-title">Documents de référence</h3>
-            <div class="download-buttons">
-              <a href="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf" class="download-btn download-pdf" download>
-                <span class="download-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                </span>
-                <span class="download-text">
-                  <span class="download-label">Budget complet</span>
-                  <span class="download-format">Format PDF</span>
-                </span>
-              </a>
-                   <a href="/assets/datas/2025/Budget-primitif-2025.ods" class="download-btn download-csv" download>
-                <span class="download-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="9" y1="9" x2="15" y2="9"/>
-                    <line x1="9" y1="12" x2="15" y2="12"/>
-                    <line x1="9" y1="15" x2="15" y2="15"/>
-                  </svg>
-                </span>
-                <span class="download-text">
-                  <span class="download-label">Budget complet</span>
-                  <span class="download-format">Format ODS</span>
-                </span>
-              </a>
-            </div>
+          <div class="cta-container">
+
+          <a href="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf" class="help-button" download>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span class="download-label">Budget complet</span>
+            <span class="download-format">PDF</span>
+          </a>
+          <a href="/assets/datas/2025/Budget-primitif-2025.ods" class="help-button" download>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span class="download-label">Budget complet</span>
+            <span class="download-format">ODS</span>
+          </a>
           </div>
         </header>
 
@@ -620,6 +608,30 @@
 
     
     <style>
+
+  .help-button {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+
+  .help-button:hover {
+    background: var(--primary);
+    color: white;
+    transform: none;
+    box-shadow: none;
+  }
       .finances-main {
         min-height: 100vh;
         background-color: #f9fafb;
@@ -731,7 +743,7 @@
         background: #f8fafc;
         border-radius: 1rem;
         padding: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
         border-left: 4px solid var(--primary);
       }
     
@@ -777,46 +789,29 @@
       }
     
       .download-buttons {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        display: flex;
         gap: 1rem;
+        flex-wrap: wrap;
       }
     
-      .download-btn {
+      .cta.download {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.75rem;
         padding: 1rem 1.5rem;
         border-radius: 0.75rem;
         text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
         transition: all 0.3s ease;
-        border: 2px solid transparent;
       }
     
-      .download-pdf {
-        background: var(--primary);
-        color: white;
-      }
-    
-      .download-pdf:hover {
+      .cta.download:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
       }
     
-      .download-csv {
-        background: #f8fafc;
-        color: var(--primary);
-        border-color: var(--primary);
-      }
-    
-      .download-csv:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(46, 139, 87, 0.2);
-      }
-    
-      .download-icon {
+      .cta.download .download-icon {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -825,20 +820,18 @@
         height: 24px;
       }
     
-      .download-text {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-    
-      .download-label {
+      .cta.download .download-label {
         font-weight: 600;
         font-size: 1rem;
+        margin-right: 0.5rem;
       }
     
-      .download-format {
-        font-size: 0.875rem;
+      .cta.download .download-format {
+        font-size: 0.95rem;
         opacity: 0.8;
+      }
+      a.cta{
+        text-decoration: none;
       }
     
       .chart-section {
