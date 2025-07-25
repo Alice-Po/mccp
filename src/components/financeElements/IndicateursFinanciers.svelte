@@ -9,17 +9,7 @@
 
 <script lang="ts">
   import MethodologyModal from './MethodologyModal.svelte';
-
-  interface IndicateurFinancier {
-    critere: string;
-    definition_critere: string;
-    valeur_putanges_le_lac_par_habitant: string;
-    mediane_echantillon_par_habitant: string;
-    classement_putanges_le_lac_sur_129: string;
-    premier_decile_par_habitant: string;
-    dernier_decile_par_habitant: string;
-    commentaires: string;
-  }
+  import type { IndicateurFinancier } from '../../finances';
 
   // Props avec les runes Svelte 5
   let { 
