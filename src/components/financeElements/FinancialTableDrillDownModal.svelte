@@ -111,7 +111,7 @@
                 <th>Libellé</th>
                 <th>Prévus 2024</th>
                 <th>Réalisés 2024</th>
-                <th>Écart 2024 (%)</th>
+                <th>Écart 2024 (€)</th>
                 <th>Propositions 2025</th>
               </tr>
             </thead>
@@ -124,7 +124,7 @@
                   <td>{formatCurrency(item.realises_2024)}</td>
                   <td class={getEcartColorClass(getEcartPourcentage(item.prevus_2024, item.realises_2024))}>
                     {#if item.prevus_2024}
-                      {getEcartPourcentage(item.prevus_2024, item.realises_2024).toFixed(1)} %
+                      {formatCurrency(item.realises_2024 - item.prevus_2024)}
                     {:else}
                       —
                     {/if}
@@ -141,7 +141,7 @@
                 <td><strong>{formatCurrency(grandTotal.realises_2024)}</strong></td>
                 <td class={getEcartColorClass(getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024))}><strong>
                   {#if grandTotal.prevus_2024}
-                    {getEcartPourcentage(grandTotal.prevus_2024, grandTotal.realises_2024).toFixed(1)} %
+                    {formatCurrency(grandTotal.realises_2024 - grandTotal.prevus_2024)}
                   {:else}
                     —
                   {/if}
