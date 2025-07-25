@@ -33,7 +33,7 @@
   };
 
   // Fonction de rendu du graphique
-  async function renderChart(currentData: any[], currentType: string, currentTitle: string) {
+  async function renderChart(currentData: any[]) {
     const Chart = (await import('chart.js/auto')).default;
     if (chartInstance) {
       chartInstance.destroy();
@@ -123,8 +123,7 @@
 
   // Effet principal : (ré)affiche le graphique à chaque changement de props
   $effect(() => {
-
-    renderChart(data, type, title);
+    renderChart(data);
   });
 
   // Effet pour écouter l'événement updateChart (comme DonutChart)
@@ -139,7 +138,7 @@
       }
       
       
-      renderChart(newData || [], newType || type, newTitle || title);
+      renderChart(newData);
     }
     
     document.addEventListener('updateChart', handleUpdateChart as EventListener);
