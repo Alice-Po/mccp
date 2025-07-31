@@ -7,8 +7,9 @@
   import DonutChart from './DonutChart.svelte';
   import IndicateursFinanciers from './IndicateursFinanciers.svelte';
   import FinancialTable from './FinancialTable.svelte';
+  import Download from '../commonsElements/Download.svelte';
   import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
-  import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../types/finances';
+  import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../finances';
 
   // Variables réactives
   let budgetData: BudgetItem[] = $state([]);
@@ -54,10 +55,7 @@
   let overviewInvestissementRecettes = $derived(  
     buildOverviewDataByChapitre(financialTableInvestissementRecettes, 'Recettes d\'investissement détaillées')
   );
-  
-  // === PHASE 1: GESTION DE LA MODAL SIMPLIFIÉE ===
-  
-  // État de la modal simplifié - plus d'objet complexe !
+    
   let isModalOpen = $state(false);
   let modalData = $state<{
     category: string;
@@ -134,9 +132,7 @@ function toggleAccordion(id: string) {
     const typeLabel = tab === 'depenses' ? 'Dépenses' : 'Recettes';
     return `${typeLabel} de ${section.toLowerCase()} détaillées`;
   }
-  
-  // === PHASE 1: HANDLER SIMPLIFIÉ POUR L'OUVERTURE DE LA MODAL ===
-  
+    
   function handleSegmentClick(event: CustomEvent) {
     try {
       const { category } = event.detail;
@@ -265,25 +261,16 @@ function toggleAccordion(id: string) {
 
     <!-- Section de téléchargement -->
     <div class="cta-container">
-
-    <a href="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf" class="help-button" download>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      <span class="download-label">Budget complet</span>
-      <span class="download-format">PDF</span>
-    </a>
-    <a href="/assets/datas/2025/Budget-primitif-2025.ods" class="help-button" download>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      <span class="download-label">Budget complet</span>
-      <span class="download-format">ODS</span>
-    </a>
+      <Download 
+        url="/assets/datas/2025/Budget-primitif-2025-Putanges.pdf"
+        label="Budget complet"
+        format="PDF"
+      />
+      <Download 
+        url="/assets/datas/2025/Budget-primitif-2025.ods"
+        label="Budget complet"
+        format="ODS"
+      />
     </div>
   </header>
 
@@ -710,80 +697,14 @@ function toggleAccordion(id: string) {
     
     <style>
 
-  .help-button {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    padding: 0.6rem 1.2rem;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
 
-  .help-button:hover {
-    background: var(--primary);
-    color: white;
-    transform: none;
-    box-shadow: none;
-  }
       .finances-main {
         min-height: 100vh;
         background-color: #f9fafb;
         max-width: 1600px;
       }
     
-      /* Message d'avertissement - masqué par défaut */
-      .screen-warning {
-        display: none;
-        min-height: 100vh;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        background: #f8f9fa;
-      }
-    
-      .warning-content {
-        max-width: 600px;
-        text-align: center;
-        background: white;
-        padding: 3rem;
-        border-radius: 1.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 2px solid #2e8b57;
-      }
-    
-      .warning-content h2 {
-        color: #2e8b57;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-      }
-    
-      .warning-content p {
-        color: #495057;
-        margin-bottom: 1rem;
-        line-height: 1.6;
-        font-size: 1.1rem;
-      }
-    
-      .warning-details {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        margin: 2rem 0;
-        border-left: 4px solid #2e8b57;
-      }
-    
-      .warning-details p {
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-      }
+     
     
       .btn-home {
         display: inline-block;
