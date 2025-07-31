@@ -473,9 +473,7 @@
 
   /* Responsive design */
   @media (max-width: 1200px) {
-    .table-wrapper {
-      padding: 0 1rem;
-    }
+
     
     .financial-table {
       font-size: 0.8rem;

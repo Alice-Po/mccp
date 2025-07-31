@@ -442,8 +442,8 @@
     margin-left: 0.25rem;
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
+  /* Responsive - Légende sous le graphique en dessous de 999px */
+  @media (max-width: 999px) {
     .chart-container {
       flex-direction: column;
       align-items: center;

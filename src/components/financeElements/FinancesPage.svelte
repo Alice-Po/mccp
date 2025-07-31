@@ -697,32 +697,6 @@ function toggleAccordion(id: string) {
     
     <style>
 
-
-      .finances-main {
-        min-height: 100vh;
-        background-color: #f9fafb;
-        max-width: 1600px;
-      }
-    
-     
-    
-      .btn-home {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: #2e8b57;
-        color: white;
-        text-decoration: none;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        margin-top: 1rem;
-      }
-    
-      .btn-home:hover {
-        background: #1b5e39;
-        transform: translateY(-2px);
-      }
-    
       .finances-content section{
         margin: 0 auto;
       }
@@ -792,70 +766,7 @@ function toggleAccordion(id: string) {
         color: var(--primary-dark);
         border-bottom-color: var(--primary);
       }
-    
-      /* Section de téléchargement */
-      .download-section {
-        background: white;
-        border-radius: 1rem;
-        padding: 2rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(46, 139, 87, 0.1);
-      }
-    
-      .download-title {
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: var(--primary);
-        margin-bottom: 1.5rem;
-        text-align: center;
-      }
-    
-      .download-buttons {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-    
-      .cta.download {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem 1.5rem;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-    
-      .cta.download:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
-      }
-    
-      .cta.download .download-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-      }
-    
-      .cta.download .download-label {
-        font-weight: 600;
-        font-size: 1rem;
-        margin-right: 0.5rem;
-      }
-    
-      .cta.download .download-format {
-        font-size: 0.95rem;
-        opacity: 0.8;
-      }
-      a.cta{
-        text-decoration: none;
-      }
-    
+
       .chart-section {
         border-radius: 1rem;
         padding: 2rem;
@@ -876,13 +787,7 @@ function toggleAccordion(id: string) {
         color: var(--primary);
         margin-bottom: 0.5rem;
       }
-    
-      .section-header p {
-        font-size: 1rem;
-        color: var(--secondary);
-        margin: 0;
-      }
-    
+  
       .tabs-container {
         margin: 2rem 0;
       }
@@ -915,11 +820,7 @@ function toggleAccordion(id: string) {
         outline: 2px solid var(--primary);
       }
     
-      .tab-active {
-        color: var(--primary) !important;
-        border-bottom-color: var(--primary) !important;
-        background-color: #f5faff;
-      }
+
     
       .chart-wrapper {
         min-height: 400px;
@@ -975,12 +876,7 @@ function toggleAccordion(id: string) {
         gap: 0.5rem;
         transition: all 0.3s ease;
       }
-    
-      .cta-accordion:hover {
-        background: var(--primary-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(46, 139, 87, 0.4);
-      }
+  
     
       .cta-icon {
         transition: transform 0.3s ease;
@@ -992,13 +888,6 @@ function toggleAccordion(id: string) {
       color: white;
       border: none;
       box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
-      }
-      .cta.active .cta-icon {
-        transform: rotate(180deg);
-      }
-    
-      .accordion-wrapper.expanded {
-        max-height: 2000px; /* Valeur suffisamment grande pour le contenu */
       }
     
       .accordion-content {
@@ -1024,62 +913,65 @@ function toggleAccordion(id: string) {
         margin: 0;
       }
   
-      /* Responsive pour les grands écrans */
-      @media (min-width: 1400px) and (max-width: 1599px) {
-        .finances-layout {
-          gap: 1.5rem;
-          padding: 1.5rem;
-        }
-      }
+
     
-      /* Responsive pour l'introduction et les téléchargements */
-      @media (max-width: 768px) {
-        .finances-header h1 {
-          font-size: 2rem;
-        }
+  /* Responsive pour masquer la sidebar en dessous de 1299px */
+  @media (max-width: 1299px) {
+    .finances-sidebar {
+      display: none;
+    }
     
-        .intro-section {
-          padding: 1.5rem;
-          margin-bottom: 1.5rem;
-        }
+    .finances-layout {
+      gap: 1rem;
+      padding: 1rem;
+    }
     
-        .intro-content p {
-          font-size: 1rem;
-        }
-    
-        .download-section {
-          padding: 1.5rem;
-        }
-    
-        .download-buttons {
-          grid-template-columns: 1fr;
-          gap: 0.75rem;
-        }
-    
-        .download-btn {
-          padding: 0.875rem 1.25rem;
-        }
-    
-        .download-title {
-          font-size: 1.2rem;
-        }
-        
-    
-      }  .drill-down-legend {
-        margin-top: 2rem;
-        background: #ffa60021;
-        border-radius: 1rem;
-        color: var(--secondary);
-        padding : 1rem;
-        border-left: 4px solid #ffa500;
-        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
-     
-     
-    
-      }
-      @keyframes gentle-pulse {
-        0%, 100% { opacity: 0.8; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.12); }
-      }
+    .finances-content {
+      width: 100%;
+    }
+  }
+
+  /* Responsive pour les grands écrans */
+  @media (min-width: 1400px) and (max-width: 1599px) {
+    .finances-layout {
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+  }
+
+  /* Responsive pour les petits écrans */
+  @media (max-width: 768px) {
+    .finances-header h1 {
+      font-size: 2rem;
+    }
+
+    .intro-section {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-content p {
+      font-size: 1rem;
+    }
+
+    .chart-section {
+      padding: 1.5rem;
+    }
+
+    .cta-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta {
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+@keyframes gentle-pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.12); }
+  }
     
     </style>
