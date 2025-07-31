@@ -11,7 +11,7 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
         <h2>📊 Consultation des Finances</h2>
         <p>Pour une meilleure expérience de consultation des données financières, nous vous recommandons d'utiliser un ordinateur ou un écran plus large.</p>
         <div class="warning-details">
-          <p><strong>Résolution minimale recommandée :</strong> 1400px de largeur</p>
+          <p><strong>Résolution minimale recommandée :</strong> 1200px de largeur</p>
           <p>Cette page contient des graphiques détaillés et des tableaux interactifs qui nécessitent plus d'espace d'affichage pour une lecture optimale.</p>
         </div>
         <div class="warning-actions">
@@ -26,56 +26,8 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
 </Layout>
 
 <style>
-  /* Variables CSS globales pour le composant Finances */
+  /* CSS nettoyé pour le composant Finances */
 
-     /* Message d'avertissement - masqué par défaut */
-     .screen-warning {
-        display: none;
-        min-height: 100vh;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        background: #f8f9fa;
-      }
-    
-      .warning-content {
-        max-width: 600px;
-        text-align: center;
-        background: white;
-        padding: 3rem;
-        border-radius: 1.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 2px solid #2e8b57;
-      }
-    
-      .warning-content h2 {
-        color: #2e8b57;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-      }
-    
-      .warning-content p {
-        color: #495057;
-        margin-bottom: 1rem;
-        line-height: 1.6;
-        font-size: 1.1rem;
-      }
-    
-      .warning-details {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        margin: 2rem 0;
-        border-left: 4px solid #2e8b57;
-      }
-    
-      .warning-details p {
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-      }
-      main {
-        max-width: 1400px;
-      }
   .finances-main {
     min-height: 100vh;
     background-color: #f9fafb;
@@ -145,336 +97,15 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
     transform: translateY(-2px);
   }
 
-  .finances-content section{
-    margin: 0 auto;
+  .finances-section {
+    /* Styles pour la section finances si nécessaire */
   }
 
-  .finances-layout {
-    display: flex;
-    gap: 2rem;
-    min-height: 100vh;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  .finances-sidebar {
-    flex-shrink: 0;
-  }
-
-  .finances-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .finances-header {
-    text-align: left;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .finances-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--secondary);
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  /* Introduction */
-  .intro-section {
-    background: #f8fafc;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-left: 4px solid var(--primary);
-  }
-
-  .intro-content p {
-    font-size: 1.1rem;
-    color: #374151;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-  }
-
-  .intro-content p:last-child {
-    margin-bottom: 0;
-  }
-
-  .intro-link {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease;
-  }
-
-  .intro-link:hover {
-    color: var(--primary-dark);
-    border-bottom-color: var(--primary);
-  }
-
-  /* Section de téléchargement */
-  .download-section {
-    background: white;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .download-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .download-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-
-  .download-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    border-radius: 0.75rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-  }
-
-  .download-pdf {
-    background: var(--primary);
-    color: white;
-  }
-
-  .download-pdf:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
-  }
-
-  .download-csv {
-    background: #f8fafc;
-    color: var(--primary);
-    border-color: var(--primary);
-  }
-
-  .download-csv:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.2);
-  }
-
-  .download-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-  }
-
-  .download-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .download-label {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .download-format {
-    font-size: 0.875rem;
-    opacity: 0.8;
-  }
-
-  .chart-section {
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    scroll-margin-top: 2rem;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .section-header h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .section-header p {
-    font-size: 1rem;
-    color: var(--secondary);
-    margin: 0;
-  }
-
-  .tabs-container {
-    margin-bottom: 2rem;
-  }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tab {
-    background: none;
-    border: none;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 2.5px solid transparent;
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
-    border-radius: 0.25rem 0.25rem 0 0;
-  }
-
-  .tab:hover {
-    color: var(--primary);
-  }
-
-  .tab:focus {
-    outline: 2px solid var(--primary);
-  }
-
-  .tab-active {
-    color: var(--primary) !important;
-    border-bottom-color: var(--primary) !important;
-    background-color: #f5faff;
-  }
-
-  .chart-wrapper {
-    min-height: 400px;
-  }
-
-  /* Styles pour les commentaires et accordéons */
-  .realization-comment {
-    margin-top: 2rem;
-    background: #f8fafc;
-    border-radius: 1rem;
-    padding: 2rem;
-    border-left: 4px solid var(--secondary);
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
-  }
-
-  .comment-content h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--secondary);
-    margin: 0 0 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .comment-content p {
-    font-size: 1rem;
-    color: var(--secondary);
-    line-height: 1.7;
-    margin: 0 0 1.5rem 0;
-    font-weight: 500;
-  }
-
-  .cta-container {
-    display: flex;
-    justify-content: center;
-  }
-
-  .cta{
-    background: white;
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
-   
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    margin: 0 1rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
-
-  .cta-accordion:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(46, 139, 87, 0.4);
-  }
-
-  .cta-icon {
-    transition: transform 0.3s ease;
-  }
+ 
 
 
-  .cta[aria-expanded="true"] {
-    background: var(--primary);
-  color: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
-  }
-  .cta.active .cta-icon {
-    transform: rotate(180deg);
-  }
-
-
-  .accordion-wrapper {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: white;
-  }
-
-  .accordion-wrapper.expanded {
-    max-height: 2000px; /* Valeur suffisamment grande pour le contenu */
-  }
-
-  .accordion-content {
-    padding: 2rem;
-    border-top: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .accordion-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .accordion-header h4 {
-    color: var(--primary);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .accordion-header p {
-    color: #6b7280;
-    font-size: 1rem;
-    margin: 0;
-  }
-
-  /* Affichage conditionnel basé sur la largeur d'écran */
-  @media (max-width: 1399px) {
+  /* Responsive pour les petits écrans */
+  @media (max-width: 768px) {
     .screen-warning {
       display: flex;
     }
@@ -482,75 +113,26 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
     .finances-section {
       display: none;
     }
-  }
-
-  /* Styles pour écrans ≥ 1400px */
-  @media (min-width: 1400px) {
-    .screen-warning {
-      display: none;
-    }
-    
-    .finances-section {
-      display: block;
-    }
-  }
-
-  /* Responsive pour les grands écrans */
-  @media (min-width: 1400px) and (max-width: 1599px) {
-    .finances-layout {
-      gap: 1.5rem;
-      padding: 1.5rem;
-    }
-  }
-
-  /* Responsive pour l'introduction et les téléchargements */
-  @media (max-width: 768px) {
-    .finances-header h1 {
-      font-size: 2rem;
+    .warning-content {
+      padding: 2rem;
+      margin: 1rem;
     }
 
-    .intro-section {
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
+    .warning-content h2 {
+      font-size: 1.5rem;
     }
 
-    .intro-content p {
+    .warning-content p {
       font-size: 1rem;
     }
 
-    .download-section {
-      padding: 1.5rem;
+    .warning-details {
+      padding: 1rem;
+      margin: 1.5rem 0;
     }
 
-    .download-buttons {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
+    .btn-home {
+      padding: 0.875rem 1.5rem;
     }
-
-    .download-btn {
-      padding: 0.875rem 1.25rem;
-    }
-
-    .download-title {
-      font-size: 1.2rem;
-    }
-    
-
-  }  .drill-down-legend {
-    margin-top: 2rem;
-    background: #ffa60021;
-    border-radius: 1rem;
-    color: var(--secondary);
-    padding : 1rem;
-    border-left: 4px solid #ffa500;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
- 
- 
-
   }
-  @keyframes gentle-pulse {
-    0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.12); }
-  }
-
 </style>
