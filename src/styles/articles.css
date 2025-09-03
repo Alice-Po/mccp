@@ -1,0 +1,42 @@
+/* =============================================================================
+   ARTICLES STYLES - Images responsive simples
+   ============================================================================= */
+
+/* Images responsive de base */
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
+/* Taille maximale raisonnable */
+.post-content img {
+  max-width: 600px;
+  max-height: 60vh;
+}
+
+/* Mobile : s'adapte à l'écran */
+@media (max-width: 768px) {
+  .post-content img {
+    max-width: calc(100vw - 2rem);
+    max-height: 50vh;
+    margin: 1rem auto;
+  }
+}
+
+/* Classe spéciale pour les affiches */
+.post-content img.poster {
+  max-width: 500px;
+  max-height: 70vh;
+}
+
+@media (max-width: 768px) {
+  .post-content img.poster {
+    max-width: calc(100vw - 2rem);
+    max-height: 60vh;
+  }
+}

@@ -1,4 +1,5 @@
 import Layout from "./Layout.astro";
+import "../styles/articles.css";
 
 const { frontmatter } = Astro.props;
 
@@ -52,13 +53,6 @@ const { frontmatter } = Astro.props;
     color: var(--secondary);
     opacity: 0.8;
     font-size: 0.9rem;
-  }
-
-  .post-image {
-    width: 100%;
-    height: auto;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
   }
 
   .post-content {
