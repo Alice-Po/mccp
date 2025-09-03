@@ -8,6 +8,8 @@
 -->
 
 <script lang="ts">
+  import ArrowIcon from '../commonsElements/ArrowIcon.svelte';
+
   interface CommuneComparaison {
     exercice: string;
     département: string;
@@ -137,7 +139,6 @@
           <li><strong>Population :</strong> Entre 1 000 et 3 000 habitants</li>
           <li><strong>Type :</strong> Communes rurales exclusivement</li>
           <li><strong>Exclusion :</strong> Communes touristiques écartées</li>
-          <li><strong>Homogénéité :</strong> Profil socio-économique similaire (Tranche de revenus)</li>
         </ul>
       </div>
 
@@ -145,7 +146,8 @@
         <h3>Comment fonctionne la comparaison ?</h3>
         
         <div >
-            <h4>L'indicateur choisi</h4>
+            <h4>              <ArrowIcon color="#2e8b57" size={16} direction="right" />
+              L'indicateur choisi</h4>
             <p>
                 Nous utilisons les <strong>"frais de personnel par habitant"</strong> comme référence de comparaison.
                 Cet indicateur mesure ce que chaque commune dépense annuellement pour rémunérer ses agents
@@ -156,26 +158,24 @@
             <details class="technical-detail">
                 <summary>Détail technique : qu'est-ce qui est compté ?</summary>
                 <p><strong>Inclus :</strong> salaires bruts, cotisations patronales, primes et indemnités, formation du personnel</p>
-                <p><strong>Exclus :</strong> indemnités des élus (comptabilisées à part), prestations sous-traitées, personnel détaché d'autres collectivités</p>
+                <p><strong>Exclus :</strong> indemnités des élus (comptabilisées à part), prestations sous-traitées</p>
                 <p><strong>Source :</strong> chapitre 012 du budget communal</p>
             </details>
             
-        
+        <br>
             
-            <h4>Traitement statistique</h4>
+            <h4>
+              <ArrowIcon color="#2e8b57" size={16} direction="right" />
+              Traitement statistique
+            </h4>
             <p>
-                Pour éviter que des situations exceptionnelles faussent la comparaison, nous excluons automatiquement
-                les communes avec des montants anormalement élevés ou faibles <strong>(3 communes sur 132)</strong>.
-                Nous utilisons la médiane plutôt que la moyenne pour plus de robustesse.
+                Nous utilisons la médiane plutôt que la moyenne, ce qui permet de limiter naturellement l'impact des valeurs extrêmes sans avoir besoin d'exclure des communes.
             </p>
             
-            <details class="technical-detail">
-                <summary>Méthode d'exclusion des valeurs aberrantes</summary>
-                <p>Nous appliquons la règle des écarts interquartiles :</p>
-                <p>• <strong>Seuil bas (premier décile) :</strong> 9,71 € par habitant</p>
-                <p>• <strong>Seuil haut (dernier décile) :</strong> 286,02 € par habitant</p>
-                <p><strong>Motifs d'exclusion typiques :</strong> fusion récente, transfert exceptionnel de personnel, situation de crise</p>
-            </details>
+                <p>Pour vous renseigner sur la distribution des valeurs dans notre échantillon de 132 communes :</p>
+                <p>• <strong>Premier décile :</strong> 9,71 € par habitant (10% des communes dépensent moins)</p>
+                <p>• <strong>Dernier décile :</strong> 286,02 € par habitant (10% des communes dépensent plus)</p>
+ 
             
             <div class="highlight">
                 <strong>Limite importante :</strong> Cet indicateur ne renseigne pas sur la qualité des services rendus,
@@ -300,7 +300,7 @@
   .modal-header {
     background: #2e8b57;
     color: white;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
