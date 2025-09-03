@@ -155,19 +155,38 @@ export function generateColors(count: number): string[] {
 }
 
 /**
- * Agrège les données par CHAPITRE_officiel pour une section et un type donnés
- * Retourne un tableau d'objets avec label, compte, prevus_2024, realises_2024, propositions_2025, color
+ * Agrège les données par CHAPITRE_officiel pour le composant HorizontalBarChart
+ * Applique des exclusions spécifiques pour la vulgarisation des données
+ * @param data - Données JSON brutes
+ * @param section - "FONCTIONNEMENT" ou "INVESTISSEMENT"
+ * @param type - "DEPENSES" ou "RECETTES"
+ * @returns Données agrégées avec exclusions appliquées pour HorizontalBarChart
  */
-
-export function aggregateByChapitre(
+export function aggregateByChapitreForHorizontalBarChart(
   data: BudgetItem[],
   section: 'FONCTIONNEMENT' | 'INVESTISSEMENT',
   type: 'DEPENSES' | 'RECETTES'
 ): BarItem[] {
   // Filtrer les données selon les critères
-  const filteredData = data.filter(
+  let filteredData = data.filter(
     (item) => item.SECTION === section && item['DÉPENSES/RECETTES'] === type
   );
+
+  // Exclusions spécifiques pour la vulgarisation dans HorizontalBarChart
+  const vulgarizationExclusions: Record<string, Record<string, string[]>> = {
+    FONCTIONNEMENT: {
+      DEPENSES: [
+        "VIREMENT A LA SECTION D'INVESTISSEMENT", // Masqué car confus pour la vulgarisation
+      ],
+    },
+    // Facilement extensible pour d'autres exclusions
+  };
+
+  // Appliquer les exclusions si elles existent
+  const exclusions = vulgarizationExclusions[section]?.[type];
+  if (exclusions && exclusions.length > 0) {
+    filteredData = filteredData.filter((item) => !exclusions.includes(item.CHAPITRE_officiel));
+  }
 
   // Grouper par CHAPITRE_officiel
   const grouped = new Map<string, BudgetItem[]>();

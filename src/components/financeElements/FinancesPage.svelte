@@ -8,7 +8,7 @@
   import IndicateursFinanciers from './IndicateursFinanciers.svelte';
   import FinancialTable from './FinancialTable.svelte';
   import Download from '../commonsElements/Download.svelte';
-  import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
+  import { aggregateData, aggregateByChapitreForHorizontalBarChart, buildOverviewDataByChapitre } from '../../utils/budget-data';
   import type { FiscaliteItem, IndicateurFinancier, BudgetItem } from '../../types';
 
   // Variables réactives
@@ -22,10 +22,10 @@
   let investissementDepenses = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'DEPENSES', 'regroupement_focale_n1'));
   let investissementRecettes = $derived(aggregateData(budgetData, 'INVESTISSEMENT', 'RECETTES', 'regroupement_focale_n1'));
   
-  let barChartFonctionnementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'DEPENSES'));
-  let barChartFonctionnementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'FONCTIONNEMENT', 'RECETTES'));
-  let barChartInvestissementDepensesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'DEPENSES'));
-  let barChartInvestissementRecettesChapitre = $derived(aggregateByChapitre(budgetData, 'INVESTISSEMENT', 'RECETTES'));
+  let barChartFonctionnementDepensesChapitre = $derived(aggregateByChapitreForHorizontalBarChart(budgetData, 'FONCTIONNEMENT', 'DEPENSES'));
+  let barChartFonctionnementRecettesChapitre = $derived(aggregateByChapitreForHorizontalBarChart(budgetData, 'FONCTIONNEMENT', 'RECETTES'));
+  let barChartInvestissementDepensesChapitre = $derived(aggregateByChapitreForHorizontalBarChart(budgetData, 'INVESTISSEMENT', 'DEPENSES'));
+  let barChartInvestissementRecettesChapitre = $derived(aggregateByChapitreForHorizontalBarChart(budgetData, 'INVESTISSEMENT', 'RECETTES'));
   
   let financialTableFonctionnementDepenses = $derived(
     budgetData.filter(item => item.SECTION === 'FONCTIONNEMENT' && item['DÉPENSES/RECETTES'] === 'DEPENSES')
