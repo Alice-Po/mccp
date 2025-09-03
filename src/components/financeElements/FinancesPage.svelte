@@ -374,7 +374,15 @@ function toggleAccordion(id: keyof typeof accordions) {
             <div class="accordion-content">
               <div class="accordion-header">
                 <h4>Comparaison détaillée par chapitre</h4>
-                <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
+                <div class="justification-note" aria-label="note de justification">
+                  <p> Pour pouvoir analyser la comparaison entre prévisions, réalisations et propositions, nous avons repris la nomenclature des chapitres officiels qui nous a semblé le niveau pertinent de représentation car c'est à ce niveau que sont votés les crédits disponibles. </p>
+
+                  <p><strong>Dans le cadre des dépenses de fonctionnement,</strong> nous avons choisi de distinguer spécifiquement les chapitres 011 (charges à caractère général), 012 (charges de personnel) et 65 (autres charges de gestion courante), qui représentent traditionnellement les postes de dépenses les plus significatifs et les plus parlants pour comprendre la gestion municipale. </p>
+                  
+                  <p>L'ensemble des autres chapitres a été consolidé sous la mention "autres dépenses" pour éviter un éclatement de l'information.</p>
+                  <p> 
+                  Le chapitre 023 "virement à la section d'investissement" a été délibérément exclu de cette représentation car il s'agit d'une écriture comptable de transfert qui, par nature, ne donne lieu à aucune exécution réelle (le montant réalisé est systématiquement nul). </p>
+                </div>
               </div>
               
               <!-- Onglets pour le graphique de comparaison -->
@@ -908,6 +916,27 @@ function toggleAccordion(id: keyof typeof accordions) {
         color: #6b7280;
         font-size: 1rem;
         margin: 0;
+      }
+
+      /* Note de justification (discrète) */
+      .justification-note {
+        margin: 1rem auto 0 auto;
+        max-width: 900px;
+        padding: 0.75rem 1rem;
+        border-left: 3px solid rgba(46, 139, 87, 0.25);
+        background: rgba(248, 250, 252, 0.6);
+        color: #6b7280;
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+      .justification-note h5 {
+        margin: 0.5rem 0 0.5rem 0;
+        font-size: 0.95rem;
+        color: #4b5563;
+        font-weight: 600;
+      }
+      .justification-note p {
+        margin: 0.3rem 0;
       }
   
 

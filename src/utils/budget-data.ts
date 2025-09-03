@@ -215,24 +215,78 @@ export function aggregateByChapitreForHorizontalBarChart(
   // Construire le résultat
   let colorIndex = 0;
   const result: BarItem[] = [];
-  grouped.forEach((items, label) => {
-    const prevus_2024 = items.reduce((sum, item) => sum + (item.PREVISIONS_2024 || 0), 0);
-    const realises_2024 = items.reduce((sum, item) => sum + (item.REALISATIONS_2024 || 0), 0);
-    const propositions_2025 = items.reduce((sum, item) => sum + (item.PROPOSITIONS_2025 || 0), 0);
-    if (prevus_2024 > 0 || realises_2024 > 0 || propositions_2025 > 0) {
+
+  // Cas spécifique: Dépenses de fonctionnement
+  if (section === 'FONCTIONNEMENT' && type === 'DEPENSES') {
+    const chaptersToKeep = new Set(['011', '012', '65']);
+    let othersPrevus = 0;
+    let othersRealises = 0;
+    let othersPropositions = 0;
+    let hasOthers = false;
+
+    grouped.forEach((items, label) => {
+      const prevus_2024 = items.reduce((sum, item) => sum + (item.PREVISIONS_2024 || 0), 0);
+      const realises_2024 = items.reduce((sum, item) => sum + (item.REALISATIONS_2024 || 0), 0);
+      const propositions_2025 = items.reduce((sum, item) => sum + (item.PROPOSITIONS_2025 || 0), 0);
+      if (!(prevus_2024 > 0 || realises_2024 > 0 || propositions_2025 > 0)) {
+        return;
+      }
+      const chapterNumber = CHAPITRE_NUMBERS_MAP[label.toUpperCase()];
+      if (chapterNumber && chaptersToKeep.has(chapterNumber)) {
+        result.push({
+          label,
+          compte: items[0].COMPTE,
+          prevus_2024,
+          realises_2024,
+          propositions_2025,
+          color: palette[colorIndex % palette.length],
+        });
+        colorIndex++;
+      } else {
+        hasOthers = true;
+        othersPrevus += prevus_2024;
+        othersRealises += realises_2024;
+        othersPropositions += propositions_2025;
+      }
+    });
+
+    if (hasOthers && (othersPrevus > 0 || othersRealises > 0 || othersPropositions > 0)) {
       result.push({
-        label,
-        compte: items[0].COMPTE,
-        prevus_2024,
-        realises_2024,
-        propositions_2025,
+        label: 'AUTRES DÉPENSES',
+        compte: '',
+        prevus_2024: othersPrevus,
+        realises_2024: othersRealises,
+        propositions_2025: othersPropositions,
         color: palette[colorIndex % palette.length],
       });
-      colorIndex++;
     }
+  } else {
+    // Comportement générique
+    grouped.forEach((items, label) => {
+      const prevus_2024 = items.reduce((sum, item) => sum + (item.PREVISIONS_2024 || 0), 0);
+      const realises_2024 = items.reduce((sum, item) => sum + (item.REALISATIONS_2024 || 0), 0);
+      const propositions_2025 = items.reduce((sum, item) => sum + (item.PROPOSITIONS_2025 || 0), 0);
+      if (prevus_2024 > 0 || realises_2024 > 0 || propositions_2025 > 0) {
+        result.push({
+          label,
+          compte: items[0].COMPTE,
+          prevus_2024,
+          realises_2024,
+          propositions_2025,
+          color: palette[colorIndex % palette.length],
+        });
+        colorIndex++;
+      }
+    });
+  }
+  // Trier par montant réalisé décroissant, avec "Autres dépenses" toujours en dernier
+  return result.sort((a, b) => {
+    // "Autres dépenses" toujours en dernier
+    if (a.label === 'AUTRES DÉPENSES') return 1;
+    if (b.label === 'AUTRES DÉPENSES') return -1;
+    // Sinon tri par montant réalisé décroissant
+    return b.realises_2024 - a.realises_2024;
   });
-  // Trier par montant réalisé décroissant
-  return result.sort((a, b) => b.realises_2024 - a.realises_2024);
 }
 
 // Type pour la table financière détaillée
