@@ -11,7 +11,7 @@
 <script lang="ts">
   import DonutChart from './DonutChart.svelte';
   import { aggregateDataLevel2 } from '../../utils/budget-data';
-  import type { BudgetItem, DrillDownModalProps } from '../../finances';
+  import type { DrillDownModalProps, BudgetItem } from '../../types';
 
   // Props idiomatiques Svelte 5 - PAS de destructuration !
   const props = $props();
@@ -94,6 +94,7 @@
     class="modal-backdrop" 
     role="dialog" 
     aria-modal="true"
+    tabindex="-1"
     onclick={handleBackdropClick}
     onkeydown={handleKeydown}
   >

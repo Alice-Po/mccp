@@ -2,47 +2,7 @@
   export let data: OverviewData;
   export let rawData: BudgetItem[]; // nouvelle prop : tableau brut
   import FinancialTableDrillDownModal from './FinancialTableDrillDownModal.svelte';
-  import { onMount } from 'svelte';
-  import type { DrillDownItem } from '../../utils/drilldown';
-  import type { BudgetItem } from '../../utils/budget-data';
-
-  interface OverviewData {
-    metadata: {
-      title: string;
-      periods: {
-        budget_2024: string;
-        actual_2024: string;
-        budget_2025: string;
-      };
-      columns: {
-        compte: string;
-        libelle: string;
-        prevus_2024: string;
-        realises_2024: string;
-        propositions_2025: string;
-        notes: string;
-      };
-    };
-    sections: Array<{
-      type: string;
-      title: string;
-      highlight_color?: string;
-      items: Array<{
-        compte?: string;
-        libelle: string;
-        prevus_2024: number;
-        realises_2024: number;
-        propositions_2025: number;
-        notes: string;
-      }>;
-      total?: {
-        libelle: string;
-        prevus_2024: number;
-        realises_2024: number;
-        propositions_2025: number;
-      };
-    }>;
-  }
+  import type { DrillDownItem, BudgetItem, OverviewData } from '../../types';
 
   let showDownloadPopup = false;
   let showDrillDownModal = false;
@@ -59,20 +19,6 @@
       minimumFractionDigits: 2, 
       maximumFractionDigits: 2 
     }) + ' €';
-  }
-
-  // Fonction pour déterminer la couleur de fond selon le type de section
-  function getSectionColor(type: string, highlight_color?: string): string {
-    if (type === 'expenses') return '#FFF9C4'; // Jaune clair - fonctionnement
-    if (type === 'revenues') return '#E8F5E8'; // Vert clair - fonctionnement
-    if (type === 'investment_expenses') return '#FFE5B4'; // Orange clair - investissement
-    if (type === 'investment_revenues') return '#E5F3FF'; // Bleu clair - investissement
-    if (type === 'balance') return '#F0F4F8'; // Gris-bleu clair
-    return '#FFFFFF';
-  }
-
-  function toggleDownloadPopup() {
-    showDownloadPopup = !showDownloadPopup;
   }
 
   function closeDownloadPopup() {

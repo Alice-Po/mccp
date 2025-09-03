@@ -14,15 +14,14 @@
 
 <script lang="ts">
   import { Chart, registerables } from 'chart.js';
-  import type { AggregatedData } from '../../utils/budget-data';
-  import type { DonutChartProps } from '../../finances';
+  import type { AggregatedData, DonutChartProps } from '../../types';
   import { formatCurrency, generateColors, calculateTotal } from '../../utils/budget-data';
 
   // Enregistrer tous les composants Chart.js
   Chart.register(...registerables);
 
   // Props idiomatiques Svelte 5 - PAS de destructuration pour garder la réactivité
-  const props = $props<DonutChartProps>();
+  const props = $props();
   // Valeurs dérivées réactives
   const data = $derived(props.data || []);
   const title = $derived(props.title || '');
@@ -250,7 +249,6 @@
       <canvas 
         bind:this={canvasElement}
         class="chart-canvas"
-        role="img"
         aria-label="Graphique en donut : {title}"
 
       ></canvas>

@@ -285,3 +285,139 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+// ================================
+// Domaine Finances - Types partagés
+// ================================
+
+export interface BudgetItem {
+  'DÉPENSES/RECETTES': 'DEPENSES' | 'RECETTES';
+  SECTION: 'FONCTIONNEMENT' | 'INVESTISSEMENT';
+  COMPTE: string;
+  LIBELLE: string;
+  regroupement_focale_n1: string;
+  regroupement_focale_n2: string;
+  pour_comparaison_prévision_réalisation: boolean;
+  CHAPITRE_officiel: string;
+  PREVISIONS_2024: number;
+  REALISATIONS_2024: number;
+  PROPOSITIONS_2025: number;
+  TAUX_EXECUTION_2024: number;
+  EVOLUTION_2024_2025_ABSOLUE: number;
+  EVOLUTION_2024_2025_RELATIVE: number;
+}
+
+export interface AggregatedData {
+  label: string;
+  value: number;
+  items: BudgetItem[];
+}
+
+export interface BarItem {
+  label: string;
+  compte: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+  color: string;
+}
+
+export interface OverviewData {
+  metadata: {
+    title: string;
+    periods: {
+      budget_2024: string;
+      actual_2024: string;
+      budget_2025: string;
+    };
+    columns: {
+      compte: string;
+      libelle: string;
+      prevus_2024: string;
+      realises_2024: string;
+      propositions_2025: string;
+      notes: string;
+    };
+  };
+  sections: Array<{
+    type: string;
+    title: string;
+    highlight_color?: string;
+    items: Array<{
+      compte?: string;
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+      notes: string;
+    }>;
+    total?: {
+      libelle: string;
+      prevus_2024: number;
+      realises_2024: number;
+      propositions_2025: number;
+    };
+  }>;
+}
+
+export interface DrillDownItem {
+  compte: string;
+  libelle: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+  type: 'expense' | 'income';
+}
+
+export interface FiscaliteItem {
+  type_taxe: string;
+  taux_vote_commune_putanges: string;
+  taux_moyen_communes_francaises_comparables: string;
+  commentaire: string;
+}
+
+export interface IndicateurFinancier {
+  critere: string;
+  definition_critere: string;
+  valeur_putanges_le_lac_par_habitant: string;
+  mediane_echantillon_par_habitant: string;
+  classement_putanges_le_lac_sur_129: string;
+  premier_decile_par_habitant: string;
+  dernier_decile_par_habitant: string;
+  commentaires: string;
+}
+
+export interface DonutChartProps {
+  data: AggregatedData[];
+  title: string;
+  chartId: string;
+  enableDrillDown?: boolean;
+  onsegmentclick?: (event: CustomEvent<{ category: string; value: number; index: number }>) => void;
+}
+
+export interface DrillDownModalProps {
+  isOpen: boolean;
+  budgetData: BudgetItem[];
+  modalData: {
+    category: string;
+    section: string;
+    type: string;
+  } | null;
+  onclose: () => void;
+}
+
+export interface ChartDataItem {
+  label: string;
+  prevus_2024: number;
+  realises_2024: number;
+  propositions_2025: number;
+}
+
+export interface DetailItem {
+  category: string;
+  compte: string;
+  libelle: string;
+  montant_prevu?: number;
+  montant_realise?: number;
+  montant_propose?: number;
+}

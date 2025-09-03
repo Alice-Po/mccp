@@ -3,28 +3,7 @@
  * Agrégation par section, type et regroupement
  */
 
-export interface BudgetItem {
-  'DÉPENSES/RECETTES': 'DEPENSES' | 'RECETTES';
-  SECTION: 'FONCTIONNEMENT' | 'INVESTISSEMENT';
-  COMPTE: string;
-  LIBELLE: string;
-  regroupement_focale_n1: string;
-  regroupement_focale_n2: string;
-  pour_comparaison_prévision_réalisation: boolean;
-  CHAPITRE_officiel: string;
-  PREVISIONS_2024: number;
-  REALISATIONS_2024: number;
-  PROPOSITIONS_2025: number;
-  TAUX_EXECUTION_2024: number;
-  EVOLUTION_2024_2025_ABSOLUE: number;
-  EVOLUTION_2024_2025_RELATIVE: number;
-}
-
-export interface AggregatedData {
-  label: string;
-  value: number;
-  items: BudgetItem[];
-}
+import type { BudgetItem, AggregatedData, BarItem, OverviewData } from '../types';
 
 /**
  * Agrège les données par section, type et regroupement
@@ -55,8 +34,6 @@ export function aggregateData(
     }
     grouped.get(key)!.push(item);
   });
-
-  grouped.forEach((items, label) => {});
 
   // Calculer les totaux pour chaque groupe
   const result: AggregatedData[] = [];
@@ -181,14 +158,6 @@ export function generateColors(count: number): string[] {
  * Agrège les données par CHAPITRE_officiel pour une section et un type donnés
  * Retourne un tableau d'objets avec label, compte, prevus_2024, realises_2024, propositions_2025, color
  */
-export interface BarItem {
-  label: string;
-  compte: string;
-  prevus_2024: number;
-  realises_2024: number;
-  propositions_2025: number;
-  color: string;
-}
 
 export function aggregateByChapitre(
   data: BudgetItem[],
@@ -248,43 +217,6 @@ export function aggregateByChapitre(
 }
 
 // Type pour la table financière détaillée
-export interface OverviewData {
-  metadata: {
-    title: string;
-    periods: {
-      budget_2024: string;
-      actual_2024: string;
-      budget_2025: string;
-    };
-    columns: {
-      compte: string;
-      libelle: string;
-      prevus_2024: string;
-      realises_2024: string;
-      propositions_2025: string;
-      notes: string;
-    };
-  };
-  sections: Array<{
-    type: string;
-    title: string;
-    highlight_color?: string;
-    items: Array<{
-      compte?: string;
-      libelle: string;
-      prevus_2024: number;
-      realises_2024: number;
-      propositions_2025: number;
-      notes: string;
-    }>;
-    total?: {
-      libelle: string;
-      prevus_2024: number;
-      realises_2024: number;
-      propositions_2025: number;
-    };
-  }>;
-}
 
 // Mapping des libellés de chapitres vers leur numéro
 export const CHAPITRE_NUMBERS_MAP: Record<string, string> = {

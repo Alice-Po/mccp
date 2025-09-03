@@ -9,7 +9,7 @@
 
 <script lang="ts">
   import MethodologyModal from './MethodologyModal.svelte';
-  import type { IndicateurFinancier } from '../../finances';
+  import type { IndicateurFinancier } from '../../types';
 
   // Props avec les runes Svelte 5
   let { 

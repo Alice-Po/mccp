@@ -9,7 +9,7 @@
   import FinancialTable from './FinancialTable.svelte';
   import Download from '../commonsElements/Download.svelte';
   import { aggregateData, aggregateByChapitre, buildOverviewDataByChapitre } from '../../utils/budget-data';
-  import type { BudgetItem, FiscaliteItem, IndicateurFinancier } from '../../finances';
+  import type { FiscaliteItem, IndicateurFinancier, BudgetItem } from '../../types';
 
   // Variables réactives
   let budgetData: BudgetItem[] = $state([]);
@@ -63,14 +63,19 @@
     type: string;
   } | null>(null);
 
-  let accordions = $state({
+  let accordions = $state<{
+  'accordion-fonctionnement': boolean;
+  'accordion-fonctionnement-chapitre': boolean;
+  'accordion-investissement': boolean;
+  'accordion-investissement-chapitre': boolean;
+}>({
   'accordion-fonctionnement': false,
   'accordion-fonctionnement-chapitre': false,
   'accordion-investissement': false,
   'accordion-investissement-chapitre': false
 });
 
-function toggleAccordion(id: string) {
+function toggleAccordion(id: keyof typeof accordions) {
   const wasClosed = !accordions[id];
   accordions[id] = !accordions[id];
   
@@ -234,7 +239,7 @@ function toggleAccordion(id: string) {
 <div class="finances-layout">
 <!-- Navigation fixe à gauche -->
 <aside class="finances-sidebar">
-  <FinanceNavigation client:load />
+  <FinanceNavigation />
 </aside>
 
 <!-- Contenu principal à droite -->
@@ -325,7 +330,7 @@ function toggleAccordion(id: string) {
       title={generateDonutTitle('Fonctionnement', fonctionnementDonutTab as 'depenses' | 'recettes')}
       chartId="chart-fonctionnement"
       enableDrillDown={true}
-      onsegmentclick={handleSegmentClick}
+      onsegmentclick={(e: CustomEvent<{ category: string; value: number; index: number }>) => handleSegmentClick(e)}
     />
     </div>
 
@@ -400,8 +405,6 @@ function toggleAccordion(id: string) {
               <div class="chart-wrapper" id="bar-fonctionnement">
                 <HorizontalBarChart 
                   data={fonctionnementBarTab === 'depenses' ? barChartFonctionnementDepensesChapitre : barChartFonctionnementRecettesChapitre}
-                  type={fonctionnementBarTab === 'depenses' ? 'expenses' : 'revenues'}
-                  title={fonctionnementBarTab === 'depenses' ? 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)' : 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)'}
                   chartId="bar-fonctionnement"
                 />
               </div>
@@ -447,8 +450,6 @@ function toggleAccordion(id: string) {
             <div class="chart-wrapper" id="table-fonctionnement">
               <FinancialTable 
                 data={fonctionnementTableTab === 'depenses' ? overviewFonctionnementDepenses : overviewFonctionnementRecettes}
-                type={fonctionnementTableTab === 'depenses' ? 'expenses' : 'revenues'}
-                title={generateFinancialTableTitle('Fonctionnement', fonctionnementTableTab as 'depenses' | 'recettes')}
                 rawData={fonctionnementTableTab === 'depenses' ? financialTableFonctionnementDepenses : financialTableFonctionnementRecettes}
               />
             </div>
@@ -505,7 +506,7 @@ function toggleAccordion(id: string) {
               title={investissementDonutTab === 'depenses' ? 'Dépenses - Investissement - Réalisations 2024' : 'Recettes - Investissement - Réalisations 2024'}
               chartId="chart-investissement"
               enableDrillDown={true}
-              onsegmentclick={handleSegmentClick}
+              onsegmentclick={(e: CustomEvent<{ category: string; value: number; index: number }>) => handleSegmentClick(e)}
             />
           </div>
 
@@ -577,8 +578,6 @@ function toggleAccordion(id: string) {
               <div class="chart-wrapper" id="bar-investissement">
                 <HorizontalBarChart 
                   data={investissementBarTab === 'depenses' ? barChartInvestissementDepensesChapitre : barChartInvestissementRecettesChapitre}
-                  type={investissementBarTab === 'depenses' ? 'expenses' : 'revenues'}
-                  title={investissementBarTab === 'depenses' ? 'Comparaison des dépenses par chapitre (Prévus, Réalisés, Propositions)' : 'Comparaison des recettes par chapitre (Prévus, Réalisés, Propositions)'}
                   chartId="bar-investissement"
                 />
               </div>
@@ -622,8 +621,6 @@ function toggleAccordion(id: string) {
             <div class="chart-wrapper" id="table-investissement-chapitre">
               <FinancialTable 
                 data={investissementTableTab === 'depenses' ? overviewInvestissementDepenses : overviewInvestissementRecettes}
-                type={investissementTableTab === 'depenses' ? 'expenses' : 'revenues'}
-                title={generateFinancialTableTitle('Investissement', investissementTableTab as 'depenses' | 'recettes')}
                 rawData={investissementTableTab === 'depenses' ? financialTableInvestissementDepenses : financialTableInvestissementRecettes}
               />
             </div>
