@@ -9,6 +9,7 @@
 
 <script lang="ts">
   import ArrowIcon from '../commonsElements/ArrowIcon.svelte';
+  import '../../styles/modal.css';
 
   interface CommuneComparaison {
     exercice: string;
@@ -271,72 +272,7 @@
 {/if}
 
 <style>
-  /* Styles de la modale */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 2rem;
-  }
-
-  .modal-content {
-    background: white;
-    border-radius: 1.5rem;
-    max-width: 1200px;
-    max-height: 95vh;
-    width: 100%;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .modal-header {
-    background: #2e8b57;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-  }
-
-  .modal-close {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-  }
-
-  .modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .modal-body {
-    padding: 2rem;
-    overflow-y: auto;
-    max-height: calc(95vh - 120px);
-  }
+  /* Styles spécifiques à MethodologyModal */
 
   .methodology-section {
     margin-bottom: 2rem;
@@ -685,29 +621,8 @@
     background: #f1f5f9;
   }
 
-  /* Responsive */
+  /* Responsive spécifique à MethodologyModal */
   @media (max-width: 768px) {
-    /* Modale responsive */
-    .modal-overlay {
-      padding: 1rem;
-    }
-
-    .modal-content {
-      max-height: 90vh;
-    }
-
-    .modal-header {
-      padding: 1.5rem;
-    }
-
-    .modal-header h2 {
-      font-size: 1.3rem;
-    }
-
-    .modal-body {
-      padding: 1.5rem;
-    }
-
     .methodology-section h3 {
       font-size: 1.1rem;
     }

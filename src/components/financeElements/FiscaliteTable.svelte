@@ -15,6 +15,7 @@
 
 <script lang="ts">
   import MethodologyModal from './MethodologyModal.svelte';
+  import '../../styles/modal.css';
 
   interface FiscaliteItem {
     type_taxe: string;
@@ -418,71 +419,7 @@
     font-style: italic;
   }
 
-  /* Styles de la modale */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 2rem;
-  }
-
-  .modal-content {
-    background: white;
-    border-radius: 1.5rem;
-    max-width: 900px;
-    max-height: 85vh;
-    width: 100%;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(46, 139, 87, 0.1);
-  }
-
-  .modal-header {
-    background: var(--primary);
-    color: white;
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .modal-close {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-  }
-
-  .modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .modal-body {
-    padding: 2rem;
-    overflow-y: auto;
-    max-height: calc(85vh - 120px);
-  }
+  /* Styles spécifiques à FiscaliteTable */
 
 
 

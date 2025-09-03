@@ -12,6 +12,7 @@
   import DonutChart from './DonutChart.svelte';
   import { aggregateDataLevel2 } from '../../utils/budget-data';
   import type { DrillDownModalProps, BudgetItem } from '../../types';
+  import '../../styles/modal.css';
 
   // Props idiomatiques Svelte 5 - PAS de destructuration !
   const props = $props();

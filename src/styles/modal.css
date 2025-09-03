@@ -1,0 +1,225 @@
+/* =============================================================================
+   MODAL STYLES - Styles communs pour toutes les modales
+   ============================================================================= */
+
+/* Variables CSS spécifiques aux modales */
+:root {
+  /* Espacements modales */
+  --modal-padding-xs: 0.5rem;
+  --modal-padding-sm: 1rem;
+  --modal-padding-md: 1.5rem;
+  --modal-padding-lg: 2rem;
+
+  /* Border-radius */
+  --modal-radius-sm: 0.5rem;
+  --modal-radius-md: 1rem;
+  --modal-radius-lg: 1.5rem;
+  --modal-radius-standard: 12px;
+
+  /* Couleurs spécifiques aux modales */
+  --modal-bg-light: #f9fafb;
+  --modal-bg-hover: #f3f4f6;
+  --modal-border: #e5e7eb;
+  --modal-text-secondary: #6b7280;
+  --modal-text-dark: #374151;
+  --modal-overlay-standard: rgba(0, 0, 0, 0.5);
+  --modal-shadow-standard: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Dimensions */
+  --modal-z-index: 1000;
+  --modal-close-size: 2.5rem;
+  --modal-transition: 0.2s ease;
+  --modal-max-width: 1200px;
+  --modal-max-height: 90vh;
+  --modal-blur-intensity: 2px;
+}
+
+/* Styles de base pour les modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--modal-overlay-standard);
+  backdrop-filter: blur(var(--modal-blur-intensity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--modal-z-index);
+  padding: var(--modal-padding-lg);
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--modal-radius-standard);
+  max-width: var(--modal-max-width);
+  max-height: var(--modal-max-height);
+  width: 100%;
+  overflow: hidden;
+  box-shadow: var(--modal-shadow-standard);
+  border: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.modal-header {
+  background: var(--primary);
+  color: white;
+  padding: var(--modal-padding-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: var(--modal-close-size);
+  height: var(--modal-close-size);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--modal-transition);
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-body {
+  padding: var(--modal-padding-lg);
+  overflow-y: auto;
+  max-height: calc(95vh - 120px);
+}
+
+/* Variantes de modales */
+
+.modal-content.drilldown {
+  width: 90%;
+  max-width: var(--modal-max-width);
+  max-height: var(--modal-max-height);
+  border-radius: var(--modal-radius-standard);
+  box-shadow: var(--modal-shadow-standard);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content.table {
+  max-width: var(--modal-max-width);
+  max-height: var(--modal-max-height);
+  width: 100%;
+  border-radius: var(--modal-radius-standard);
+  box-shadow: var(--modal-shadow-standard);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+/* Styles pour modal-header alternatifs */
+.modal-header.light {
+  background: var(--modal-bg-light);
+  border-bottom: 1px solid var(--modal-border);
+  color: var(--secondary);
+}
+
+.modal-header.light h2,
+.modal-header.light .modal-title {
+  color: var(--secondary);
+  text-transform: capitalize;
+}
+
+/* Styles pour modal-close alternatifs */
+.modal-close.light {
+  background: none;
+  color: var(--modal-text-secondary);
+  border: none;
+  padding: var(--modal-padding-xs);
+  border-radius: 50%;
+  width: var(--modal-close-size);
+  height: var(--modal-close-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--modal-transition);
+}
+
+.modal-close.light:hover {
+  background: var(--modal-bg-hover);
+  color: var(--modal-text-dark);
+}
+
+.close-btn {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: var(--modal-radius-sm);
+  padding: var(--modal-padding-xs);
+  cursor: pointer;
+  transition: all var(--modal-transition);
+  color: var(--secondary);
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Modal footer */
+.modal-footer {
+  padding: var(--modal-padding-md) var(--modal-padding-lg);
+  border-top: 1px solid var(--modal-border);
+  background: var(--modal-bg-light);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Boutons de modale */
+.btn-secondary {
+  background: var(--modal-text-secondary);
+  color: white;
+  border: none;
+  padding: 0.75rem var(--modal-padding-md);
+  border-radius: var(--modal-radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--modal-transition);
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* États spéciaux */
+
+/* Styles responsive pour les modales */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: var(--modal-padding-sm);
+  }
+
+  .modal-content {
+    max-height: var(--modal-max-height);
+  }
+
+  .modal-header {
+    padding: var(--modal-padding-sm);
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-body {
+    padding: var(--modal-padding-md);
+  }
+}
