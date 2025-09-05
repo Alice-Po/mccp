@@ -37,10 +37,6 @@
   const total = $derived(calculateTotal(data));
   const colors = $derived(generateColors(data.length));
 
-  // Variables pour gérer les effets hover
-  let hoveredSegmentIndex = $state<number | null>(null);
-  let searchIconPosition = $state<{x: number, y: number} | null>(null);
-
   // Fonction pour créer le graphique
   function createChart() {
     if (!canvasElement || data.length === 0) {
@@ -100,12 +96,14 @@
           duration: 1000,
           easing: 'easeOutQuart'
         },
-        interaction: {
-          intersect: false,
-          mode: 'index'
+        hover: {
+          animationDuration: 200
         },
-        onClick: enableDrillDown ? handleChartClick : undefined,
-        onHover: enableDrillDown ? handleChartHover : undefined
+        interaction: {
+          intersect: true,
+          mode: 'nearest'
+        },
+        onClick: enableDrillDown ? handleChartClick : undefined
       }
     });
   }
@@ -145,35 +143,6 @@
 
     // Appeler le callback prop directement (syntaxe Svelte 5)
     onsegmentclick?.(customEvent);
-  }
-
-  // Gestion du hover sur le graphique
-  function handleChartHover(event: any, elements: any[]) {
-    if (!enableDrillDown) return;
-    
-    if (elements.length > 0) {
-      const elementIndex = elements[0].index;
-      const clickedData = data[elementIndex];
-      const hasValidDrillDown = clickedData.items && clickedData.items.length > 1;
-      
-      if (hasValidDrillDown) {
-        hoveredSegmentIndex = elementIndex;
-        const canvas = canvasElement;
-        if (canvas) {
-          const rect = canvas.getBoundingClientRect();
-          searchIconPosition = {
-            x: event.offsetX || rect.width / 2,
-            y: event.offsetY || rect.height / 2
-          };
-        }
-      } else {
-        hoveredSegmentIndex = null;
-        searchIconPosition = null;
-      }
-    } else {
-      hoveredSegmentIndex = null;
-      searchIconPosition = null;
-    }
   }
 
   // Gestion du hover sur la légende
@@ -539,4 +508,4 @@
     color: var(--primary, #2e8b57);
     font-weight: 600;
   }
-</style> 
+</style>
