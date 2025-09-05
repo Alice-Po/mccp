@@ -13,7 +13,7 @@ Site web du **Mouvement Citoyen des Communes de Putanges** (MCCP), une liste cit
 
 > **Pourquoi Astro + Svelte 5 et pas WordPress comme tout le monde ?**
 >
-> **Excellente performance ** : Astro génère des sites statiques ultra-rapides (scores Lighthouse proches de 100/100), essentiel pour toucher tous les habitants, même avec une connexion limitée en zone rurale.
+> **Excellente performance** : Astro génère des sites statiques ultra-rapides (scores Lighthouse proches de 100/100), essentiel pour toucher tous les habitants, même avec une connexion limitée en zone rurale.
 >
 > **Sécurité maximale** : Pas de base de données, pas de plugins vulnérables, pas de mises à jour de sécurité constantes. Le site est "figé" en HTML/CSS/JS, impossible à pirater.
 >
