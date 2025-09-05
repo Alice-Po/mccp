@@ -23,7 +23,7 @@ Site web du **Mouvement Citoyen des Communes de Putanges** (MCCP), une liste cit
 >
 > **Simplicité de maintenance** : Alice est la maintenante officielle, mais ce guide est conçu pour que n'importe qui puisse reprendre la main si nécessaire.
 >
-> **⚡ Déploiement automatique** : Chaque modification sur GitHub se déploie automatiquement en 2 minutes. Plus de FTP, plus de sauvegarde manuelle.
+> **Déploiement automatique** : Chaque modification sur GitHub se déploie automatiquement en 2 minutes. Plus de FTP, plus de sauvegarde manuelle.
 
 ### Structure des fichiers
 
