@@ -14,7 +14,7 @@ Ce réseau rassemble aujourd'hui 60 communes de toutes tailles (de 150 à 90 000
 
 ### Qu'est ce que la coopérative **Fréquence Communes** ?
 
-En 2020, un collectif professionnel et militant composé de citoyen·ne·s, d’activistes, de chercheur·euse·s et d’élu·e·s particulièrement engagé dans le réseau Actions Communes a structuré une Société Coopérative d'Intéret Collectif (SCIC), Fréquence Commune, afin de pouvoir accompagner et aider les listes citoyenne et participative ainsi que les élus dans la transformation démocratique de leur commune.
+En 2020, un collectif professionnel et militant composé de citoyen·ne·s, d’activistes, de chercheur·euse·s et d’élu·e·s particulièrement engagé dans le réseau Actions Communes a structuré une Société Coopérative d'Intéret Collectif (SCIC), Fréquence Commune, afin de pouvoir accompagner et aider les listes citoyennes et participatives ainsi que les élus dans la transformation démocratique de leur commune.
 
 ## Notre histoire avec Actions Communes et Fréquences Communes
 
@@ -22,7 +22,7 @@ En 2022 à La Carneille, a eu lieu la projection du film "Commune Commune", qui 
 
 ![Affiche du film Commune Commune](/assets/img/commune-commune.jpg)
 
-Depuis, certains d'entre nous ont tissé des liens avec ses deux structures :
+Depuis, certains d'entre nous ont tissé des liens avec ces deux structures :
 
 - En novembre 2023, Bruno Cristofoli, accompagnateur chez Fréquence Commune et acteur au sein d'Actions Communes est venu présenter les méthodes de travail du réseau à la salle des fêtes de Ménil-Gondouin
 - Certains d'entre nous ont participé aux Rencontres Nationales à Melle (79) en novembre 2023
