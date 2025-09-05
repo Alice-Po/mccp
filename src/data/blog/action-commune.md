@@ -1,6 +1,6 @@
 ---
 title: "Qu'est ce que le réseau Actions Communes ?"
-description: 'Actions Communes est le réseau qui nous a inspiré dans ce projet de liste citoyenne.'
+description: 'Actions Communes est le réseau qui nous a inspirés dans ce projet de liste citoyenne.'
 pubDate: 2025-09-03
 author: 'MCCP'
 image: '/assets/img/action-commune.png'
