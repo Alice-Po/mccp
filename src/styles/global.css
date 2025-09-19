@@ -1033,6 +1033,11 @@ strong {
     margin: 0.5rem 0 !important;
   }
 
+  /* Masquer toutes les images sauf celles avec la classe post-image */
+  img:not(.post-image) {
+    display: none !important;
+  }
+
   /* Titres dans le contenu */
   .post-content h2 {
     font-size: 1.2rem !important;
