@@ -26,7 +26,7 @@ La rénovation énergétique des bâtiments publics, la végétalisation des éc
 
 Deux thèmes ont été travaillés conjointement : la mobilité et la vie des villages.
 
-Pour lutter contre l’isolement, particulièrement des personnes âgées, plusieurs pistes ont été envisagées. Le groupe a par exemple proposé de **renforcer la solidarité de voisinage** par 'un système d'entraide :.Un "parrain" ou une "super voisine" serait plus particulièrement attaché à prendre soin d'une personne isolée de son hameau voisin. Prendre des nouvelles, proposer une course ponctuelle, pouvoir alerter en cas de besoin... peuvent être des rôles attribués à ces volontaires.
+Pour lutter contre l'isolement, particulièrement des personnes âgées, plusieurs pistes ont été envisagées. Le groupe a par exemple proposé de **renforcer la solidarité de voisinage** par un système d'entraide. Un "parrain" ou une "super voisine" serait plus particulièrement attaché à prendre soin d'une personne isolée de son hameau voisin. Prendre des nouvelles, proposer une course ponctuelle, pouvoir alerter en cas de besoin... peuvent être des rôles attribués à ces volontaires.
 
 Sur le sujet de la mobilité, ont été mentionnées des navettes fluviales permettant de gagner Putanges depuis Rabodanges ou encore des services de bus, de location de voitures ou vélo électriques. Ils pourraient **permettre à certains habitants et habitantes de se passer d'une deuxième voiture** ou de se rendre sur le marché voisin.
 
@@ -35,7 +35,7 @@ Déjà discuté lors de la première réunion publique à Putanges, il a été a
 Enfin, le groupe a souligné que si l'ouverture des marchés et des restaurants agirait contre l'isolement des personnes âgées et la réduction du besoin de mobilité.
 
 Le groupe a ainsi abordé le deuxième sujet : la vie au sein des villages de Putanges-le-Lac.
-Les commerces du bourg de Putanges se raréfient , sont ouverts à des horaires irréguliers et donc peu attractifs. Le seul supermarché sera déplacé hors du bourg, ne favorisant pas la fréquentation des autres commerces . Le sujet reste à creuser.
+Les commerces du bourg de Putanges se raréfient, sont ouverts à des horaires irréguliers et donc peu attractifs. Le seul supermarché sera déplacé hors du bourg, ne favorisant pas la fréquentation des autres commerces. Le sujet reste à creuser.
 
 ### Diversifier la proposition culturelle
 
@@ -50,7 +50,7 @@ A la Forêt-Auvray, les locaux du restaurant ont été vendus et un traiteur s'i
 
 Le groupe qui a travaillé sur la décentralisation a partagé une frustration : le sentiment d’une centralisation excessive autour de Putanges et d’un fonctionnement intercommunal jugé peu démocratique.
 
-Les participants ont réfléchis aux moyens de donner une voix réelle aux citoyens. Une piste a émergé : la création d’un **conseil citoyen local**, dont les décisions seraient reprises moralement par les élus. Cette idée d’un « contrat moral » vise à réconcilier représentativité et démocratie directe.
+Les participants ont réfléchi aux moyens de donner une voix réelle aux citoyens. Une piste a émergé : la création d’un **conseil citoyen local**, dont les décisions seraient reprises moralement par les élus. Cette idée d’un « contrat moral » vise à réconcilier représentativité et démocratie directe.
 
 Parmi les autres propositions : **séparer les fonctions de maire et de président de la Communauté de Commune**, **limiter le cumul des mandats**, s’inspirer de l'expérience d'autres listes participatives et se structurer davantage entre communes voisines.
 

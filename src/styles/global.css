@@ -373,6 +373,26 @@ strong {
   transform: translateY(-2px);
 }
 
+/* Styles pour la mention de source */
+.article-source {
+  display: none; /* Masqué par défaut */
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(46, 139, 87, 0.1);
+  font-size: 0.9rem;
+  color: var(--secondary);
+  opacity: 0.7;
+}
+
+.article-source a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.article-source a:hover {
+  text-decoration: underline;
+}
+
 /* Styles pour les boutons de navigation d'articles */
 .article-navigation {
   display: flex;
@@ -930,5 +950,122 @@ strong {
 
   .document-info p {
     text-align: center;
+  }
+}
+
+/* Styles pour l'impression */
+@media print {
+  /* Masquer les éléments non essentiels */
+  .site-header,
+  footer,
+  .article-navigation {
+    display: none !important;
+  }
+
+  /* Optimisation générale */
+  * {
+    margin-top: 0 !important;
+  }
+
+  body,
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body {
+    font-size: 9pt !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Typographie condensée */
+  p,
+  li {
+    font-size: 0.8rem !important;
+    margin-bottom: 0.3rem !important;
+    orphans: 2 !important;
+    widows: 2 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid !important;
+    margin-top: 0.5rem !important;
+  }
+
+  section {
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Optimisation des posts de blog */
+  .blog-post {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+
+  .post-header {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .blog-post h1 {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .post-meta {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .post-content {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+  }
+
+  .post-image {
+    max-height: 250px !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Titres dans le contenu */
+  .post-content h2 {
+    font-size: 1.2rem !important;
+    margin: 0.8rem 0 0.4rem !important;
+  }
+
+  .post-content h3 {
+    font-size: 1.1rem !important;
+    margin: 0.6rem 0 0.3rem !important;
+  }
+
+  /* Listes */
+  .post-content ul,
+  .post-content ol {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .post-content li {
+    margin-bottom: 0.2rem !important;
+  }
+
+  /* Mention de source */
+  .article-source {
+    display: block !important;
+    margin-top: 1rem !important;
+    padding-top: 0.5rem !important;
+    border-top: 1px solid #ccc !important;
+    font-size: 0.7rem !important;
+    color: #666 !important;
+  }
+
+  .article-source a {
+    color: #666 !important;
+    text-decoration: none !important;
   }
 }

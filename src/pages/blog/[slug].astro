@@ -51,6 +51,11 @@ const { Content } = await render(post);
           <Content />
         </div>
         
+        <!-- Mention de source -->
+        <div class="article-source">
+          <p>Source : <a href={Astro.url.href}>{Astro.url.href}</a></p>
+        </div>
+        
         <!-- Boutons de navigation -->
         <div class="article-navigation">
           <a href="/blog" class="nav-button secondary-button">
