@@ -8,9 +8,11 @@ tags: ['test']
 draft: false
 ---
 
-En 2026, le nombre de sièges au conseil municipal ne passera pas à 19, mais restera fixé à 33 conseillers municipaux : pourquoi ?
+En 2026, le nombre de sièges au conseil municipal **ne passera pas à 19**, mais restera fixé à **33 conseillers municipaux** : pourquoi ?
 
-Parce que Putanges-le-Lac est une commune nouvelle créée en 2016, et qu’une période transitoire s’applique jusqu’aux élections de 2032. Cette disposition permet de conserver un conseil plus large, afin d'assurer une meilleure représentation des anciennes communes fusionnées. Le seuil de population nous placerait normalement dans la tranche 1 500 - 2 499 habitants (19 conseillers), mais nous restons dans la tranche supérieure jusqu’au prochain cycle.
+Parce que Putanges-le-Lac est une **commune nouvelle** créée en 2016, et qu’une période transitoire s’applique jusqu’aux élections de 2032. Cette disposition permet de conserver un conseil plus large, afin d'assurer une meilleure représentation des anciennes communes fusionnées. Le seuil de population nous placerait normalement dans la tranche 1 500 - 2 499 habitants (19 conseillers), mais nous restons dans la tranche supérieure jusqu’au prochain cycle.
+
+Source : [legifrance.gouv.fr](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051645324)
 
 ## Comment se dérouleront les élections ?
 
