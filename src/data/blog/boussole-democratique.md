@@ -57,4 +57,4 @@ Pour en savoir plus sur [la boussole originale d’Actions Communes ->](https://
 
 Une liste citoyenne à Putanges-le-lac devrait écouter, rassembler, expérimenter et rendre des comptes, en s'appuyant sur nos forces locales pour faire évoluer pas à pas notre façon de décider ensemble.
 
-[Télécharger la boussole en format papier](/public/assets/img/boussole-democratique.pdf)
+[Télécharger la boussole en format papier](/assets/img/boussole-democratique.pdf)
