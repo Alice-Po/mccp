@@ -1,0 +1,103 @@
+{
+    "communes": [
+        {
+            "nom": "Putanges-Pont-Écrepin",
+            "code_insee": "61339",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 10.12,
+            "population": {
+                "valeur": 980,
+                "annee": 2022
+            },
+            "densite_hab_km2": 97
+        },
+        {
+            "nom": "Chênedouit",
+            "code_insee": "61106",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 8.93,
+            "population": {
+                "valeur": 168,
+                "annee": 2022
+            },
+            "densite_hab_km2": 19
+        },
+        {
+            "nom": "La Forêt-Auvray",
+            "code_insee": "61174",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 10.96,
+            "population": {
+                "valeur": 168,
+                "annee": 2022
+            },
+            "densite_hab_km2": 15
+        },
+        {
+            "nom": "La Fresnaye-au-Sauvage",
+            "code_insee": "61179",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 11.98,
+            "population": {
+                "valeur": 224,
+                "annee": 2022
+            },
+            "densite_hab_km2": 19
+        },
+        {
+            "nom": "Ménil-Jean",
+            "code_insee": "61270",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 7.04,
+            "population": {
+                "valeur": 114,
+                "annee": 2022
+            },
+            "densite_hab_km2": 16
+        },
+        {
+            "nom": "Rabodanges",
+            "code_insee": "61340",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 9.32,
+            "population": {
+                "valeur": 174,
+                "annee": 2022
+            },
+            "densite_hab_km2": 19
+        },
+        {
+            "nom": "Les Rotours",
+            "code_insee": "61354",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 5.06,
+            "population": {
+                "valeur": 113,
+                "annee": 2022
+            },
+            "densite_hab_km2": 22
+        },
+        {
+            "nom": "St Aubert-sur-Orne",
+            "code_insee": "61364",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 9.69,
+            "population": {
+                "valeur": 98,
+                "annee": 2022
+            },
+            "densite_hab_km2": 10
+        },
+        {
+            "nom": "Ste Croix-sur-Orne",
+            "code_insee": "61378",
+            "intercommunalite": "CC du Val d'Orne",
+            "superficie_km2": 3.81,
+            "population": {
+                "valeur": 76,
+                "annee": 2022
+            },
+            "densite_hab_km2": 20
+        }
+    ]
+}

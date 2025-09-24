@@ -50,10 +50,26 @@ import Layout from "../layouts/Layout.astro";
       map.createPane('labels');
       map.getPane('labels').style.zIndex = 650; // au-dessus des overlays
       map.getPane('labels').style.pointerEvents = 'none';
-     
-      fetch('/assets/datas/geojson/Putanges_wgs84.geojson')
-        .then(r => r.json())
-        .then(gj => {
+
+      // Charger en parallèle les géométries et les données habitants
+      Promise.all([
+        fetch('/assets/datas/geojson/Putanges_wgs84.geojson').then(r => r.json()),
+        fetch('/assets/datas/geojson/donnees-communes.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
+      ])
+        .then(([gj, rawData]) => {
+
+          // Construire un index nom normalisé -> { population, annee }
+          const index = new Map();
+          try {
+            const list = Array.isArray(rawData?.communes) ? rawData.communes : [];
+            for (const item of list) {
+              const nom = item.nom || item.NOM;
+              const popVal = item.population?.valeur ?? item.population;
+              const popAnnee = item.population?.annee ?? item.annee;
+              if (!nom) continue;
+              index.set(String(nom).trim().toLowerCase(), { population: popVal, annee: popAnnee });
+            }
+          } catch (_) {}
 
           const baseStyle = {
             color: PRIMARY,
@@ -81,9 +97,11 @@ import Layout from "../layouts/Layout.astro";
               lyr.on('mouseover', () => lyr.setStyle(highlightStyle));
               lyr.on('mouseout', () => lyr.setStyle(baseStyle));
               lyr.on('click', () => {
-                const nomEnc = encodeURIComponent(nom);
-                const osmLink = `https://www.openstreetmap.org/search?query=${nomEnc}`;
-                lyr.bindPopup(`<strong>${nom}</strong><br/>`).openPopup();
+                const key = String(nom).trim().toLowerCase();
+                const info = index.get(key);
+                const popFmt = (v) => (typeof v === 'number' && v.toLocaleString) ? v.toLocaleString('fr-FR') : (v ?? '');
+                const popLine = (info && info.population) ? `<br/>Habitants: <strong>${popFmt(info.population)}</strong>${info.annee ? ` <small>(réf. ${info.annee})</small>` : ''}` : '';
+                lyr.bindPopup(`<strong>${nom}</strong>${popLine}`).openPopup();
               });
             }
           }).addTo(map);
