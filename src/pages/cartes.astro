@@ -21,12 +21,7 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
     crossorigin=""
   />
 
-  <script
-    is:inline
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <!-- Reprojection pour couches additionnelles (ZAE en EPSG:2154) -->
   <script
     is:inline
@@ -34,6 +29,23 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
+  <script is:inline>
+    // Expose icon mapper to window for use in inline Leaflet code
+    window.iconPathForCategory = (cat) => {
+      const key = String(cat || '').toLowerCase();
+      const map = {
+        'administratif ou militaire': '/assets/svg/zae/admin-militaire.svg',
+        'religieux': '/assets/svg/zae/religieux.svg',
+        'culture et loisirs': '/assets/svg/zae/culture-loisirs.svg',
+        'gestion des eaux': '/assets/svg/zae/gestion-eaux.svg',
+        'industriel et commercial': '/assets/svg/zae/industrie-commerce.svg',
+        'santé': '/assets/svg/zae/sante.svg',
+        'science et enseignement': '/assets/svg/zae/science-enseignement.svg',
+        'sport': '/assets/svg/zae/sport.svg'
+      };
+      return map[key] || '/assets/svg/zae/industrie-commerce.svg';
+    };
+  </script>
 
   <script is:inline>
     window.addEventListener('load', () => {
@@ -64,14 +76,11 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
       window.addEventListener('resize', resizeMapSection);
 
       // Fond de carte plus riche en libellés (CARTO Voyager)
-      const baseTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
-      }).addTo(map);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' }).addTo(map);
 
       // Calque de libellés par-dessus (reste lisible au-dessus des polygones)
       map.createPane('labels');
-      map.getPane('labels').style.zIndex = 650; // au-dessus des overlays
+      map.getPane('labels').style.zIndex = 650;
       map.getPane('labels').style.pointerEvents = 'none';
 
       // Charger en parallèle les géométries et les données habitants
@@ -109,7 +118,7 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
 
           // Dessiner les polygones dans un pane sous les labels
           map.createPane('polygons');
-          map.getPane('polygons').style.zIndex = 640; // sous les labels (650)
+          map.getPane('polygons').style.zIndex = 640;
           const layer = L.geoJSON(gj, {
             style: () => baseStyle,
             pane: 'polygons',
@@ -133,7 +142,7 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
 
           try {
             const bounds = layer.getBounds();
-            // Vue plus ajustée: plus de padding et zoom max plafonné
+            // Vue ajustée: padding et zoom max plafonné
             map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
             // S'assurer que la carte occupe tout l'espace disponible une fois prête
             map.whenReady(() => setTimeout(() => map.invalidateSize(), 0));
@@ -144,13 +153,13 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
           // --- Couche ZAE (EPSG:2154 -> 4326) + Sidebar de filtrage ---
           try {
             map.createPane('overlays');
-            map.getPane('overlays').style.zIndex = 645; // entre polygones et labels
+            map.getPane('overlays').style.zIndex = 645;
 
             fetch('/assets/datas/geojson/ZAE.geojson')
               .then(r => r.json())
               .then(zae => {
                 if (!window.proj4 || !zae) return;
-                // Définition Lambert-93
+                // Lambert-93
                 proj4.defs('EPSG:2154', '+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +units=m +no_defs');
                 const from = proj4('EPSG:2154');
                 const to = proj4('EPSG:4326');
@@ -168,19 +177,38 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
                 const zaeLayer = L.geoJSON(zaeWgs, {
                   style: () => zaeStyle,
                   pane: 'overlays',
+                  bubblingMouseEvents: false,
+                  // pas de pointToLayer, on reste sur polygones/lines
                   onEachFeature: (f, lyr) => {
                     const p = f.properties || {};
                     const title = p.TOPONYME || p.NATURE || p.CATEGORIE || 'Élément';
-                    const lines = [
-                      p.CATEGORIE ? `<div><small>${p.CATEGORIE}${p.NATURE ? ' · '+p.NATURE : ''}${p.NAT_DETAIL ? ' · '+p.NAT_DETAIL : ''}</small></div>` : ''
-                    ].join('');
-                    // Libellé permanent au centre
-                    lyr.bindTooltip(title, { permanent: true, direction: 'center', className: 'leaflet-label-zae' });
+                    const lines = p.CATEGORIE ? `<div><small>${p.CATEGORIE}${p.NATURE ? ' · '+p.NATURE : ''}${p.NAT_DETAIL ? ' · '+p.NAT_DETAIL : ''}</small></div>` : '';
+                    // Libellé permanent enrichi avec une icône de catégorie
+                    const iconPath = window.iconPathForCategory(p.CATEGORIE || '');
+                    const iconOnly = `<img src=\"${iconPath}\" alt=\"\" class=\"zae-label-icon\"/>`;
+                    const withText = `${iconOnly}<span class=\"zae-label-text\">${title}</span>`;
+                    lyr.bindTooltip(iconOnly, { permanent: true, direction: 'center', className: 'leaflet-label-zae', interactive: true });
+                    // Rendre l'icône (tooltip permanent) cliquable et stopper la propagation
+                    const attachTooltipClick = () => {
+                      const tt = lyr.getTooltip?.();
+                      const el = tt?.getElement?.();
+                      if (el && !el._zaeBound) {
+                        el._zaeBound = true;
+                        el.addEventListener('click', (e) => { e.stopPropagation(); lyr.openPopup(); });
+                        el.addEventListener('mousedown', (e) => e.stopPropagation());
+                        el.addEventListener('dblclick', (e) => e.stopPropagation());
+                      }
+                    };
+                    setTimeout(attachTooltipClick, 0);
+                    lyr.on('tooltipopen', attachTooltipClick);
+                    lyr.on('mouseover', () => { const t = lyr.getTooltip?.(); if (t) t.setContent(withText); });
+                    lyr.on('mouseout', () => { const t = lyr.getTooltip?.(); if (t) t.setContent(iconOnly); });
                     lyr.bindPopup(`<strong>${title}</strong>${lines}`);
                     // Stocke la catégorie sur le layer pour filtrage
                     lyr.featureCategory = p.CATEGORIE || 'Autres';
                   }
                 }).addTo(map);
+
 
                 // Construire la liste de catégories
                 const catSet = new Set();
@@ -193,7 +221,8 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
                   const actives = e.detail?.actives || new Set(cats);
                   zaeLayer.eachLayer(l => {
                     const show = actives.has(l.featureCategory);
-                    l.setStyle({ opacity: show?0.9:0, fillOpacity: show?0.2:0 });
+                    // Zones (polygones) et markers (divIcon) : gérer les deux cas
+                    if (l.setStyle) { l.setStyle({ opacity: show?0.9:0, fillOpacity: show?0.2:0 }); }
                     if (show) { l.addTo(map); } else { l.removeFrom(map); }
                   });
                 });
@@ -310,8 +339,12 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
       font-family: var(--font-main);
       font-size: 0.8rem;
       font-weight: 600;
-      padding: 0.1rem 0.3rem;
+      padding: 0.1rem 0.4rem;
     }
+    /* Icône compacte pour les labels permanents */
+    .leaflet-label-zae .leaflet-tooltip-content { margin: 0; padding: 0; line-height: 1; }
+    .leaflet-label-zae .zae-label-icon { width:14px; height:14px; display:block; }
+    .leaflet-label-zae .zae-label-text { margin-left:.35rem; }
 
     /* RWD */
     @media (max-width: 768px) {
@@ -321,6 +354,8 @@ import SidebarZAE from "../components/SidebarZAE.svelte";
       .map-container { height: 100%; }
       .fab { display: inline-flex; align-items:center; gap:.4rem; }
     }
+
+    /* (plus de markers autonomes) */
   </style>
 </Layout>
 

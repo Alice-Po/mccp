@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { iconPathForCategory } from '../utils/zae-icons.ts';
   export let categories = [];
   export let opened = false;
 
@@ -38,6 +39,7 @@
         {#each categories as label}
           <label class="cat-item">
             <input type="checkbox" value={label} checked on:change={onChange} />
+            <img class="cat-icon" alt="" src={iconPathForCategory(label)} />
             <span>{label}</span>
           </label>
         {/each}
@@ -69,6 +71,7 @@
   .sidebar-body { padding: .75rem; overflow:auto; }
   .filter-group h3 { margin:.25rem 0 .5rem; font-size:.95rem; color: var(--secondary); }
   .cat-item { display:flex; align-items:center; gap:.5rem; margin:.25rem 0; font-size:.95rem; }
+  .cat-item .cat-icon { width: 18px; height: 18px; opacity:.9; }
 
   @media (max-width: 768px) {
     .sidebar { position:absolute; left:1rem; right:1rem; top:0; height:auto; max-height:60vh; transform: translateY(-110%); transition: transform .2s ease; z-index: 700; }
