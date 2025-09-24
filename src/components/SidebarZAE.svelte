@@ -34,7 +34,7 @@
   </header>
   <div class="sidebar-body">
     <div class="filter-group">
-      <h3>Catégories</h3>
+      <h3>Équipements et lieux d’intérêt de Putanges‑le‑Lac</h3>
       <div id="zae-categories">
         {#each categories as label}
           <label class="cat-item">
