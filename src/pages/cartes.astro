@@ -1,0 +1,146 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Cartes du territoire">
+  <main>
+    <section class="text-section">
+      <h1>Cartographie du territoire</h1>
+      <p>Visualisation des communes déléguées de Putanges-le-Lac à partir des données OpenStreetMap et de notre fichier GeoJSON.</p>
+    </section>
+
+    <section class="map-section">
+      <div id="map" class="map-container" aria-label="Carte des communes déléguées"></div>
+    </section>
+  </main>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <script
+    is:inline
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <script is:inline>
+    window.addEventListener('load', () => {
+      if (!window.L) return;
+
+      const PRIMARY = getComputedStyle(document.documentElement).getPropertyValue('--primary')?.trim() || '#2e8b57';
+      const SECONDARY = getComputedStyle(document.documentElement).getPropertyValue('--secondary')?.trim() || '#1b365d';
+
+      const map = L.map('map', {
+        scrollWheelZoom: true,
+        attributionControl: true
+      });
+
+      // Fond de carte plus riche en libellés (CARTO Voyager)
+      const baseTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+
+      // Calque de libellés par-dessus (reste lisible au-dessus des polygones)
+      map.createPane('labels');
+      map.getPane('labels').style.zIndex = 650; // au-dessus des overlays
+      map.getPane('labels').style.pointerEvents = 'none';
+      const labelsTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        pane: 'labels',
+        attribution: ''
+      }).addTo(map);
+
+      fetch('/assets/datas/geojson/Putanges_wgs84.geojson')
+        .then(r => r.json())
+        .then(gj => {
+
+          const baseStyle = {
+            color: PRIMARY,
+            weight: 2,
+            opacity: 1,
+            fillColor: PRIMARY,
+            fillOpacity: 0.08
+          };
+
+          const highlightStyle = {
+            weight: 3,
+            fillOpacity: 0.15
+          };
+
+          // Dessiner les polygones dans un pane sous les labels
+          map.createPane('polygons');
+          map.getPane('polygons').style.zIndex = 640; // sous les labels (650)
+          const layer = L.geoJSON(gj, {
+            style: () => baseStyle,
+            pane: 'polygons',
+            onEachFeature: (feature, lyr) => {
+              const nom = feature?.properties?.NOM || 'Secteur';
+              // Libellé discret au survol, on laisse les libellés OSM natifs visibles
+              lyr.bindTooltip(nom, { sticky: true, direction: 'top', className: 'leaflet-tooltip-custom' });
+              lyr.on('mouseover', () => lyr.setStyle(highlightStyle));
+              lyr.on('mouseout', () => lyr.setStyle(baseStyle));
+              lyr.on('click', () => {
+                const nomEnc = encodeURIComponent(nom);
+                const osmLink = `https://www.openstreetmap.org/search?query=${nomEnc}`;
+                lyr.bindPopup(`<strong>${nom}</strong><br/><a href="${osmLink}" target="_blank" rel="noopener">Voir sur OpenStreetMap</a>`).openPopup();
+              });
+            }
+          }).addTo(map);
+
+          layer.eachLayer(l => { l.getElement?.()?.style && (l.getElement().style.cursor = 'pointer'); });
+
+          try {
+            const bounds = layer.getBounds();
+            map.fitBounds(bounds, { padding: [20, 20] });
+          } catch (e) {
+            map.setView([48.787, -0.197], 11);
+          }
+        })
+        .catch(() => {
+          map.setView([48.787, -0.197], 11);
+        });
+    });
+  </script>
+
+  <style>
+    .map-section {
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 70vh;
+      min-height: 420px;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    /* Harmoniser les tooltips avec le thème */
+    .leaflet-tooltip-custom {
+      background: #fff;
+      color: var(--secondary);
+      border: 1px solid rgba(46, 139, 87, 0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border-radius: 6px;
+      font-family: var(--font-main);
+      font-weight: 500;
+    }
+
+    /* RWD */
+    @media (max-width: 768px) {
+      .map-container { height: 60vh; }
+    }
+  </style>
+</Layout>
+
+
