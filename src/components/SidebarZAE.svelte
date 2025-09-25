@@ -1,7 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { iconPathForCategory } from '../utils/zae-icons.ts';
-  let { categories = [], opened = $bindable(false), interco = $bindable(false) } = $props();
+  import ArrowIcon from './commonsElements/ArrowIcon.svelte';
+  let { categories = [], opened = $bindable(false), interco = $bindable(false), rivers = $bindable(false), vegCategories = [], vegColors = {} } = $props();
+
+  // Accordions state
+  let openEquip = $state(true);
+  let openNature = $state(false);
 
   const dispatch = createEventDispatcher();
 
@@ -31,6 +36,20 @@
     window.dispatchEvent(new CustomEvent('zae:layer', { detail: { interco } }));
   }
 
+  function onToggleRivers() {
+    // bind:checked already updated `rivers`; just notify parent if needed later
+    dispatch('rivers', { rivers });
+    window.dispatchEvent(new CustomEvent('zae:rivers', { detail: { rivers } }));
+  }
+
+  function onVegChange() {
+    const container = document.getElementById('veg-categories');
+    const actives = new Set(Array.from(container?.querySelectorAll('input[type="checkbox"]') || [])
+      .filter(i => i.checked).map(i => i.value));
+    dispatch('vegFilter', { actives });
+    window.dispatchEvent(new CustomEvent('zae:vegFilter', { detail: { actives } }));
+  }
+
   // categories sont passées par props; plus besoin d'événements window ici
 </script>
 
@@ -46,17 +65,51 @@
         <span>CdC du Val d'Orne</span>
       </label>
     </div>
+  
     <div class="filter-group">
-      <h3>Équipements et lieux d’intérêt de Putanges‑le‑Lac</h3>
-      <div id="zae-categories">
-        {#each categories as label}
-          <label class="cat-item">
-            <input type="checkbox" value={label} checked onchange={onChange} />
-            <img class="cat-icon" alt="" src={iconPathForCategory(label)} />
-            <span>{label}</span>
-          </label>
-        {/each}
+      <div class="accordion {openEquip ? 'open' : ''}">
+        <button type="button" class="accordion-summary" aria-expanded={openEquip} onclick={() => openEquip = !openEquip}>
+          <ArrowIcon color="var(--secondary)" size={14} direction={openEquip ? 'down' : 'right'} />
+          <h3>Équipements et lieux d’intérêt de Putanges‑le‑Lac</h3>
+        </button>
+        <div class="accordion-content"><div class="accordion-inner">
+          <div id="zae-categories">
+            {#each categories as label}
+              <label class="cat-item">
+                <input type="checkbox" value={label} checked onchange={onChange} />
+                <img class="cat-icon" alt="" src={iconPathForCategory(label)} />
+                <span>{label}</span>
+              </label>
+            {/each}
+          </div>
+        </div></div>
       </div>
+
+    {#if vegCategories?.length}
+    <div class="filter-group">
+      <div class="accordion {openNature ? 'open' : ''}">
+        <button type="button" class="accordion-summary" aria-expanded={openNature} onclick={() => openNature = !openNature}>
+          <ArrowIcon color="var(--secondary)" size={14} direction={openNature ? 'down' : 'right'} />
+          <h3>Élements naturels</h3>
+        </button>
+        <div class="accordion-content"><div class="accordion-inner">
+          <div id="veg-categories">
+            <label class="cat-item">
+              <input type="checkbox" bind:checked={rivers} onchange={onToggleRivers} />
+              <span>Rivières</span>
+            </label>
+            {#each vegCategories as label}
+              <label class="cat-item">
+                <input type="checkbox" value={label} onchange={onVegChange} />
+                <span class="legend-chip" style={`--chip:${vegColors[label] || '#999'}`}></span>
+                <span>{label}</span>
+              </label>
+            {/each}
+          </div>
+        </div></div>
+      </div>
+    </div>
+  {/if}
     </div>
     
   </div>
@@ -86,6 +139,14 @@
   .filter-group h3 { margin:.25rem 0 .5rem; font-size:.95rem; color: var(--secondary); }
   .cat-item { display:flex; align-items:center; gap:.5rem; margin:.25rem 0; font-size:.95rem; }
   .cat-item .cat-icon { width: 18px; height: 18px; opacity:.9; }
+  .legend-chip { width: 12px; height: 12px; border-radius: 2px; background: var(--chip, #999); display:inline-block; border:1px solid rgba(0,0,0,0.25); }
+  .accordion { border-top: 2px solid rgba(0,0,0,0.06);  padding:.75rem .5rem;  }
+  .accordion-summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:.4rem; background:none; border:none; padding:0; width:100%; text-align:left; }
+  .accordion-summary::-webkit-details-marker { display:none; }
+  .accordion h3 { margin:.25rem 0; font-size:.95rem; color: var(--secondary); }
+  .accordion-content { overflow: hidden; transition: grid-template-rows .2s ease, opacity .2s ease; display: grid; grid-template-rows: 0fr; opacity: 0; }
+  .accordion.open .accordion-content { grid-template-rows: 1fr; opacity: 1; }
+  .accordion-inner { min-height: 0; }
 
   @media (max-width: 768px) {
     .sidebar { position:absolute; left:1rem; right:1rem; top:0; height:auto; max-height:60vh; transform: translateY(-110%); transition: transform .2s ease; z-index: 700; }

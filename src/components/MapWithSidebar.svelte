@@ -13,7 +13,14 @@
   let activeCategories = $state(new Set());
   let sidebarOpened = $state(false);
   let showInterco = $state(false);
+  let showRivers = $state(false);
+  // Vegetation layer visibility is derived from activeVegCategories (no global toggle)
+  let vegCategories = $state([]);
+  let vegColors = $state({}); // { [nature: string]: color }
+  let activeVegCategories = $state(new Set());
   let intercoLayer;
+  let riversLayer;
+  let vegetationLayer;
 
   // UI colors from CSS variables
   function readThemeVar(name, fallback) {
@@ -85,6 +92,52 @@
     }
   });
 
+  // reactive toggle for rivers layer
+  $effect(() => {
+    const _v2 = showRivers;
+    if (!map || !riversLayer) return;
+    if (showRivers) {
+      riversLayer.addTo(map);
+    } else {
+      riversLayer.removeFrom(map);
+    }
+  });
+
+  // Vegetation layer visibility: present only if at least one category selected
+  $effect(() => {
+    const _sel = activeVegCategories.size;
+    if (!map || !vegetationLayer) return;
+    if (activeVegCategories.size > 0) {
+      vegetationLayer.addTo(map);
+      applyVegetationFilter();
+    } else {
+      vegetationLayer.removeFrom(map);
+    }
+  });
+
+  function applyVegetationFilter() {
+    if (!vegetationLayer) return;
+    if (activeVegCategories.size === 0) {
+      vegetationLayer.eachLayer(l => {
+        if (l.setStyle) l.setStyle({ opacity: 0, fillOpacity: 0 });
+        l.removeFrom(map);
+      });
+      return;
+    }
+    const actives = activeVegCategories;
+    vegetationLayer.eachLayer(l => {
+      const show = actives.has(l.featureNature);
+      if (l.setStyle) l.setStyle({ opacity: show ? 0.7 : 0, fillOpacity: show ? 0.15 : 0 });
+      if (show) { l.addTo(map); } else { l.removeFrom(map); }
+    });
+  }
+
+  $effect(() => {
+    const _sV = activeVegCategories.size;
+    const _cV = vegCategories.length;
+    applyVegetationFilter();
+  });
+
   onMount(async () => {
     try {
       const [{ default: L }, { default: proj4 }] = await Promise.all([
@@ -126,6 +179,83 @@
         }
       } catch (_) {}
 
+      // Vegetation layer (EPSG:2154 -> 4326)
+      try {
+        const vegetation = await fetch('/assets/datas/geojson/Zones_vegetation2.geojson').then(r => r.json());
+        if (vegetation) {
+          if (!map.getPane('overlays')) {
+            map.createPane('overlays');
+            map.getPane('overlays').style.zIndex = 645;
+          }
+          proj4.defs('EPSG:2154', '+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +units=m +no_defs');
+          const fromV = proj4('EPSG:2154');
+          const toV = proj4('EPSG:4326');
+          function tCoordsV(c){ if(typeof c[0]==='number'){ const [x,y]=c; const [lon,lat]=proj4(fromV,toV,[x,y]); return [lon,lat]; } return c.map(tCoordsV); }
+          function tGeomV(g){ return { ...g, coordinates: tCoordsV(g.coordinates) }; }
+          const vegetationWgs = (vegetation.type==='FeatureCollection') ? { ...vegetation, features: vegetation.features.map(f=>({ ...f, geometry: tGeomV(f.geometry) })) } : vegetation;
+          function baseColorForVegetation(nature) {
+            const key = String(nature || '').toLowerCase();
+            // Choix de couleurs "par nature" (lisibles sur fond clair)
+            const map = new Map([
+              ['forêt', '#2e8b57'],
+              ['bois', '#2e8b57'],
+              ['boisement', '#2e8b57'],
+              ['haie', '#3b9d5d'],
+              ['bocage', '#4caf50'],
+              ['prairie', '#7cb342'],
+              ['pelouse', '#8bc34a'],
+              ['verger', '#a2c23a'],
+              ['zone humide', '#43a047'],
+              ['marais', '#43a047'],
+              ['lande', '#6aa84f'],
+              ['friche', '#9e9d24'],
+              ['dune', '#c0ca33'],
+              ['ripisylve', '#388e3c'],
+              ['roselière', '#66bb6a'],
+              ['tourbière', '#2e7d32'],
+              ['eau', '#1e90ff'],
+            ]);
+            for (const [k, v] of map.entries()) {
+              if (key.includes(k)) return v;
+            }
+            // fallback deterministe basé sur hash
+            let h = 0; for (let i = 0; i < key.length; i++) h = ((h << 5) - h) + key.charCodeAt(i) | 0;
+            const palette = ['#81c784','#aed581','#c5e1a5','#9ccc65','#66bb6a','#8d6e63','#a1887f','#90a4ae'];
+            return palette[Math.abs(h) % palette.length];
+          }
+          // construire catégories et palette stable avant la création du layer
+          const vset = new Set();
+          (vegetationWgs.features || []).forEach(f => { const n = f?.properties?.NATURE; if (n) vset.add(n); });
+          const categoriesArr = Array.from(vset).sort();
+          // Palette catégorielle contrastée (inspirée ColorBrewer/Tableau)
+          const distinctPalette = [
+            '#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00',
+            '#ffff33','#a65628','#f781bf','#999999','#66c2a5',
+            '#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f',
+            '#e5c494','#b3b3b3','#1b9e77','#d95f02','#7570b3'
+          ];
+          const colorMap = {};
+          categoriesArr.forEach((label, idx) => {
+            colorMap[label] = distinctPalette[idx % distinctPalette.length];
+          });
+          vegColors = colorMap;
+          vegCategories = categoriesArr;
+          // Par défaut: aucun filtre actif → couche masquée tant que rien n'est coché
+          activeVegCategories = new Set();
+
+          const vegStyle = (f) => {
+            const nature = f?.properties?.NATURE;
+            const col = vegColors[nature] || distinctPalette[0];
+            return { color: col, weight: 1, opacity: 0.7, fillColor: col, fillOpacity: 0.15 };
+          };
+          vegetationLayer = L.geoJSON(vegetationWgs, { style: vegStyle, pane: 'overlays', interactive: false, onEachFeature: (f, lyr) => {
+            lyr.featureNature = f?.properties?.NATURE || 'Autre';
+            // Forcer style initial (certains moteurs n'appellent pas style pour les MultiPolygon existants)
+            const s = activeVegCategories.size > 0 ? vegStyle(f) : { opacity: 0, fillOpacity: 0 };
+            try { lyr.setStyle && lyr.setStyle(s); } catch(_) {}
+          } });
+        }
+      } catch (_) {}
       const baseStyle = { color: PRIMARY(), weight: 2, opacity: 1, fillColor: PRIMARY(), fillOpacity: 0.08 };
       const highlightStyle = { weight: 3, fillOpacity: 0.15 };
 
@@ -249,6 +379,26 @@
           intercoLayer = L.geoJSON(epciWgs, { style: () => intercoStyle, pane: 'overlays', interactive: false });
         }
       } catch (_) {}
+
+      // Rivers layer (EPSG:2154 -> 4326)
+      try {
+        const rivers = await fetch('/assets/datas/geojson/rivieres.geojson').then(r => r.json());
+        if (rivers) {
+          if (!map.getPane('overlays')) {
+            map.createPane('overlays');
+            map.getPane('overlays').style.zIndex = 645;
+          }
+          proj4.defs('EPSG:2154', '+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +units=m +no_defs');
+          const fromR = proj4('EPSG:2154');
+          const toR = proj4('EPSG:4326');
+          function tCoordsR(c){ if(typeof c[0]==='number'){ const [x,y]=c; const [lon,lat]=proj4(fromR,toR,[x,y]); return [lon,lat]; } return c.map(tCoordsR); }
+          function tGeomR(g){ return { ...g, coordinates: tCoordsR(g.coordinates) }; }
+          const riversWgs = (rivers.type==='FeatureCollection') ? { ...rivers, features: rivers.features.map(f=>({ ...f, geometry: tGeomR(f.geometry) })) } : rivers;
+          const riverColor = '#1e90ff';
+          const riversStyle = (f) => ({ color: riverColor, weight: 2, opacity: 0.9 });
+          riversLayer = L.geoJSON(riversWgs, { style: riversStyle, pane: 'overlays', interactive: false });
+        }
+      } catch (_) {}
     } catch (_) {
       try { map?.setView([48.787, -0.197], 11); } catch {}
     }
@@ -266,10 +416,14 @@
 <section class="map-section with-sidebar">
   <SidebarZAE
     {categories}
+    {vegCategories}
+    {vegColors}
     bind:opened={sidebarOpened}
     bind:interco={showInterco}
+    bind:rivers={showRivers}
     on:filter={onFilterChange}
     on:toggle={onToggle}
+    on:vegFilter={(e)=>{ const next = e?.detail?.actives; activeVegCategories = next instanceof Set ? next : new Set(next || []); applyVegetationFilter(); }}
   />
   <div bind:this={mapEl} class="map-container" aria-label="Carte des communes déléguées"></div>
   <button class="fab" aria-label="Ouvrir les filtres" onclick={onToggle}>🔍 Filtres</button>

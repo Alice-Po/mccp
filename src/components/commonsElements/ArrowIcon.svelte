@@ -23,11 +23,11 @@
   // Calcul des transformations selon la direction
   const getTransform = (dir: string) => {
     switch (dir) {
-      case 'up': return 'rotate(-90)';
-      case 'down': return 'rotate(90)';
-      case 'left': return 'rotate(180)';
+      case 'up': return 'rotate(-90deg)';
+      case 'down': return 'rotate(90deg)';
+      case 'left': return 'rotate(180deg)';
       case 'right': 
-      default: return 'rotate(0)';
+      default: return 'rotate(0deg)';
     }
   };
 </script>
@@ -38,7 +38,7 @@
   viewBox="0 0 24 24" 
   fill="none" 
   xmlns="http://www.w3.org/2000/svg"
-  style="transform: {getTransform(direction)};"
+  style="transform: {getTransform(direction)}; transform-origin: center; transition: transform .18s ease;"
 >
   <path 
     d="M9 18L15 12L9 6" 
