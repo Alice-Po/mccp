@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { iconPathForCategory } from '../utils/zae-icons.ts';
-  let { categories = [], opened = $bindable(false) } = $props();
+  let { categories = [], opened = $bindable(false), interco = $bindable(false) } = $props();
 
   const dispatch = createEventDispatcher();
 
@@ -25,6 +25,12 @@
     window.dispatchEvent(new CustomEvent('zae:filter', { detail: { actives } }));
   }
 
+  function onToggleInterco() {
+    // bind:checked already updated `interco`; just notify parent
+    dispatch('layer', { interco });
+    window.dispatchEvent(new CustomEvent('zae:layer', { detail: { interco } }));
+  }
+
   // categories sont passées par props; plus besoin d'événements window ici
 </script>
 
@@ -34,6 +40,12 @@
     <h2>Filtres</h2>
   </header>
   <div class="sidebar-body">
+    <div class="filter-group">
+      <label class="cat-item">
+        <input type="checkbox" bind:checked={interco} onchange={onToggleInterco} />
+        <span>CdC du Val d'Orne</span>
+      </label>
+    </div>
     <div class="filter-group">
       <h3>Équipements et lieux d’intérêt de Putanges‑le‑Lac</h3>
       <div id="zae-categories">
@@ -46,6 +58,7 @@
         {/each}
       </div>
     </div>
+    
   </div>
 </aside>
 

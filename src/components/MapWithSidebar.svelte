@@ -12,6 +12,8 @@
   let categories = $state([]);
   let activeCategories = $state(new Set());
   let sidebarOpened = $state(false);
+  let showInterco = $state(false);
+  let intercoLayer;
 
   // UI colors from CSS variables
   function readThemeVar(name, fallback) {
@@ -70,6 +72,17 @@
   $effect(() => {
     const _o = sidebarOpened;
     setTimeout(() => map?.invalidateSize(), 150);
+  });
+
+  // reactive toggle for interco layer
+  $effect(() => {
+    const _v = showInterco;
+    if (!map || !intercoLayer) return;
+    if (showInterco) {
+      intercoLayer.addTo(map);
+    } else {
+      intercoLayer.removeFrom(map);
+    }
   });
 
   onMount(async () => {
@@ -215,6 +228,27 @@
         activeCategories = new Set(categories);
         applyZaeFilter();
       } catch (_) {}
+
+      // Interco boundary layer (EPCI)
+      try {
+        const epci = await fetch('/assets/datas/geojson/EPCI.geojson').then(r => r.json());
+        if (epci) {
+          // ensure overlays pane exists
+          if (!map.getPane('overlays')) {
+            map.createPane('overlays');
+            map.getPane('overlays').style.zIndex = 645;
+          }
+          // local reprojection helpers (scope-safe)
+          proj4.defs('EPSG:2154', '+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +units=m +no_defs');
+          const from2 = proj4('EPSG:2154');
+          const to2 = proj4('EPSG:4326');
+          function tCoords2(c){ if(typeof c[0]==='number'){ const [x,y]=c; const [lon,lat]=proj4(from2,to2,[x,y]); return [lon,lat]; } return c.map(tCoords2); }
+          function tGeom2(g){ return { ...g, coordinates: tCoords2(g.coordinates) }; }
+          const epciWgs = (epci.type==='FeatureCollection') ? { ...epci, features: epci.features.map(f=>({ ...f, geometry: tGeom2(f.geometry) })) } : epci;
+          const intercoStyle = { color: 'orange', weight: 3, opacity: 0.9, fillOpacity: 0 };
+          intercoLayer = L.geoJSON(epciWgs, { style: () => intercoStyle, pane: 'overlays', interactive: false });
+        }
+      } catch (_) {}
     } catch (_) {
       try { map?.setView([48.787, -0.197], 11); } catch {}
     }
@@ -233,6 +267,7 @@
   <SidebarZAE
     {categories}
     bind:opened={sidebarOpened}
+    bind:interco={showInterco}
     on:filter={onFilterChange}
     on:toggle={onToggle}
   />
