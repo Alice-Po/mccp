@@ -1,11 +1,16 @@
 <script>
-  import { onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import { iconPathForCategory } from '../utils/zae-icons.ts';
-  export let categories = [];
-  export let opened = false;
+  let { categories = [], opened = $bindable(false) } = $props();
+
+  const dispatch = createEventDispatcher();
 
   function toggleOpen() {
     opened = !opened;
+    // Svelte event for parent components
+    dispatch('toggle', { opened });
+    // Backward-compatible window event
+    // (à supprimer quand plus nécessaire)
     window.dispatchEvent(new CustomEvent('zae:toggle', { detail: { opened } }));
   }
 
@@ -13,23 +18,19 @@
     const container = document.getElementById('zae-categories');
     const actives = new Set(Array.from(container.querySelectorAll('input[type="checkbox"]'))
       .filter(i => i.checked).map(i => i.value));
+    // Svelte event for parent components
+    dispatch('filter', { actives });
+    // Backward-compatible window event
+    // (à supprimer quand plus nécessaire)
     window.dispatchEvent(new CustomEvent('zae:filter', { detail: { actives } }));
   }
 
-  onMount(() => {
-    const handler = (e) => {
-      const next = e?.detail?.categories || [];
-      categories = next;
-      requestAnimationFrame(() => onChange());
-    };
-    window.addEventListener('zae:mount', handler);
-    return () => window.removeEventListener('zae:mount', handler);
-  });
+  // categories sont passées par props; plus besoin d'événements window ici
 </script>
 
 <aside class:open={opened} class="sidebar">
   <header class="sidebar-header">
-    <button on:click={toggleOpen} aria-label="Ouvrir/fermer le filtre">☰</button>
+    <button onclick={toggleOpen} aria-label="Ouvrir/fermer le filtre">☰</button>
     <h2>Filtres</h2>
   </header>
   <div class="sidebar-body">
@@ -38,7 +39,7 @@
       <div id="zae-categories">
         {#each categories as label}
           <label class="cat-item">
-            <input type="checkbox" value={label} checked on:change={onChange} />
+            <input type="checkbox" value={label} checked onchange={onChange} />
             <img class="cat-icon" alt="" src={iconPathForCategory(label)} />
             <span>{label}</span>
           </label>
