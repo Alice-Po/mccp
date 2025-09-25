@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { iconPathForCategory } from '../utils/zae-icons.ts';
+  import { iconPathForCategory } from '../utils/zae-icons.js';
   import ArrowIcon from './commonsElements/ArrowIcon.svelte';
   let { categories = [], opened = $bindable(false), interco = $bindable(false), rivers = $bindable(false), vegCategories = [], vegColors = {} } = $props();
 
@@ -131,10 +131,7 @@
 <style>
   .sidebar {
     background: #fff;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.06);
     height: 100%;
     display: flex;
     flex-direction: column;

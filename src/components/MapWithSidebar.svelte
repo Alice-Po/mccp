@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import 'leaflet/dist/leaflet.css';
-  import SidebarZAE from './SidebarZAE.svelte';
+  import SidebarMap from './SidebarMap.svelte';
   import { iconPathForCategory } from '../utils/zae-icons.ts';
 
   let mapEl;
@@ -414,7 +414,7 @@
  
 
 <section class="map-section with-sidebar">
-  <SidebarZAE
+  <SidebarMap
     {categories}
     {vegCategories}
     {vegColors}
