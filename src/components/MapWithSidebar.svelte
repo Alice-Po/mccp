@@ -190,7 +190,20 @@
             lyr.on('tooltipopen', attachTooltipClick);
             lyr.on('mouseover', () => { const t = lyr.getTooltip?.(); if (t) t.setContent(withText); });
             lyr.on('mouseout', () => { const t = lyr.getTooltip?.(); if (t) t.setContent(iconOnly); });
-            lyr.bindPopup(`<strong>${title}</strong>`);
+            const fmt = (v) => (v ?? '') === null ? '' : String(v ?? '');
+            const popup = `
+              <div class="zae-popup">
+                <div class="zae-popup-header">
+                  <img src="${iconPath}" alt="" class="zae-label-icon" />
+                  <div class="zae-popup-title"><strong>${title}</strong></div>
+                </div>
+                <div class="zae-popup-body">
+    
+                  ${p.NAT_DETAIL ? `<div> ${fmt(p.NAT_DETAIL)}</div>` : ''}
+                
+                </div>
+              </div>`;
+            lyr.bindPopup(popup);
             lyr.featureCategory = p.CATEGORIE || 'Autres';
           }
         }).addTo(map);
@@ -307,6 +320,10 @@
   :global(.leaflet-control-zoom-in),
   :global(.leaflet-control-zoom-out) { font-weight: 700; }
   :global(.leaflet-popup-content) { font-size: 0.95rem; }
+  :global(.zae-popup) { min-width: 220px; }
+  :global(.zae-popup-header) { display:flex; align-items:center; gap:.5rem; margin-bottom:.25rem; }
+  :global(.zae-popup-title) { font-size: 1rem; }
+  :global(.zae-popup-body div) { margin: .15rem 0; }
 
   @media (max-width: 768px) {
     .map-section { grid-template-columns: 1fr; height: calc(100dvh - 80px); padding: 0; }
