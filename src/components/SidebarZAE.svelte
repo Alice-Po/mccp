@@ -113,6 +113,19 @@
     </div>
     
   </div>
+  <footer class="sidebar-footer">
+    <small>
+      Données issues de <a href="https://geoservices.ign.fr/bdtopo" target="_blank" rel="noopener noreferrer">BD TOPO – IGN</a>    
+    </small>
+    <br />
+    <small>Mise à jour: juin 2025.</small>
+    <div class="contrib-box">
+      <small>
+        Une donnée est manquante ou erronée ? Vous souhaitez proposer de nouvelles couches ?
+       <a href="mailto:contact@mccputanges.fr?subject=Contribution%20donn%C3%A9es%20cartographiques">Envoyez-nous vos suggestions par mail.</a>
+      </small>
+    </div>
+  </footer>
 </aside>
 
 <style>
@@ -147,6 +160,10 @@
   .accordion-content { overflow: hidden; transition: grid-template-rows .2s ease, opacity .2s ease; display: grid; grid-template-rows: 0fr; opacity: 0; }
   .accordion.open .accordion-content { grid-template-rows: 1fr; opacity: 1; }
   .accordion-inner { min-height: 0; }
+  .sidebar-footer { padding: .5rem .75rem; border-top: 1px solid rgba(0,0,0,0.06); color:#555; }
+  .sidebar-footer a { color: var(--secondary); text-decoration: underline; }
+  .contrib-box { margin-top:.4rem; padding:.35rem .5rem; background:#f7f8f9; border:1px solid rgba(0,0,0,0.06); border-radius:.5rem; }
+  .contrib-box small { line-height:1.2; display:block; font-size:.85rem; }
 
   @media (max-width: 768px) {
     .sidebar { position:absolute; left:1rem; right:1rem; top:0; height:auto; max-height:60vh; transform: translateY(-110%); transition: transform .2s ease; z-index: 700; }
