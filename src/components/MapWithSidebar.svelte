@@ -193,63 +193,59 @@
           function tCoordsV(c){ if(typeof c[0]==='number'){ const [x,y]=c; const [lon,lat]=proj4(fromV,toV,[x,y]); return [lon,lat]; } return c.map(tCoordsV); }
           function tGeomV(g){ return { ...g, coordinates: tCoordsV(g.coordinates) }; }
           const vegetationWgs = (vegetation.type==='FeatureCollection') ? { ...vegetation, features: vegetation.features.map(f=>({ ...f, geometry: tGeomV(f.geometry) })) } : vegetation;
-          function baseColorForVegetation(nature) {
-            const key = String(nature || '').toLowerCase();
-            // Choix de couleurs "par nature" (lisibles sur fond clair)
-            const map = new Map([
-              ['forêt', '#2e8b57'],
-              ['bois', '#2e8b57'],
-              ['boisement', '#2e8b57'],
-              ['haie', '#3b9d5d'],
-              ['bocage', '#4caf50'],
-              ['prairie', '#7cb342'],
-              ['pelouse', '#8bc34a'],
-              ['verger', '#a2c23a'],
-              ['zone humide', '#43a047'],
-              ['marais', '#43a047'],
-              ['lande', '#6aa84f'],
-              ['friche', '#9e9d24'],
-              ['dune', '#c0ca33'],
-              ['ripisylve', '#388e3c'],
-              ['roselière', '#66bb6a'],
-              ['tourbière', '#2e7d32'],
-              ['eau', '#1e90ff'],
-            ]);
-            for (const [k, v] of map.entries()) {
-              if (key.includes(k)) return v;
-            }
-            // fallback deterministe basé sur hash
-            let h = 0; for (let i = 0; i < key.length; i++) h = ((h << 5) - h) + key.charCodeAt(i) | 0;
-            const palette = ['#81c784','#aed581','#c5e1a5','#9ccc65','#66bb6a','#8d6e63','#a1887f','#90a4ae'];
-            return palette[Math.abs(h) % palette.length];
-          }
-          // construire catégories et palette stable avant la création du layer
-          const vset = new Set();
-          (vegetationWgs.features || []).forEach(f => { const n = f?.properties?.NATURE; if (n) vset.add(n); });
-          const categoriesArr = Array.from(vset).sort();
-          // Palette catégorielle contrastée (inspirée ColorBrewer/Tableau)
-          const distinctPalette = [
-            '#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00',
-            '#ffff33','#a65628','#f781bf','#999999','#66c2a5',
-            '#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f',
-            '#e5c494','#b3b3b3','#1b9e77','#d95f02','#7570b3'
+          // Normalisation des catégories de végétation d'après le fichier de données
+          const VEG_GROUPS = [
+            'Bois',
+            'Forêt clairsemée',
+            'Forêt de conifères',
+            'Forêt de feuillus',
+            'Forêt mixte',
+            'Haie',
+            'Landes (ajonc, bruyères, genets)',
+            'Peupleraie',
+            'Verger'
           ];
-          const colorMap = {};
-          categoriesArr.forEach((label, idx) => {
-            colorMap[label] = distinctPalette[idx % distinctPalette.length];
-          });
-          vegColors = colorMap;
-          vegCategories = categoriesArr;
+
+          function normalizeVegNature(nature) {
+            const val = String(nature || '').trim();
+            if (!val) return null;
+            // Jeu fermé: les 9 libellés exacts présents dans le fichier
+            if (VEG_GROUPS.includes(val)) return val;
+            // Tolérance minimale sur les accents: compare en minuscule sans accents
+            const toKey = (s) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+            const key = toKey(val);
+            for (const g of VEG_GROUPS) {
+              if (toKey(g) === key) return g;
+            }
+            return null; // non classé (devrait être rare si la donnée est propre)
+          }
+
+          // Couleurs fixes, une par groupe (ordre identique à VEG_GROUPS)
+          const vegGroupColors = {
+            'Bois': '#76452e',
+            'Forêt clairsemée': '#adff2f',
+            'Forêt de conifères': '#228b22',
+            'Forêt de feuillus': '#32cd32',
+            'Forêt mixte': '#006400',
+            'Haie': '#90ee90',
+            'Landes (ajonc, bruyères, genets)': '#ffb6c1',
+            'Peupleraie': '#20b2aa',
+            'Verger': '#dc143c'
+          };
+
+          // Légende et couleurs visibles dans la sidebar
+          vegCategories = VEG_GROUPS;
+          vegColors = { ...vegGroupColors };
           // Par défaut: aucun filtre actif → couche masquée tant que rien n'est coché
           activeVegCategories = new Set();
 
           const vegStyle = (f) => {
-            const nature = f?.properties?.NATURE;
-            const col = vegColors[nature] || distinctPalette[0];
+            const norm = normalizeVegNature(f?.properties?.NATURE);
+            const col = vegGroupColors[norm] || '#2e8b57';
             return { color: col, weight: 1, opacity: 0.7, fillColor: col, fillOpacity: 0.15 };
           };
           vegetationLayer = L.geoJSON(vegetationWgs, { style: vegStyle, pane: 'overlays', interactive: false, onEachFeature: (f, lyr) => {
-            lyr.featureNature = f?.properties?.NATURE || 'Autre';
+            lyr.featureNature = normalizeVegNature(f?.properties?.NATURE);
             // Forcer style initial (certains moteurs n'appellent pas style pour les MultiPolygon existants)
             const s = activeVegCategories.size > 0 ? vegStyle(f) : { opacity: 0, fillOpacity: 0 };
             try { lyr.setStyle && lyr.setStyle(s); } catch(_) {}

@@ -96,7 +96,7 @@
           <div id="veg-categories">
             <label class="cat-item">
               <input type="checkbox" bind:checked={rivers} onchange={onToggleRivers} />
-              <span>Rivières</span>
+              <span>Cours d'eau</span>
             </label>
             {#each vegCategories as label}
               <label class="cat-item">
