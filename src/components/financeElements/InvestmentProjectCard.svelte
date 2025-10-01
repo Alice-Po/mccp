@@ -1,19 +1,33 @@
 <script>
-  export let code = '';
-  export let libelle = '';
-  export let budget_dep = 0;
-  export let realise_dep = 0;
+  import { createEventDispatcher } from 'svelte';
+  const props = $props();
+  const code = $derived(props.code ?? '');
+  const libelle = $derived(props.libelle ?? '');
+  const budget_dep = $derived(props.budget_dep ?? 0);
+  const realise_dep = $derived(props.realise_dep ?? 0);
+  const computedPrev = $derived(props.computedPrev ?? props.budget_dep ?? 0);
+  const computedReal = $derived(props.computedReal ?? props.realise_dep ?? 0);
+
+  const dispatch = createEventDispatcher();
 
   const fmt = (n) => {
     if (typeof n !== 'number' || isNaN(n)) return '';
     return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
   const percent = () => {
-    if (!budget_dep) return 0;
-    return Math.round((realise_dep / budget_dep) * 100);
+    if (!computedPrev) return 0;
+    return Math.round((computedReal / computedPrev) * 100);
   };
   const basePercent = () => Math.max(0, Math.min(100, percent()));
   const overflowPercent = () => Math.max(0, Math.min(100, percent() - 100));
+
+  function onDetailsClick() {
+    dispatch('details', { code, libelle });
+  }
+
+  $effect(() => {
+    console.log('[ProjectCard] mount/update', { code, libelle, budget_dep, realise_dep });
+  });
 </script>
 
 <article class="project-card">
@@ -24,8 +38,8 @@
   </header>
   <div class="project-body">
     <div class="amounts">
-      <div class="amount"><strong>Budget dépensé prévu</strong><span>{fmt(budget_dep)} €</span></div>
-      <div class="amount"><strong>Réalisé</strong><span>{fmt(realise_dep)} €</span></div>
+      <div class="amount"><strong>Budget dépensé prévu</strong><span>{fmt(computedPrev)} €</span></div>
+      <div class="amount"><strong>Réalisé</strong><span>{fmt(computedReal)} €</span></div>
     </div>
     <div class="progress">
       <div class="bar"><div class="fill" style={`width:${basePercent()}%`}></div></div>
@@ -37,6 +51,11 @@
         <div class="ratio over-text">+{overflowPercent()}% dépassement</div>
       </div>
     {/if}
+  </div>
+  <div class="actions">
+    <button class="details-btn" onclick={onDetailsClick}>
+      Voir le détail des dépenses
+    </button>
   </div>
 </article>
 
@@ -68,6 +87,9 @@
   .bar-over { height: 8px; }
   .fill.over { background: #c0392b; }
   .ratio.over-text { color:#c0392b; font-weight:600; }
+  .actions { margin-top: .5rem; display:flex; justify-content:flex-end; }
+  .details-btn { background: var(--primary); color:#fff; border:none; border-radius:.5rem; padding:.5rem .9rem; font-weight:600; cursor:pointer; box-shadow: 0 4px 8px rgba(46,139,87,.2); }
+  .details-btn:hover { background: var(--primary-dark); }
 
   @media (max-width: 768px) { .amounts { grid-template-columns: 1fr; } }
 </style>
