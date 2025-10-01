@@ -1,0 +1,32 @@
+[
+    {
+        "code": "0019",
+        "libelle": "Aménagements de sécurité à Putanges-Pont-Écrepin",
+        "budget_dep": 501680.00,
+        "realise_dep": 562856.26
+    },
+    {
+        "code": "0021",
+        "libelle": "Équipement informatique du siège de la commune",
+        "budget_dep": 57435.91,
+        "realise_dep": 398.29
+    },
+    {
+        "code": "0029",
+        "libelle": "Travaux sur le patrimoine communal",
+        "budget_dep": 16146.00,
+        "realise_dep": 16146.00
+    },
+    {
+        "code": "0030",
+        "libelle": "Rénovation du camping du Val d'Orne",
+        "budget_dep": 127442.87,
+        "realise_dep": 28200.00
+    },
+    {
+        "code": "2021004",
+        "libelle": "Aménagement des abords du lac de Rabodanges",
+        "budget_dep": 495729.15,
+        "realise_dep": 43610.79
+    }
+]
