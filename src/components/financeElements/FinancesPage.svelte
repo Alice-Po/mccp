@@ -7,6 +7,7 @@
   import DonutChart from './DonutChart.svelte';
   import IndicateursFinanciers from './IndicateursFinanciers.svelte';
   import FinancialTable from './FinancialTable.svelte';
+  import InvestmentProjects from './InvestmentProjects.svelte';
   import Download from '../commonsElements/Download.svelte';
   import { aggregateData, aggregateByChapitreForHorizontalBarChart, buildOverviewDataByChapitre } from '../../utils/budget-data';
   import type { FiscaliteItem, IndicateurFinancier, BudgetItem } from '../../types';
@@ -635,6 +636,11 @@ function toggleAccordion(id: keyof typeof accordions) {
           </div>
           {/if}
         </div>
+        </section>
+
+        <!-- Projets d'investissement -->
+        <section class="chart-section" id="section-projets-investissement">
+          <InvestmentProjects year="2025" />
         </section>
         <!-- Section Fiscalité -->
         <section class="chart-section" id="section-fiscalite">
