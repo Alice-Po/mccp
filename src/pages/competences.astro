@@ -8,12 +8,12 @@ import Tourisme from './competences/tourisme.astro';
 import ActionCulturelle from './competences/action-culturelle.astro';
 import PolitiqueVille from './competences/politique-ville.astro';
 import Sport from './competences/sport.astro';
-import ActionSociale from './competences/2action-sociale.astro';
+import ActionSociale from './competences/action-sociale-et-sante.astro';
 import EmploiInsertion from './competences/3emploi-insertion.astro';
 import AmenagementDvlpRural from './competences/amenagement-dvlp-rural.astro';
 import EnvPatrimoine from './competences/env-patrimoine.astro';
 import LogementHabitat from './competences/logement-habitat.astro';
-import Securite from './competences/1securite.astro';
+import Securite from './competences/securite.astro';
 ---
 
 <Layout title="Compétences - MCC Putanges-le-Lac">
@@ -23,8 +23,8 @@ import Securite from './competences/1securite.astro';
       
       <section class="text-section">
         <p>
-          Découvrez les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
-          Chaque section détaille les responsabilités, les actions possibles et les exemples concrets pour notre territoire.
+          Les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
+        
         </p>
         <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
       </section>
@@ -36,6 +36,9 @@ import Securite from './competences/1securite.astro';
 
         <CompetenceSection title="Action Sociale et Santé" client:load>
           <ActionSociale />
+        </CompetenceSection>
+        <CompetenceSection title="Emploi et Insertion" client:load>
+          <EmploiInsertion />
         </CompetenceSection>
         <CompetenceSection title="Enfance et Jeunesse" client:load>
           <EnfanceJeunesse />
@@ -67,9 +70,7 @@ import Securite from './competences/1securite.astro';
 
     
 
-        <CompetenceSection title="Emploi et Insertion" client:load>
-          <EmploiInsertion />
-        </CompetenceSection>
+     
 
         <CompetenceSection title="Aménagement du Territoire" client:load>
           <AmenagementDvlpRural />
