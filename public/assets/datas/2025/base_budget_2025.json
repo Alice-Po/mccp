@@ -253,7 +253,8 @@
     "PROPOSITIONS_2025": 1000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 1000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -285,7 +286,8 @@
     "PROPOSITIONS_2025": 40000,
     "TAUX_EXECUTION_2024": 13.83,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -701,7 +703,8 @@
     "PROPOSITIONS_2025": 12000,
     "TAUX_EXECUTION_2024": 105.82,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -1197,7 +1200,8 @@
     "PROPOSITIONS_2025": 10750,
     "TAUX_EXECUTION_2024": 83.81,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -1469,7 +1473,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -14208,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -1709,7 +1714,8 @@
     "PROPOSITIONS_2025": 23000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 23000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -1853,7 +1859,8 @@
     "PROPOSITIONS_2025": 41700,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 41700,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -1917,7 +1924,8 @@
     "PROPOSITIONS_2025": 5000,
     "TAUX_EXECUTION_2024": 611.79,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -2045,7 +2053,8 @@
     "PROPOSITIONS_2025": 2000,
     "TAUX_EXECUTION_2024": 77.33,
     "EVOLUTION_2024_2025_ABSOLUE": 500,
-    "EVOLUTION_2024_2025_RELATIVE": 33.33
+    "EVOLUTION_2024_2025_RELATIVE": 33.33,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2061,7 +2070,8 @@
     "PROPOSITIONS_2025": 152638.56,
     "TAUX_EXECUTION_2024": 8.9,
     "EVOLUTION_2024_2025_ABSOLUE": 71717.95,
-    "EVOLUTION_2024_2025_RELATIVE": 88.64
+    "EVOLUTION_2024_2025_RELATIVE": 88.64,
+    "libelle_vulgarise": "études"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2111,7 +2121,8 @@
     "PROPOSITIONS_2025": 3000,
     "TAUX_EXECUTION_2024": 34.7,
     "EVOLUTION_2024_2025_ABSOLUE": -3000,
-    "EVOLUTION_2024_2025_RELATIVE": -50
+    "EVOLUTION_2024_2025_RELATIVE": -50,
+    "libelle_vulgarise": "logiciels et autres"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2127,7 +2138,8 @@
     "PROPOSITIONS_2025": 50000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 50000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "subventions et participations versées"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2143,7 +2155,8 @@
     "PROPOSITIONS_2025": 217029,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 217029,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2160,7 +2173,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -10000,
     "EVOLUTION_2024_2025_RELATIVE": -100,
-    "OPERATION_CODE": "2021008"
+    "OPERATION_CODE": "2021008",
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2176,7 +2190,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -30000,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2193,7 +2208,8 @@
     "TAUX_EXECUTION_2024": 56.92,
     "EVOLUTION_2024_2025_ABSOLUE": -56663.71,
     "EVOLUTION_2024_2025_RELATIVE": -56.92,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2209,7 +2225,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2226,7 +2243,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2242,7 +2260,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2275,7 +2294,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2291,7 +2311,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2307,7 +2328,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2324,7 +2346,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "0029"
+    "OPERATION_CODE": "0029",
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2340,7 +2363,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2356,7 +2380,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2372,7 +2397,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2389,7 +2415,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2405,7 +2432,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2422,7 +2450,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "0019"
+    "OPERATION_CODE": "0019",
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2439,7 +2468,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "2020003"
+    "OPERATION_CODE": "2020003",
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2456,7 +2486,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2472,7 +2503,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2489,7 +2521,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
     "EVOLUTION_2024_2025_RELATIVE": 0,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2505,7 +2538,8 @@
     "PROPOSITIONS_2025": 25000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 25000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres réseaux"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2521,7 +2555,8 @@
     "PROPOSITIONS_2025": 162920.05,
     "TAUX_EXECUTION_2024": 30.28,
     "EVOLUTION_2024_2025_ABSOLUE": -73323.99,
-    "EVOLUTION_2024_2025_RELATIVE": -31.03
+    "EVOLUTION_2024_2025_RELATIVE": -31.03,
+    "libelle_vulgarise": "autres réseaux"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2538,7 +2573,8 @@
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -2862,
     "EVOLUTION_2024_2025_RELATIVE": -4.27,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "autres réseaux"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2554,7 +2590,8 @@
     "PROPOSITIONS_2025": 3328.8,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 3328.8,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2570,7 +2607,8 @@
     "PROPOSITIONS_2025": 30000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 30000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "réseau de voirie"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2586,7 +2624,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2602,7 +2641,8 @@
     "PROPOSITIONS_2025": 62000,
     "TAUX_EXECUTION_2024": 102.73,
     "EVOLUTION_2024_2025_ABSOLUE": -66009.12,
-    "EVOLUTION_2024_2025_RELATIVE": -51.57
+    "EVOLUTION_2024_2025_RELATIVE": -51.57,
+    "libelle_vulgarise": "véhicules"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2669,7 +2709,8 @@
     "PROPOSITIONS_2025": 15000,
     "TAUX_EXECUTION_2024": 533.44,
     "EVOLUTION_2024_2025_ABSOLUE": -600,
-    "EVOLUTION_2024_2025_RELATIVE": -3.85
+    "EVOLUTION_2024_2025_RELATIVE": -3.85,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2686,7 +2727,8 @@
     "TAUX_EXECUTION_2024": 87.57,
     "EVOLUTION_2024_2025_ABSOLUE": -13135.75,
     "EVOLUTION_2024_2025_RELATIVE": -87.57,
-    "OPERATION_CODE": "2021004"
+    "OPERATION_CODE": "2021004",
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2702,7 +2744,8 @@
     "PROPOSITIONS_2025": 773645,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 703645,
-    "EVOLUTION_2024_2025_RELATIVE": 1005.21
+    "EVOLUTION_2024_2025_RELATIVE": 1005.21,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2718,7 +2761,8 @@
     "PROPOSITIONS_2025": 21600,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 21600,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2734,7 +2778,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -500,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2750,7 +2795,8 @@
     "PROPOSITIONS_2025": 500000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 224158.12,
-    "EVOLUTION_2024_2025_RELATIVE": 81.23
+    "EVOLUTION_2024_2025_RELATIVE": 81.23,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2766,7 +2812,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 72.16,
     "EVOLUTION_2024_2025_ABSOLUE": -37313.96,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2782,7 +2829,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -50000,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "études"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2798,7 +2846,8 @@
     "PROPOSITIONS_2025": 400000,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 400000,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2814,7 +2863,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -50000,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "DEPENSES",
@@ -2926,7 +2976,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -2958,7 +3009,8 @@
     "PROPOSITIONS_2025": 1500,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": 0,
-    "EVOLUTION_2024_2025_RELATIVE": 0
+    "EVOLUTION_2024_2025_RELATIVE": 0,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -3006,7 +3058,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 100,
     "EVOLUTION_2024_2025_ABSOLUE": -6201.72,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -3022,7 +3075,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 100,
     "EVOLUTION_2024_2025_ABSOLUE": -68798.28,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -3038,7 +3092,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -10386.33,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "construction et entretien des bâtiments"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -3118,7 +3173,8 @@
     "PROPOSITIONS_2025": 400000,
     "TAUX_EXECUTION_2024": 8.4,
     "EVOLUTION_2024_2025_ABSOLUE": 350000,
-    "EVOLUTION_2024_2025_RELATIVE": 700
+    "EVOLUTION_2024_2025_RELATIVE": 700,
+    "libelle_vulgarise": "études"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",
@@ -3134,7 +3190,8 @@
     "PROPOSITIONS_2025": 0,
     "TAUX_EXECUTION_2024": 0,
     "EVOLUTION_2024_2025_ABSOLUE": -50000,
-    "EVOLUTION_2024_2025_RELATIVE": -100
+    "EVOLUTION_2024_2025_RELATIVE": -100,
+    "libelle_vulgarise": "autres dépenses d'investissement"
   },
   {
     "DÉPENSES/RECETTES": "RECETTES",

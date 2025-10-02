@@ -3,6 +3,8 @@
   import DonutChart from './DonutChart.svelte';
   import HorizontalBarChart from './HorizontalBarChart.svelte';
   import '../../styles/modal.css';
+  import { onMount } from 'svelte';
+  
   export let year = '2024';
   let projects = [];
   let error = '';
@@ -26,11 +28,7 @@
       const res = await fetch(`/assets/datas/${year}/table_operations_${year}.json`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      projects = Array.isArray(data) ? data.slice().sort((a, b) => {
-        const ra = Number(a?.realise_dep ?? 0);
-        const rb = Number(b?.realise_dep ?? 0);
-        return rb - ra; // plus grand réalisé en premier
-      }) : [];
+      projects = Array.isArray(data) ? data.slice() : [];
 
       // Pré-calculer la présence de données côté budget de base
       try {
@@ -42,8 +40,8 @@
           map.set(p.code, 0);
           codeSums.set(p.code, { prev: 0, real: 0 });
         }
-        // Préparer agrégation pour les "autres dépenses"
-        const otherMap = new Map(); // LIBELLE -> { label, prevus_2024, realises_2024, propositions_2025 }
+        // Préparer agrégation pour les "autres dépenses" avec libellés vulgarisés
+        const otherMap = new Map(); // libelle_vulgarise -> { label, prevus_2024, realises_2024, propositions_2025 }
 
         for (const row of (Array.isArray(bdata) ? bdata : [])) {
           if (row.SECTION !== 'INVESTISSEMENT' || row['DÉPENSES/RECETTES'] !== 'DEPENSES') {
@@ -62,22 +60,12 @@
               sums.real += isNaN(val) ? 0 : val;
               codeSums.set(op, sums);
             } else {
-              // suffix non reconnu -> autres dépenses
-              const key = row.LIBELLE || 'Autres';
-              const acc = otherMap.get(key) || { label: key, prevus_2024: 0, realises_2024: 0, propositions_2025: 0 };
-              acc.prevus_2024 += Number(row?.PREVISIONS_2024 || 0) || 0;
-              acc.realises_2024 += Number(row?.REALISATIONS_2024 || 0) || 0;
-              acc.propositions_2025 += Number(row?.PROPOSITIONS_2025 || 0) || 0;
-              otherMap.set(key, acc);
+              // suffix non reconnu -> autres dépenses (seulement si libellé vulgarisé existe)
+              aggregateOtherExpenses(row, otherMap);
             }
           } else {
-            // Pas de code d'opération dans COMPTE -> autres dépenses
-            const key = row.LIBELLE || 'Autres';
-            const acc = otherMap.get(key) || { label: key, prevus_2024: 0, realises_2024: 0, propositions_2025: 0 };
-            acc.prevus_2024 += Number(row?.PREVISIONS_2024 || 0) || 0;
-            acc.realises_2024 += Number(row?.REALISATIONS_2024 || 0) || 0;
-            acc.propositions_2025 += Number(row?.PROPOSITIONS_2025 || 0) || 0;
-            otherMap.set(key, acc);
+            // Pas de code d'opération dans COMPTE -> autres dépenses (seulement si libellé vulgarisé existe)
+            aggregateOtherExpenses(row, otherMap);
           }
         }
         codesWithData = new Set(Array.from(map.entries()).filter(([, sum]) => sum > 0).map(([k]) => k));
@@ -93,7 +81,19 @@
     }
   }
 
-  load();
+  // Fonction utilitaire pour agréger les autres dépenses
+  function aggregateOtherExpenses(row, otherMap) {
+    if (row.libelle_vulgarise) {
+      const key = row.libelle_vulgarise;
+      const acc = otherMap.get(key) || { label: key, prevus_2024: 0, realises_2024: 0, propositions_2025: 0 };
+      acc.prevus_2024 += Number(row?.PREVISIONS_2024 || 0) || 0;
+      acc.realises_2024 += Number(row?.REALISATIONS_2024 || 0) || 0;
+      acc.propositions_2025 += Number(row?.PROPOSITIONS_2025 || 0) || 0;
+      otherMap.set(key, acc);
+    }
+  }
+
+  onMount(() => load());
 
   async function openDetails(e) {
     const { code, libelle } = e.detail || {};
@@ -152,7 +152,6 @@
 
     <!-- Accordéon: Autres dépenses d'investissement (non rattachées à une opération) -->
     <div  id="accordion-investissement-autres">
-      <div >
         <div class="cta-container">
           <button class="cta" onclick={() => otherOpen = !otherOpen} aria-expanded={otherOpen}>
             <span class="cta-text">{otherOpen ? 'Masquer' : 'Explorer'} les autres dépenses d'investissement hors projets</span>
@@ -168,7 +167,6 @@
           <HorizontalBarChart data={otherBarData} chartId={`bar-investissements-autres-${year}`} />
         </div>
       {/if}
-    </div>
   {/if}
 </section>
 
@@ -204,14 +202,6 @@
   .tabs { display:flex; gap:.5rem; margin-bottom: 1rem; }
   .tabs button { background:#fff; border:1px solid var(--primary); color: var(--primary); padding:.4rem .8rem; border-radius:.5rem; font-weight:600; cursor:pointer; }
   .tabs button.active, .tabs button:hover { background: var(--primary); color:#fff; }
-  .compare { display:flex; flex-direction:column; gap:.75rem; }
-  .compare .row { display:grid; grid-template-columns: 120px 1fr auto; gap:.75rem; align-items:center; }
-  .compare .bar { height: 12px; background: var(--gray-light); border-radius:999px; overflow:hidden; }
-  .compare .fill { height:100%; }
-  .compare .fill.prev { background: #1b365d; }
-  .compare .fill.real { background: var(--primary); }
-  .compare .label { color: var(--secondary); font-weight:600; }
-  .compare .val { color: var(--secondary); font-weight:600; }
 
   #accordion-investissement-autres {
     margin-top: 2rem;
@@ -232,12 +222,6 @@
     margin-bottom: 1rem;
   }
 
-  .accordion-header h3 {
-    color: var(--primary);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
 
   .cta-container {
     display: flex;

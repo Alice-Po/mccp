@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "add:ops": "node scripts/add-operations-to-budget.js --year 2025"
+    "add:ops": "node scripts/add-operations-to-budget.js --year 2025",
+    "add:vulgarized": "node scripts/add-vulgarized-labels.js --year 2025"
   },
   "dependencies": {
     "@astrojs/svelte": "^7.1.0",

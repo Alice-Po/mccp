@@ -1,0 +1,132 @@
+[
+    {
+        "libelle_original": "Dépôts et cautionnements reçus",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "Frais d'études",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "études"
+    },
+    {
+        "libelle_original": "Concessions et droits similaires",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "logiciels et autres"
+    },
+    {
+        "libelle_original": "Groupements de collectivités EPL et des colle",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "subventions et participations versées"
+    },
+    {
+        "libelle_original": "Terrains nus",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
+    },
+    {
+        "libelle_original": "Terrains aménagés autres que voirie",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
+    },
+    {
+        "libelle_original": "Agencement et aménagement de terrains",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
+    },
+    {
+        "libelle_original": "Bâtiments publics",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Autres bâtiments publics",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Bâtiments privés",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Autres bâtiments privés",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Autres constructions",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Réseaux de voirie",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "réseau de voirie"
+    },
+    {
+        "libelle_original": "Installations de voirie",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "réseau de voirie"
+    },
+    {
+        "libelle_original": "Réseaux divers",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres réseaux"
+    },
+    {
+        "libelle_original": "Autres réseaux",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres réseaux"
+    },
+    {
+        "libelle_original": "Plantations d'arbres et d'arbustes",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "terrains (acquisitions, agencement, plantations...)"
+    },
+    {
+        "libelle_original": "Installations générales agencements et aménag",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "Matériel de transport",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "véhicules"
+    },
+    {
+        "libelle_original": "Autres",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "Constructions",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Restauration des biens historiques et culture",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "construction et entretien des bâtiments"
+    },
+    {
+        "libelle_original": "Dépôts et cautionnements versés",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "CREANCES SUR DES COLLECTIVITES PUBLIQUES - CO",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "Plus ou moins-values sur cessions d'immobilis",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    },
+    {
+        "libelle_original": "Avances versées sur commandes d'immobilisatio",
+        "credit_type": "hors opération",
+        "libelle_vulgarise": "autres dépenses d'investissement"
+    }
+]
