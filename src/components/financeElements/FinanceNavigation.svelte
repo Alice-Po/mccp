@@ -23,6 +23,11 @@
       type: 'donut'
     },
     {
+      id: 'section-projets-investissement',
+      label: 'Projets d\'investissement',
+      type: 'bar'
+    },
+    {
       id: 'section-fiscalite',
       label: 'Fiscalité locale',
       type: 'table'
@@ -173,12 +178,7 @@
     {/each}
   </ul>
   
-  <div class="nav-footer">
-    <div class="nav-indicator">
-      <div class="indicator-dot"></div>
-      <span class="indicator-text">Section active</span>
-    </div>
-  </div>
+  
 </nav>
 
 <style>
