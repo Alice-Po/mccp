@@ -15,6 +15,9 @@
   let totalReal = 0;
   let barData = [];
   let codeSums = new Map(); // code -> { prev: number, real: number }
+  // Autres dépenses (non rattachées à une opération)
+  let otherOpen = false;
+  let otherBarData = [];
 
   async function load() {
     error = '';
@@ -39,7 +42,13 @@
           map.set(p.code, 0);
           codeSums.set(p.code, { prev: 0, real: 0 });
         }
+        // Préparer agrégation pour les "autres dépenses"
+        const otherMap = new Map(); // LIBELLE -> { label, prevus_2024, realises_2024, propositions_2025 }
+
         for (const row of (Array.isArray(bdata) ? bdata : [])) {
+          if (row.SECTION !== 'INVESTISSEMENT' || row['DÉPENSES/RECETTES'] !== 'DEPENSES') {
+            continue;
+          }
           const c = typeof row?.COMPTE === 'string' ? row.COMPTE : '';
           const dash = c.lastIndexOf('-');
           if (dash > -1) {
@@ -52,13 +61,32 @@
               sums.prev += prev;
               sums.real += isNaN(val) ? 0 : val;
               codeSums.set(op, sums);
+            } else {
+              // suffix non reconnu -> autres dépenses
+              const key = row.LIBELLE || 'Autres';
+              const acc = otherMap.get(key) || { label: key, prevus_2024: 0, realises_2024: 0, propositions_2025: 0 };
+              acc.prevus_2024 += Number(row?.PREVISIONS_2024 || 0) || 0;
+              acc.realises_2024 += Number(row?.REALISATIONS_2024 || 0) || 0;
+              acc.propositions_2025 += Number(row?.PROPOSITIONS_2025 || 0) || 0;
+              otherMap.set(key, acc);
             }
+          } else {
+            // Pas de code d'opération dans COMPTE -> autres dépenses
+            const key = row.LIBELLE || 'Autres';
+            const acc = otherMap.get(key) || { label: key, prevus_2024: 0, realises_2024: 0, propositions_2025: 0 };
+            acc.prevus_2024 += Number(row?.PREVISIONS_2024 || 0) || 0;
+            acc.realises_2024 += Number(row?.REALISATIONS_2024 || 0) || 0;
+            acc.propositions_2025 += Number(row?.PROPOSITIONS_2025 || 0) || 0;
+            otherMap.set(key, acc);
           }
         }
         codesWithData = new Set(Array.from(map.entries()).filter(([, sum]) => sum > 0).map(([k]) => k));
+        otherBarData = Array.from(otherMap.values()).filter(d => (d.prevus_2024||0) > 0 || (d.realises_2024||0) > 0 || (d.propositions_2025||0) > 0)
+          .sort((a,b)=> (b.realises_2024||0) - (a.realises_2024||0));
       } catch (_) {
         codesWithData = new Set();
         codeSums = new Map();
+        otherBarData = [];
       }
     } catch (e) {
       error = `Impossible de charger les projets (${e.message})`;
@@ -115,12 +143,31 @@
       {#each projects.filter(p => codesWithData.has(p.code)) as p (p.code)}
         <InvestmentProjectCard
           {...p}
-          hasBudgetData={true}
           computedPrev={(codeSums.get(p.code)?.prev) || 0}
           computedReal={(codeSums.get(p.code)?.real) || 0}
           on:details={openDetails}
         />
       {/each}
+    </div>
+
+    <!-- Accordéon: Autres dépenses d'investissement (non rattachées à une opération) -->
+    <div  id="accordion-investissement-autres">
+      <div >
+        <div class="cta-container">
+          <button class="cta" onclick={() => otherOpen = !otherOpen} aria-expanded={otherOpen}>
+            <span class="cta-text">{otherOpen ? 'Masquer' : 'Explorer'} les autres dépenses d'investissement hors projets</span>
+            <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {#if otherOpen}
+        <div class="accordion-content">
+          <HorizontalBarChart data={otherBarData} chartId={`bar-investissements-autres-${year}`} />
+        </div>
+      {/if}
     </div>
   {/if}
 </section>
@@ -165,6 +212,91 @@
   .compare .fill.real { background: var(--primary); }
   .compare .label { color: var(--secondary); font-weight:600; }
   .compare .val { color: var(--secondary); font-weight:600; }
+
+  #accordion-investissement-autres {
+    margin-top: 2rem;
+  }
+
+  /* Styles des accordéons (copiés de FinancesPage.svelte) */
+  .accordion-wrapper {
+    margin-top: 2rem;
+    background: #f8fafc;
+    border-radius: 1rem;
+    padding: 2rem;
+    border-left: 4px solid var(--secondary);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+  }
+
+  .accordion-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .accordion-header h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .cta-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta {
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    margin: 0 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .cta[aria-expanded="true"] {
+    background: var(--primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+  }
+
+  .cta[aria-expanded="true"] .cta-icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion-content {
+    padding: 2rem;
+    border-top: 1px solid rgba(46, 139, 87, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .cta-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta {
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+    }
+  }
 </style>
 
 
