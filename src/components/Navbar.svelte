@@ -9,6 +9,7 @@
     { href: "/blog", text: "Actualités" },
     { href: "/retroplanning", text: "Rétro-planning" },
     { href: "/conseils-municipaux", text: "Conseils Municipaux" },
+    { href: "/cartes", text: "Cartes" },
     // {
     //   text: "Suivis Municipal",
     //   dropdown: [
