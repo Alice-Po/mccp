@@ -1,0 +1,54 @@
+---
+export interface Props { title?: string }
+const { title = 'Enseignement' } = Astro.props as Props;
+---
+
+<section class="text-section">
+  <h2>{title}</h2>
+  <div class="article-body">
+    <h3>1. Compétences de la commune de Putanges-le-Lac</h3>
+    <p>La commune conserve les compétences de base en matière d'enseignement préélémentaire et élémentaire public :</p>
+    
+    <h4>Création et gestion des écoles</h4>
+    <p>Décision d'ouvrir, fermer ou implanter une école maternelle/élémentaire (après avis du préfet).</p>
+    
+    <h4>Bâtiments et équipements</h4>
+    <p>Construction, rénovation, équipement et entretien des écoles publiques (travaux d'accessibilité, achat de matériel).</p>
+    
+    <h4>Personnel</h4>
+    <p>Recrutement et gestion des ATSEM (agents territoriaux spécialisés des écoles maternelles).</p>
+    
+    <h4>Restauration et périscolaire</h4>
+    <p><strong>Cantine (facultatif)</strong> : Organisation et financement des repas.</p>
+    <p><strong>Garderie et activités périscolaires (facultatif)</strong> : Ateliers culturels, sportifs, ou garderie avant/après l'école.</p>
+    <p><strong>Service d'accueil en cas de grève</strong> : Obligatoire si plus de 25 % des enseignants sont grévistes.</p>
+    
+    <h4>Caisse des écoles</h4>
+    <p>Aides financières aux familles pour les fournitures, sorties, ou activités.</p>
+    
+    <h4>Contrôle de l'obligation scolaire</h4>
+    <p>Le maire recense chaque année les enfants de 3 à 16 ans pour vérifier leur inscription.</p>
+    
+    <h4>Avis sur les écoles privées</h4>
+    <p>Donne son avis sur l'ouverture/modification d'écoles privées hors contrat.</p>
+    
+    <p><em>Exemple concret</em> : Si l'école de Putanges-le-Lac a besoin de travaux, c'est la commune qui les finance et les organise. De même, si des familles ont des difficultés financières, la caisse des écoles peut leur accorder des aides pour les fournitures ou les cantines.</p>
+
+    <h3>2. Compétences effectives de la CdC du Val d'Orne (2014)</h3>
+    <p>La CdC a choisi de prendre en charge certaines compétences optionnelles en matière d'enseignement préélémentaire et élémentaire :</p>
+    
+    <h4>Prise en charge des dépenses</h4>
+    <p>Investissement et fonctionnement des écoles publiques (bâtiments, équipements, cantines, garderies).</p>
+    <p>Cela signifie que la CdC peut financer ou gérer directement ces services pour toutes les communes membres, y compris Putanges-le-Lac, si elles le décident.</p>
+    
+    <h4>Mutualisation</h4>
+    <p>La CdC peut centraliser la gestion des cantines, des garderies ou des transports scolaires pour plusieurs communes, afin d'optimiser les coûts et améliorer l'offre.</p>
+    <p>Elle peut aussi construire ou rénover des écoles utilisées par plusieurs communes (une école intercommunale).</p>
+    
+    <h4>Ce que la CdC ne gère pas (d'après ses statuts) :</h4>
+    <ul>
+      <li>Les programmes scolaires, le recrutement des enseignants, ou les lycées/collèges (compétence départementale/régionale).</li>
+      <li>Les écoles privées (sauf avis consultatif).</li>
+    </ul>
+  </div>
+</section>

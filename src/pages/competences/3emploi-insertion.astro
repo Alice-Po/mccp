@@ -1,0 +1,51 @@
+---
+export interface Props { title?: string }
+const { title = 'Emploi et insertion professionnelle' } = Astro.props as Props;
+---
+
+<section class="text-section">
+  <h2>{title}</h2>
+  <div class="article-body">
+    <h3>1. Ce que peut faire la commune de Putanges-le-Lac</h3>
+    <p>Même si l'emploi relève surtout de l'État et de Pôle Emploi, la commune a plusieurs leviers pour agir localement :</p>
+    
+    <h4>Accompagner les demandeurs d'emploi</h4>
+    <p><strong>Relais de Pôle Emploi</strong> : La mairie peut recevoir des offres d'emploi locales et aider à les diffuser (affichage en mairie, site internet, bulletin municipal).</p>
+    <p><strong>Missions locales</strong> : Participer au financement ou à l'animation d'une antenne locale pour accompagner les jeunes (16-25 ans) sortis du système scolaire.</p>
+    <p><strong>Ateliers d'insertion</strong> : Organiser des ateliers CV, simulations d'entretien, ou des forums emploi avec les entreprises locales.</p>
+    
+    <h4>Soutenir l'insertion par l'activité économique</h4>
+    <p><strong>Conventions avec l'État</strong> : Signer des accords pour créer des chantiers d'insertion (entretien des chemins creux, restauration du patrimoine).</p>
+    <p><strong>Plans locaux pour l'emploi</strong> : Élaborer un plan pluriannuel avec les acteurs locaux pour cibler les besoins en compétences.</p>
+    
+    <h4>Lien avec les entreprises</h4>
+    <p><strong>Maison de l'emploi</strong> : Rejoindre ou cofinancer une Maison de l'Emploi avec d'autres communes pour mutualiser les moyens.</p>
+    <p><strong>Aides aux employeurs</strong> : Proposer des subventions ou des locaux à tarifs préférentiels pour les entreprises qui embauchent des habitants en difficulté.</p>
+    
+    <h4>Focus sur les jeunes et les non-qualifiés</h4>
+    <p><strong>Parcours d'insertion</strong> : Travailler avec les associations et Pôle Emploi pour créer des parcours adaptés aux jeunes sans diplôme.</p>
+    <p><strong>Service civique</strong> : Promouvoir le service civique pour les 18-24 ans, notamment dans les domaines de l'environnement ou de l'animation locale.</p>
+
+    <h3>2. Ce que peut faire la Communauté de Communes du Val d'Orne</h3>
+    <p>La CdC peut jouer un rôle clé en coordonnant les actions et en mutualisant les moyens :</p>
+    
+    <h4>Coordination et mutualisation</h4>
+    <p><strong>Maison de l'emploi intercommunale</strong> : Créer un guichet unique pour l'emploi et la formation, en partenariat avec Pôle Emploi, la Mission Locale et les chambres consulaires.</p>
+    <p><strong>Réseau pour l'emploi</strong> : Intégrer le réseau territorial pour l'emploi afin de mieux connecter les offreurs et demandeurs d'emploi sur le territoire.</p>
+    
+    <h4>Développement économique et emploi</h4>
+    <p><strong>Soutien aux filières locales</strong> : Identifier les secteurs créateurs d'emplois (tourisme autour du lac de Rabodanges, circuits courts agricoles).</p>
+    <p><strong>Insertion par l'activité économique (IAE)</strong> : Financer ou porter des structures d'insertion pour redonner une activité aux chômeurs de longue durée.</p>
+    <p><strong>Formation et reconversion</strong> : Organiser des formations courtes et ciblées en lien avec les besoins des entreprises locales.</p>
+    
+    <h4>Exemples concrets pour Putanges-le-Lac</h4>
+    <p><strong>Jeunes sans emploi</strong> : La CdC peut financer un « bus de l'emploi » pour emmener les jeunes vers les formations ou les entreprises qui recrutent.</p>
+    <p><strong>Agriculture et artisanat</strong> : Soutenir la reprise des fermes abandonnées en aidant à la formation des nouveaux agriculteurs.</p>
+    <p><strong>Tourisme saisonnier</strong> : Mettre en place un système de pré-recrutement pour les emplois saisonniers.</p>
+    <p><strong>Circuits courts</strong> : Développer des projets collectifs qui créent des emplois non délocalisables.</p>
+
+    <h3>3. Ce que ni la commune ni la CdC ne gèrent directement</h3>
+    <p><strong>Indemnisation chômage</strong> : Gérée par Pôle Emploi et l'Unédic.</p>
+    <p><strong>Formation professionnelle longue</strong> : Relève de la Région ou de l'État, mais la commune et la CdC peuvent faciliter l'accès aux dispositifs existants.</p>
+  </div>
+</section>

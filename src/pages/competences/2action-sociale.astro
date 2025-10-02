@@ -1,0 +1,60 @@
+---
+export interface Props { title?: string }
+const { title = 'Action Sociale et Santé' } = Astro.props as Props;
+---
+
+<section class="text-section">
+  <h2>{title}</h2>
+  <div class="article-body">
+    <h3>1. Ce que peut faire la commune de Putanges-le-Lac (le maire et le CCAS)</h3>
+    <p>Même si Putanges-le-Lac a moins de 1 500 habitants, la commune peut choisir de garder un CCAS (Centre Communal d'Action Sociale) ou de s'appuyer sur un CIAS (Centre Intercommunal d'Action Sociale) géré par la CdC. Voici ses principales missions :</p>
+    
+    <h4>Aide aux habitants en difficulté</h4>
+    <p><strong>Aides d'urgence</strong> : Attribuer des secours financiers ou en nature (colis alimentaires, aides pour payer une facture d'énergie) aux familles, personnes âgées ou handicapées.</p>
+    <p><strong>Accompagnement social</strong> : Aider les habitants à monter des dossiers pour des aides (RSA, APA) et les transmettre au département ou à l'État.</p>
+    <p><strong>Fichier social</strong> : Tenir à jour une liste des personnes âgées ou handicapées pour mieux organiser les visites à domicile, les aides ou les alertes en cas de canicule.</p>
+    
+    <h4>Petite enfance et personnes âgées</h4>
+    <p><strong>Crèches et haltes-garderies</strong> : Créer ou subventionner des structures pour les enfants de moins de 6 ans.</p>
+    <p><strong>Logements adaptés</strong> : Construire ou aider à financer des foyers pour personnes âgées ou des logements sociaux pour les ménages modestes.</p>
+    
+    <h4>Santé publique et environnement</h4>
+    <p><strong>Eau et assainissement</strong> : Veiller à la qualité de l'eau potable (surtout importante avec les sources locales polluées) et à l'évacuation des eaux usées.</p>
+    <p><strong>Salubrité</strong> : Lutter contre l'insalubrité des logements (maisons abandonnées ou en ruine) et organiser des campagnes de vaccination ou de désinfection.</p>
+    <p><strong>Désert médical</strong> : Aider à attirer des professionnels de santé (médecin, infirmier) en subventionnant des locaux ou en participant à des maisons de santé pluridisciplinaires.</p>
+    
+    <h4>Logement et précarité</h4>
+    <p><strong>Logements sociaux</strong> : Autoriser ou subventionner la construction de logements locatifs sociaux pour les ménages en difficulté.</p>
+    <p><strong>Fonds de solidarité pour le logement (FSL)</strong> : Participer au financement d'aides pour payer un loyer, des charges ou des factures d'eau/énergie.</p>
+    <p><strong>Jeunes en difficulté</strong> : Gérer un fonds d'aide pour les 18-24 ans sortis du système scolaire et sans emploi.</p>
+    
+    <h4>Veille sanitaire</h4>
+    <p><strong>Alerte santé</strong> : Signaler toute menace pour la santé (pollution de l'eau, épidémie) aux agences régionales de santé.</p>
+    <p><strong>Participation aux hôpitaux</strong> : Le maire peut siéger (avec voix consultative) au conseil de surveillance de l'hôpital le plus proche, pour défendre les besoins locaux.</p>
+
+    <h3>2. Ce que peut faire la Communauté de Communes du Val d'Orne</h3>
+    <p>La CdC n'a pas de compétence obligatoire en action sociale, mais elle peut :</p>
+    
+    <h4>Créer un CIAS</h4>
+    <p>Si les petites communes (comme Putanges-le-Lac, La Forêt-Auvray, etc.) décident de mutualiser leurs CCAS, la CdC peut gérer un CIAS pour coordonner les aides sociales sur tout le territoire.</p>
+    
+    <h4>Financer des équipements</h4>
+    <p>Construire ou subventionner des infrastructures sanitaires (maison de santé, EHPAD) ou des logements sociaux.</p>
+    
+    <h4>Soutenir les professionnels de santé</h4>
+    <p>Aider à l'installation de médecins ou d'infirmiers, en partenariat avec le département.</p>
+    
+    <h4>Lutte contre les moustiques et nuisibles</h4>
+    <p>Participer au financement de la lutte anti-vectorielle (démoustication).</p>
+    
+    <h4>Exemples concrets pour Putanges-le-Lac</h4>
+    <p><strong>Problème de logements trop grands et vacants</strong> : La commune peut transformer des maisons vacantes en logements sociaux ou adaptés pour les personnes âgées, avec l'aide financière de la CdC.</p>
+    <p><strong>Désert médical</strong> : La CdC peut aider à créer une maison de santé regroupant plusieurs professionnels (médecin, kiné, infirmier) pour desservir plusieurs bourgs.</p>
+    <p><strong>Eau polluée</strong> : La commune et la CdC peuvent financer des analyses ou des travaux pour sécuriser l'accès à l'eau potable, surtout pour les habitants utilisant des sources.</p>
+    <p><strong>Isolement des personnes âgées</strong> : Le CCAS ou CIAS peut organiser des visites à domicile, des repas communautaires ou des transports pour les courses/médecin.</p>
+
+    <h3>3. Ce que ni la commune ni la CdC ne gèrent directement</h3>
+    <p><strong>Hôpitaux et cliniques</strong> : Leur gestion relève de l'État ou des établissements publics de santé, mais la commune et la CdC peuvent financer des équipements ou participer aux instances de gouvernance.</p>
+    <p><strong>Allocation RSA ou APA</strong> : Ces aides sont gérées par le département, mais le CCAS/CIAS peut aider les habitants à faire les démarches.</p>
+  </div>
+</section>

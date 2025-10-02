@@ -953,6 +953,16 @@ strong {
   }
 }
 
+/* Styles pour les sections de compétences */
+.competences-section {
+  margin: 3rem 0;
+}
+
+.competences-section h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 /* Styles pour l'impression */
 @media print {
   /* Masquer les éléments non essentiels */

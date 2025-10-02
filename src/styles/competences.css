@@ -1,0 +1,391 @@
+/* Styles spécifiques aux compétences */
+
+/* Variables de couleurs pour les compétences */
+:root {
+  --commune-color: #2e8b57; /* Vert pour la commune */
+  --cdc-color: #ffa500; /* Orange pour la CdC */
+  --commune-light: rgba(46, 139, 87, 0.1);
+  --cdc-light: rgba(255, 165, 0, 0.1);
+  --commune-bg: rgba(46, 139, 87, 0.05);
+  --cdc-bg: rgba(255, 165, 0, 0.05);
+  --example-bg: rgba(46, 139, 87, 0.08);
+  --limitations-bg: rgba(255, 165, 0, 0.08);
+}
+
+/* Section de compétence */
+.competence-section {
+  overflow: hidden;
+}
+
+/* Introduction de la compétence */
+.competence-intro {
+  background: linear-gradient(135deg, var(--commune-bg), var(--cdc-bg));
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--commune-color);
+}
+
+.competence-intro p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--secondary);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* En-tête de section avec couleur selon le type */
+.competence-header {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  border: none;
+  background: var(--commune-color);
+  color: white;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.competence-header:hover {
+  background: var(--primary-dark);
+}
+
+.competence-header.cdc {
+  background: var(--cdc-color);
+}
+
+.competence-header.cdc:hover {
+  background: #e6940a;
+}
+
+/* Icône de toggle */
+.toggle-icon {
+  transition: transform 0.3s ease;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Contenu de la section */
+.competence-content {
+  padding: 0;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.competence-inner {
+  padding: 1.5rem;
+}
+
+/* Styles pour le contenu aligné à gauche */
+.competence-inner {
+  text-align: left;
+}
+
+.competence-inner h3 {
+  font-size: 1.3rem;
+  color: var(--commune-color);
+  margin: 1.5rem 0 1rem 0;
+  font-family: var(--font-main);
+  font-weight: 600;
+  border-left: 4px solid var(--commune-color);
+  padding-left: 1rem;
+}
+
+.competence-inner h3.cdc {
+  color: var(--cdc-color);
+  border-left-color: var(--cdc-color);
+}
+
+.competence-inner h4 {
+  font-size: 1.1rem;
+  color: var(--secondary);
+  margin: 1.2rem 0 0.8rem 0;
+  font-family: var(--font-main);
+  font-weight: 600;
+}
+
+.competence-inner p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--secondary);
+}
+
+.competence-inner ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.competence-inner li {
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+/* Badge pour identifier le type */
+.competence-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid;
+}
+
+.competence-badge.commune {
+  background: var(--commune-light);
+  color: var(--commune-color);
+  border-color: var(--commune-color);
+}
+
+.competence-badge.cdc {
+  background: var(--cdc-light);
+  color: var(--cdc-color);
+  border-color: var(--cdc-color);
+}
+
+/* Cartes de compétences */
+.competence-card {
+  background: var(--commune-bg);
+  border: 1px solid var(--commune-light);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.competence-card.cdc {
+  background: var(--cdc-bg);
+  border-color: var(--cdc-light);
+}
+
+.competence-card h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--commune-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.competence-card.cdc h4 {
+  color: var(--cdc-color);
+}
+
+.competence-card p {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.competence-card ul {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.competence-card li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* Boîte des limitations */
+.limitations-box {
+  background: var(--limitations-bg);
+  border: 1px solid var(--cdc-light);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.limitations-box h4 {
+  margin: 0 0 1rem 0;
+  color: var(--cdc-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.limitations-box ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.limitations-box li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* Accordion pour le texte de référence */
+.reference-accordion {
+  margin-top: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.reference-header {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: #f8f9fa;
+  border: none;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.reference-header:hover {
+  background: #e9ecef;
+}
+
+.reference-content {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--gray);
+}
+
+.reference-content h4 {
+  font-size: 1rem;
+  color: var(--secondary);
+  margin: 1rem 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.reference-content ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.reference-content li {
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+}
+
+/* Responsive mobile-first */
+@media (max-width: 768px) {
+  .competence-section {
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  .competence-intro {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .competence-intro p {
+    font-size: 1rem;
+  }
+
+  .competence-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    margin: 1rem 0 0.8rem 0;
+  }
+
+  .competence-card {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .competence-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .competence-card p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .competence-card ul {
+    padding-left: 1.2rem;
+  }
+
+  .competence-card li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .limitations-box {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .limitations-box h4 {
+    font-size: 1rem;
+  }
+
+  .reference-header {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .reference-content {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .competence-section {
+    padding: 0.8rem;
+  }
+
+  .competence-intro {
+    padding: 0.8rem;
+  }
+
+  .competence-intro p {
+    font-size: 0.95rem;
+  }
+
+  .competence-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .competence-card {
+    padding: 0.8rem;
+  }
+
+  .competence-card h4 {
+    font-size: 0.95rem;
+  }
+
+  .competence-card p {
+    font-size: 0.85rem;
+  }
+
+  .competence-card li {
+    font-size: 0.85rem;
+  }
+
+  .limitations-box {
+    padding: 0.8rem;
+  }
+
+  .limitations-box h4 {
+    font-size: 0.95rem;
+  }
+}
