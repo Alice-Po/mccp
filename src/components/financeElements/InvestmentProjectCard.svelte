@@ -7,6 +7,7 @@
   const realise_dep = $derived(props.realise_dep ?? 0);
   const computedPrev = $derived(props.computedPrev ?? props.budget_dep ?? 0);
   const computedReal = $derived(props.computedReal ?? props.realise_dep ?? 0);
+  const img = $derived(props.img ?? '');
 
   const dispatch = createEventDispatcher();
 
@@ -31,6 +32,11 @@
 </script>
 
 <article class="project-card">
+  {#if img}
+    <div class="project-image">
+      <img src={img} alt={libelle} />
+    </div>
+  {/if}
   <header class="project-header">
     <h3>{libelle}</h3>
     <span class="project-code">Code opération: {code}</span>
@@ -38,7 +44,7 @@
   </header>
   <div class="project-body">
     <div class="amounts">
-      <div class="amount"><strong>Budget dépensé prévu</strong><span>{fmt(computedPrev)} €</span></div>
+      <div class="amount"><strong>Prévu</strong><span>{fmt(computedPrev)} €</span></div>
       <div class="amount"><strong>Réalisé</strong><span>{fmt(computedReal)} €</span></div>
     </div>
     <div class="progress">
@@ -69,6 +75,18 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    overflow: hidden;
+  }
+  .project-image {
+    height: 200px;
+    overflow: hidden;
+    margin: -1.25rem -1.25rem 0.75rem -1.25rem;
+  }
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
   .project-header { display: flex; flex-direction: column; gap: .25rem; }
   .project-header h3 { font-size: 1.2rem; color: var(--secondary); margin: 0; font-family: var(--font-main); font-weight: 600; }

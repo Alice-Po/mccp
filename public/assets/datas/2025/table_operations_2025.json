@@ -5,7 +5,8 @@
     },
     {
         "code": "0021",
-        "libelle": "Équipement informatique du siège de la commune"
+        "libelle": "Équipement informatique du siège de la commune",
+        "img": "/assets/img/operations/2025/0021.jpg"
     },
     {
         "code": "0029",
@@ -13,11 +14,13 @@
     },
     {
         "code": "0030",
-        "libelle": "Rénovation du camping du Val d'Orne"
+        "libelle": "Rénovation du camping du Val d'Orne",
+        "img": "/assets/img/operations/2025/0030.jpg"
     },
     {
         "code": "2021004",
-        "libelle": "Aménagement des abords du lac de Rabodanges"
+        "libelle": "Aménagement des abords du lac de Rabodanges",
+        "img": "/assets/img/operations/2025/2021004.jpg"
     },
     {
         "code": "2018006",
