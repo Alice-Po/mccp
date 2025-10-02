@@ -8,6 +8,8 @@
   const computedPrev = $derived(props.computedPrev ?? props.budget_dep ?? 0);
   const computedReal = $derived(props.computedReal ?? props.realise_dep ?? 0);
   const img = $derived(props.img ?? '');
+  const description = $derived(props.description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo.');
+  const financements = $derived(props.financements ?? '');
 
   const dispatch = createEventDispatcher();
 
@@ -40,7 +42,12 @@
   <header class="project-header">
     <h3>{libelle}</h3>
     <span class="project-code">Code opération: {code}</span>
-    <p class="project-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo.</p>
+    <p class="project-desc">{description}</p>
+    {#if financements}
+      <div class="project-financements">
+        <span class="financements-text">Financé par {financements}</span>
+      </div>
+    {/if}
   </header>
   <div class="project-body">
     <div class="amounts">
@@ -92,6 +99,22 @@
   .project-header h3 { font-size: 1.2rem; color: var(--secondary); margin: 0; font-family: var(--font-main); font-weight: 600; }
   .project-code { font-size: .9rem; color: var(--secondary); opacity: .7; }
   .project-desc { margin: .25rem 0 0; color: var(--secondary); opacity: .85; font-size: .95rem; line-height: 1.4; }
+  .project-financements { 
+    margin-top: .25rem; 
+    display: flex; 
+    align-items: center; 
+    gap: .4rem; 
+    opacity: .7;
+  }
+  .financements-label { 
+    font-size: .8rem; 
+    opacity: .6;
+  }
+  .financements-text { 
+    font-size: .8rem; 
+    color: var(--secondary); 
+    font-style: italic;
+  }
   .project-body { display: flex; flex-direction: column; gap: .75rem; }
   .amounts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
   .amount { background: rgba(46,139,87,0.06); border-radius: .5rem; padding: .75rem; display:flex; flex-direction:column; gap:.25rem; }

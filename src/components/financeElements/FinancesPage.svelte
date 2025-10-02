@@ -428,7 +428,7 @@ function toggleAccordion(id: keyof typeof accordions) {
           <div class="accordion-content">
             <div class="accordion-header">
               <h4>Tableau des dépenses et recettes par chapitre</h4>
-              <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
+       
             </div>
             
             <!-- Onglets pour le graphique de comparaison -->
@@ -556,7 +556,6 @@ function toggleAccordion(id: keyof typeof accordions) {
             <div class="accordion-content">
               <div class="accordion-header">
                 <h4>Comparaison détaillée par chapitre</h4>
-                <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
               </div>
               
               <!-- Onglets pour le graphique de comparaison -->
@@ -599,7 +598,6 @@ function toggleAccordion(id: keyof typeof accordions) {
           <div class="accordion-content">
             <div class="accordion-header">
               <h4>Tableau des dépenses et recettes d'investissement par chapitre</h4>
-              <p> Explication de pourquoi on a choisi la répartition par graphique ici. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus. </p>
             </div>
             
             <!-- Onglets pour le graphique de comparaison -->

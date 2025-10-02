@@ -6,7 +6,8 @@
     {
         "code": "0021",
         "libelle": "Équipement informatique du siège de la commune",
-        "img": "/assets/img/operations/2025/0021.jpg"
+        "img": "/assets/img/operations/2025/0021.jpg",
+        "description": "Pas de détail disponible"
     },
     {
         "code": "0029",
@@ -15,12 +16,16 @@
     {
         "code": "0030",
         "libelle": "Rénovation du camping du Val d'Orne",
-        "img": "/assets/img/operations/2025/0030.jpg"
+        "img": "/assets/img/operations/2025/0030.jpg",
+        "description": "Modernisation d'un camping de bord de rivière : création d'emplacements supplémentaires, tiny houses et nouveau bâtiment écoresponsable avec panneaux solaires.",
+        "financements": "État, Conseil départemental et commune."
     },
     {
         "code": "2021004",
         "libelle": "Aménagement des abords du lac de Rabodanges",
-        "img": "/assets/img/operations/2025/2021004.jpg"
+        "img": "/assets/img/operations/2025/2021004.jpg",
+        "description": "Transformation du lac de Rabodanges en base de loisirs : baignade surveillée, barques électriques, aires de jeux et point info tourisme.",
+        "financements": "État, Région Normandie, Département de l'Orne, commune et Europe."
     },
     {
         "code": "2018006",
