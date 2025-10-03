@@ -34,7 +34,7 @@
   
 </script>
 
-<div class="competence-section">
+<div class="competence-section" id="content-{title}">
   <button 
     class="competence-header" 
     onclick={toggle}
@@ -57,7 +57,7 @@
   </button>
   
   {#if isOpen}
-    <div class="competence-content" id="content-{title}" onclick={handleReferenceToggle} role="button" tabindex="0" onkeydown={(e) => e.key === 'Enter' && handleReferenceToggle(e)}>
+    <div class="competence-content" onclick={handleReferenceToggle} role="button" tabindex="0" onkeydown={(e) => e.key === 'Enter' && handleReferenceToggle(e)}>
       <div class="competence-inner">
         {@render children?.()}
       </div>

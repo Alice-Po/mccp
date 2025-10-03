@@ -41,6 +41,41 @@ main {
   padding: 0 1rem 2rem;
 }
 
+/* Layout pour les compétences avec navigation */
+.competences-main {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.competences-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.competences-content {
+  flex: 1;
+  overflow-x: hidden;
+}
+
+.competences-section {
+  width: 100%;
+}
+
+/* Responsive pour les compétences */
+@media (max-width: 1200px) {
+  .competences-layout {
+    flex-direction: column;
+  }
+
+  .competences-content {
+    width: 100%;
+  }
+}
+
 /* Styles pour les titres */
 h1,
 h2,

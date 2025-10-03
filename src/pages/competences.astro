@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CompetenceSection from '../components/CompetenceSection.svelte';
+import CompetenceNavigation from '../components/CompetenceNavigation.svelte';
 import EnfanceJeunesse from './competences/enfance-jeunesse.astro';
 import Urbanisme from './competences/urbanisme.astro';
 import Enseignement from './competences/enseignement.astro';
@@ -9,7 +10,7 @@ import ActionCulturelle from './competences/action-culturelle.astro';
 import PolitiqueVille from './competences/politique-ville.astro';
 import Sport from './competences/sport.astro';
 import ActionSociale from './competences/action-sociale-et-sante.astro';
-import EmploiInsertion from './competences/3emploi-insertion.astro';
+import EmploiInsertion from './competences/emploi-insertion.astro';
 import AmenagementDvlpRural from './competences/amenagement-dvlp-rural.astro';
 import EnvPatrimoine from './competences/env-patrimoine.astro';
 import LogementHabitat from './competences/logement-habitat.astro';
@@ -17,19 +18,23 @@ import Securite from './competences/securite.astro';
 ---
 
 <Layout title="Compétences - MCC Putanges-le-Lac">
-  <main>
-    <div class="content-wrapper">
-      <h1>Compétences municipales et intercommunales</h1>
+  <main class="competences-main">
+    <div class="competences-layout">
+      <CompetenceNavigation client:load />
       
-      <section class="text-section">
-        <p>
-          Les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
-        
-        </p>
-        <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
-      </section>
+      <div class="competences-content">
+        <div class="content-wrapper">
+          <h1>Compétences municipales et intercommunales</h1>
+          
+          <section class="text-section">
+            <p>
+              Les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
+            
+            </p>
+            <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
+          </section>
 
-      <section class="competences-section">
+          <section class="competences-section">
         <CompetenceSection title="Sécurité" client:load>
           <Securite />
         </CompetenceSection>
@@ -84,8 +89,9 @@ import Securite from './competences/securite.astro';
           <LogementHabitat />
         </CompetenceSection>
 
-      
-      </section>
+          </section>
+        </div>
+      </div>
     </div>
   </main>
 </Layout>
