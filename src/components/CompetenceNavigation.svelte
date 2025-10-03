@@ -187,7 +187,7 @@
 <style>
   .competence-navigation {
     position: sticky;
-    top: 20px;
+    top: 90px;
     width: 320px;
     background: white;
     border-radius: 1rem;
@@ -197,9 +197,10 @@
     backdrop-filter: blur(10px);
     font-family: var(--font-main);
     height: fit-content;
-    max-height: calc(100vh - 40px);
+    max-height: calc(100vh - 110px);
     overflow-y: auto;
     flex-shrink: 0;
+    z-index: 999;
   }
 
   .competence-navigation.closed {
