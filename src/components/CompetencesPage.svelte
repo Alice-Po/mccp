@@ -41,12 +41,10 @@
     <div class="content-wrapper">
       <h1>Compétences municipales et intercommunales</h1>
       
-      <section class="text-section">
         <p>
           Les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
         </p>
         <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
-      </section>
 
       <section class="competences-section">
         <CompetenceSection title="Sécurité" isOpen={openAccordion === "Sécurité"} on:toggle={handleAccordionToggle}>
@@ -61,6 +59,10 @@
           <EmploiInsertion />
         </CompetenceSection>
         
+        <CompetenceSection title="Enseignement" isOpen={openAccordion === "Enseignement"} on:toggle={handleAccordionToggle}>
+            <Enseignement />
+          </CompetenceSection>
+          
         <CompetenceSection title="Enfance et Jeunesse" isOpen={openAccordion === "Enfance et Jeunesse"} on:toggle={handleAccordionToggle}>
           <EnfanceJeunesse />
         </CompetenceSection>
@@ -69,9 +71,7 @@
           <Urbanisme />
         </CompetenceSection>
 
-        <CompetenceSection title="Enseignement" isOpen={openAccordion === "Enseignement"} on:toggle={handleAccordionToggle}>
-          <Enseignement />
-        </CompetenceSection>
+    
 
         <CompetenceSection title="Tourisme" isOpen={openAccordion === "Tourisme"} on:toggle={handleAccordionToggle}>
           <Tourisme />
