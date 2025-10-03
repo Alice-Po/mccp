@@ -1,7 +1,6 @@
----
-export interface Props { title?: string }
-const { title = 'Politique de la Ville' } = Astro.props as Props;
----
+<script>
+  export let title = 'Politique de la Ville';
+</script>
 
 <section class="text-section">
   <h2>{title}</h2>
@@ -60,4 +59,3 @@ const { title = 'Politique de la Ville' } = Astro.props as Props;
     <p><strong>Fonds propres</strong> : Utiliser son budget pour des projets sociaux (aides aux associations caritatives).</p>
   </div>
 </section>
-

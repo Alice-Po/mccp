@@ -1,9 +1,14 @@
----
-import '../../styles/competences.css';
-
-export interface Props { title?: string }
-const { title = 'Emploi et insertion professionnelle' } = Astro.props as Props;
----
+<script>
+  import '../../styles/competences.css';
+  
+  export let title = 'Emploi et insertion professionnelle';
+  
+  let showReference = false;
+  
+  function toggleReference() {
+    showReference = !showReference;
+  }
+</script>
 
 <div class="competence-section">
   <div class="competence-badge commune">Commune de Putanges-le-Lac</div>
@@ -125,13 +130,13 @@ const { title = 'Emploi et insertion professionnelle' } = Astro.props as Props;
 
   <!-- Accordion pour le texte de référence -->
   <div class="reference-accordion">
-    <button class="reference-header" id="reference-button" type="button">
+    <button class="reference-header" type="button" on:click={toggleReference}>
       <span>Texte de référence</span>
       <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     </button>
-    <div class="reference-content" id="reference-content" style="display: none;">
+    <div class="reference-content" style="display: {showReference ? 'block' : 'none'};">
       <h4>Concours au service public de l'emploi</h4>
       <ul>
         <li>Possibilité de délégation par Pôle emploi de la réception d'offres d'emplois et d'opérations de placement</li>

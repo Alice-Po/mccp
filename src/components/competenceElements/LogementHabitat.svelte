@@ -1,7 +1,6 @@
----
-export interface Props { title?: string }
-const { title = 'Logement et habitat' } = Astro.props as Props;
----
+<script>
+  export let title = 'Logement et habitat';
+</script>
 
 <section class="text-section">
   <h2>{title}</h2>
@@ -23,41 +22,41 @@ const { title = 'Logement et habitat' } = Astro.props as Props;
 
     <h3>2. Compétences de la commune de Putanges-le-Lac</h3>
     <h4>Participation au financement du logement</h4>
-    <p><strong>Programme Local de l’Habitat (PLH)</strong> : participation à un PLH intercommunal ou élaboration locale.</p>
-    <p><strong>Plan Départemental de l’Habitat (PDH)</strong> : coordination avec le département.</p>
+    <p><strong>Programme Local de l'Habitat (PLH)</strong> : participation à un PLH intercommunal ou élaboration locale.</p>
+    <p><strong>Plan Départemental de l'Habitat (PDH)</strong> : coordination avec le département.</p>
 
     <h4>Attribution et gestion des logements</h4>
-    <p><strong>Commissions d’attribution</strong> (CALEOL) et <strong>CIA</strong> : participation possible.</p>
-    <p><strong>Offices publics de l’habitat (OPH)</strong> : conventions d’utilité sociale (CUS) possibles.</p>
+    <p><strong>Commissions d'attribution</strong> (CALEOL) et <strong>CIA</strong> : participation possible.</p>
+    <p><strong>Offices publics de l'habitat (OPH)</strong> : conventions d'utilité sociale (CUS) possibles.</p>
 
-    <h4>Police de l’habitat</h4>
+    <h4>Police de l'habitat</h4>
     <p><strong>Immeubles menaçant ruine</strong> : pouvoirs du maire (sécurisation, réhabilitation).</p>
     <p><strong>Équipements communs</strong> : vérification sécurité/entretien.</p>
 
     <h4>Amélioration du parc immobilier</h4>
     <p><strong>Réhabilitation des logements</strong> : subventions isolation/chauffage.</p>
     <p><em>Exemple</em> : programme de rénovation énergétique des maisons anciennes.</p>
-    <p><strong>Changement d’usage</strong> : autoriser/refuser (ex : maison en gîte).</p>
+    <p><strong>Changement d'usage</strong> : autoriser/refuser (ex : maison en gîte).</p>
 
     <h4>SPPEH (service public performance énergétique)</h4>
     <p><strong>Accompagnement des ménages</strong> : audits et aides aux travaux.</p>
-    <p><em>Exemple</em> : ateliers d’information sur MaPrimeRénov’.</p>
+    <p><em>Exemple</em> : ateliers d'information sur MaPrimeRénov'.</p>
 
-    <h4>Aires d’accueil des gens du voyage</h4>
-    <p>Création et gestion possibles (souvent à l’échelle intercommunale).</p>
+    <h4>Aires d'accueil des gens du voyage</h4>
+    <p>Création et gestion possibles (souvent à l'échelle intercommunale).</p>
 
-    <h3>3. Compétences de la Communauté de Communes du Val d’Orne (2014)</h3>
+    <h3>3. Compétences de la Communauté de Communes du Val d'Orne (2014)</h3>
     <h4>Habitat (facultatif)</h4>
-    <p><strong>Prise en charge des dépenses</strong> : financement de projets d’habitat.</p>
+    <p><strong>Prise en charge des dépenses</strong> : financement de projets d'habitat.</p>
     <p><strong>Exemple</strong> : rénover des logements vacants pour du social/adapté aux seniors.</p>
     <p><strong>Gestion du parc immobilier</strong> : construction/rénovation de logements.</p>
 
     <h4>Participation aux politiques de logement</h4>
     <p><strong>PLH intercommunal</strong> : coordination territoriale.</p>
-    <p><strong>Conventions avec l’État</strong> : contingents sociaux, aides à la pierre.</p>
+    <p><strong>Conventions avec l'État</strong> : contingents sociaux, aides à la pierre.</p>
 
-    <h4>Aires d’accueil des gens du voyage</h4>
-    <p>Création/gestion d’une aire intercommunale.</p>
+    <h4>Aires d'accueil des gens du voyage</h4>
+    <p>Création/gestion d'une aire intercommunale.</p>
 
     <h4>Soutien aux communes</h4>
     <p><strong>Ingénierie et financement</strong> : aide aux projets de réhabilitation/creation de logements adaptés.</p>

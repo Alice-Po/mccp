@@ -1,7 +1,6 @@
----
-export interface Props { title?: string }
-const { title = 'Sport' } = Astro.props as Props;
----
+<script>
+  export let title = 'Sport';
+</script>
 
 <section class="text-section">
   <h2>{title}</h2>

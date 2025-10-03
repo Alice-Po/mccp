@@ -1,7 +1,6 @@
----
-export interface Props { title?: string }
-const { title = 'Environnement et patrimoine naturel' } = Astro.props as Props;
----
+<script>
+  export let title = 'Environnement et patrimoine naturel';
+</script>
 
 <section class="text-section">
   <h2>{title}</h2>
@@ -19,51 +18,51 @@ const { title = 'Environnement et patrimoine naturel' } = Astro.props as Props;
 
     <h4>Enjeux :</h4>
     <ul>
-      <li>Préservation des milieux naturels face à l’urbanisation et aux pollutions (eaux, sols).</li>
-      <li>Valorisation du patrimoine pour le tourisme et l’identité locale.</li>
-      <li>Adaptation au changement climatique (ex : gestion de l’eau, préservation des sols).</li>
+      <li>Préservation des milieux naturels face à l'urbanisation et aux pollutions (eaux, sols).</li>
+      <li>Valorisation du patrimoine pour le tourisme et l'identité locale.</li>
+      <li>Adaptation au changement climatique (ex : gestion de l'eau, préservation des sols).</li>
     </ul>
 
     <h3>2. Compétences de la commune de Putanges-le-Lac</h3>
     <h4>Inventaires du patrimoine naturel</h4>
-    <p><strong>Réalisation d’inventaires locaux</strong> (article L. 411-1 A du code de l’environnement) :</p>
+    <p><strong>Réalisation d'inventaires locaux</strong> (article L. 411-1 A du code de l'environnement) :</p>
     <p>La commune peut cartographier et inventorier les espèces animales et végétales, les habitats naturels (ex : zones humides, haies bocagères), et les paysages remarquables.</p>
     <p><em>Exemple :</em> Un inventaire des chemins creux et de leur biodiversité pour les protéger et les valoriser.</p>
 
     <h4>Protection des milieux naturels</h4>
     <p><strong>Zones protégées :</strong> Classer des espaces naturels sensibles (ex : zones humides autour du lac) en ENS ou en ZNIEFF.</p>
-    <p><strong>Trame verte et bleue :</strong> Intégrer les corridors écologiques (ex : haies, cours d’eau) dans les documents d’urbanisme (PLU).</p>
+    <p><strong>Trame verte et bleue :</strong> Intégrer les corridors écologiques (ex : haies, cours d'eau) dans les documents d'urbanisme (PLU).</p>
 
-    <h4>Gestion des déchets et de l’eau</h4>
-    <p><strong>Assainissement :</strong> Contrôler les installations d’assainissement non collectif (SPANC) pour limiter la pollution des eaux.</p>
+    <h4>Gestion des déchets et de l'eau</h4>
+    <p><strong>Assainissement :</strong> Contrôler les installations d'assainissement non collectif (SPANC) pour limiter la pollution des eaux.</p>
     <p><strong>Déchets :</strong> Organiser la collecte des déchets et promouvoir le tri (en lien avec la CdC, compétence « ordures ménagères »).</p>
 
     <h4>Sensibilisation et éducation</h4>
     <p><strong>Animations nature :</strong> Organiser des sorties pédagogiques (oiseaux du lac, ateliers sur le bocage).</p>
-    <p><em>Exemple :</em> Un sentier d’interprétation autour du lac de Rabodanges avec des panneaux sur la faune et la flore.</p>
+    <p><em>Exemple :</em> Un sentier d'interprétation autour du lac de Rabodanges avec des panneaux sur la faune et la flore.</p>
 
     <h4>Patrimoine bâti et paysager</h4>
     <p><strong>Inventaire du patrimoine bâti :</strong> Recenser les maisons traditionnelles, lavoirs, moulins pour les préserver.</p>
     <p><strong>Sites patrimoniaux remarquables :</strong> Créer un secteur sauvegardé ou un site patrimonial remarquable pour protéger le centre-bourg historique.</p>
 
     <h4>Lutte contre les pollutions</h4>
-    <p><strong>Eaux usées et sources polluées :</strong> Surveiller la qualité de l’eau et agir contre les pollutions (nitrates, pesticides).</p>
+    <p><strong>Eaux usées et sources polluées :</strong> Surveiller la qualité de l'eau et agir contre les pollutions (nitrates, pesticides).</p>
     <p><strong>Démarches « zéro pesticide » :</strong> Appliquer la loi Labbé et promouvoir les alternatives (désherbage thermique).</p>
 
-    <h3>3. Compétences de la Communauté de Communes du Val d’Orne (2014)</h3>
-    <h4>Protection et mise en valeur de l’environnement</h4>
-    <p><strong>SPANC :</strong> La CdC gère le contrôle des installations d’assainissement individuel.</p>
-    <p><strong>Qualité des eaux :</strong> Diagnostics sur les cours d’eau et zones humides (captages, algues vertes).</p>
-    <p><strong>Aménagement des cours d’eau :</strong> Entretien et restauration des cours d’eau non domaniaux.</p>
+    <h3>3. Compétences de la Communauté de Communes du Val d'Orne (2014)</h3>
+    <h4>Protection et mise en valeur de l'environnement</h4>
+    <p><strong>SPANC :</strong> La CdC gère le contrôle des installations d'assainissement individuel.</p>
+    <p><strong>Qualité des eaux :</strong> Diagnostics sur les cours d'eau et zones humides (captages, algues vertes).</p>
+    <p><strong>Aménagement des cours d'eau :</strong> Entretien et restauration des cours d'eau non domaniaux.</p>
     <p><strong>Inondations :</strong> Études et travaux pour limiter les risques (bassins de rétention, zones humides).</p>
 
     <h4>Patrimoine naturel et paysager</h4>
-    <p><strong>Inventaires intercommunaux :</strong> Coordination d’atlas de la biodiversité intercommunale.</p>
+    <p><strong>Inventaires intercommunaux :</strong> Coordination d'atlas de la biodiversité intercommunale.</p>
     <p><strong>Sentiers :</strong> Aménagement et entretien des chemins de randonnée.</p>
 
     <h4>Soutien aux communes</h4>
     <p><strong>Ingénierie et financement :</strong> Aide au montage de projets environnementaux.</p>
-    <p><strong>Sensibilisation :</strong> Campagnes intercommunales (semaine de l’environnement, économies d’énergie).</p>
+    <p><strong>Sensibilisation :</strong> Campagnes intercommunales (semaine de l'environnement, économies d'énergie).</p>
 
     <h4>Gestion des déchets</h4>
     <p><strong>Collecte et traitement :</strong> Compétence obligatoire de la CdC pour la collecte et le recyclage.</p>
