@@ -1,15 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   
-  let { title, children } = $props();
-  
-  let isOpen = $state(false);
+  let { title, children, isOpen = false } = $props();
   
   const dispatch = createEventDispatcher();
   
   function toggle() {
-    isOpen = !isOpen;
-    dispatch('toggle', { title, isOpen });
+    dispatch('toggle', { title, isOpen: !isOpen });
   }
   
   // Gérer l'accordion du texte de référence
@@ -31,12 +28,12 @@
       }
     }
   }
-  
 </script>
 
 <div class="competence-section" id="content-{title}">
   <button 
     class="competence-header" 
+    class:open={isOpen}
     onclick={toggle}
     aria-expanded={isOpen}
     aria-controls="content-{title}"
@@ -44,7 +41,7 @@
     <h3>{title}</h3>
     <svg 
       class="toggle-icon" 
-      class:rotated={isOpen}
+      style="transform: {isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}"
       width="20" 
       height="20" 
       viewBox="0 0 24 24" 
@@ -78,14 +75,16 @@
   .competence-header {
     width: 100%;
     padding: 1.5rem;
-    background: none;
+    background: white;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: left;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    position: relative;
+    border-bottom: 1px solid #eaeaea;
   }
   
   .competence-header:hover {
@@ -106,9 +105,6 @@
     flex-shrink: 0;
   }
   
-  .toggle-icon.rotated {
-    transform: rotate(180deg);
-  }
   
   .competence-content {
     overflow: hidden;

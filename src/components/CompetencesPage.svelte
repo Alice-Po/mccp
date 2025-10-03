@@ -17,6 +17,21 @@
   import LogementHabitat from './competenceElements/LogementHabitat.svelte';
   import Securite from './competenceElements/Securite.svelte';
   import DvlpEconomique from './competenceElements/DvlpEconomique.svelte';
+
+  // État global pour gérer l'accordéon exclusif
+  let openAccordion = $state(null);
+
+  function handleAccordionToggle(event) {
+    const { title, isOpen } = event.detail;
+    
+    if (isOpen) {
+      // Si on ouvre un accordéon, fermer tous les autres
+      openAccordion = title;
+    } else {
+      // Si on ferme l'accordéon ouvert, réinitialiser
+      openAccordion = null;
+    }
+  }
 </script>
 
 <div class="competences-layout">
@@ -34,62 +49,114 @@
       </section>
 
       <section class="competences-section">
-        <CompetenceSection title="Sécurité">
+        <CompetenceSection title="Sécurité" isOpen={openAccordion === "Sécurité"} on:toggle={handleAccordionToggle}>
           <Securite />
         </CompetenceSection>
 
-        <CompetenceSection title="Action Sociale et Santé">
+        <CompetenceSection title="Action Sociale et Santé" isOpen={openAccordion === "Action Sociale et Santé"} on:toggle={handleAccordionToggle}>
           <ActionSociale />
         </CompetenceSection>
         
-        <CompetenceSection title="Emploi et Insertion">
+        <CompetenceSection title="Emploi et Insertion" isOpen={openAccordion === "Emploi et Insertion"} on:toggle={handleAccordionToggle}>
           <EmploiInsertion />
         </CompetenceSection>
         
-        <CompetenceSection title="Enfance et Jeunesse">
+        <CompetenceSection title="Enfance et Jeunesse" isOpen={openAccordion === "Enfance et Jeunesse"} on:toggle={handleAccordionToggle}>
           <EnfanceJeunesse />
         </CompetenceSection>
 
-        <CompetenceSection title="Urbanisme et Aménagement">
+        <CompetenceSection title="Urbanisme et Aménagement" isOpen={openAccordion === "Urbanisme et Aménagement"} on:toggle={handleAccordionToggle}>
           <Urbanisme />
         </CompetenceSection>
 
-        <CompetenceSection title="Enseignement">
+        <CompetenceSection title="Enseignement" isOpen={openAccordion === "Enseignement"} on:toggle={handleAccordionToggle}>
           <Enseignement />
         </CompetenceSection>
 
-        <CompetenceSection title="Tourisme">
+        <CompetenceSection title="Tourisme" isOpen={openAccordion === "Tourisme"} on:toggle={handleAccordionToggle}>
           <Tourisme />
         </CompetenceSection>
 
-        <CompetenceSection title="Action Culturelle">
+        <CompetenceSection title="Action Culturelle" isOpen={openAccordion === "Action Culturelle"} on:toggle={handleAccordionToggle}>
           <ActionCulturelle />
         </CompetenceSection>
 
-        <CompetenceSection title="Politique de la Ville">
+        <CompetenceSection title="Politique de la Ville" isOpen={openAccordion === "Politique de la Ville"} on:toggle={handleAccordionToggle}>
           <PolitiqueVille />
         </CompetenceSection>
 
-        <CompetenceSection title="Sport">
+        <CompetenceSection title="Sport" isOpen={openAccordion === "Sport"} on:toggle={handleAccordionToggle}>
           <Sport />
         </CompetenceSection>
 
-        <CompetenceSection title="Aménagement du Territoire">
+        <CompetenceSection title="Aménagement du Territoire" isOpen={openAccordion === "Aménagement du Territoire"} on:toggle={handleAccordionToggle}>
           <AmenagementDvlpRural />
         </CompetenceSection>
 
-        <CompetenceSection title="Environnement et Patrimoine">
+        <CompetenceSection title="Environnement et Patrimoine" isOpen={openAccordion === "Environnement et Patrimoine"} on:toggle={handleAccordionToggle}>
           <EnvPatrimoine />
         </CompetenceSection>
 
-        <CompetenceSection title="Logement et Habitat">
+        <CompetenceSection title="Logement et Habitat" isOpen={openAccordion === "Logement et Habitat"} on:toggle={handleAccordionToggle}>
           <LogementHabitat />
         </CompetenceSection>
 
-        <CompetenceSection title="Développement économique">
+        <CompetenceSection title="Développement économique" isOpen={openAccordion === "Développement économique"} on:toggle={handleAccordionToggle}>
           <DvlpEconomique />
         </CompetenceSection>
       </section>
     </div>
   </div>
 </div>
+
+<style>
+  .competences-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .competences-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .text-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 1rem;
+    border-left: 4px solid #2e8b57;
+  }
+
+  .text-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #495057;
+    margin-bottom: 1rem;
+  }
+
+  .text-section small {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  .text-section a {
+    color: #2e8b57;
+    text-decoration: none;
+  }
+
+  .text-section a:hover {
+    text-decoration: underline;
+  }
+
+  .competences-section {
+    margin-top: 2rem;
+  }
+</style>
