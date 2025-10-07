@@ -44,11 +44,30 @@
   <div class="competences-content">
     <div class="content-wrapper">
       <h1>Compétences municipales et intercommunales</h1>
-      
-        <p>
-          Les compétences exercées par la commune de Putanges-le-Lac et la Communauté de Communes du Val d'Orne. 
-        </p>
-        <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
+        
+        <div class="text-section">
+          <p>
+            Cette page présente les compétences exercées par la commune de Putanges-le-Lac 
+            et la Communauté de Communes du Val d'Orne.
+          </p>
+
+          <h3>Sources officielles</h3>
+          
+          <div class="article-body">
+            <ul>
+              <li>
+                <strong><a href="https://www.banatic.interieur.gouv.fr/intercommunalite/246100390-cc-du-val-d-orne?onglet=intercommunalite&siren=&nom=val+d%27orne&departement=&page=1#competences">Fiche BANATIC (CC du Val d'Orne)</a></strong> — Coordonnées, périmètre, délégués, finances, compétences: 
+                
+              </li>
+              <li>
+                <strong><a href="https://www.cc-valdorne.fr/cdc/images/statuts.pdf">Statuts de la CC du Val d'Orne</a></strong> — Répartition locale des compétences spécifique à la CC du Val d'Orne
+              </li>
+              <li>
+                <strong><a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">Tableau national (DGCL)</a></strong> — Répartition des compétences entre collectivités
+              </li>
+            </ul>
+          </div>
+        </div>
 
       <section class="competences-section">
         {#each competences as comp}
@@ -60,6 +79,13 @@
 </div>
 
 <style>
+  .text-section {
+    margin: 2rem 0;
+    text-align: left;
+  }
+  .article-body li{
+    font-size: 1rem;
+  }
   .competences-layout {
     display: flex;
     min-height: 100vh;
