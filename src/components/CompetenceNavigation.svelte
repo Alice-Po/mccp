@@ -9,7 +9,7 @@
 
   // État local réactif avec $state
   let activeItem = $state('content-Sécurité');
-  let isOpen = $state(true);
+  let opened = $state(true);
 
   // Navigation items avec icônes
   const navItems: NavItem[] = [
@@ -92,7 +92,7 @@
     },
     {
       id: 'content-Déchets',
-      label: 'Environnement et Patrimoine',
+      label: 'Déchets',
       icon: '🚮'
     },
     {
@@ -157,9 +157,50 @@
     }
   }
 
-  function toggleNavigation() {
-    isOpen = !isOpen;
-  }
+  function toggleOpen() { opened = !opened; }
+
+  // Breakpoint: initialise une seule fois; puis ajuste seulement si on franchit le seuil
+  let breakpointInitDone = false;
+  let isDesktop = $state(true);
+  $effect(() => {
+    if (typeof window === 'undefined' || breakpointInitDone) return;
+    breakpointInitDone = true;
+    let lastIsDesktop = window.innerWidth >= 1200;
+    opened = lastIsDesktop;
+
+    const onResize = () => {
+      const isDesktop = window.innerWidth >= 1200;
+      if (isDesktop !== lastIsDesktop) {
+        opened = isDesktop;
+        lastIsDesktop = isDesktop;
+      }
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  });
+
+  
+
+  // Fallback ultra simple en mobile: toggle display inline
+  let sidebarEl = $state<HTMLElement | null>(null);
+  const updateMobileDisplay = () => {
+    if (typeof window === 'undefined' || !sidebarEl) return;
+    const mobile = window.innerWidth < 1200;
+    if (mobile) {
+      sidebarEl.style.display = opened ? 'block' : 'none';
+    } else {
+      sidebarEl.style.display = '';
+    }
+  };
+  $effect(() => {
+    updateMobileDisplay();
+  });
+  $effect(() => {
+    if (typeof window === 'undefined') return;
+    const onResizeDisplay = () => updateMobileDisplay();
+    window.addEventListener('resize', onResizeDisplay);
+    return () => window.removeEventListener('resize', onResizeDisplay);
+  });
 
   // Effet pour gérer l'Intersection Observer (section la plus proche du centre du viewport)
   $effect(() => {
@@ -204,113 +245,77 @@
   });
 </script>
 
-<nav class="competence-navigation" class:closed={!isOpen}>
-  <div class="nav-header">
-    <h3>Compétences</h3>
-    <button class="close-button" onclick={toggleNavigation} aria-label="Fermer la navigation">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
+<aside class="sidebar competence-navigation" class:open={opened} bind:this={sidebarEl}>
+  <header class="sidebar-header">
+    <h2>Compétences</h2>
+  </header>
+  <div class="sidebar-body">
+    <ul class="nav-list">
+      {#each navItems as item}
+        <li class="nav-item">
+          <button 
+            class="nav-link"
+            class:active={activeItem === item.id}
+            aria-current={activeItem === item.id ? 'location' : undefined}
+            onclick={() => selectItem(item.id)}
+          >
+            <span class="nav-icon">{item.icon}</span>
+            <span class="nav-label">{item.label}</span>
+          </button>
+        </li>
+      {/each}
+    </ul>
   </div>
-  
-  <ul class="nav-list">
-    {#each navItems as item}
-      <li class="nav-item">
-        <button 
-          class="nav-link"
-          class:active={activeItem === item.id}
-          aria-current={activeItem === item.id ? 'location' : undefined}
-          onclick={() => selectItem(item.id)}
-        >
-          <span class="nav-icon">
-            {item.icon}
-          </span>
-          <span class="nav-label">{item.label}</span>
-        </button>
-      </li>
-    {/each}
-  </ul>
-  
-  {#if !isOpen}
-    <button class="open-button" onclick={toggleNavigation} aria-label="Ouvrir la navigation">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-  {/if}
-</nav>
+</aside>
+
+<button class="competence-menu-fab" onclick={toggleOpen} aria-label={opened ? 'Fermer le menu' : 'Ouvrir le menu'} aria-expanded={opened}>{opened ? 'Fermer' : 'Menu'}</button>
 
 <style>
-  .competence-navigation {
+  /* Wrapper sidebar (aligné sur SidebarMap) */
+  .sidebar {
+    background: #fff;
+    overflow: hidden;
+    height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
     position: sticky;
     top: 90px;
+    width: 100%;
     max-width: 500px;
-    background: white;
     border-radius: 1rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border: 2px solid rgba(46, 139, 87, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
-    font-family: var(--font-main);
-    height: fit-content;
-    max-height: calc(100vh - 110px);
     overflow-y: auto;
-    flex-shrink: 0;
+    flex: 0 0 500px; /* réserve l'espace côté contenu (desktop) */
     z-index: 999;
   }
 
-  .competence-navigation.closed {
-    width: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .nav-header {
-    padding: 1rem;
-    background: var(--primary);
-    border-radius: 1rem 1rem 0 0;
+  .sidebar-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: .5rem;
+    padding: .5rem .75rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
   }
+  .sidebar-header h2 { font-size: 1rem; margin: 0; }
+  .sidebar-header .close-mobile { background: transparent; color:#333; border:none; border-radius:.25rem; padding:.2rem .4rem; cursor:pointer; font-size:1.1rem; margin-left:auto; display:none; }
 
-  .nav-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-  }
+  .sidebar-body { padding: .75rem; overflow:auto; }
 
-  .close-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
-  }
-
-  .close-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .open-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+  /* Bouton flottant (mobile < 1200px) */
+  .competence-menu-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
     background: var(--primary);
+    color: #fff;
     border: none;
-    color: white;
+    border-radius: 999px;
+    padding: .6rem 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
     cursor: pointer;
-    padding: 0.75rem;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
+    display: none; /* visible via media query */
     z-index: 1001;
   }
 
@@ -418,66 +423,24 @@
     line-height: 1.2;
   }
 
-  /* Responsive design */
-  @media (max-width: 1400px) {
-    .competence-navigation {
-      max-width: 500px;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    .competence-navigation {
-      max-width: 500px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .competence-navigation {
+  /* Responsive < 1200px : sidebar cachée, bouton Menu visible */
+  @media (max-width: 1199px) {
+    .sidebar {
       position: fixed;
-      top: auto;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      z-index: 1000;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .competence-navigation:hover {
-      width: 280px;
+      left: 1rem;
+      right: 1rem;
+      top: 0.75rem;
       height: auto;
-      border-radius: 1rem;
+      max-height: 60vh;
+      display: none; /* cachée par défaut en mobile */
+      flex: none; /* overlay, pas de réserve d'espace */
+      width: auto;
+      max-width: none;
+      z-index: 1002;
     }
+    .sidebar.open { display: block; }
 
-    .nav-header {
-      display: none;
-    }
-
-    .nav-list {
-      padding: 0;
-    }
-
-    .nav-item {
-      margin-bottom: 0;
-    }
-
-    .nav-link {
-      padding: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-label {
-      display: none;
-    }
-
-    .competence-navigation:hover .nav-label {
-      display: block;
-    }
-
-    .competence-navigation:hover .nav-link {
-      padding: 0.75rem 1rem;
-    }
+    .competence-menu-fab { display: inline-flex; align-items: center; gap:.4rem; }
+    .sidebar-header .close-mobile { display: inline-block; }
   }
 </style>
