@@ -159,20 +159,17 @@
 
   function toggleOpen() { opened = !opened; }
 
-  // Breakpoint: initialise une seule fois; puis ajuste seulement si on franchit le seuil
-  let breakpointInitDone = false;
-  let isDesktop = $state(true);
+  // Breakpoint: initialisation simple + bascule uniquement au franchissement du seuil
   $effect(() => {
-    if (typeof window === 'undefined' || breakpointInitDone) return;
-    breakpointInitDone = true;
+    if (typeof window === 'undefined') return;
     let lastIsDesktop = window.innerWidth >= 1200;
     opened = lastIsDesktop;
 
     const onResize = () => {
-      const isDesktop = window.innerWidth >= 1200;
-      if (isDesktop !== lastIsDesktop) {
-        opened = isDesktop;
-        lastIsDesktop = isDesktop;
+      const nowDesktop = window.innerWidth >= 1200;
+      if (nowDesktop !== lastIsDesktop) {
+        opened = nowDesktop;
+        lastIsDesktop = nowDesktop;
       }
     };
     window.addEventListener('resize', onResize);
@@ -181,26 +178,6 @@
 
   
 
-  // Fallback ultra simple en mobile: toggle display inline
-  let sidebarEl = $state<HTMLElement | null>(null);
-  const updateMobileDisplay = () => {
-    if (typeof window === 'undefined' || !sidebarEl) return;
-    const mobile = window.innerWidth < 1200;
-    if (mobile) {
-      sidebarEl.style.display = opened ? 'block' : 'none';
-    } else {
-      sidebarEl.style.display = '';
-    }
-  };
-  $effect(() => {
-    updateMobileDisplay();
-  });
-  $effect(() => {
-    if (typeof window === 'undefined') return;
-    const onResizeDisplay = () => updateMobileDisplay();
-    window.addEventListener('resize', onResizeDisplay);
-    return () => window.removeEventListener('resize', onResizeDisplay);
-  });
 
   // Effet pour gérer l'Intersection Observer (section la plus proche du centre du viewport)
   $effect(() => {
@@ -245,7 +222,7 @@
   });
 </script>
 
-<aside class="sidebar competence-navigation" class:open={opened} bind:this={sidebarEl}>
+<aside class="sidebar competence-navigation" class:open={opened}>
   <header class="sidebar-header">
     <h2>Compétences</h2>
   </header>
@@ -280,7 +257,6 @@
     flex-direction: column;
     position: sticky;
     top: 90px;
-    width: 100%;
     max-width: 500px;
     border-radius: 1rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -299,7 +275,7 @@
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
   .sidebar-header h2 { font-size: 1rem; margin: 0; }
-  .sidebar-header .close-mobile { background: transparent; color:#333; border:none; border-radius:.25rem; padding:.2rem .4rem; cursor:pointer; font-size:1.1rem; margin-left:auto; display:none; }
+  /* Plus de bouton de fermeture en en-tête mobile */
 
   .sidebar-body { padding: .75rem; overflow:auto; }
 
@@ -319,10 +295,7 @@
     z-index: 1001;
   }
 
-  .open-button:hover {
-    background: var(--primary-dark);
-    transform: scale(1.05);
-  }
+  /* Ancien open-button supprimé */
 
   .nav-list {
     list-style: none;
@@ -385,35 +358,7 @@
     box-shadow: 0 2px 12px rgba(46, 139, 87, 0.2);
   }
 
-  :global(.nav-link.active::after) {
-    content: '●';
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    color: var(--primary);
-    animation: softPulse 2.5s ease-in-out infinite;
-    filter: drop-shadow(0 0 3px rgba(46, 139, 87, 0.6));
-  }
-
-  @keyframes softPulse {
-    0% {
-      opacity: 0.6;
-      transform: translateY(-50%) scale(0.8);
-      filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.4));
-    }
-    50% {
-      opacity: 1;
-      transform: translateY(-50%) scale(1.1);
-      filter: drop-shadow(0 0 6px rgba(46, 139, 87, 0.8));
-    }
-    100% {
-      opacity: 0.6;
-      transform: translateY(-50%) scale(0.8);
-      filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.4));
-    }
-  }
+  /* Suppression de l'indicateur animé pour alléger le CSS */
 
   .nav-label {
     font-size: 0.95rem;
@@ -438,9 +383,9 @@
       max-width: none;
       z-index: 1002;
     }
-    .sidebar.open { display: block; }
+    /* En Svelte, la classe dynamique `open` n'est pas scopée → marquer .open en global */
+    .competence-navigation:global(.open) { display: block !important; }
 
     .competence-menu-fab { display: inline-flex; align-items: center; gap:.4rem; }
-    .sidebar-header .close-mobile { display: inline-block; }
   }
 </style>
