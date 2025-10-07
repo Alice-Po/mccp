@@ -37,17 +37,20 @@
   function selectItem(itemId: string) {
     activeItem = itemId;
     const element = document.getElementById(itemId);
-    if (element) {
-      // Ouvrir la section si elle est fermée
-      const button = element.querySelector('.competence-header') as HTMLButtonElement;
-      if (button && button.getAttribute('aria-expanded') === 'false') {
-        button.click();
-      }
-      // Attendre un peu que la section s'ouvre puis scroller
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
+    if (!element) return;
+    const headerBtn = element.querySelector('.competence-header') as HTMLElement | null;
+    // Ouvrir si fermé
+    if (headerBtn && headerBtn.getAttribute('aria-expanded') === 'false') {
+      (headerBtn as HTMLButtonElement).click();
     }
+    // Scroll vers l'en-tête de l'accordéon avec offset pour ne pas la cacher sous le header
+    const SCROLL_OFFSET = 90; // ajuster si besoin selon la hauteur du header global
+    setTimeout(() => {
+      const target = headerBtn ?? element;
+      const rect = target.getBoundingClientRect();
+      const y = rect.top + window.scrollY - SCROLL_OFFSET;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 100);
   }
 
   function toggleOpen() { opened = !opened; }
