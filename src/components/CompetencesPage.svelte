@@ -1,25 +1,11 @@
 <script>
   import CompetenceNavigation from './CompetenceNavigation.svelte';
   import CompetenceSection from './CompetenceSection.svelte';
-  
-  // Import des composants de compétences migrés vers Svelte
-  import EnfanceJeunesse from './competenceElements/EnfanceJeunesse.svelte';
-  import Urbanisme from './competenceElements/Urbanisme.svelte';
-  import Enseignement from './competenceElements/Enseignement.svelte';
-  import Tourisme from './competenceElements/Tourisme.svelte';
-  import ActionCulturelle from './competenceElements/ActionCulturelle.svelte';
-  import PolitiqueVille from './competenceElements/PolitiqueVille.svelte';
-  import Sport from './competenceElements/Sport.svelte';
-  import ActionSociale from './competenceElements/ActionSociale.svelte';
-  import EmploiInsertion from './competenceElements/EmploiInsertion.svelte';
-  import AmenagementDvlpRural from './competenceElements/AmenagementDvlpRural.svelte';
-  import EnvPatrimoine from './competenceElements/EnvPatrimoine.svelte';
-  import LogementHabitat from './competenceElements/LogementHabitat.svelte';
-  import Securite from './competenceElements/Securite.svelte';
-  import DvlpEconomique from './competenceElements/DvlpEconomique.svelte';
 
   // État global pour gérer l'accordéon exclusif
   let openAccordion = $state(null);
+  let competences = $state([]);
+  let referenceByTitle = $state({});
 
   function handleAccordionToggle(event) {
     const { title, isOpen } = event.detail;
@@ -32,6 +18,24 @@
       openAccordion = null;
     }
   }
+
+  // Charger la liste des compétences depuis le JSON pour piloter l'ordre et les titres
+  $effect(async () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const res = await fetch('/assets/datas/competences/competences.json', { cache: 'no-cache' });
+      const data = await res.json();
+      const list = Array.isArray(data?.competences) ? data.competences : [];
+      competences = list;
+      const map = {};
+      for (const c of list) {
+        map[c.title] = c?.["COMMUNES OU EPCI"] ?? null;
+      }
+      referenceByTitle = map;
+    } catch (e) {
+      competences = [];
+    }
+  });
 </script>
 
 <div class="competences-layout">
@@ -47,63 +51,9 @@
         <small>source : <a href="https://www.collectivites-locales.gouv.fr/files/Comp%C3%A9tences/1.%20les%20comp%C3%A9tences/Tableau%20r%C3%A9paratition%20des%20comp%C3%A9tences_actualisation%20au%20220825.pdf">https://www.collectivites-locales.gouv.fr</a></small>
 
       <section class="competences-section">
-        <CompetenceSection title="Sécurité" isOpen={openAccordion === "Sécurité"} on:toggle={handleAccordionToggle}>
-          <Securite />
-        </CompetenceSection>
-
-        <CompetenceSection title="Action Sociale et Santé" isOpen={openAccordion === "Action Sociale et Santé"} on:toggle={handleAccordionToggle}>
-          <ActionSociale />
-        </CompetenceSection>
-        
-        <CompetenceSection title="Emploi et Insertion" isOpen={openAccordion === "Emploi et Insertion"} on:toggle={handleAccordionToggle}>
-          <EmploiInsertion />
-        </CompetenceSection>
-        
-        <CompetenceSection title="Enseignement" isOpen={openAccordion === "Enseignement"} on:toggle={handleAccordionToggle}>
-            <Enseignement />
-          </CompetenceSection>
-          
-        <CompetenceSection title="Enfance et Jeunesse" isOpen={openAccordion === "Enfance et Jeunesse"} on:toggle={handleAccordionToggle}>
-          <EnfanceJeunesse />
-        </CompetenceSection>
-
-        <CompetenceSection title="Urbanisme et Aménagement" isOpen={openAccordion === "Urbanisme et Aménagement"} on:toggle={handleAccordionToggle}>
-          <Urbanisme />
-        </CompetenceSection>
-
-    
-
-        <CompetenceSection title="Tourisme" isOpen={openAccordion === "Tourisme"} on:toggle={handleAccordionToggle}>
-          <Tourisme />
-        </CompetenceSection>
-
-        <CompetenceSection title="Action Culturelle" isOpen={openAccordion === "Action Culturelle"} on:toggle={handleAccordionToggle}>
-          <ActionCulturelle />
-        </CompetenceSection>
-
-        <CompetenceSection title="Politique de la Ville" isOpen={openAccordion === "Politique de la Ville"} on:toggle={handleAccordionToggle}>
-          <PolitiqueVille />
-        </CompetenceSection>
-
-        <CompetenceSection title="Sport" isOpen={openAccordion === "Sport"} on:toggle={handleAccordionToggle}>
-          <Sport />
-        </CompetenceSection>
-
-        <CompetenceSection title="Aménagement du Territoire" isOpen={openAccordion === "Aménagement du Territoire"} on:toggle={handleAccordionToggle}>
-          <AmenagementDvlpRural />
-        </CompetenceSection>
-
-        <CompetenceSection title="Environnement et Patrimoine" isOpen={openAccordion === "Environnement et Patrimoine"} on:toggle={handleAccordionToggle}>
-          <EnvPatrimoine />
-        </CompetenceSection>
-
-        <CompetenceSection title="Logement et Habitat" isOpen={openAccordion === "Logement et Habitat"} on:toggle={handleAccordionToggle}>
-          <LogementHabitat />
-        </CompetenceSection>
-
-        <CompetenceSection title="Développement économique" isOpen={openAccordion === "Développement économique"} on:toggle={handleAccordionToggle}>
-          <DvlpEconomique />
-        </CompetenceSection>
+        {#each competences as comp}
+          <CompetenceSection title={comp.title} referenceData={referenceByTitle[comp.title]} isOpen={openAccordion === comp.title} on:toggle={handleAccordionToggle} />
+        {/each}
       </section>
     </div>
   </div>

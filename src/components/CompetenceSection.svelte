@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   
-  let { title, children, isOpen = false } = $props();
+  let { title, isOpen = false, referenceData: referenceDataProp = null } = $props();
   
   const dispatch = createEventDispatcher();
   
@@ -9,25 +9,17 @@
     dispatch('toggle', { title, isOpen: !isOpen });
   }
   
-  // Gérer l'accordion du texte de référence
-  function handleReferenceToggle(event) {
-    const button = event.target.closest('.reference-header');
-    if (button) {
-      const content = document.getElementById('reference-content');
-      const icon = button.querySelector('.toggle-icon');
-      
-      if (content && icon) {
-        const currentDisplay = content.style.display;
-        if (currentDisplay === 'none' || currentDisplay === '') {
-          content.style.display = 'block';
-          icon.style.transform = 'rotate(180deg)';
-        } else {
-          content.style.display = 'none';
-          icon.style.transform = 'rotate(0deg)';
-        }
-      }
-    }
+  let showReference = $state(false);
+  let referenceData = $state(null);
+  
+  function toggleReference() {
+    showReference = !showReference;
   }
+  
+  // Réception des données depuis le parent uniquement (pas de fetch ici)
+  $effect(() => {
+    referenceData = referenceDataProp ?? null;
+  });
 </script>
 
 <div class="competence-section" id="content-{title}">
@@ -54,9 +46,45 @@
   </button>
   
   {#if isOpen}
-    <div class="competence-content" onclick={handleReferenceToggle} role="button" tabindex="0" onkeydown={(e) => e.key === 'Enter' && handleReferenceToggle(e)}>
+    <div class="competence-content">
       <div class="competence-inner">
-        {@render children?.()}
+        <p>
+          Un travail est en cours pour adapter le texte officiel décrivant les compétences
+          de la commune sur cette thématique à la situation particulière de Putanges-le-Lac
+          et de la Communauté de communes du Val d'Orne. Ce contenu est en cours.
+        </p>
+
+        <div class="reference-accordion">
+          <button class="reference-header" type="button" onclick={toggleReference} aria-expanded={showReference}>
+            <span>Texte de référence</span>
+            <svg 
+              class="toggle-icon" 
+              style="transform: {showReference ? 'rotate(180deg)' : 'rotate(0deg)'}"
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="reference-content" style="display: {showReference ? 'block' : 'none'};">
+            {#if referenceData}
+              {#each Object.entries(referenceData) as [section, content]}
+                <h4>{section} :</h4>
+                {#if Array.isArray(content)}
+                  <ul>
+                    {#each content as item}
+                      <li>{item}</li>
+                    {/each}
+                  </ul>
+                {:else}
+                  {#if typeof content === 'string'}
+                    <p>{content}</p>
+                  {/if}
+                {/if}
+              {/each}
+            {:else}
+              <p>Aucune donnée disponible.</p>
+            {/if}
+          </div>
+        </div>
       </div>
     </div>
   {/if}
@@ -157,6 +185,44 @@
     font-style: normal;
   }
   
+  /* Styles pour l'accordion "Texte de référence" */
+  .reference-accordion {
+    margin-top: 1.25rem;
+    border-top: 1px solid #eaeaea;
+    padding-top: 1rem;
+  }
+  .reference-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    background: #f9fafb;
+    border: 1px solid #eaeaea;
+    border-radius: .5rem;
+    padding: .75rem 1rem;
+    cursor: pointer;
+    color: var(--secondary);
+    font-weight: 600;
+    transition: background-color .2s ease;
+  }
+  .reference-header:hover { background: rgba(46,139,87,0.06); }
+  .reference-content {
+    font-size: 0.9rem;
+    margin-top: .75rem;
+    border: 1px solid #eaeaea;
+    border-radius: .5rem;
+    padding: 1rem 1.1rem;
+    background: #fff;
+  }
+  .reference-content :global(h4) { font-size: 1rem; }
+  .reference-content :global(li),
+  .reference-content :global(p) { font-size: 0.9rem; }
+  .reference-content :global(ul) { margin: .5rem 0 .75rem 1rem; }
+  .reference-content :global(li) { margin: .25rem 0; }
+  .reference-content :global(h4) { margin-top: 1rem; }
+  .reference-content :global(h4:first-child) { margin-top: 0; }
+
   @media (max-width: 768px) {
     .competence-header {
       padding: 1rem;

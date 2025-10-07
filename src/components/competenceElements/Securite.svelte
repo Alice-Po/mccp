@@ -1,105 +1,36 @@
 <script>
   import '../../styles/competences.css';
   
-  export let title = 'Sécurité';
+  const { title = 'Sécurité' } = $props();
   
-  let showReference = false;
+  let showReference = $state(false);
+  let referenceData = $state(null);
   
   function toggleReference() {
     showReference = !showReference;
   }
+  
+  $effect(async () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const res = await fetch('/assets/datas/competences/competences.json', { cache: 'no-cache' });
+      const data = await res.json();
+      const item = (data?.competences || []).find((c) => c?.title === title);
+      referenceData = item?.["COMMUNES OU EPCI"] ?? null;
+    } catch (e) {
+      referenceData = null;
+    }
+  });
 </script>
 
 <div class="competence-section">
- 
-  <div class="competence-badge commune">Commune de Putanges-le-Lac</div>
-  
-  <h3>🛡️ Le maire, premier responsable de la sécurité</h3>
-  
-  <div class="competence-card">
-    <h4>👮 Police municipale et surveillance</h4>
-    <p>Le maire peut créer une police municipale ou nommer des gardes champêtres pour :</p>
-    <ul>
-      <li>Surveiller les espaces publics et les chemins</li>
-      <li>Prévenir les incivilités (vandalisme, stationnement sauvage)</li>
-      <li>Assurer la tranquillité publique</li>
-    </ul>
-  </div>
-  
-  <div class="competence-card">
-    <h4>⚠️ Prévention des risques</h4>
-    <p>En cas de risques naturels (inondations, tempêtes), le maire doit :</p>
-    <ul>
-      <li>Établir un Plan Communal de Sauvegarde (PCS)</li>
-      <li>Organiser les secours en cas de crise</li>
-      <li>Informer la population des risques</li>
-    </ul>
-  </div>
-  
-  <div class="competence-card">
-    <h4>📹 Vidéoprotection</h4>
-    <p>Le maire peut installer des caméras pour sécuriser les lieux sensibles.</p>
-  </div>
-  
-  <div class="competence-card">
-    <h4>🚨 Coordination des secours</h4>
-    <p>En cas d'urgence (accident, intempéries), le maire dirige les opérations de secours sur son territoire.</p>
-  </div>
+  <p>
+    Un travail est en cours pour adapter le texte officiel décrivant les compétences
+    de la commune sur cette thématique à la situation particulière de Putanges-le-Lac
+    et de la Communauté de communes du Val d'Orne. Ce contenu est en cours.
+  </p>
 
-  <div class="competence-badge cdc">Communauté de Communes du Val d'Orne</div>
-  
-  <h3 class="cdc">🤝 Comment la CdC complète l'action communale</h3>
-  
-  <div class="competence-card cdc">
-    <h4>🚒 Financement des pompiers</h4>
-    <p>La CdC verse une contribution annuelle au Service Départemental d'Incendie et de Secours (SDIS).</p>
-  </div>
-  
-  <div class="competence-card cdc">
-    <h4>🛤️ Entretien des chemins et cours d'eau</h4>
-    <p>La CdC peut réaliser des travaux pour :</p>
-    <ul>
-      <li>Limiter les risques d'inondation</li>
-      <li>Sécuriser les chemins creux</li>
-      <li>Maintenir le patrimoine local</li>
-    </ul>
-  </div>
-  
-  <div class="competence-card cdc">
-    <h4>🏢 Soutien aux communes</h4>
-    <p>La CdC peut aider à financer ou construire des locaux pour :</p>
-    <ul>
-      <li>Les pompiers</li>
-      <li>La gendarmerie</li>
-      <li>La police</li>
-    </ul>
-  </div>
-  
-  <div class="competence-card cdc">
-    <h4>🤝 Mutualisation des moyens</h4>
-    <p>Si plusieurs communes le souhaitent, la CdC peut organiser :</p>
-    <ul>
-      <li>Une police municipale intercommunale</li>
-      <li>Un système de vidéoprotection partagé</li>
-      <li>Des formations communes</li>
-    </ul>
-  </div>
-  
-  <div class="competence-card cdc">
-    <h4>📋 Plan Intercommunal de Sauvegarde (PICS)</h4>
-    <p>La CdC peut coordonner un plan global pour mieux réagir en cas de crise.</p>
-  </div>
-
-  <div class="limitations-box">
-    <h4>⚠️ Ce que la CdC ne peut pas faire</h4>
-    <ul>
-      <li>Elle ne remplace pas le maire pour la sécurité quotidienne</li>
-      <li>Elle n'a pas de pouvoir de police (pas de verbalisation)</li>
-      <li>Elle ne gère pas directement les forces de l'ordre (gendarmerie, police nationale)</li>
-    </ul>
-  </div>
-
-  <!-- Accordion pour le texte de référence -->
+  <!-- Accordion pour le texte de référence (depuis competences.json) -->
   <div class="reference-accordion">
     <button class="reference-header" type="button" on:click={toggleReference}>
       <span>Texte de référence</span>
@@ -108,30 +39,24 @@
       </svg>
     </button>
     <div class="reference-content" style="display: {showReference ? 'block' : 'none'};">
-      <h4>Maire :</h4>
-      <ul>
-        <li>Officier de police judiciaire (au nom de l'État, sous la direction du procureur de la République)</li>
-        <li>Exercice de la police municipale / police administrative générale (bon ordre, sûreté, sécurité, salubrité publiques)</li>
-        <li>Pouvoirs de police spéciale portant sur des objets particuliers (circulation, stationnement, etc.)</li>
-        <li>Possibilité de créer une police municipale, des postes de gardes champêtres et d'agents de surveillance de la voie publique (ASVP)</li>
-        <li>Prévention de la délinquance : présidence du conseil local de sécurité et de prévention de la délinquance (CLSPD), obligatoire dans les communes de plus de 5 000 habitants et dans celles comprenant un quartier prioritaire de la politique de la ville (QPV), sauf s'il existe un CISPD</li>
-        <li>Possibilité d'installation et d'exploitation d'un système de vidéoprotection</li>
-        <li>Possibilité de mutualisation « pluri-communale » des polices municipales</li>
-        <li>Établit le plan communal de sauvegarde (PCS), obligatoire lorsque la commune est exposée à un risque naturel ou technologique (article L. 731-3 du code de la sécurité intérieure - CSI)</li>
-        <li>Commandement des opérations de secours dans les conditions prévues par le règlement opérationnel arrêté par le préfet de département</li>
-      </ul>
-      
-      <h4>Président d'EPCI :</h4>
-      <ul>
-        <li>Pouvoirs de police spéciale par transfert d'un ou plusieurs maires de communes membres (circulation, stationnement, habitat indigne, déchets, etc.)</li>
-        <li>Prévention de la délinquance : présidence du conseil intercommunal de sécurité et de prévention de la délinquance (CISPD), obligatoire dans les communautés urbaines, communautés d'agglomération et métropoles (sauf opposition majoritaire des communes membres)</li>
-        <li>Possibilité de créer une police municipale intercommunale</li>
-        <li>Possibilité d'installer et d'exploiter un système de vidéoprotection mis à la disposition des communes membres</li>
-        <li>Établit le plan intercommunal de sauvegarde (PICS) conjointement avec les maires des communes membres dotées d'un PCS, obligatoire dans les EPCI à fiscalité propre dont au moins une commune doit élaborer un PCS (article L. 731-4 du CSI)</li>
-      </ul>
-      
-      <h4>Communes et EPCI :</h4>
-      <p>Les communes et EPCI peuvent construire, y compris sur les dépendances de leur domaine public, financer, acquérir ou rénover des bâtiments destinés à être mis à la disposition de l'État pour les besoins de la justice, de la défense nationale, de la police ou de la gendarmerie nationales, ou des services d'incendie et de secours (articles L. 1311-19 et R. 1311-9 du CGCT).</p>
+      {#if referenceData}
+        {#each Object.entries(referenceData) as [section, content]}
+          <h4>{section} :</h4>
+          {#if Array.isArray(content)}
+            <ul>
+              {#each content as item}
+                <li>{item}</li>
+              {/each}
+            </ul>
+          {:else}
+            {#if typeof content === 'string'}
+              <p>{content}</p>
+            {/if}
+          {/if}
+        {/each}
+      {:else}
+        <p>Aucune donnée disponible.</p>
+      {/if}
     </div>
   </div>
 </div>
