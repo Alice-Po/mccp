@@ -29,6 +29,11 @@
       icon: '💼'
     },
     {
+      id: 'content-Enseignement',
+      label: 'Enseignement',
+      icon: '📚'
+    },
+    {
       id: 'content-Enfance et Jeunesse',
       label: 'Enfance et Jeunesse',
       icon: '👶'
@@ -39,14 +44,9 @@
       icon: '🏗️'
     },
     {
-      id: 'content-Enseignement',
-      label: 'Enseignement',
-      icon: '📚'
-    },
-    {
-      id: 'content-Tourisme',
-      label: 'Tourisme',
-      icon: '🏖️'
+      id: 'content-Sport',
+      label: 'Sport',
+      icon: '⚽'
     },
     {
       id: 'content-Action Culturelle',
@@ -54,19 +54,36 @@
       icon: '🎭'
     },
     {
+      id: 'content-Tourisme',
+      label: 'Tourisme',
+      icon: '🏖️'
+    },
+    {
+      id: 'content-Interventions dans le domaine économique',
+      label: 'Interventions dans le domaine économique',
+      icon: '💰'
+    },
+ 
+    {
       id: 'content-Politique de la Ville',
       label: 'Politique de la Ville',
       icon: '🏘️'
     },
+
     {
-      id: 'content-Sport',
-      label: 'Sport',
-      icon: '⚽'
+      id: 'content-Urbanisme et aménagement de l’espace',
+      label: 'Urbanisme et aménagement de l’espace',
+      icon: '🗺️'
     },
     {
-      id: 'content-Aménagement du Territoire',
-      label: 'Aménagement du Territoire',
-      icon: '🗺️'
+      id: 'content-Aménagement du territoire et développement rural',
+      label: 'Aménagement du territoire et développement rural',
+      icon: '🌳'
+    },
+    {
+      id: 'content-Logement et Habitat',
+      label: 'Logement et Habitat',
+      icon: '🏠'
     },
     {
       id: 'content-Environnement et Patrimoine',
@@ -74,10 +91,53 @@
       icon: '🌳'
     },
     {
-      id: 'content-Logement et Habitat',
-      label: 'Logement et Habitat',
-      icon: '🏠'
-    }
+      id: 'content-Déchets',
+      label: 'Environnement et Patrimoine',
+      icon: '🚮'
+    },
+    {
+      id: 'content-Eau et assainissement',
+      label: 'Eau et assainissement',
+      icon: '💧'
+    },
+    {
+      id: 'content-Réseaux câblés et télécommunications',
+      label: 'Réseaux câblés et télécommunications',
+      icon: '📡'
+    },
+    {
+      id: 'content-Énergie',
+      label: 'Énergie',
+      icon: '🔌'
+    },
+    {
+      id: 'content-Ports, voies d’eau et liaisons maritimes',
+      label: 'Ports, voies d’eau et liaisons maritimes',
+      icon: '🚢'
+    },
+    {
+      id: 'content-Transports scolaires',
+      label: 'Transports scolaires',
+      icon: '🚢'
+    },
+    {
+      id: 'content-Transports publics',
+      label: 'Transports publics',
+      icon: '🚌'
+    },
+    {
+      id: 'content-Voirie',
+      label: 'Voirie',
+      icon: '🚗'
+    },
+    {
+      id: 'content-Funéraire',
+      label: 'Funéraire',
+      icon: '💀'
+    },
+    
+
+
   ];
 
   // Actions
@@ -188,7 +248,7 @@
   .competence-navigation {
     position: sticky;
     top: 90px;
-    width: 320px;
+    max-width: 500px;
     background: white;
     border-radius: 1rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -361,13 +421,13 @@
   /* Responsive design */
   @media (max-width: 1400px) {
     .competence-navigation {
-      width: 280px;
+      max-width: 500px;
     }
   }
 
   @media (max-width: 1200px) {
     .competence-navigation {
-      width: 260px;
+      max-width: 500px;
     }
   }
 

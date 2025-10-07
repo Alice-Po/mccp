@@ -1,0 +1,617 @@
+{
+    "competences": [
+        {
+            "id": "1",
+            "title": "Sécurité",
+            "COMMUNES OU EPCI": {
+                "Maire": [
+                    "Officier de police judiciaire (au nom de l'État, sous la direction du procureur de la République)",
+                    "Exercice de la police municipale / police administrative générale (bon ordre, sûreté, sécurité, salubrité publiques)",
+                    "Pouvoirs de police spéciale portant sur des objets particuliers (circulation, stationnement, etc.)",
+                    "Possibilité de créer une police municipale, des postes de gardes champêtres et d'agents de surveillance de la voie publique (ASVP)",
+                    "Prévention de la délinquance : présidence du conseil local de sécurité et de prévention de la délinquance (CLSPD), obligatoire dans les communes de plus de 5 000 habitants et dans celles comprenant un quartier prioritaire de la politique de la ville (QPV), sauf s'il existe un CISPD",
+                    "Possibilité d'installation et d'exploitation d'un système de vidéoprotection",
+                    "Possibilité de mutualisation « pluri-communale » des polices municipales",
+                    "Établit le plan communal de sauvegarde (PCS), obligatoire lorsque la commune est exposée à un risque naturel ou technologique (article L. 731-3 du code de la sécurité intérieure - CSI)",
+                    "Commandement des opérations de secours dans les conditions prévues par le règlement opérationnel arrêté par le préfet de département"
+                ],
+                "Président d’EPCI": [
+                    "Pouvoirs de police spéciale par transfert d'un ou plusieurs maires de communes membres (circulation, stationnement, habitat indigne, déchets, etc.)",
+                    "Prévention de la délinquance : présidence du conseil intercommunal de sécurité et de prévention de la délinquance (CISPD), obligatoire dans les communautés urbaines, communautés d'agglomération et métropoles (sauf opposition majoritaire des communes membres)",
+                    "Possibilité de créer une police municipale intercommunale",
+                    "Possibilité d'installer et d'exploiter un système de vidéoprotection mis à la disposition des communes membres",
+                    "Établit le plan intercommunal de sauvegarde (PICS) conjointement avec les maires des communes membres dotées d'un PCS, obligatoire dans les EPCI à fiscalité propre dont au moins une commune doit élaborer un PCS (article L. 731-4 du CSI)"
+                ],
+                "Communes et EPCI": [
+                    "Les communes et EPCI peuvent construire, financer, acquérir ou rénover des bâtiments destinés à être mis à la disposition de l'État pour les besoins de la justice, de la défense nationale, de la police ou de la gendarmerie nationales, ou des services d'incendie et de secours (articles L. 1311-19 et R. 1311-9 du CGCT)."
+                ],
+                "....": ""
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "2",
+            "title": "Action Sociale et Santé",
+            "COMMUNES OU EPCI": {
+                "Rôle général": [
+                    "Animation d’une action générale de prévention et de développement social sur le territoire de la commune par le biais d’un centre communal ou intercommunal d’action sociale (CCAS ou CIAS). Pour les communes de moins de 1 500 habitants, possibilité de ne pas créer ou de dissoudre le CCAS et d’assurer la compétence sociale par un CIAS ou un service non personnalisé.",
+                    "Nouvelle possibilité pour les communautés urbaines et les métropoles de créer un centre intercommunal d’action sociale introduite à l’article L.123-4-1 du CASF"
+                ],
+                "Compétences et interventions": [
+                    "Attribution de l’aide sociale facultative (secours aux familles en difficulté, (non) remboursement des prestations)",
+                    "Constitution des dossiers de demande d’aide sociale et transmission à l’autorité compétente si leur instruction incombe à une autre autorité",
+                    "Mise en place d’un fichier pour recueillir les informations utiles à l'intervention des services sociaux et sanitaires auprès des personnes âgées et des personnes handicapées (identité, âge, adresse du domicile…)",
+                    "Possibilité de créer et de gérer un établissement ou service public à caractère social ou médico-social (centres d’accueil des enfants de moins de six ans, foyers destinés aux personnes âgées…)",
+                    "Possibilité de construire ou de subventionner la réalisation d’infrastructures et équipements publics sanitaires (surtout en zone de montagne) dans un but de maintien des services",
+                    "Pouvoirs de police municipale en matière de sécurité et de salubrité, ainsi que certaines dimensions de la politique de l'habitat (résorption de l'insalubrité et des immeubles menaçant ruine …)",
+                    "Gestion du fonds d'aide aux jeunes en difficulté"
+                ],
+                "Logement": [
+                    "Autorisation, mise en œuvre ou subvention d’actions ou opérations d'aménagement permettant la réalisation de logements locatifs sociaux pour répondre aux besoins en hébergement des personnes mal logées, défavorisées ou présentant des difficultés particulières",
+                    "Possibilité de participer au financement du fonds de solidarité pour le logement (FSL) afin de venir en aide aux personnes qui se trouvent dans l'impossibilité d'assumer leurs obligations relatives au paiement du loyer, des charges et des frais relatifs à la fourniture d'eau, d'énergie et de services téléphoniques"
+                ],
+                "Santé publique et environnement": [
+                    "Protection générale de la santé publique et de l’environnement par :",
+                    "L’organisation et le financement des services municipaux de désinfection et des services communaux d'hygiène et de santé",
+                    "L’organisation des campagnes de vaccination gratuite ; la salubrité des habitations, des agglomérations et de tous les milieux de vie de l'homme ; l’alimentation en eau destinée à la consommation humaine ; l’évacuation, le traitement, l’élimination et l’utilisation des eaux usées et des déchets",
+                    "Devoir d’alerte et de veille sanitaire par le signalement sans délai des menaces imminentes pour la santé de la population et par la transmission à l'Institut de veille sanitaire d’informations nécessaires à l'exercice de ses missions",
+                    "Participation aux différentes commissions des agences régionales de santé",
+                    "Aides aux professionnels de santé visant à favoriser les soins en zones déficitaires (article L.1511-8 du CGCT) : compétence de plein droit",
+                    "Financement partagé avec les départements de la lutte anti-vectorielle"
+                ],
+                "Relations avec les établissements de santé": [
+                    "L’article L. 6143-5 du code de la santé publique, permet au maire de la commune où est situé un établissement public de santé ayant fusionné ou ayant été mis en direction commune avec l'établissement principal, ou son représentant, de participer aux réunions du conseil de surveillance de l’établissement principal, avec voix consultative",
+                    "Les communes et leurs groupements peuvent concourir volontairement au financement du programme d'investissement des établissements de santé publics, privés d'intérêt collectif et privés (article L. 1422-3 du code de la santé publique)",
+                    "L’article L. 6323-1-3 du code de la santé publique prévoit que les centres de santé peuvent être créés et gérés par les communes ou leurs groupements"
+                ],
+                "....": ""
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "3",
+            "title": "Emploi et Insertion",
+            "COMMUNES OU EPCI": {
+                "Concours au service public de l'emploi": [
+                    "Possibilité de délégation par Pôle emploi de la réception d’offres d’emplois et d’opérations de placement",
+                    "Possibilité de participation aux maisons de l’emploi",
+                    "Possibilité de participation aux structures d’accompagnement et d’insertion professionnelle des jeunes (missions locales)",
+                    "Participation au conseil régional de l’emploi",
+                    "Possibilité pour les communes de contribuer au service public de l’emploi dans les conditions prévues aux articles L.5322-1 à L.5322-4 du code du travail",
+                    "Représentation des communes et des départements grâce à l’octroi d’un siège au conseil d’administration de Pôle emploi (un siège en tout), au titre de l’article L.5312-4 du code du travail"
+                ],
+                "Plans et conventions": [
+                    "Possibilité de mise en œuvre des plans locaux pluriannuels pour l’insertion et l’emploi",
+                    "Possibilité de conclure avec l’État des conventions au titre de l’insertion par l’activité économique",
+                    "Participation au réseau pour l’emploi (article L. 5311-7 du code du travail)"
+                ],
+                "....": ""
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "4",
+            "title": "Enseignement",
+            "COMMUNES OU EPCI": {
+                "Compétences communales": [
+                    "Le conseil municipal décide de la création et de l'implantation des écoles et classes élémentaires et maternelles d'enseignement public après avis du représentant de l'État dans le département (article L. 2121-30 du CGCT)",
+                    "Construction, reconstruction, extension, grosses réparations, équipement et fonctionnement des écoles publiques (article L. 212-4 du code de l’éducation)",
+                    "Compétence des communes pourvues d’une ou plusieurs écoles maternelles relative au recrutement et à la gestion des ATSEM (assistants territoriaux spécialisés des écoles maternelles)",
+                    "Financement des dépenses de fonctionnement liées à la scolarisation d’enfants dans des écoles privées ou publiques d’autres communes",
+                    "Avis sur l’ouverture / la modification d’établissements scolaires privés hors contrat",
+                    "Restauration scolaire des écoles maternelles et élémentaires (compétence facultative)",
+                    "Organisation d'activités périscolaires (activités culturelles, sportives, artistiques complémentaires aux enseignements scolaires) et de la garderie périscolaire (compétence facultative)",
+                    "Mise en place d’un service d'accueil à destination des élèves d'une école maternelle ou élémentaire publique lorsque le nombre des personnes qui ont déclaré leur intention de participer à la grève en application du premier alinéa est égal ou supérieur à 25% (article L.133-4 du code de l’éducation)",
+                    "Veille au respect de l'obligation scolaire : chaque année, à la rentrée scolaire, le maire dresse la liste de tous les enfants résidant dans sa commune et qui sont soumis à l'obligation scolaire (article L.131-6 du code de l’éducation)",
+                    "Une délibération du conseil municipal crée, dans chaque commune, une caisse des écoles, destinée à faciliter la fréquentation de l'école par des aides aux élèves en fonction des ressources de leur famille (article L. 212-10 du code de l’éducation)",
+                    "Les collectivités territoriales et leurs groupements peuvent contribuer au financement des sites et établissements d'enseignement supérieur et établissements de recherche implantés sur leur territoire ainsi qu’aux œuvres universitaires et scolaires (article L.216-11 du code de l’éducation)"
+                ],
+                "....": ""
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "5",
+            "title": "Enfance et Jeunesse",
+            "COMMUNES OU EPCI": {
+                "Accueil du jeune enfant": [
+                    "Les communes sont les autorités organisatrices de l’accueil du jeune enfant à partir du 1er janvier 2025 (article L. 214-1-3 du CASF).",
+                    "A ce titre, toutes les communes exercent obligatoirement les compétences suivantes :",
+                    "1° Recenser les besoins des enfants âgés de moins de trois ans et de leurs familles en matière de services aux familles ;",
+                    "2° Informer et accompagner les familles ayant un ou plusieurs enfants âgés de moins de trois ans ainsi que les futurs parents ;",
+                    "Les communes de plus de 3 500 habitants doivent également exercer les compétences suivantes :",
+                    "3° Planifier, au vu du recensement des besoins, le développement des modes d'accueil ;",
+                    "4° Soutenir la qualité des modes d'accueil",
+                    "Concernant les communes de plus de 10 000 habitants :",
+                    "- elles doivent établir et mettre en œuvre le schéma pluriannuel de maintien et de développement de l'offre d'accueil du jeune enfant (l'article L. 214-2 du CASF) pour l’exercice de la compétence 3° ;",
+                    "- elles doivent mettre en place le relais petite enfance (article L. 214-2-1 du CASF) à partir du 1er janvier 2026, pour l’exercice des compétences 2° et 4°."
+                ],
+                "Compétences optionnelles": [
+                    "Possibilité de soutenir, financer ou gérer des structures d’accueil de la petite enfance (crèches, haltes garderies, jardins d’éveil, etc.)",
+                    "Possibilité de créer un relais d’assistants maternels"
+                ],
+                "....": ""
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "6",
+            "title": "Sport",
+            "COMMUNES OU EPCI": {
+                "Équipements sportifs": [
+                    "Construction et fonctionnement des équipements sportifs de proximité (piscine, gymnase, camping, etc.)",
+                    "Les communautés de communes peuvent contribuer au développement et à l’aménagement sportif de l’espace communautaire par la construction, l’aménagement, l’entretien et la gestion d’équipements sportifs d’intérêt communautaire",
+                    "Subventions aux clubs, associations, etc.",
+                    "Sécurité des installations sportives",
+                    "Possibilité de mettre à disposition les équipements sportifs auprès des collèges et des lycées, soit gratuitement, soit au moyen d’un prix fixé par voie conventionnelle",
+                    "Possibilité de créer un office municipal des sports"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "7",
+            "title": "Action Culturelle",
+            "COMMUNES OU EPCI": {
+                "1% culturel": [
+                    "Insertion des œuvres d’art dans certaines constructions (1% du coût de l’investissement)"
+                ],
+                "Enseignements artistiques": [
+                    "Enseignement initial de la musique, de la danse et de l’art dramatique en vue d’une pratique amateur, et offre d’éducation artistique en partenariat avec les établissements scolaires"
+                ],
+                "Inventaire général du patrimoine culturel": [
+                    "Les communes et leurs groupements peuvent se voir déléguer, par les régions bénéficiaires du transfert de compétences, l’exercice des compétences d’inventaire général du patrimoine culturel, par voie conventionnelle"
+                ],
+                "Bibliothèques": [
+                    "Bibliothèques de prêt municipales"
+                ],
+                "Musées": [
+                    "Organisation et financement des musées municipaux"
+                ],
+                "Archives": [
+                    "Conservation et mise en valeur des archives municipales"
+                ],
+                "Archéologie préventive": [
+                    "Réalisation des diagnostics et des fouilles d’archéologie préventive par les services d’archéologiques territoriaux agréés"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "8",
+            "title": "Tourisme",
+            "COMMUNES OU EPCI": {
+                "Tourisme": [
+                    "Compétence partagée des collectivités territoriales (articles L.1111-4 du CGCT et L.111-1 du code du tourisme)",
+                    "Les communautés de communes, les communautés d’agglomération, les communautés urbaines, les métropoles et la métropole de Lyon sont compétentes en matière de « promotion du tourisme, dont la création d’offices de tourisme » (article L.134-1 du code du tourisme)",
+                    "Les communautés de communes, les communautés d’agglomération, les communautés urbaines et les métropoles peuvent, par délibération du conseil communautaire, instituer un office de tourisme dont elles déterminent le statut"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "9",
+            "title": "Interventions dans le domaine économique",
+            "COMMUNES OU EPCI": {
+                "Schéma régional de développement économique, d’innovation et d’internationalisation (SRDEII)": [
+                    "Le projet de SRDEII est élaboré en concertation avec les EPCI à fiscalité propre.",
+                    "Sur le territoire d’une métropole, les orientations applicables sont élaborées et adoptées conjointement par le conseil régional et le conseil de la métropole.",
+                    "A défaut d’accord entre la région et la métropole, cette dernière adopte un document d’orientations stratégiques qui prend en compte le schéma régional.",
+                    "Le schéma régional fait l’objet d’une présentation et d’une discussion en CTAP.",
+                    "La mise en œuvre du SRDEII peut faire l’objet de conventions entre la région et un ou plusieurs EPCI à fiscalité propre."
+                ],
+                "Aides de droit commun (article L. 1511-2 du CGCT)": [
+                    "Les communes et les EPCI à fiscalité propre peuvent participer au financement des aides et des régimes d’aides mis en place par la région, dans le cadre d’une convention.",
+                    "Ils peuvent se voir déléguer par le conseil régional l’octroi de tout ou partie des aides."
+                ],
+                "Aides à l’immobilier d’entreprises (article L. 1511-3)": [
+                    "Les communes, la métropole de Lyon et les EPCI à fiscalité propre sont seuls compétents pour définir les aides ou les régimes d’aides et décider de l’octroi de ces aides en matière d’investissement immobilier des entreprises et de location de terrains ou d’immeubles.",
+                    "Ces aides ont pour objet la création ou l’extension d’activités économiques."
+                ],
+                "Aides aux entreprises en difficulté": [
+                    "Les communes et leurs groupements peuvent participer au financement des aides accordées à des entreprises en difficulté dans le cadre d’une convention passée avec la région."
+                ],
+                "Aides aux organismes participant à la création ou à la reprise d’entreprises (article L. 1511-7)": [
+                    "Les métropoles et la métropole de Lyon sont compétentes pour verser des subventions aux organismes qui participent à la création ou à la reprise d’entreprises.",
+                    "Les communes et les autres EPCI à fiscalité propre peuvent aussi verser des subventions à ces organismes mais uniquement dans le cadre d’une convention passée avec la région."
+                ],
+                "Aides aux professionnels et étudiants en santé (article L. 1511-8)": [
+                    "Compétence de plein droit visant à favoriser les soins en zones déficitaires."
+                ],
+                "Aides aux vétérinaires et étudiants vétérinaires (article L. 1511-9)": [
+                    "Compétence de plein droit afin d’assurer la permanence et la continuité des soins aux animaux d’élevage."
+                ],
+                "Aides aux salles de spectacle cinématographique (article L. 2251-4)": [
+                    "Les communes peuvent attribuer des subventions à des entreprises existantes ayant pour objet l’exploitation de salles de spectacle cinématographique ou la création d’un nouvel établissement."
+                ],
+                "Aides au maintien des services en milieu rural et en QPV (article L. 2251-3)": [
+                    "La commune peut accorder des aides pour assurer la création ou le maintien d’un service nécessaire à la satisfaction des besoins de la population, en milieu rural ou lorsque la commune comprend un ou plusieurs quartiers prioritaires de la ville, dans les conditions prévues à l’article L. 2251-3 du CGCT."
+                ],
+                "Aides aux établissements de vente de livres neufs (article L. 2251-5)": [
+                    "Les communes et leurs groupements, la collectivité de Saint-Barthélemy et la collectivité de Saint-Martin peuvent verser des subventions à ces établissements dans les conditions fixées par l’article susvisé."
+                ],
+                "Ingénierie financière": [
+                    "Garantie d’emprunt à des personnes de droit privé (articles L. 2252-1 et s. du CGCT)",
+                    "Participation au capital de sociétés de garantie (article L. 2253-7 du CGCT)",
+                    "Participation au capital de sociétés de capital investissement, de sociétés de financement interrégionales ou propres à chaque région, de SEM ou de SATT (article L.4211-1 8° du CGCT), en complément de la région. Compétence directe possible pour les métropoles et la métropole de Lyon",
+                    "Souscription de parts dans un fonds commun de placement à risques à vocation régionale ou interrégionale ayant pour objet d'apporter des fonds propres à des entreprises, possible en complément de la région dans le cadre d’une convention passée avec celle-ci",
+                    "Une commune peut participer financièrement à la mise en œuvre du fonds d'investissement de proximité défini à l'article L. 214-30 du code monétaire et financier, en complément de la région"
+                ],
+                "Participation au capital de sociétés commerciales de droit commun": [
+                    "Principe d’interdiction sauf autorisation par décret en Conseil d’Etat (article L. 2253-1 du CGCT)",
+                    "Par dérogation, possibilité de participer au capital des SA et SAS ayant pour objet social la production d’énergie renouvelable par des installations sur son territoire ou territoire limitrophe"
+                ],
+                "Rapport annuel (article L. 1511-1)": [
+                    "Les communes et les EPCI à fiscalité propre transmettent à la région, avant le 31 mars, toutes les informations relatives aux aides et régimes d’aides mis en œuvre dans leur ressort au titre de l’année civile précédente."
+                ],
+                "Récupération des aides illégales (article L.1511-1-1)": [
+                    "Une commune ou un EPCI ayant accordé une aide à une entreprise est tenue de procéder sans délai à sa récupération si une décision de la Commission européenne ou un arrêt de la CJUE l’enjoint, à titre provisoire ou définitif.",
+                    "Les communes ou les EPCI supportent les conséquences financières des condamnations qui pourraient résulter pour l’Etat de l’exécution tardive ou incomplète des décisions de récupération."
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "11",
+            "title": "Politique de la Ville",
+            "COMMUNES OU EPCI": {
+                "Contrat de ville": [
+                    "Pilotage et mise en œuvre du contrat de ville",
+                    "Élaboration à l’échelle intercommunale pour les territoires comprenant un ou plusieurs quartiers prioritaires au titre de la politique de la ville"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "12",
+            "title": "Urbanisme et aménagement de l’espace",
+            "COMMUNES OU EPCI": {
+                "Documents d’urbanisme": [
+                    "Schéma de cohérence territoriale (SCoT - article L.143-16 du code de l’urbanisme)",
+                    "Plan local d’urbanisme (PLU - article L.153-1 du code de l’urbanisme)",
+                    "Plan de sauvegarde et de mise en valeur d’un site patrimonial remarquable (article L.313-1 du code de l’urbanisme)"
+                ],
+                "Autorisations d’urbanisme": [
+                    "Instruction et délivrance des autorisations d’occupation des sols (articles L.422-1, L.423-1 et R*423-14 du code de l’urbanisme)"
+                ],
+                "Actions et opérations d’aménagement (outils)": [
+                    "Zone d’aménagement concerté (ZAC - article L.311-1 du code de l’urbanisme)",
+                    "Constitution de réserves foncières (article L.221-1 du code de l’urbanisme)",
+                    "Zones d'aménagement différé (article L.212-1 du code de l’urbanisme)",
+                    "Droit de préemption urbain (articles L.211-1 et L.211-2 du code de l’urbanisme)",
+                    "Déclaration de parcelle en état d’abandon manifeste",
+                    "Projet partenarial d’aménagement (PPA) et grande opération d’urbanisme (GOU) (articles L.312-1 et L.312-3 du code de l’urbanisme)"
+                ],
+                "Zones d’activité": [
+                    "Création, aménagement des zones d'activité industrielle, commerciale, tertiaire, artisanale, touristique, portuaire ou aéroportuaire."
+                ],
+                "Opérations de restauration immobilière": [
+                    "Opérations de restauration immobilière (ORI) (article L.313-4 du code de l’urbanisme)"
+                ],
+                "Sauvegarde du commerce et de l’artisanat": [
+                    "Délimitation du périmètre de sauvegarde du commerce et de l’artisanat de proximité"
+                ],
+                "Prévention du recul du trait de côte": [
+                    "Droit de préemption urbain (article L.219-1 du code de l’urbanisme)",
+                    "Réserves foncières (article L.221-1 du code de l’urbanisme)",
+                    "Opération de recomposition des territoires littoraux exposés au recul du trait de côte dans le cadre d'un PPA (article L.312-8 du code de l’urbanisme)"
+                ],
+                "Autres droits de préemption": [
+                    "Droit de préemption sur les fonds artisanaux, les fonds de commerce, les baux commerciaux et les terrains faisant l'objet de projets d'aménagement commercial (articles L.214-1 et L.214-1-1 du code de l’urbanisme)",
+                    "Droit de préemption pour l'acquisition de terrains destinés à la création ou à l'aménagement de jardins familiaux (article L.216-1 du code de l’urbanisme)",
+                    "Droit de préemption pour la préservation des ressources en eau destinées à la consommation humaine (article L.218-3 du code de l’urbanisme)"
+                ],
+                "Rapport triennal": [
+                    "Rapport triennal relatif à l’artificialisation des sols (maire ou président d’EPCI, article L.2231-1 du CGCT)"
+                ],
+                "Outils contractuels collectivités/État": [
+                    "Convention multipartites pour la définition d’opérations de revitalisation du territoire (article L.303-2 du code de la construction et de l’habitation)",
+                    "PPA et GOU (articles L.312-1 et L.312-3 du code de l’urbanisme)",
+                    "Opération de recomposition des territoires littoraux exposés au recul du trait de côte (article L.312-8 du code de l’urbanisme)",
+                    "Contrats de plan État-région",
+                    "Convention interrégionale de massif",
+                    "Contrats pour la réussite de la transition écologique"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "13",
+            "title": "Aménagement du territoire et développement rural",
+            "COMMUNES OU EPCI": {
+                "Chartes intercommunales": [
+                    "Élaboration et approbation des chartes intercommunales de développement et d’aménagement (article L.5223-1 du CGCT)"
+                ],
+                "CRTE": [
+                    "Participation aux Contrats de relance et de transition écologique (CRTE)"
+                ],
+                "Financement (article L.1111-10 du CGCT)": [
+                    "Les collectivités territoriales peuvent financer toute opération figurant dans les contrats de projet État-région ou dans les contrats de convergence"
+                ],
+                "France ruralités revitalisation (FRR)": [
+                    "Zonage FRR défini à l’article 44 quindecies A du CGI, ouvrant des droits aux acteurs économiques implantés sur les communes zonées :",
+                    "Exonérations fiscales (sur délibération des communes et EPCI à fiscalité propre concernés) :",
+                    "- Impôt sur les bénéfices (article 44 quindecies A du CGI)",
+                    "- Impôts locaux : taxe foncière sur les propriétés bâties (article 1383 K) et cotisation foncière des entreprises (article 1466 G)",
+                    "Exonérations sociales :",
+                    "- Exonérations de cotisations patronales (articles L.241-19 et L.241-20 du code de la sécurité sociale)",
+                    "Mesures adossées non fiscales et non sociales en faveur des communes zonées et de leurs habitants (ex. majoration de la dotation de solidarité rurale)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "14",
+            "title": "Logement et Habitat",
+            "COMMUNES OU EPCI": {
+                "Programmation de l’habitat": [
+                    "Programme local de l’habitat (PLH)",
+                    "Plan départemental de l’habitat (PDH) : élaboration conjointe avec l’État et le département"
+                ],
+                "Gouvernance et attributions": [
+                    "Participation aux commissions d’attribution des logements et d’examen de l’occupation des logements (CALEOL)",
+                    "Convention intercommunale d’attribution (CIA)",
+                    "Autorité de rattachement des offices publics de l’habitat (OPH)",
+                    "Signataire des conventions d’utilité sociale (CUS) conclues par les OPH rattachés à une commune ou un EPCI"
+                ],
+                "Délégations possibles par l’État": [
+                    "Contingent de réservation préfectoral",
+                    "Aides à la pierre",
+                    "Droit au logement opposable (DALO), réquisitions avec attributaire, hébergement (MGP + autres métropoles) ainsi que conventions d’utilité sociale et agréments d’aliénation de logements aux organismes HLM (métropoles)"
+                ],
+                "Police et qualité du bâti": [
+                    "Police des immeubles menaçant ruine, des ERP à usage d’hébergement, des équipements communs des immeubles collectifs",
+                    "Amélioration du parc immobilier bâti"
+                ],
+                "SPPEH": [
+                    "Service public de la performance énergétique et de l’habitat (SPPEH) assuré « à leur initiative et avec leur accord » (article L.232-2 du code de l’énergie)"
+                ],
+                "Gens du voyage": [
+                    "Création, aménagement, entretien et gestion des aires d’accueil des gens du voyage"
+                ],
+                "Régulation de l’usage et de la location des logements": [
+                    "Changement d’usage des locaux d’habitation",
+                    "Délimitation des zones soumises à déclaration ou autorisation de mise en location"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "15",
+            "title": "Environnement et Patrimoine",
+            "COMMUNES OU EPCI": {
+                "Patrimoine naturel": [
+                    "Réalisation d’inventaires locaux du patrimoine naturel (article L. 411-1 A du code de l’environnement)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "16",
+            "title": "Déchets",
+            "COMMUNES OU EPCI": {
+                "Ordures ménagères": [
+                    "Collecte et traitement des ordures ménagères (article L. 2224-13 du CGCT)",
+                    "Compétence obligatoire des EPCI à fiscalité propre"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "17",
+            "title": "Eau et assainissement",
+            "COMMUNES OU EPCI": {
+                "Eau potable (article L. 2224-7-1 du CGCT)": [
+                    "Distribution publique de l’eau potable et élaboration du schéma de distribution d’eau potable",
+                    "Missions facultatives possibles : production, transport et stockage de l’eau potable",
+                    "Transfert obligatoire pour les métropoles, communautés urbaines et pour les communautés d’agglomération à compter du 1er janvier 2020",
+                    "Transfert facultatif pour les communautés de communes, à l’exception des transferts réalisés avant la loi du 11 avril 2025 qui ont un caractère obligatoire"
+                ],
+                "Assainissement (article L. 2224-8 du CGCT)": [
+                    "Élaboration d’un schéma d’assainissement collectif",
+                    "Définition du zonage d’assainissement (article L.2224-10 du CGCT)",
+                    "Assainissement collectif : contrôle des raccordements au réseau public de collecte, collecte, transport et épuration des eaux usées, élimination des boues produites",
+                    "Assainissement non collectif : mission obligatoire de contrôle des installations autonomes",
+                    "Transfert obligatoire pour les métropoles, communautés urbaines et pour les communautés d’agglomération à compter du 1er janvier 2020",
+                    "Transfert facultatif pour les communautés de communes, sauf transferts antérieurs à la loi du 11 avril 2025 (obligatoires)"
+                ],
+                "GEPU – Gestion des eaux pluviales urbaines": [
+                    "Compétence distincte de l’assainissement",
+                    "Facultative pour les communautés de communes / Obligatoire pour les autres EPCI à fiscalité propre"
+                ],
+                "GEMAPI (I bis de l’article L. 211-7 du code de l’environnement)": [
+                    "Gestion des milieux aquatiques et prévention des inondations",
+                    "Transfert aux EPCI à fiscalité propre (compétence obligatoire) à compter du 1er janvier 2018"
+                ],
+                "Compléments GEMAPI": [
+                    "En sus de la compétence GEMAPI : étude, exécution et exploitation de tous travaux, ouvrages ou installations présentant un caractère d’intérêt général ou d’urgence concernant les items de l’article L. 211-7 du code de l’environnement"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "18",
+            "title": "Réseaux câblés et télécommunications",
+            "COMMUNES OU EPCI": {
+                "Télécommunications": [
+                    "Établissement et exploitation des infrastructures et des réseaux de télécommunication, fourniture de services de télécommunication en cas de carence d’initiative privée (article L.1425-1 du CGCT) — compétence obligatoire de la métropole de Lyon et des métropoles de droit commun",
+                    "Possibilité d’éditer un service de télévision destiné aux informations sur la vie locale (article L.1426-1 du CGCT)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "19",
+            "title": "Énergie",
+            "COMMUNES OU EPCI": {
+                "AODE": [
+                    "Autorités organisatrices de distribution d’électricité et de gaz (AODE) (article L.2224-31 du CGCT)"
+                ],
+                "Énergies renouvelables": [
+                    "Aménagement, exploitation d’installations de production d’énergie de sources renouvelables (article L.2224-32 du CGCT)"
+                ],
+                "Production d’électricité de proximité": [
+                    "Installation de production d’électricité de proximité (article L.2224-33 du CGCT)"
+                ],
+                "Maîtrise de la demande d’énergie": [
+                    "Mise en place d’actions tendant à maîtriser la demande d’énergie des consommateurs finaux et des consommateurs en situation de précarité (article L.2224-34 du CGCT)"
+                ],
+                "Infrastructures de charge VE": [
+                    "Sous réserve d’une offre inexistante, insuffisante ou inadéquate, création d’infrastructures de charge nécessaires à l’usage de véhicules électriques ou hybrides (article L.2224-37 du CGCT)"
+                ],
+                "PCAET": [
+                    "Élaboration et adoption du plan climat‑air‑énergie territorial (article L.229-26 du code de l’environnement)"
+                ],
+                "Valorisation énergétique et réseaux de chaleur": [
+                    "Réalisation d’installations en vue d'utiliser le pouvoir calorifique des résidus et déchets collectés dans les centres urbains ou en vue d'alimenter un réseau de chaleur (loi n° 46-628 du 8 avril 1946 modifiée par la loi n° 80-531 du 15 juillet 1980)"
+                ],
+                "Compétences obligatoires (CU/Métropoles)": [
+                    "AODE, bornes de recharge, contribution à la transition énergétique, maîtrise de l’énergie et création/aménagement/entretien/gestion des réseaux de chaleur et de froid sont obligatoires pour les communautés urbaines (article L.5215-20 du CGCT), la métropole de Lyon (article L.3641-1 du CGCT) et les métropoles de droit commun (article L.5217-2 du CGCT)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "20",
+            "title": "Ports, voies d’eau et liaisons maritimes",
+            "COMMUNES OU EPCI": {
+                "Ports de plaisance": [
+                    "Création, aménagement, exploitation (article L.5314-4 du code des transports)"
+                ],
+                "Ports maritimes transférés": [
+                    "Ports maritimes de commerce et de pêche transférés en application de l’article L.5314-4 du code des transports : aménagement et exploitation",
+                    "Ports maritimes départementaux de commerce et de pêche transférés au plus tard au 1er janvier 2017 dans le cadre de l’article 22 de la loi du 7 août 2015"
+                ],
+                "Liaisons maritimes": [
+                    "Desserte des îles côtières appartenant à la commune continentale (article L.5431-1 du code des transports)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "21",
+            "title": "Transports scolaires",
+            "COMMUNES OU EPCI": {
+                "Organisation des transports scolaires": [
+                    "Financement, organisation et fonctionnement des transports scolaires à l’intérieur des périmètres de transports urbains existants au 1er septembre 1984 par l’autorité organisatrice de la mobilité (article L.3111-7 du code des transports)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "22",
+            "title": "Transports publics",
+            "COMMUNES OU EPCI": {
+                "Autorité organisatrice de la mobilité (AOM)": [
+                    "Organisation de services réguliers et à la demande de transport public de personnes, des services de mobilité solidaire, des services relatifs aux mobilités actives (article L.1271-1 du code des transports) et aux usages partagés des véhicules terrestres à moteur",
+                    "Conseil et accompagnement individualisé à la mobilité destiné aux personnes en situation de vulnérabilité économique ou sociale ainsi qu’aux personnes en situation de handicap ou à mobilité réduite",
+                    "Conseil en mobilité destiné aux employeurs et aux gestionnaires d’activité générant des flux de déplacements importants",
+                    "Organisation ou contribution au développement des services de transport de marchandises et de logistique urbaine",
+                    "Plans de mobilité (article L.1214-1 du code des transports) et transports publics non urbains (article L.3111-1 du code des transports)",
+                    "Cadre juridique: articles L.1231-1, L.1231-8 et L.1231-14 à L.1231-16 du code des transports",
+                    "Communautés d’agglomération, métropoles, communautés urbaines et métropole de Lyon: AOM obligatoirement. Sur le territoire des communautés de communes: soit la CC est AOM, soit la région est AOM"
+                ],
+                "ZFE-m": [
+                    "Mise en place d’une zone à faibles émissions mobilité (ZFE-m): obligatoire pour les métropoles; facultative pour les autres EPCI à fiscalité propre (article L.2213-4-1 du CGCT)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "23",
+            "title": "Voirie",
+            "COMMUNES OU EPCI": {
+                "Voirie communale": [
+                    "Création, aménagement et entretien des voies communales"
+                ],
+                "Transferts de compétence": [
+                    "Transfert facultatif et soumis à l’intérêt communautaire pour les communautés de communes (article L.5214-16 du CGCT) et les communautés d’agglomération (article L.5216-5 du CGCT)",
+                    "Transfert obligatoire pour les communautés urbaines (article L.5215-20 du CGCT) et les métropoles (article L.5217-2 du CGCT), sauf si les communautés urbaines créées après la loi n°99-586 du 12 juillet 1999 et les métropoles ont exercé leur droit de retour à l’intérêt communautaire dans l’année suivant l’entrée en vigueur de la loi 3DS (jusqu’au 21 février 2023)"
+                ],
+                "Pouvoir de police de la circulation": [
+                    "Exercé par le maire sur toutes les voies de l’agglomération, y compris les voies départementales et nationales (article L.2213-1 du CGCT)",
+                    "Transfert du pouvoir de police de la circulation sur les voies intercommunales au président de l’EPCI à fiscalité propre, sauf opposition du maire (article L.5211-9 du CGCT)"
+                ],
+                "Voies spécifiques": [
+                    "Voies vertes créées par le titulaire du pouvoir de police de la circulation (article R.411-3-2 du code de la route)",
+                    "Chemins ruraux appartenant au domaine privé de la commune (article L.161-1 du code rural et de la pêche maritime)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        },
+        {
+            "id": "24",
+            "title": "Funéraire",
+            "COMMUNES OU EPCI": {
+                "Maire": [
+                    "En tant qu’officier d’état civil : dresse l’acte de décès (article 87 du code civil)",
+                    "Autorise la fermeture du cercueil (article R.2213-17 du CGCT)",
+                    "Autorise les inhumations et les crémations (article R.2213-31 du CGCT)",
+                    "Autorise le transfert du corps vers un cercueil adapté à la crémation (article L.2223-42-1 du CGCT)",
+                    "Autorise le placement dans une sépulture, le scellement sur un monument funéraire, le dépôt dans une case de columbarium d’une urne et la dispersion des cendres (article R.2213-39 du CGCT)",
+                    "Autorise les exhumations à la demande du plus proche parent (article R.2213-40 du CGCT)",
+                    "Autorise la crémation des restes des corps exhumés à la demande du plus proche parent (article R.2213-37 du CGCT)",
+                    "Autorise les inscriptions sur les pierres tumulaires ou monuments funéraires (article R.2223-8 du CGCT)",
+                    "Autorise le retrait d’une urne d’une concession d’un site cinéraire (article R.2223-23-3 du CGCT)",
+                    "Autorise le dépôt temporaire du corps (article R.2213-29 du CGCT)",
+                    "Pourvoit d’urgence à ce que toute personne défunte soit ensevelie et inhumée sans distinction de culte ni de croyance (article L.2213-7 du CGCT)",
+                    "Assure l’inhumation des personnes dépourvues de ressources suffisantes décédées dans la commune (article L. 2223-27 duCGCT)",
+                    "Peut autoriser la construction dans l’enceinte de l’hôpital de monuments pour les fondateurs et bienfaiteurs de l’établissement à titre d’hommage public (article L.2223-10 du CGCT)",
+                    "Autorise la construction, restauration ou extension des bâtiments à moins de 100 mètres des nouveaux cimetières transférés hors des communes (article L.2223-5 du CGCT)",
+                    "Assure la police spéciale des monuments funéraires menaçant ruine (articles L.2212-2 et L.2213-9 du CGCT, L.511-1 et L.511-3 du code de la construction et de l’habitation)"
+                ],
+                "EPCI": [
+                    "Création, gestion, extension et translation des cimetières et sites cinéraires, ainsi que création, gestion et extension des crématoriums (article L.2223-1 du CGCT; compétence soumise à l’intérêt communautaire pour communautés urbaines et métropoles)",
+                    "Service extérieur des pompes funèbres (compétence facultative, article L.2223-19 du CGCT)"
+                ]
+            },
+            "DEPARTEMENTS": "",
+            "REGION": "",
+            "ETAT": ""
+        }
+    ]
+}
