@@ -123,39 +123,8 @@
   }
 
   .content-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 0 ;
   }
-
-  .text-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 1rem;
-    border-left: 4px solid #2e8b57;
-  }
-
-  .text-section p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #495057;
-    margin-bottom: 1rem;
-  }
-
-  .text-section small {
-    font-size: 0.9rem;
-    color: #6c757d;
-  }
-
-  .text-section a {
-    color: #2e8b57;
-    text-decoration: none;
-  }
-
-  .text-section a:hover {
-    text-decoration: underline;
-  }
-
   .competences-section {
     margin-top: 2rem;
   }

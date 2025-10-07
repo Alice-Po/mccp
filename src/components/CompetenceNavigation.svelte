@@ -11,134 +11,27 @@
   let activeItem = $state('content-Sécurité');
   let opened = $state(true);
 
-  // Navigation items avec icônes
-  const navItems: NavItem[] = [
-    {
-      id: 'content-Sécurité',
-      label: 'Sécurité',
-      icon: '🛡️'
-    },
-    {
-      id: 'content-Action Sociale et Santé',
-      label: 'Action Sociale et Santé',
-      icon: '🏥'
-    },
-    {
-      id: 'content-Emploi et Insertion',
-      label: 'Emploi et Insertion',
-      icon: '💼'
-    },
-    {
-      id: 'content-Enseignement',
-      label: 'Enseignement',
-      icon: '📚'
-    },
-    {
-      id: 'content-Enfance et Jeunesse',
-      label: 'Enfance et Jeunesse',
-      icon: '👶'
-    },
-    {
-      id: 'content-Urbanisme et Aménagement',
-      label: 'Urbanisme et Aménagement',
-      icon: '🏗️'
-    },
-    {
-      id: 'content-Sport',
-      label: 'Sport',
-      icon: '⚽'
-    },
-    {
-      id: 'content-Action Culturelle',
-      label: 'Action Culturelle',
-      icon: '🎭'
-    },
-    {
-      id: 'content-Tourisme',
-      label: 'Tourisme',
-      icon: '🏖️'
-    },
-    {
-      id: 'content-Interventions dans le domaine économique',
-      label: 'Interventions dans le domaine économique',
-      icon: '💰'
-    },
- 
-    {
-      id: 'content-Politique de la Ville',
-      label: 'Politique de la Ville',
-      icon: '🏘️'
-    },
-
-    {
-      id: 'content-Urbanisme et aménagement de l’espace',
-      label: 'Urbanisme et aménagement de l’espace',
-      icon: '🗺️'
-    },
-    {
-      id: 'content-Aménagement du territoire et développement rural',
-      label: 'Aménagement du territoire et développement rural',
-      icon: '🌳'
-    },
-    {
-      id: 'content-Logement et Habitat',
-      label: 'Logement et Habitat',
-      icon: '🏠'
-    },
-    {
-      id: 'content-Environnement et Patrimoine',
-      label: 'Environnement et Patrimoine',
-      icon: '🌳'
-    },
-    {
-      id: 'content-Déchets',
-      label: 'Déchets',
-      icon: '🚮'
-    },
-    {
-      id: 'content-Eau et assainissement',
-      label: 'Eau et assainissement',
-      icon: '💧'
-    },
-    {
-      id: 'content-Réseaux câblés et télécommunications',
-      label: 'Réseaux câblés et télécommunications',
-      icon: '📡'
-    },
-    {
-      id: 'content-Énergie',
-      label: 'Énergie',
-      icon: '🔌'
-    },
-    {
-      id: 'content-Ports, voies d’eau et liaisons maritimes',
-      label: 'Ports, voies d’eau et liaisons maritimes',
-      icon: '🚢'
-    },
-    {
-      id: 'content-Transports scolaires',
-      label: 'Transports scolaires',
-      icon: '🚢'
-    },
-    {
-      id: 'content-Transports publics',
-      label: 'Transports publics',
-      icon: '🚌'
-    },
-    {
-      id: 'content-Voirie',
-      label: 'Voirie',
-      icon: '🚗'
-    },
-    {
-      id: 'content-Funéraire',
-      label: 'Funéraire',
-      icon: '💀'
-    },
-    
-
-
-  ];
+  // Navigation items depuis la source de vérité JSON
+  let navItems = $state<NavItem[]>([]);
+  // Fallback minimal au cas où certaines entrées JSON n'auraient pas d'icon
+  const defaultIcon = '•';
+  $effect(async () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const res = await fetch('/assets/datas/competences/competences.json', { cache: 'no-cache' });
+      const data = await res.json();
+      const items: NavItem[] = (data?.competences || []).map((c: any) => {
+        const title: string = c?.title || 'Section';
+        const id = 'content-' + title;
+        const iconFromJson: string | undefined = c?.icon;
+        const icon = iconFromJson && typeof iconFromJson === 'string' ? iconFromJson : defaultIcon;
+        return { id, label: title, icon };
+      });
+      navItems = items;
+    } catch (e) {
+      // en cas d'échec, on garde navItems vide
+    }
+  });
 
   // Actions
   function selectItem(itemId: string) {
@@ -256,9 +149,8 @@
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 90px;
+    top: 70px;
     max-width: 500px;
-    border-radius: 1rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border: 2px solid rgba(46, 139, 87, 0.1);
     backdrop-filter: blur(10px);
@@ -274,8 +166,7 @@
     padding: .5rem .75rem;
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
-  .sidebar-header h2 { font-size: 1rem; margin: 0; }
-  /* Plus de bouton de fermeture en en-tête mobile */
+  .sidebar-header h2 { font-size: 1.5rem; margin: 0; }
 
   .sidebar-body { padding: .75rem; overflow:auto; }
 

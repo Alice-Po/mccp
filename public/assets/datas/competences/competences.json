@@ -3,6 +3,7 @@
         {
             "id": "1",
             "title": "Sécurité",
+            "icon": "🛡️",
             "COMMUNES OU EPCI": {
                 "Maire": [
                     "Officier de police judiciaire (au nom de l'État, sous la direction du procureur de la République)",
@@ -34,6 +35,7 @@
         {
             "id": "2",
             "title": "Action Sociale et Santé",
+            "icon": "🏥",
             "COMMUNES OU EPCI": {
                 "Rôle général": [
                     "Animation d’une action générale de prévention et de développement social sur le territoire de la commune par le biais d’un centre communal ou intercommunal d’action sociale (CCAS ou CIAS). Pour les communes de moins de 1 500 habitants, possibilité de ne pas créer ou de dissoudre le CCAS et d’assurer la compétence sociale par un CIAS ou un service non personnalisé.",
@@ -75,6 +77,7 @@
         {
             "id": "3",
             "title": "Emploi et Insertion",
+            "icon": "💼",
             "COMMUNES OU EPCI": {
                 "Concours au service public de l'emploi": [
                     "Possibilité de délégation par Pôle emploi de la réception d’offres d’emplois et d’opérations de placement",
@@ -98,6 +101,7 @@
         {
             "id": "4",
             "title": "Enseignement",
+            "icon": "📚",
             "COMMUNES OU EPCI": {
                 "Compétences communales": [
                     "Le conseil municipal décide de la création et de l'implantation des écoles et classes élémentaires et maternelles d'enseignement public après avis du représentant de l'État dans le département (article L. 2121-30 du CGCT)",
@@ -121,6 +125,7 @@
         {
             "id": "5",
             "title": "Enfance et Jeunesse",
+            "icon": "👶",
             "COMMUNES OU EPCI": {
                 "Accueil du jeune enfant": [
                     "Les communes sont les autorités organisatrices de l’accueil du jeune enfant à partir du 1er janvier 2025 (article L. 214-1-3 du CASF).",
@@ -147,6 +152,7 @@
         {
             "id": "6",
             "title": "Sport",
+            "icon": "⚽",
             "COMMUNES OU EPCI": {
                 "Équipements sportifs": [
                     "Construction et fonctionnement des équipements sportifs de proximité (piscine, gymnase, camping, etc.)",
@@ -164,6 +170,7 @@
         {
             "id": "7",
             "title": "Action Culturelle",
+            "icon": "🎭",
             "COMMUNES OU EPCI": {
                 "1% culturel": [
                     "Insertion des œuvres d’art dans certaines constructions (1% du coût de l’investissement)"
@@ -194,6 +201,7 @@
         {
             "id": "8",
             "title": "Tourisme",
+            "icon": "🏖️",
             "COMMUNES OU EPCI": {
                 "Tourisme": [
                     "Compétence partagée des collectivités territoriales (articles L.1111-4 du CGCT et L.111-1 du code du tourisme)",
@@ -208,6 +216,7 @@
         {
             "id": "9",
             "title": "Interventions dans le domaine économique",
+            "icon": "💰",
             "COMMUNES OU EPCI": {
                 "Schéma régional de développement économique, d’innovation et d’internationalisation (SRDEII)": [
                     "Le projet de SRDEII est élaboré en concertation avec les EPCI à fiscalité propre.",
@@ -272,6 +281,7 @@
         {
             "id": "11",
             "title": "Politique de la Ville",
+            "icon": "🏘️",
             "COMMUNES OU EPCI": {
                 "Contrat de ville": [
                     "Pilotage et mise en œuvre du contrat de ville",
@@ -285,6 +295,7 @@
         {
             "id": "12",
             "title": "Urbanisme et aménagement de l’espace",
+            "icon": "🗺️",
             "COMMUNES OU EPCI": {
                 "Documents d’urbanisme": [
                     "Schéma de cohérence territoriale (SCoT - article L.143-16 du code de l’urbanisme)",
@@ -340,6 +351,7 @@
         {
             "id": "13",
             "title": "Aménagement du territoire et développement rural",
+            "icon": "🌳",
             "COMMUNES OU EPCI": {
                 "Chartes intercommunales": [
                     "Élaboration et approbation des chartes intercommunales de développement et d’aménagement (article L.5223-1 du CGCT)"
@@ -367,6 +379,7 @@
         {
             "id": "14",
             "title": "Logement et Habitat",
+            "icon": "🏠",
             "COMMUNES OU EPCI": {
                 "Programmation de l’habitat": [
                     "Programme local de l’habitat (PLH)",
@@ -405,6 +418,7 @@
         {
             "id": "15",
             "title": "Environnement et Patrimoine",
+            "icon": "🌳",
             "COMMUNES OU EPCI": {
                 "Patrimoine naturel": [
                     "Réalisation d’inventaires locaux du patrimoine naturel (article L. 411-1 A du code de l’environnement)"
@@ -417,6 +431,7 @@
         {
             "id": "16",
             "title": "Déchets",
+            "icon": "🚮",
             "COMMUNES OU EPCI": {
                 "Ordures ménagères": [
                     "Collecte et traitement des ordures ménagères (article L. 2224-13 du CGCT)",
@@ -430,6 +445,7 @@
         {
             "id": "17",
             "title": "Eau et assainissement",
+            "icon": "💧",
             "COMMUNES OU EPCI": {
                 "Eau potable (article L. 2224-7-1 du CGCT)": [
                     "Distribution publique de l’eau potable et élaboration du schéma de distribution d’eau potable",
@@ -464,6 +480,7 @@
         {
             "id": "18",
             "title": "Réseaux câblés et télécommunications",
+            "icon": "📡",
             "COMMUNES OU EPCI": {
                 "Télécommunications": [
                     "Établissement et exploitation des infrastructures et des réseaux de télécommunication, fourniture de services de télécommunication en cas de carence d’initiative privée (article L.1425-1 du CGCT) — compétence obligatoire de la métropole de Lyon et des métropoles de droit commun",
@@ -477,6 +494,7 @@
         {
             "id": "19",
             "title": "Énergie",
+            "icon": "🔌",
             "COMMUNES OU EPCI": {
                 "AODE": [
                     "Autorités organisatrices de distribution d’électricité et de gaz (AODE) (article L.2224-31 du CGCT)"
@@ -510,6 +528,7 @@
         {
             "id": "20",
             "title": "Ports, voies d’eau et liaisons maritimes",
+            "icon": "🚢",
             "COMMUNES OU EPCI": {
                 "Ports de plaisance": [
                     "Création, aménagement, exploitation (article L.5314-4 du code des transports)"
@@ -529,6 +548,7 @@
         {
             "id": "21",
             "title": "Transports scolaires",
+            "icon": "🚌",
             "COMMUNES OU EPCI": {
                 "Organisation des transports scolaires": [
                     "Financement, organisation et fonctionnement des transports scolaires à l’intérieur des périmètres de transports urbains existants au 1er septembre 1984 par l’autorité organisatrice de la mobilité (article L.3111-7 du code des transports)"
@@ -541,6 +561,7 @@
         {
             "id": "22",
             "title": "Transports publics",
+            "icon": "🚌",
             "COMMUNES OU EPCI": {
                 "Autorité organisatrice de la mobilité (AOM)": [
                     "Organisation de services réguliers et à la demande de transport public de personnes, des services de mobilité solidaire, des services relatifs aux mobilités actives (article L.1271-1 du code des transports) et aux usages partagés des véhicules terrestres à moteur",
@@ -562,6 +583,7 @@
         {
             "id": "23",
             "title": "Voirie",
+            "icon": "🚗",
             "COMMUNES OU EPCI": {
                 "Voirie communale": [
                     "Création, aménagement et entretien des voies communales"
@@ -586,6 +608,7 @@
         {
             "id": "24",
             "title": "Funéraire",
+            "icon": "💀",
             "COMMUNES OU EPCI": {
                 "Maire": [
                     "En tant qu’officier d’état civil : dresse l’acte de décès (article 87 du code civil)",
