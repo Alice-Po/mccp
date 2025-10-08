@@ -3,6 +3,11 @@
   export let url: string;
   export let title: string;
   export let description: string = "";
+  // Meta optionnelle pour enrichir le partage d'événements
+  export let eventDate: Date | string | null = null;
+  export let startTime: string | null = null;
+  export let endTime: string | null = null;
+  export let place: string | null = null;
   
   let isOpen = false;
   let copySuccess = false;
@@ -128,14 +133,41 @@
   async function shareNative() {
     if (navigator.share) {
       try {
-        await navigator.share({
-          title: title,
-          text: description,
-          url: url
-        });
+        const website = url;
+        const hasEventMeta = !!(eventDate || startTime || endTime || place);
+
+        const formattedDate = (() => {
+          if (!eventDate) return "";
+          const d = new Date(eventDate);
+          if (isNaN(d.getTime())) return "";
+          return d.toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+        })();
+
+        const formattedTime = (() => {
+          const fmt = (t: string) => {
+            const [h, m] = t.split('-');
+            const hh = String(parseInt(h || '0', 10)).padStart(2, '0');
+            const mm = String(parseInt(m || '0', 10)).padStart(2, '0');
+            return `${hh}h${mm !== '00' ? mm : ''}`.trim();
+          };
+          if (startTime && endTime) return `${fmt(startTime)} – ${fmt(endTime)}`;
+          if (startTime) return fmt(startTime);
+          return "";
+        })();
+
+        const parts: string[] = [];
+        parts.push(title);
+        if (formattedDate) parts.push(formattedDate);
+        if (formattedTime) parts.push(formattedTime);
+        if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
+        parts.push(website);
+
+        const text = hasEventMeta ? parts.join('\n') : `${description}\n${website}`.trim();
+
+        await navigator.share({ title, text, url: website });
         closeShare();
       } catch (err) {
-        console.error('Erreur lors du partage natif:', err);
+        // l'utilisateur peut annuler; on n'affiche pas d'erreur
       }
     }
   }

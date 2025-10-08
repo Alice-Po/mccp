@@ -163,6 +163,10 @@
         url={typeof window !== 'undefined' ? window.location.href : ''}
         title={event.data.title}
         description={event.data.description}
+        eventDate={event.data.date}
+        startTime={event.data.start}
+        endTime={event.data.end}
+        place={event.data.place}
       />
     </div>
 
