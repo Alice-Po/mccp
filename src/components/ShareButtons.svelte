@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate, tick } from 'svelte';
+  import { onMount, afterUpdate, tick } from 'svelte';
   export let url: string;
   export let title: string;
   export let description: string = "";
@@ -16,6 +16,17 @@
   let shareContainer: HTMLDivElement;
   let previousIsOpen = isOpen;
   let rafId: number | null = null;
+  let isMobile = false;
+
+  onMount(() => {
+    if (typeof navigator !== 'undefined') {
+      const ua = navigator.userAgent || '';
+      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone|Opera Mini|Mobi/i;
+      const navDataMobile = (navigator as any).userAgentData?.mobile ?? false;
+      const screenSmall = typeof window !== 'undefined' ? window.innerWidth <= 820 : false;
+      isMobile = Boolean(navDataMobile || mobileRegex.test(ua) || screenSmall);
+    }
+  });
 
   // no-op
 
@@ -76,10 +87,46 @@
     isOpen = false;
   }
 
-  // Fonction pour copier l'URL dans le presse-papiers
+  // Fonction pour copier un message d'invitation dans le presse-papiers
   async function copyToClipboard() {
     try {
-      await navigator.clipboard.writeText(url);
+      const website = url;
+      const hasEventMeta = !!(eventDate || startTime || endTime || place);
+
+      const formattedDate = (() => {
+        if (!eventDate) return "";
+        const d = new Date(eventDate);
+        if (isNaN(d.getTime())) return "";
+        return d.toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+      })();
+
+      const formattedTime = (() => {
+        const fmt = (t: string) => {
+          const [h, m] = t.split('-');
+          const hh = String(parseInt(h || '0', 10)).padStart(2, '0');
+          const mm = String(parseInt(m || '0', 10)).padStart(2, '0');
+          return `${hh}h${mm !== '00' ? mm : ''}`.trim();
+        };
+        if (startTime && endTime) return `${fmt(startTime)} – ${fmt(endTime)}`;
+        if (startTime) return fmt(startTime);
+        return "";
+      })();
+
+      const parts: string[] = [];
+      if (hasEventMeta) {
+        parts.push("Invitation : ");
+        parts.push(title);
+        if (formattedDate) parts.push(formattedDate);
+        if (formattedTime) parts.push(formattedTime);
+        if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
+        parts.push("", website);
+      } else {
+        if (description && description.trim()) parts.push(description.trim());
+        parts.push("", website);
+      }
+
+      const invitationText = parts.join('\n');
+      await navigator.clipboard.writeText(invitationText);
       copySuccess = true;
       setTimeout(() => {
         copySuccess = false;
@@ -100,7 +147,42 @@
   // Fonction pour partager via email
   function shareViaEmail() {
     const subject = encodeURIComponent(title);
-    const body = encodeURIComponent(`${description}\n\n${url}`);
+    const website = url;
+    const hasEventMeta = !!(eventDate || startTime || endTime || place);
+
+    const formattedDate = (() => {
+      if (!eventDate) return "";
+      const d = new Date(eventDate);
+      if (isNaN(d.getTime())) return "";
+      return d.toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+    })();
+
+    const formattedTime = (() => {
+      const fmt = (t: string) => {
+        const [h, m] = t.split('-');
+        const hh = String(parseInt(h || '0', 10)).padStart(2, '0');
+        const mm = String(parseInt(m || '0', 10)).padStart(2, '0');
+        return `${hh}h${mm !== '00' ? mm : ''}`.trim();
+      };
+      if (startTime && endTime) return `${fmt(startTime)} – ${fmt(endTime)}`;
+      if (startTime) return fmt(startTime);
+      return "";
+    })();
+
+    const parts: string[] = [];
+    if (hasEventMeta) {
+      parts.push("Invitation : ");
+      parts.push(title);
+      if (formattedDate) parts.push(formattedDate);
+      if (formattedTime) parts.push(formattedTime);
+      if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
+      parts.push("", website); // ligne vide puis URL
+    } else {
+      if (description && description.trim()) parts.push(description.trim());
+      parts.push("", website);
+    }
+
+    const body = encodeURIComponent(parts.join('\n'));
     const emailUrl = `mailto:?subject=${subject}&body=${body}`;
     window.open(emailUrl);
     closeShare();
@@ -108,19 +190,90 @@
 
   // Fonction pour partager via WhatsApp
   function shareViaWhatsApp() {
-    const text = `${title} - ${url}`;
+    // Construire un message enrichi (événement) et inclure l'URL dans le texte (WhatsApp nécessite text=)
+    const website = url;
+    const hasEventMeta = !!(eventDate || startTime || endTime || place);
+
+    const formattedDate = (() => {
+      if (!eventDate) return "";
+      const d = new Date(eventDate);
+      if (isNaN(d.getTime())) return "";
+      return d.toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+    })();
+
+    const formattedTime = (() => {
+      const fmt = (t: string) => {
+        const [h, m] = t.split('-');
+        const hh = String(parseInt(h || '0', 10)).padStart(2, '0');
+        const mm = String(parseInt(m || '0', 10)).padStart(2, '0');
+        return `${hh}h${mm !== '00' ? mm : ''}`.trim();
+      };
+      if (startTime && endTime) return `${fmt(startTime)} – ${fmt(endTime)}`;
+      if (startTime) return fmt(startTime);
+      return "";
+    })();
+
+    const parts: string[] = [];
+    if (hasEventMeta) {
+      parts.push(title);
+      if (formattedDate) parts.push(formattedDate);
+      if (formattedTime) parts.push(formattedTime);
+      if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
+      parts.push("", website);
+    } else {
+      if (description && description.trim()) parts.push(description.trim());
+      parts.push("", website);
+    }
+
+    const text = parts.join('\n');
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
     closeShare();
   }
 
-  // Fonction pour partager via Signal
-  function shareViaSignal() {
-    const text = `${title} - ${url}`;
-    const signalUrl = `https://signal.me/#p/${encodeURIComponent(text)}`;
-    window.open(signalUrl, '_blank');
-    closeShare();
-  }
+  // Fonction expérimental qui ne marche pas encore pour partager via Signal
+  // function shareViaSignal() {
+  //   // Utiliser un message enrichi comme pour WhatsApp; tenter d'abord le deeplink natif
+  //   const website = url;
+  //   const hasEventMeta = !!(eventDate || startTime || endTime || place);
+
+  //   const formattedDate = (() => {
+  //     if (!eventDate) return "";
+  //     const d = new Date(eventDate);
+  //     if (isNaN(d.getTime())) return "";
+  //     return d.toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+  //   })();
+
+  //   const formattedTime = (() => {
+  //     const fmt = (t: string) => {
+  //       const [h, m] = t.split('-');
+  //       const hh = String(parseInt(h || '0', 10)).padStart(2, '0');
+  //       const mm = String(parseInt(m || '0', 10)).padStart(2, '0');
+  //       return `${hh}h${mm !== '00' ? mm : ''}`.trim();
+  //     };
+  //     if (startTime && endTime) return `${fmt(startTime)} – ${fmt(endTime)}`;
+  //     if (startTime) return fmt(startTime);
+  //     return "";
+  //   })();
+
+  //   const parts: string[] = [];
+  //   if (hasEventMeta) {
+  //     parts.push(title);
+  //     if (formattedDate) parts.push(formattedDate);
+  //     if (formattedTime) parts.push(formattedTime);
+  //     if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
+  //     parts.push("", website);
+  //   } else {
+  //     if (description && description.trim()) parts.push(description.trim());
+  //     parts.push("", website);
+  //   }
+
+  //   const text = parts.join('\n');
+  //   const deeplink = `sgnl://send?text=${encodeURIComponent(text)}`;
+  //   // Navigation directe vers le deeplink Signal sans fallback
+  //   window.location.href = deeplink;
+  //   closeShare();
+  // }
 
   // Fonction pour partager via Facebook
   function shareViaFacebook() {
@@ -160,9 +313,9 @@
         if (formattedDate) parts.push(formattedDate);
         if (formattedTime) parts.push(formattedTime);
         if (place && place.trim()) parts.push(`📍 ${place.trim()}`);
-        parts.push(website);
 
-        const text = hasEventMeta ? parts.join('\n') : `${description}\n${website}`.trim();
+        // Ne pas dupliquer l'URL: déjà transmise via le champ url
+        const text = hasEventMeta ? parts.join('\n') : (description || '').trim();
 
         await navigator.share({ title, text, url: website });
         closeShare();
@@ -223,7 +376,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
           </svg>
-          <span>{copySuccess ? 'Copié !' : 'Copier le lien'}</span>
+          <span>{copySuccess ? 'Copié !' : 'Copier les infos de l\'évenement'}</span>
         </button>
 
         <!-- Email -->
@@ -234,13 +387,15 @@
           <span>Email</span>
         </button>
 
-        <!-- SMS -->
-        <button class="share-option" on:click={shareViaSMS}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
-          </svg>
-          <span>SMS</span>
-        </button>
+        <!-- SMS (affiché uniquement sur mobile) -->
+        {#if isMobile}
+          <button class="share-option" on:click={shareViaSMS}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
+            </svg>
+            <span>SMS</span>
+          </button>
+        {/if}
 
         <!-- WhatsApp -->
         <button class="share-option" on:click={shareViaWhatsApp}>
@@ -249,10 +404,10 @@
         </button>
 
         <!-- Signal -->
-        <button class="share-option" on:click={shareViaSignal}>
+        <!-- <button class="share-option" on:click={shareViaSignal}>
           <img src="/assets/img/logo/Signal-icon.png" alt="Signal" width="20" height="20" />
           <span>Signal</span>
-        </button>
+        </button> -->
 
         <!-- Facebook -->
         <button class="share-option" on:click={shareViaFacebook}>
