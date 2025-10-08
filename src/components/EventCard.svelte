@@ -3,7 +3,18 @@
   import ShareButtons from "./ShareButtons.svelte";
 
   export let event: any;
-  export let icsDataUrl: string | null = null;
+
+  // Fonction pour créer un lien de téléchargement direct vers le fichier .ics
+  function getIcsDownloadUrl(vcalendarPath: string): string | null {
+    if (!vcalendarPath || !vcalendarPath.trim()) {
+      return null;
+    }
+    // Retourner directement l'URL du fichier .ics
+    return vcalendarPath;
+  }
+
+  // Générer l'URL de téléchargement ICS
+  const icsDownloadUrl = event.data.vcalendar ? getIcsDownloadUrl(event.data.vcalendar) : null;
 
   let downloadsOpen = false;
 
@@ -168,8 +179,8 @@
             <img src="/assets/img/logo/outlook-icon.png" alt="Outlook" width="18" height="18" />
             <span>Outlook</span>
           </a>
-          {#if icsDataUrl}
-            <a href={icsDataUrl} class="provider-btn download">
+          {#if icsDownloadUrl}
+            <a href={icsDownloadUrl} class="provider-btn download">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -3,8 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Image from "../components/Image.astro";
 import Download from "../components/commonsElements/Download.svelte";
 import { getCollection } from 'astro:content';
-import fs from 'fs';
-import path from 'path';
 import "../styles/global.css";
 import EventCard from "../components/EventCard.svelte";
 
@@ -35,22 +33,6 @@ function generateSlug(title: string) {
     .replace(/\s+/g, '-');
 }
 
-// Fonction pour lire et encoder le contenu d'un fichier .ics
-function getIcsDataUrl(vcalendarPath: string): string | null {
-  try {
-    // Construire le chemin vers le fichier dans public/
-    const publicPath = path.join(process.cwd(), 'public', vcalendarPath.replace('/assets/', 'assets/'));
-    
-    if (fs.existsSync(publicPath)) {
-      const content = fs.readFileSync(publicPath, 'utf8');
-      const base64 = Buffer.from(content).toString('base64');
-      return `data:application/ics;charset=utf-8;base64,${base64}`;
-    }
-  } catch (error) {
-    console.warn(`Erreur lors de la lecture du fichier .ics: ${vcalendarPath}`, error);
-  }
-  return null;
-}
 ---
 
 <Layout title="MCCP">
@@ -72,7 +54,7 @@ function getIcsDataUrl(vcalendarPath: string): string | null {
     <div class="content-wrapper">
       <!-- Section Ambitions -->
       <section class="ambitions-section">
-        <h2>Nos ambitions</h2>
+        <h2>L ambitions</h2>
         <ul>
           <li>
             Des <strong>bourgs vivants</strong> où l'esprit de village est conservé
@@ -132,14 +114,11 @@ function getIcsDataUrl(vcalendarPath: string): string | null {
       <h2>Événements à venir</h2>
               <p>Participez aux rencontres, des moments conviviaux pour apprendre et échanger.</p>
       
-      <div class="events-grid">
-        {visibleEvents.map((event: any) => {
-          const icsDataUrl = event.data.vcalendar ? getIcsDataUrl(event.data.vcalendar) : null;
-          return (
-            <EventCard client:load event={event} icsDataUrl={icsDataUrl} />
-          );
-        })}
-      </div>
+               <div class="events-grid">
+                 {visibleEvents.map((event: any) => (
+                   <EventCard client:load event={event} />
+                 ))}
+               </div>
 
       {hiddenEvents.length > 0 && (
         <div class="view-all">
@@ -149,14 +128,11 @@ function getIcsDataUrl(vcalendarPath: string): string | null {
         </div>
       )}
 
-      <div id="hidden-events" class="events-grid" style="display: none;">
-        {hiddenEvents.map((event: any) => {
-          const icsDataUrl = event.data.vcalendar ? getIcsDataUrl(event.data.vcalendar) : null;
-          return (
-            <EventCard client:load event={event} icsDataUrl={icsDataUrl} />
-          );
-        })}
-      </div>
+               <div id="hidden-events" class="events-grid" style="display: none;">
+                 {hiddenEvents.map((event: any) => (
+                   <EventCard client:load event={event} />
+                 ))}
+               </div>
     </section>
 
       <!-- Nouvelle section Actualités -->
