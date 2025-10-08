@@ -10,7 +10,17 @@ const currentYear = new Date().getFullYear();
     <span class="dot">•</span>
     <a href="mailto:contact@mccputanges.fr">contact@mccputanges.fr</a>
     <span class="dot">•</span>
-    <a href="https://www.facebook.com/mccputanges">Facebook</a>
+    <div class="social-links">
+      <a href="https://www.facebook.com/mccputanges" target="_blank" rel="noopener noreferrer">
+        <img src="/assets/img/logo/Facebook-icon.png" alt="Facebook" />
+      </a>
+      <a href="https://www.instagram.com/mccputanges" target="_blank" rel="noopener noreferrer">
+        <img src="/assets/img/logo/Instagram-icon.png" alt="Instagram" />
+      </a>
+      <a href="https://signal.group/#CjQKIHatjGOpligTeLvBUasgAsfJIF9AcHi8nyJwiSYmDFUREhB3s7vbwUa3TKxpen31V0iK" target="_blank" rel="noopener noreferrer">
+        <img src="/assets/img/logo/Signal-icon.png" alt="Signal" />
+      </a>
+    </div>
     <span class="copyright">&copy; {currentYear} MCCP </span>
   </div>
 </footer>
@@ -55,6 +65,28 @@ const currentYear = new Date().getFullYear();
   .copyright {
     margin-left: auto;
     opacity: 0.7;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .social-links a {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .social-links a:hover {
+    transform: scale(1.1);
+  }
+
+  .social-links img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 20%;
   }
 
   @media (max-width: 768px) {
