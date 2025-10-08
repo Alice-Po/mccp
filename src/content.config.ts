@@ -17,10 +17,28 @@ const blog = defineCollection({
   }),
 });
 
+const agenda = defineCollection({
+  loader: glob({ pattern: '*.md', base: 'src/data/agenda' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    place: z.string(),
+    start: z.string().optional(),
+    end: z.string().optional(),
+    author: z.string(),
+    image: z.string().optional(),
+    flyers: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
 // Log pour vérifier la configuration
 console.log('Blog collection configuration:', blog);
+console.log('Agenda collection configuration:', agenda);
 
-export const collections = { blog };
+export const collections = { blog, agenda };
 
 // Log pour vérifier l'export
 console.log('Exported collections:', collections);

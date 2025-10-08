@@ -156,14 +156,16 @@ strong {
   font-size: 1.3rem;
 }
 
-/* Styles pour les cartes d'actualités */
+/* Styles pour les cartes d'actualités et événements */
 .news-section,
-.blog-index {
+.blog-index,
+.events-section {
   margin: 4rem 0;
 }
 
 .news-section h2,
-.blog-index h1 {
+.blog-index h1,
+.events-section h2 {
   color: var(--primary);
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -173,7 +175,8 @@ strong {
 }
 
 .news-grid,
-.blog-grid {
+.blog-grid,
+.events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
@@ -181,7 +184,8 @@ strong {
 }
 
 .news-card,
-.blog-card {
+.blog-card,
+.event-card {
   border: 1px solid #eaeaea;
   border-radius: 1rem;
   overflow: hidden;
@@ -194,7 +198,8 @@ strong {
 }
 
 .news-card:hover,
-.blog-card:hover {
+.blog-card:hover,
+.event-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
@@ -207,7 +212,8 @@ strong {
 }
 
 .news-content,
-.blog-content {
+.blog-content,
+.event-content {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -215,7 +221,8 @@ strong {
 }
 
 .news-content h3,
-.blog-content h2 {
+.blog-content h2,
+.event-content h3 {
   font-size: 1.3rem;
   color: var(--secondary);
   margin-bottom: 0.5rem;
@@ -231,11 +238,13 @@ strong {
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.post-meta {
+.post-meta,
+.event-meta {
   font-size: 0.9rem;
   color: var(--secondary);
   opacity: 0.7;
@@ -244,6 +253,35 @@ strong {
   background-color: rgba(46, 139, 87, 0.1);
   padding: 0.3rem 0.8rem;
   border-radius: 0.5rem;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.meta-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.event-time {
+  font-weight: 500;
+}
+
+.event-place {
+  font-weight: 500;
+  color: var(--primary);
+  margin: 0;
 }
 
 .read-more {
@@ -634,7 +672,8 @@ strong {
 /* Media queries */
 @media (max-width: 768px) {
   .news-grid,
-  .blog-grid {
+  .blog-grid,
+  .events-grid {
     grid-template-columns: 1fr;
   }
 
@@ -648,7 +687,8 @@ strong {
   }
 
   .news-card,
-  .blog-card {
+  .blog-card,
+  .event-card {
     margin-bottom: 1.5rem;
   }
 
