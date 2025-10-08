@@ -1,7 +1,9 @@
+---
 import Layout from "./Layout.astro";
 import "../styles/articles.css";
 
 const { frontmatter } = Astro.props;
+---
 
 <Layout title={frontmatter.title}>
   <main>
@@ -12,7 +14,6 @@ const { frontmatter } = Astro.props;
           <time datetime={frontmatter.pubDate}>
             {new Date(frontmatter.pubDate).toLocaleDateString('fr-FR')}
           </time>
-          <span class="author">par {frontmatter.author}</span>
         </div>
       </div>
 

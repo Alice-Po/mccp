@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { afterUpdate, tick } from 'svelte';
   export let url: string;
   export let title: string;
   export let description: string = "";
@@ -7,33 +8,62 @@
   let copySuccess = false;
   let shareButton: HTMLButtonElement;
   let shareMenu: HTMLDivElement;
+  let shareContainer: HTMLDivElement;
+  let previousIsOpen = isOpen;
+  let rafId: number | null = null;
+
+  // no-op
+
+  afterUpdate(() => {
+    if (previousIsOpen !== isOpen) {
+      previousIsOpen = isOpen;
+      if (isOpen && shareButton && shareMenu) {
+        positionMenu();
+      }
+    }
+  });
 
   // Fonction pour basculer l'état d'ouverture
-  function toggleShare() {
+  async function toggleShare() {
     isOpen = !isOpen;
-    if (isOpen && shareButton && shareMenu) {
-      positionMenu();
+    if (isOpen) {
+      await tick();
+      if (shareButton && shareMenu) {
+        positionMenu();
+      } else {
+        // refs not ready; skip silently
+      }
     }
   }
 
   // Fonction pour positionner le menu
   function positionMenu() {
+    if (!shareButton || !shareMenu || !shareContainer) {
+      return;
+    }
     const buttonRect = shareButton.getBoundingClientRect();
     const menuRect = shareMenu.getBoundingClientRect();
-    
-    // Positionner le menu sous le bouton
-    shareMenu.style.top = `${buttonRect.bottom + 8}px`;
-    shareMenu.style.left = `${buttonRect.left}px`;
-    
-    // Ajuster si le menu dépasse à droite
-    if (buttonRect.left + menuRect.width > window.innerWidth) {
-      shareMenu.style.left = `${window.innerWidth - menuRect.width - 16}px`;
-    }
-    
-    // Ajuster si le menu dépasse en bas
-    if (buttonRect.bottom + menuRect.height > window.innerHeight) {
-      shareMenu.style.top = `${buttonRect.top - menuRect.height - 8}px`;
-    }
+    const containerRect = shareContainer.getBoundingClientRect();
+
+    // Calculer la position relative au conteneur
+    let top = (buttonRect.bottom - containerRect.top) + 8; // sous le bouton
+    let left = (buttonRect.left - containerRect.left) + (buttonRect.width - menuRect.width) / 2; // centré
+
+    // Contrainte pour rester dans le conteneur horizontalement
+    left = Math.max(8, Math.min(left, containerRect.width - menuRect.width - 8));
+
+    shareMenu.style.top = `${top}px`;
+    shareMenu.style.left = `${left}px`;
+  }
+
+  // Throttle reposition using requestAnimationFrame
+  function scheduleReposition() {
+    if (!isOpen) return;
+    if (rafId !== null) return;
+    rafId = requestAnimationFrame(() => {
+      rafId = null;
+      positionMenu();
+    });
   }
 
   // Fonction pour fermer le menu
@@ -112,7 +142,10 @@
 
   // Gestionnaire pour fermer le menu en cliquant à l'extérieur
   function handleClickOutside(event: MouseEvent) {
-    if (isOpen && shareMenu && !shareMenu.contains(event.target as Node) && !shareButton.contains(event.target as Node)) {
+    const target = event.target as Node | null;
+    const clickedInsideMenu = !!shareMenu && !!target && shareMenu.contains(target);
+    const clickedButton = !!shareButton && !!target && shareButton.contains(target);
+    if (isOpen && shareMenu && !clickedInsideMenu && !clickedButton) {
       closeShare();
     }
   }
@@ -121,13 +154,18 @@
   $: if (typeof window !== 'undefined') {
     if (isOpen) {
       document.addEventListener('click', handleClickOutside);
+      window.addEventListener('resize', scheduleReposition, { passive: true });
+      // Use capture to catch scrolls on ancestor containers as well
+      window.addEventListener('scroll', scheduleReposition, { passive: true, capture: true } as any);
     } else {
       document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('resize', scheduleReposition as EventListener);
+      window.removeEventListener('scroll', scheduleReposition as EventListener, true);
     }
   }
 </script>
 
-<div class="share-container">
+<div class="share-container" bind:this={shareContainer}>
   <button bind:this={shareButton} class="share-button {isOpen ? 'active' : ''}" on:click={toggleShare}>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 5.12549 15.0077 5.24919 15.0227 5.37063L8.46447 9.46447C7.98815 8.98815 7.32588 8.7 6.6 8.7C4.61177 8.7 3 10.3118 3 12.3C3 14.2882 4.61177 15.9 6.6 15.9C7.32588 15.9 7.98815 15.6118 8.46447 15.1355L15.0227 19.2294C15.0077 19.3508 15 19.4745 15 19.6C15 21.6569 16.3431 23 18 23C19.6569 23 21 21.6569 21 19.6C21 17.5431 19.6569 16.2 18 16.2C17.2741 16.2 16.6118 16.4882 16.1355 16.9645L9.57727 12.8706C9.59227 12.7492 9.6 12.6255 9.6 12.5C9.6 12.3745 9.59227 12.2508 9.57727 12.1294L16.1355 8.03553C16.6118 8.51185 17.2741 8.8 18 8.8V8Z" fill="currentColor"/>
@@ -139,7 +177,7 @@
     <div bind:this={shareMenu} class="share-menu">
       <div class="share-options">
         <!-- Partage natif (mobile) -->
-        {#if typeof navigator !== 'undefined' && navigator.share}
+        {#if typeof navigator !== 'undefined' && typeof navigator.share === 'function'}
           <button class="share-option" on:click={shareNative}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 5.12549 15.0077 5.24919 15.0227 5.37063L8.46447 9.46447C7.98815 8.98815 7.32588 8.7 6.6 8.7C4.61177 8.7 3 10.3118 3 12.3C3 14.2882 4.61177 15.9 6.6 15.9C7.32588 15.9 7.98815 15.6118 8.46447 15.1355L15.0227 19.2294C15.0077 19.3508 15 19.4745 15 19.6C15 21.6569 16.3431 23 18 23C19.6569 23 21 21.6569 21 19.6C21 17.5431 19.6569 16.2 18 16.2C17.2741 16.2 16.6118 16.4882 16.1355 16.9645L9.57727 12.8706C9.59227 12.7492 9.6 12.6255 9.6 12.5C9.6 12.3745 9.59227 12.2508 9.57727 12.1294L16.1355 8.03553C16.6118 8.51185 17.2741 8.8 18 8.8V8Z" fill="currentColor"/>
@@ -228,10 +266,10 @@
   }
 
   .share-menu {
-    position: fixed;
+    position: absolute;
     top: auto;
     right: auto;
-    margin-top: 0.5rem;
+    margin-top: 0;
     background: white;
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
@@ -272,14 +310,21 @@
 
   .share-option svg {
     flex-shrink: 0;
+    width: 20px;
+    height: 20px;
   }
 
   .share-option img {
     border-radius: 20%;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin : 0;
   }
 
   .share-option span {
     font-weight: 500;
+    line-height: 1;
   }
 
   /* Responsive */

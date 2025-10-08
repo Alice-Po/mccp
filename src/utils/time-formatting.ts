@@ -35,3 +35,5 @@ export function formatTimeRange(start: string, end?: string): string {
   const endFormatted = formatTime(end);
   return `De ${startFormatted} à ${endFormatted}`;
 }
+
+
