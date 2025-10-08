@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MCCP//Agenda//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20251025-saint-aubert@mccp
+DTSTAMP:20250101T120000Z
+DTSTART;TZID=Europe/Paris:20251025T093000
+DTEND;TZID=Europe/Paris:20251025T120000
+SUMMARY:Réunion publique à Saint-Aubert
+DESCRIPTION:Des envies\, des idées\, des propositions pour notre commune ? Discutons-en !
+LOCATION:à venir
+END:VEVENT
+END:VCALENDAR

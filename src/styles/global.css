@@ -175,10 +175,15 @@ strong {
 }
 
 .news-grid,
-.blog-grid,
-.events-grid {
+.blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -310,11 +315,78 @@ strong {
   margin: 0;
 }
 
+/* Styles pour le bouton d'ajout au calendrier */
+.event-calendar-add {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.calendar-add-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--secondary), #2c4a6b);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(27, 54, 93, 0.3);
+  border: none;
+}
+
+.calendar-add-button:hover {
+  background: linear-gradient(135deg, #2c4a6b, var(--secondary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(27, 54, 93, 0.4);
+}
+
+.calendar-add-icon {
+  color: white;
+  flex-shrink: 0;
+}
+
 /* Styles pour la section de téléchargement des événements */
 .event-downloads {
   margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.download-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.download-toggle h4 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.toggle-icon {
+  color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.download-toggle.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.download-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
 .event-downloads h4 {
@@ -325,25 +397,30 @@ strong {
   font-family: var(--font-main);
 }
 
+/* Ensure download buttons wrap within card */
 .download-buttons {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
 
-.download-link {
+/* Make each provider button occupy a reasonable width and wrap */
+.provider-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.8rem;
-  background-color: rgba(46, 139, 87, 0.1);
-  color: var(--primary);
-  text-decoration: none;
   border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(46, 139, 87, 0.2);
-  flex: 1;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  color: var(--secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 100%;
+  box-sizing: border-box;
   justify-content: center;
 }
 
@@ -1232,4 +1309,70 @@ strong {
     color: #666 !important;
     text-decoration: none !important;
   }
+}
+
+/* Provider buttons under calendar add */
+.calendar-providers {
+  margin: 0.75rem 0 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* allow wrapping when space is insufficient */
+}
+
+/* Size to content (not full width), wrap only when needed */
+.calendar-providers .provider-btn {
+  flex: 0 0 auto; /* content width */
+  justify-content: center;
+}
+
+/* Keep generic provider button visual style */
+.provider-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  color: var(--secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.provider-btn span {
+  white-space: nowrap;
+}
+
+.provider-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the flyer download styles remain intact */
+.download-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(46, 139, 87, 0.1);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(46, 139, 87, 0.2);
+}
+.download-link:hover {
+  background-color: rgba(46, 139, 87, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(46, 139, 87, 0.2);
 }

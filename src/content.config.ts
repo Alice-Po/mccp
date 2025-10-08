@@ -29,6 +29,7 @@ const agenda = defineCollection({
     author: z.string(),
     image: z.string().optional(),
     flyers: z.string().optional(),
+    vcalendar: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().optional().default(false),
   }),

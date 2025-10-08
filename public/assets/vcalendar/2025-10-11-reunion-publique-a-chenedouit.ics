@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MCCP//Agenda//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20251011-chenedouit@mccp
+DTSTAMP:20250101T120000Z
+DTSTART;TZID=Europe/Paris:20251011T093000
+DTEND;TZID=Europe/Paris:20251011T120000
+SUMMARY:Réunion publique à Chênedouit
+DESCRIPTION:Des envies\, des idées\, des propositions pour notre commune ? Discutons-en !
+LOCATION:Salle des fêtes de Chênedouit
+END:VEVENT
+END:VCALENDAR
