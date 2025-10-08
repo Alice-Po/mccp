@@ -265,7 +265,7 @@ strong {
 .news-content,
 .blog-content,
 .event-content {
-  padding: 1.5rem;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -276,7 +276,7 @@ strong {
 .event-content h3 {
   font-size: 1.3rem;
   color: var(--secondary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   font-family: var(--font-main);
   font-weight: 600;
 }
@@ -284,7 +284,7 @@ strong {
 .description {
   color: var(--secondary);
   opacity: 0.8;
-  margin: 0.8rem 0;
+  margin: 0.6rem 0;
   line-height: 1.5;
   flex-grow: 1;
   display: -webkit-box;
@@ -309,7 +309,8 @@ strong {
 .event-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
+  margin: 0.4rem 0;
 }
 
 .meta-item {
@@ -368,8 +369,8 @@ strong {
 
 /* Styles pour la section de téléchargement des événements */
 .event-downloads {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
   border-top: 1px solid rgba(46, 139, 87, 0.1);
 }
 
@@ -411,7 +412,7 @@ strong {
   font-size: 1rem;
   font-weight: 600;
   color: var(--secondary);
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.6rem 0;
   font-family: var(--font-main);
 }
 
@@ -451,6 +452,7 @@ strong {
 /* Styles pour le bouton de partage dans les événements */
 .event-share {
   display: flex;
+  margin: 0.8rem 0;
 }
 
 .download-icon {
