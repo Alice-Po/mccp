@@ -197,6 +197,32 @@ strong {
   flex-direction: column;
 }
 
+.event-date-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  text-align: center;
+  border-radius: 1rem 1rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 4rem;
+}
+
+.date-icon {
+  color: white;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.event-date-header time {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  font-family: var(--font-main);
+  line-height: 1;
+}
+
 .news-card:hover,
 .blog-card:hover,
 .event-card:hover {
@@ -276,12 +302,60 @@ strong {
 
 .event-time {
   font-weight: 500;
+  font-size: 1.1rem;
 }
 
 .event-place {
-  font-weight: 500;
   color: var(--primary);
   margin: 0;
+}
+
+/* Styles pour la section de téléchargement des événements */
+.event-downloads {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.event-downloads h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  margin: 0 0 0.75rem 0;
+  font-family: var(--font-main);
+}
+
+.download-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(46, 139, 87, 0.1);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(46, 139, 87, 0.2);
+  flex: 1;
+  justify-content: center;
+}
+
+.download-link:hover {
+  background-color: rgba(46, 139, 87, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(46, 139, 87, 0.2);
+}
+
+.download-icon {
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .read-more {
