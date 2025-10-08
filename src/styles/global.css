@@ -8,6 +8,11 @@
   --black: #13151a;
   --gray: #747474;
   --gray-light: #e0e0e0;
+  --light-gray: #f5f5f5;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --success: #28a745;
+  --success-light: #d4edda;
   --background: #f9f9f9;
   --font-main: 'League Spartan', sans-serif;
 }
@@ -193,7 +198,6 @@ strong {
 .event-card {
   border: 1px solid #eaeaea;
   border-radius: 1rem;
-  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -442,6 +446,11 @@ strong {
   background-color: rgba(46, 139, 87, 0.2);
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(46, 139, 87, 0.2);
+}
+
+/* Styles pour le bouton de partage dans les événements */
+.event-share {
+  display: flex;
 }
 
 .download-icon {

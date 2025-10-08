@@ -1,5 +1,6 @@
 <script lang="ts">
   import { formatTimeRange } from "../utils/time-formatting";
+  import ShareButtons from "./ShareButtons.svelte";
 
   export let event: any;
   export let icsDataUrl: string | null = null;
@@ -144,6 +145,15 @@
     </div>
     
     <p class="description">{event.data.description}</p>
+
+    <!-- Bouton de partage -->
+    <div class="event-share">
+      <ShareButtons 
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+        title={event.data.title}
+        description={event.data.description}
+      />
+    </div>
 
     <!-- Boutons d'ajout au calendrier -->
     {#if hasCalendar}
