@@ -114,6 +114,7 @@
   const hasFlyers = event.data.flyers && event.data.flyers !== null && event.data.flyers.trim();
   const hasImage = event.data.image && event.data.image !== null && event.data.image.trim();
   const hasDownloads = hasFlyers || hasImage;
+  const hasFacebook = event.data.facebook && event.data.facebook !== null && event.data.facebook.trim();
 </script>
 
 <article class="event-card">
@@ -157,8 +158,8 @@
     
     <p class="description">{event.data.description}</p>
 
-    <!-- Bouton de partage -->
-    <div class="event-share">
+    <!-- Actions (partage et liens externes) -->
+    <div class="event-actions">
       <ShareButtons 
         url={typeof window !== 'undefined' ? window.location.href : ''}
         title={event.data.title}
@@ -168,6 +169,12 @@
         endTime={event.data.end}
         place={event.data.place}
       />
+      
+      {#if hasFacebook}
+        <a href={event.data.facebook} target="_blank" rel="noopener noreferrer" class="facebook-link" title="Voir l'événement sur Facebook">
+          <img src="/assets/img/logo/Facebook-logo.png" alt="Événement Facebook" />
+        </a>
+      {/if}
     </div>
 
     <!-- Boutons d'ajout au calendrier -->

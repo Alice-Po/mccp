@@ -27,6 +27,7 @@ const agenda = defineCollection({
     start: z.string().nullable().optional(),
     end: z.string().nullable().optional(),
     author: z.string(),
+    facebook: z.string().nullable().optional(),
     image: z.string().nullable().optional(),
     flyers: z.string().nullable().optional(),
     vcalendar: z.string().nullable().optional(),

@@ -369,8 +369,8 @@ strong {
 
 /* Styles pour la section de téléchargement des événements */
 .event-downloads {
-  margin-top: 1.2rem;
-  padding-top: 0.8rem;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
   border-top: 1px solid rgba(46, 139, 87, 0.1);
 }
 
@@ -450,9 +450,37 @@ strong {
 }
 
 /* Styles pour le bouton de partage dans les événements */
-.event-share {
+.event-actions {
   display: flex;
+  gap: 0.75rem;
+  align-items: center;
   margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+
+.facebook-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.facebook-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.facebook-link:active {
+  transform: translateY(0);
+}
+
+.facebook-link img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .download-icon {
