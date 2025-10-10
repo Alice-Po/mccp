@@ -40,8 +40,6 @@ Les réalités démographiques et géographiques rendent difficile la relance de
 
 Ces rendez-vous sont déjà ancrés, créent du lien, font une identité aux bourgs. **Ne faudrait-il pas d'abord les préserver et les soutenir, plutôt que d'inventer des choses artificielles juste pour le principe de décentraliser l'activité ?**
 
-Certains évènements ont disparu, comme le méchoui de la Forêt-Auvray. **Les comités des fêtes semblent essentiels pour maintenir la vie dans les bourgs.** De quoi auraient-ils besoin pour continuer ?
-
 ### Un café associatif, pourquoi pas ici ?
 
 [L'exemple du Préau au Perche](https://www.ouest-france.fr/normandie/preaux-du-perche-61340/preaux-du-perche-le-comite-des-fetes-et-son-cafe-associatif-se-portent-bien-14f72ce2-b473-11ed-a71d-77105b478d18) a été évoqué : un café associatif et culturel avec potager, porté par des bénévoles. Au départ, ça peut sembler très "nouveaux habitants" ou "jeunes". Pourtant là-bas, c'est devenu un **vrai lieu intergénérationnel où anciens et nouveaux se côtoient.**
@@ -56,9 +54,7 @@ Parfois des choses se passent, mais tout le monde n'est pas au courant. **Commen
 
 **La clé, c'est de recréer du lien, de trouver des prétextes à la rencontre et à la solidarité entre voisins.**
 
-**Le club des anciens** : où en est-il ? Est-ce qu'on pourrait créer davantage de liens entre l'école et le collège, favoriser les rencontres intergénérationnelles ?
-
-Une idée originale a été lancée : offrir un abonnement gratuit à un journal local à partir d'un certain âge pour que ces personnes restent connectées au monde. Pourquoi pas les invendus de la veille ?
+Une idée originale a été lancée : offrir un abonnement gratuit à un journal local à partir d'un certain âge pour que ces personnes restent connectées au monde.
 
 ## Groupe 2 : Plus de démocratie locale
 
