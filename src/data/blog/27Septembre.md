@@ -23,7 +23,7 @@ Comme d'habitude, nous avons formé des petits groupes sur des thématiques déc
 
 Le marché du jeudi matin, une tradition centenaire... mais est-ce que ça correspond encore aux rythmes de vie d'aujourd'hui ? Cette question a animé les échanges. Beaucoup se déplacent vers le marché de Falaise, alors que pourrait-on imaginer pour celui de Putanges ?
 
-Le jour pose question. Comment venir le jeudi matin quand on travaille ou qu'on a des enfants à l'école ? Le samedi semble compliqué avec la concurrence de Falaise et Flers. **Et si c'était le dimanche ?**
+Le jour pose question. Comment venir le jeudi matin quand on travaille ou qu'on a des enfants à l'école ? Le samedi semble compliqué avec la concurrence de Falaise et Flers. **L'idée d'un marché le dimanche** a été évoquée, mais elle soulève des interrogations réalistes : les commerçants sont souvent sur Caen le dimanche matin, ou profitent enfin d'un repos bien mérité après une grosse semaine. Il faudrait consulter les professionnels concernés.
 
 Une autre idée est venue : **des navettes depuis les différentes communes**. Pas seulement pour faire ses courses et repartir aussitôt, mais pour créer un vrai temps de présence au bourg. Un moment où l'on prendrait le temps de flâner, de croiser du monde, de faire vivre les commerces.
 Car la mobilité, ce n'est pas qu'une question pratique d'aller d'un point A à un point B. C'est aussi sortir, prendre l'air, avoir des occasions de rencontres imprévues.
@@ -31,6 +31,8 @@ Car la mobilité, ce n'est pas qu'une question pratique d'aller d'un point A à 
 Ce temps de marché pourrait devenir un moment fort où l'on pourrait concentrer des activités pour les enfants, de la musique, du dessin...
 
 Il a été rappelé que le transport relève de la Communauté de Communes. Mais si c'est important pour les habitants, est-ce que ça ne mérite pas d'être réfléchi quand même ?
+
+Enfin, la question du marché est un vrai sujet de fond qui mérite une enquête approfondie. Avant de trancher sur le jour, l'horaire ou les navettes, il faudrait prendre le temps d'interroger tous les acteurs : les commerçants ambulants, les producteurs locaux, les habitants, les autres marchés du territoire. Qu'est-ce qui est réellement possible ? Qu'est-ce qui donnerait envie aux uns de venir vendre, aux autres de venir acheter ? C'est seulement en tenant compte de tous ces facteurs qu'on pourra imaginer un marché revitalisé et viable.
 
 ### Et les communes historiques dans tout ça ?
 
