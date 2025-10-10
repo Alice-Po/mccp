@@ -379,11 +379,12 @@ export interface FiscaliteItem {
 export interface IndicateurFinancier {
   critere: string;
   definition_critere: string;
-  valeur_putanges_le_lac_par_habitant: string;
-  mediane_echantillon_par_habitant: string;
-  classement_putanges_le_lac_sur_129: string;
-  premier_decile_par_habitant: string;
-  dernier_decile_par_habitant: string;
+  population_putanges_le_lac: number;
+  valeur_putanges_le_lac_par_habitant: number;
+  mediane_echantillon_par_habitant: number;
+  classement_putanges_le_lac_sur_129: number;
+  premier_decile_par_habitant: number;
+  dernier_decile_par_habitant: number;
   commentaires: string;
 }
 

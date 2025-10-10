@@ -35,25 +35,24 @@
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
-  // Fonction pour extraire la valeur numérique d'une chaîne
-  function parseValue(value: string): number {
-    return parseFloat(value.replace(/[^\d,.-]/g, '').replace(',', '.'));
+  // Fonction pour formater un montant en euros
+  function formatMontant(montant: number): string {
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(montant);
   }
-
- 
-    
-  
 
   // Calcul des données processées
   let processedData = $derived(data.map(item => {
-    const classement = parseInt(item.classement_putanges_le_lac_sur_129);
+    const montantTotal = item.valeur_putanges_le_lac_par_habitant * item.population_putanges_le_lac;
     
     return {
       ...item,
-      classement,
       formattedName: formatCritereName(item.critere),
-      putangesValue: parseValue(item.valeur_putanges_le_lac_par_habitant),
-      medianeValue: parseValue(item.mediane_echantillon_par_habitant)
+      montantTotal
     };
   }));
 </script>
@@ -70,7 +69,7 @@
     {#each processedData as item}
       <div class="indicator-card">
         <div class="indicator-header">
-          <h3 class="indicator-name">{item.formattedName}</h3>
+          <h3 class="indicator-name">{item.formattedName} : {formatMontant(item.montantTotal)}</h3>
           
         </div>
 
@@ -83,9 +82,10 @@
             <div class="value-card local-value">
               <div class="value-header">
                 <span class="value-label">Putanges-le-Lac</span>
-                <span class="ranking-badge">#{item.classement}/129</span>
+                <span class="ranking-badge">#{item.classement_putanges_le_lac_sur_129}/129</span>
               </div>
-              <div class="value-amount">{item.valeur_putanges_le_lac_par_habitant}</div>
+              <div class="value-amount">{formatMontant(item.valeur_putanges_le_lac_par_habitant)}</div>
+              <span class="per-habitant">par habitant</span>
             </div>
             
             <div class="value-card reference-value">
@@ -93,18 +93,19 @@
                 <span class="value-label">Médiane échantillon</span>
                 <span class="sample-info">129 communes</span>
               </div>
-              <div class="value-amount">{item.mediane_echantillon_par_habitant}</div>
+              <div class="value-amount">{formatMontant(item.mediane_echantillon_par_habitant)}</div>
+              <span class="per-habitant">par habitant</span>
             </div>
           </div>
 
           <div class="deciles-info">
             <div class="decile-item">
               <span class="decile-label">Premier décile (10% supérieur) :</span>
-              <span class="decile-value">{item.premier_decile_par_habitant}</span>
+              <span class="decile-value">{formatMontant(item.premier_decile_par_habitant)}</span>
             </div>
             <div class="decile-item">
               <span class="decile-label">Dernier décile (10% inférieur) :</span>
-              <span class="decile-value">{item.dernier_decile_par_habitant}</span>
+              <span class="decile-value">{formatMontant(item.dernier_decile_par_habitant)}</span>
             </div>
           </div>
         </div>
