@@ -51,8 +51,8 @@
   </header>
   <div class="project-body">
     <div class="amounts">
-      <div class="amount"><strong>Prévu</strong><span>{fmt(computedPrev)} €</span></div>
-      <div class="amount"><strong>Réalisé</strong><span>{fmt(computedReal)} €</span></div>
+      <div class="amount"><strong>Prévu pour 2024</strong><span>{fmt(computedPrev)} €</span></div>
+      <div class="amount"><strong>Réalisé en 2024</strong><span>{fmt(computedReal)} €</span></div>
     </div>
     <div class="progress">
       <div class="bar"><div class="fill" style={`width:${basePercent()}%`}></div></div>
@@ -117,8 +117,8 @@
   }
   .project-body { display: flex; flex-direction: column; gap: .75rem; }
   .amounts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
-  .amount { background: rgba(46,139,87,0.06); border-radius: .5rem; padding: .75rem; display:flex; flex-direction:column; gap:.25rem; }
-  .amount strong { background: rgba(46, 139, 87, 0.1); padding: 0.1rem 0.25rem; border-radius: 0.25rem; font-size: .95rem; }
+  .amount {  background: rgba(46,139,87,0.06); border-radius: .5rem; padding: .75rem; display:flex; flex-direction:column; gap:.25rem; }
+  .amount strong { background: rgba(46, 139, 87, 0.1); padding: 0.1rem 0.25rem; border-radius: 0.25rem; font-size: .8rem; }
   .amount span { font-size: 1.1rem; color: var(--secondary); }
   .progress { display:flex; align-items:center; gap:.75rem; }
   .bar { flex:1; height: 10px; background: var(--gray-light); border-radius: 999px; overflow:hidden; }
