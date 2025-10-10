@@ -1,0 +1,247 @@
+{
+    "header": {
+        "republic": "RÉPUBLIQUE FRANÇAISE",
+        "motto": "Liberté - Égalité - Fraternité",
+        "prefect": "PRÉFET DE L'ORNE",
+        "subprefecture": "Sous-préfecture d'Argentan"
+    },
+    "title": "ARRÊTÉ",
+    "community": "COMMUNAUTÉ DE COMMUNES DU VAL D'ORNE",
+    "subject": "EXTENSION DES COMPÉTENCES",
+    "nor": "NOR : 1200-14-436",
+    "preambles": [
+        {
+            "type": "prefect",
+            "text": "Le Préfet de l'Orne,\nChevalier de l'Ordre National du mérite,\nChevalier de la Légion d'Honneur,"
+        },
+        {
+            "type": "vu",
+            "text": "le code général des collectivités territoriales et notamment l'article L.5211-17,"
+        },
+        {
+            "type": "vu",
+            "text": "le code général des impôts, notamment les articles 1379.0 bis et 1609 quinquies C,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 19 septembre 2014 organisant les délégations de signature au sein de la sous-préfecture d'Argentan,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 30 décembre 1993 portant constitution de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 5 octobre 1994 autorisant le rattachement de la commune de Rabodanges à la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 11 septembre 1995 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 26 décembre 1995 autorisant l'adhésion des communes d'Habloville, Ménil-Jean, Giel-Courteilles et La Fresnaye-au-Sauvage à la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 13 décembre 1996 autorisant la modification des compétences de la communauté du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 15 décembre 1998 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 26 juillet 1999 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 1er octobre 2002 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 21 décembre 2004 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 10 juin 2005 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 8 septembre 2005 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 6 août 2007 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 1er août 2011 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté préfectoral du 21 octobre 2013 autorisant la modification des compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "la délibération du conseil communautaire du 13 mars 2014 décidant d'étendre les compétences de la communauté de communes du Val d'Orne,"
+        },
+        {
+            "type": "vu",
+            "text": "les délibérations concordantes des conseils municipaux de Bazoches-au-Houlme (24 avril 2014), Chênedouit (3 avril 2014), La Forêt-Auvray (11 avril 2014), La Fresnaye-au-Sauvage (8 avril 2014), Habloville (15 avril 2014), Ménil-Gondouin (11 avril 2014), Ménil-Hermei (4 avril 2014), Ménil-Jean (28 mars 2014), Ménil-Vin (23 avril 2014), Neuvy-au-Houlme (14 avril 2014), Putanges-Pont-Ecrepin (9 avril 2014), Les Rotours (9 avril 2014), Rabodanges (24 avril 2014), Saint-Aubert-sur-Orne (28 avril 2014), Sainte-Croix-sur-Orne (12 mai 2014) et Sainte-Honorine-la-Guillaume (17 mars 2014) émettant un avis favorable à l'extension des compétences de la communauté du Val d'Orne."
+        },
+        {
+            "type": "vu",
+            "text": "la décision répultée favorable des conseils municipaux des communes de Champcerie et Giel-Courteilles, ces collectivités n'ayant pas délibéré dans le délai de trois mois fixé par l'article L.5211-17 du code général des collectivités territoriales,"
+        },
+        {
+            "type": "vu",
+            "text": "l'arrêté de création du 18 septembre 2014 décidant l'instauration du régime de la fiscalité professionnelle de zone sur le périmètre de la ZAE de Fromentel,"
+        },
+        {
+            "type": "considerant",
+            "text": "que les conditions de majorité prévues à l'article L.5211-17 du code précité sont respectées,"
+        },
+        {
+            "type": "sur_proposition",
+            "text": "du sous-préfet d'Argentan,"
+        }
+    ],
+    "arrete": {
+        "articles": [
+            {
+                "number": 1,
+                "intro": "L'article 4 de l'arrêté préfectoral du 30 décembre 1993, modifié par les articles 1er des arrêtés préfectoraux des 11 septembre 1995, 12 décembre 1996, 15 décembre 1998, 26 juillet 1999, 21 octobre 2002, 21 décembre 2004, 10 juin et 8 septembre 2005, 6 août 2007, 1er août 2011 et 21 octobre 2013 est rectifié ainsi qu'il suit :",
+                "competences": {
+                    "obligatoires": {
+                        "title": "I - COMPÉTENCES OBLIGATOIRES :",
+                        "items": [
+                            {
+                                "number": 1,
+                                "title": "interventions dans le domaine économique",
+                                "subitems": [
+                                    "- Toute étude et action concurrent au développement économique, dans les domaines industriel et artisanal",
+                                    "- Aides indirectes tendant à favoriser l'accueil et l'environnement des entreprises industrielles et artisanales d'activité économiques :",
+                                    "- Zones d'activité économiques .",
+                                    "Etude, création, aménagement, entretien et gestion de nouvelles zones d'activités économiques de Fromentel, reconnue d'intérêt communautaire.",
+                                    "Est instauré le régime de la fiscalité professionnelle de zone sur le périmètre de la zone d'activités économiques de Fromentel, située sur la commune de La Fresnaye-au-Sauvage, fixé par la délibération du 18 septembre 2014 susvisée."
+                                ]
+                            },
+                            {
+                                "number": 2,
+                                "title": "Urbanisme et aménagement de l'espace",
+                                "subitems": [
+                                    "- Elaboration, suivi et révision du Schéma de Cohérence Territoriale",
+                                    "Conformément aux dispositions de l'article L. 5214-27 du code général des collectivités territoriales, la communauté de communes peut adhérer, pour l'exercice de la compétence ScoT, à un syndicat mixte par délibération du conseil communautaire."
+                                ]
+                            }
+                        ]
+                    },
+                    "optionnelles": {
+                        "title": "II - COMPÉTENCES OPTIONNELLES :",
+                        "items": [
+                            {
+                                "number": 1,
+                                "title": "Construction, entretien et fonctionnement d'équipements culturels et sportifs et d'équipements de l'enseignement pré-élémentaire et élémentaire",
+                                "subitems": [
+                                    {
+                                        "letter": "a",
+                                        "title": "Enseignement",
+                                        "content": "- Prise en charge de l'ensemble des dépenses d'investissement et de fonctionnement liées à la scolarisation des enfants en pré-élémentaire et élémentaire dans les écoles publiques ainsi que les cantines et garderies."
+                                    },
+                                    {
+                                        "letter": "b",
+                                        "title": "Sport",
+                                        "content": "- Construction de nouveaux équipements sportifs et prise en charge des frais de fonctionnement et d'investissement sur des locaux ou des terrains sportifs appartenant à la communauté de communes ou mis à disposition."
+                                    },
+                                    {
+                                        "letter": "c",
+                                        "title": "Action Culturelle",
+                                        "content": [
+                                            "- Prise en charge de l'enseignement musical",
+                                            "- Mise en place d'une politique culturelle et soutien à des manifestations culturelles",
+                                            "- Prise en charge des dépenses de fonctionnement d'investissement liées au Centre de Loisirs Sans Hébergement"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "number": 2,
+                                "title": "Environnement et Patrimoine",
+                                "subitems": [
+                                    {
+                                        "letter": "a",
+                                        "content": "- Mise en place et gestion du service public d'assainissement non collectif (SPANC)"
+                                    },
+                                    {
+                                        "letter": "b",
+                                        "content": "- Toute étude visant à préserver ou reconquérir la qualité des eaux superficielles, dans le domaine notamment de l'alimentation en eau potable, l'assainissement collectif et individuel"
+                                    },
+                                    {
+                                        "letter": "c",
+                                        "title": "Cours d'eau",
+                                        "content": "La communauté de communes est compétente en matière de travaux d'aménagement, d'amélioration et d'entretien des canaux et des cours d'eau non domaniaux (traversant son territoire), conformément aux dispositions de l'article L.151-36 du code rural."
+                                    },
+                                    {
+                                        "letter": "d",
+                                        "title": "Bassins versants",
+                                        "content": "Etudes et réalisations de travaux."
+                                    },
+                                    {
+                                        "letter": "e",
+                                        "title": "Lutte contre les risques d'inondation",
+                                        "content": "Etude et réalisation de travaux, d'ouvrages"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "facultatives": {
+                        "title": "III - COMPÉTENCES FACULTATIVES :",
+                        "items": [
+                            {
+                                "letter": "a",
+                                "title": "Logement et Habitat",
+                                "content": "- Prise en charge de l'ensemble des dépenses de fonctionnement et d'investissement liées au parc immobilier à usage d'habitation constitué par la communauté de communes"
+                            },
+                            {
+                                "letter": "b",
+                                "title": "Tourisme",
+                                "content": [
+                                    "- Mise en œuvre de projets visant au développement du tourisme (promotion)",
+                                    "- Construction, aménagement, accueil et hébergement sur des terrains dont la Communauté de Communes du Val d'Orne est propriétaire à l'exclusion du patrimoine religieux ou non déjà existant dans les communes",
+                                    "- Prise en charge des frais de fonctionnement et d'investissement de l'Office du Tourisme de Putanges-Pont-Ecrepin",
+                                    "- Aménagements et travaux d'entretien des chemins figurant au topo-guide"
+                                ]
+                            },
+                            {
+                                "letter": "c",
+                                "title": "Sécurité",
+                                "content": "- Prise en charge de la contribution annuelle fixée par le service départemental incendie et secours"
+                            },
+                            {
+                                "letter": "d",
+                                "title": "Déchets",
+                                "content": "Collecte et traitement des ordures ménagères"
+                            },
+                            {
+                                "letter": "e",
+                                "title": "Action Sociale et Santé",
+                                "content": "Création et installation d'un Pôle de Santé Libérale et Ambulatoire"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "number": 2,
+                "content": "Le secrétaire général de la préfecture de l'Orne, le sous-préfet d'Argentan, la présidente de la communauté de communes du Val d'Orne, les maires des communes concernées et le directeur départemental des finances publiques de l'Orne sont chargés, chacun en ce qui le concerne, de l'exécution du présent arrêté, qui sera publié au recueil des actes administratifs de la préfecture de l'Orne."
+            }
+        ]
+    },
+    "place_date": "Argentan, le 26 septembre 2014",
+    "delegation": "Pour le préfet et par délégation",
+    "signer": "Le sous-préfet d'Argentan,",
+    "name": "Jean-François SALIBA",
+    "note": "La présente décision peut, si elle est contestée, faire l'objet des recours suivants, dans un délai de deux mois au plus à compter de sa notification :\n- un recours gracieux motivé adressé à mes services,\n- un recours hiérarchique auprès du ministre de l'Intérieur,\nEn l'absence de réponse de l'Administration dans un délai de deux mois à compter de la date de réception de votre recours, celui-ci doit être considéré comme implicitement rejeté.\n- un recours contentieux formé devant le tribunal administratif de Caen, déposé au plus tard avant l'expiration d'un délai de deux mois suivant la date de notification de la décision contestée ou la date du rejet de votre recours gracieux ou hiérarchique."
+}
