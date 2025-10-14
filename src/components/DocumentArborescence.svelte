@@ -7,6 +7,7 @@
   let grouped = {};
   let years = [];
   let expandedYears = new Set();
+  let selectedFile = null;
 
   onMount(async () => {
     try {
@@ -22,6 +23,20 @@
     } catch (e) {
       console.error('[DocumentArborescence] erreur chargement index', e);
     }
+
+    // Synchroniser la sélection quand le viewer change de document
+    const onViewerUpdate = (event) => {
+      const pdfUrl = event?.detail?.pdfUrl;
+      if (typeof pdfUrl === 'string') {
+        const parts = pdfUrl.split('/');
+        selectedFile = parts[parts.length - 1] || null;
+      }
+    };
+    document.addEventListener('updatePdfViewer', onViewerUpdate);
+
+    return () => {
+      document.removeEventListener('updatePdfViewer', onViewerUpdate);
+    };
   });
 
   function toggleYear(y) {
@@ -34,6 +49,7 @@
   function handleDocumentClick(doc) {
     const withUrl = { ...doc, path: `/assets/datas/CR-municipaux/${doc.file}` };
     console.log('🔍 DocumentArborescence - Clic sur document:', withUrl.path);
+    selectedFile = doc.file;
     dispatch('documentSelected', { doc: withUrl });
     
     // Fallback : événement global si dispatch ne fonctionne pas
@@ -76,13 +92,34 @@
             <ul class="documents-list">
               {#each grouped[y] as doc}
                 <li>
-                  <button 
-                    class="document-button" 
-                    on:click={() => handleDocumentClick(doc)}
-                    title={doc.path}
-                  >
-                    📄 {label(doc)}
-                  </button>
+                  <div class="document-row">
+                    <button 
+                      class="document-button {selectedFile === doc.file ? 'is-selected' : ''}" 
+                      on:click={() => handleDocumentClick(doc)}
+                      title={`/assets/datas/CR-municipaux/${doc.file}`}
+                    >
+                      {#if selectedFile === doc.file}
+                        ✅
+                      {:else}
+                        📄
+                      {/if}
+                      {label(doc)}
+                    </button>
+                    <a 
+                      class="row-download-btn" 
+                      href={`/assets/datas/CR-municipaux/${doc.file}`} 
+                      download 
+                      on:click={(e) => e.stopPropagation()}
+                      aria-label={`Télécharger ${label(doc)}`}
+                      title="Télécharger le PDF"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                    </a>
+                  </div>
                 </li>
               {/each}
             </ul>
@@ -113,15 +150,9 @@
     font-weight: 600;
     color: var(--primary);
     font-family: var(--font-main);
+    margin: 0;
   }
 
-  .arborescence-subtitle {
-    font-size: 0.9rem;
-    color: var(--secondary);
-    opacity: 0.8;
-    margin: 0;
-    line-height: 1.4;
-  }
 
   .arborescence-content {
     flex: 1;
@@ -188,6 +219,12 @@
     margin-bottom: 0.25rem;
   }
 
+  .document-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .document-button {
     background: none;
     border: none;
@@ -206,6 +243,34 @@
     background-color: rgba(46, 139, 87, 0.1);
     color: var(--primary-dark);
     transform: translateX(2px);
+  }
+
+  .document-button.is-selected {
+    background-color: rgba(46, 139, 87, 0.15);
+    color: var(--primary-dark);
+    font-weight: 600;
+    border-left: 3px solid var(--primary);
+  }
+
+  .row-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    min-width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .row-download-btn:hover {
+    background-color: rgba(46, 139, 87, 0.1);
+    transform: translateY(-1px);
   }
 
   /* Responsive */

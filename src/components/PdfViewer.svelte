@@ -160,22 +160,7 @@
           ← Retour aux documents
         </button>
       {/if}
-      <div class="viewer-title-row">
-        <h3 class="viewer-title">
-          📄 {documentTitle || 'Document PDF'}
-        </h3>
-        <button 
-          class="download-btn" 
-          on:click={() => downloadPdf()}
-          title="Télécharger le PDF"
-        >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        </button>
-      </div>
+      
 
     </div>
     
@@ -247,7 +232,6 @@
   }
 
   .viewer-header {
-    padding: 0.5rem;
     border-bottom: 1px solid #e5e7eb;
     background-color: #f9fafb;
   }
@@ -275,67 +259,6 @@
   .mobile-back-btn:active {
     transform: translateY(1px);
   }
-
-  .viewer-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .viewer-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--secondary);
-    margin: 0;
-    font-family: var(--font-main);
-    flex: 1;
-  }
-
-  .download-btn {
-    background-color: var(--primary);
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.75rem;
-    height: 2.75rem;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .download-btn:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .download-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .download-icon {
-    width: 1.375rem;
-    height: 1.375rem;
-    transition: all 0.2s ease;
-  }
-
-  .download-btn:hover .download-icon {
-    transform: scale(1.15);
-  }
-
-  .viewer-help {
-    font-size: 0.85rem;
-    color: var(--secondary);
-    opacity: 0.7;
-    margin: 0;
-  }
-
   kbd {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     background-color: #f3f4f6;
@@ -470,25 +393,6 @@
     opacity: 0.8;
     line-height: 1.6;
   }
-
-  .placeholder-tips {
-    background-color: #f0f9ff;
-    border: 1px solid #bae6fd;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .placeholder-tips p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: #0369a1;
-  }
-
-  .placeholder-tips strong {
-    font-weight: 600;
-  }
-
   /* Styles pour le CTA */
   .cta-container {
     display: flex;
@@ -530,29 +434,6 @@
   @media (max-width: 768px) {
     .viewer-header {
       padding: 1rem;
-    }
-
-    .viewer-title {
-      font-size: 1rem;
-    }
-
-    .viewer-title-row {
-      gap: 0.75rem;
-    }
-
-    .download-btn {
-      min-width: 2.25rem;
-      height: 2.25rem;
-      padding: 0.375rem;
-    }
-
-    .download-icon {
-      width: 1.125rem;
-      height: 1.125rem;
-    }
-
-    .viewer-help {
-      font-size: 0.8rem;
     }
 
     .placeholder-content h3 {
