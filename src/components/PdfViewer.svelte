@@ -73,20 +73,13 @@
       const data = await response.json();
       
       // Trier les CRs par date d'événement (du plus récent au plus ancien)
-      const sortedCRs = data
-        .filter(item => item.path.includes('CR-municipaux'))
-        .sort((a, b) => {
-          // D'abord par année (décroissant)
-          if (a.year !== b.year) return b.year - a.year;
-          
-          // Ensuite par date d'événement si disponible
-          if (a.eventDate && b.eventDate) {
-            return new Date(b.eventDate) - new Date(a.eventDate);
-          }
-          
-          // Sinon par date de modification
-          return b.mtime - a.mtime;
-        });
+      const sortedCRs = data.sort((a, b) => {
+        if (a.year !== b.year) return b.year - a.year;
+        if (a.eventDate && b.eventDate) {
+          return new Date(b.eventDate) - new Date(a.eventDate);
+        }
+        return 0;
+      });
       
       if (sortedCRs.length > 0) {
         latestCR = sortedCRs[0];
@@ -102,7 +95,7 @@
     if (latestCR) {
       const event = new CustomEvent('updatePdfViewer', {
         detail: {
-          pdfUrl: latestCR.path,
+          pdfUrl: `/assets/datas/CR-municipaux/${latestCR.file}`,
           documentTitle: `CR Municipal du ${latestCR.eventDate || latestCR.year}`,
           isVisible: true,
           isMobile: isMobile

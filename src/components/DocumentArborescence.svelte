@@ -32,12 +32,13 @@
   }
 
   function handleDocumentClick(doc) {
-    console.log('🔍 DocumentArborescence - Clic sur document:', doc.name);
-    dispatch('documentSelected', { doc });
+    const withUrl = { ...doc, path: `/assets/datas/CR-municipaux/${doc.file}` };
+    console.log('🔍 DocumentArborescence - Clic sur document:', withUrl.path);
+    dispatch('documentSelected', { doc: withUrl });
     
     // Fallback : événement global si dispatch ne fonctionne pas
     const globalEvent = new CustomEvent('documentSelected', { 
-      detail: { doc },
+      detail: { doc: withUrl },
       bubbles: true 
     });
     document.dispatchEvent(globalEvent);
@@ -51,7 +52,7 @@
         return 'Compte rendu du ' + d.toLocaleDateString('fr-FR');
       } catch {}
     }
-    return doc.name;
+    return doc.file;
   }
 </script>
 
