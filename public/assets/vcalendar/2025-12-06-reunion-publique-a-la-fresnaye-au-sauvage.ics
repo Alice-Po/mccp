@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MCCP//Agenda//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20251206-fresnaye-au-sauvage@mccp
+DTSTAMP:20250101T120000Z
+DTSTART;TZID=Europe/Paris:20251206T093000
+DTEND;TZID=Europe/Paris:20251206T120000
+SUMMARY:Réunion publique à la Fresnaye-au-Sauvage
+DESCRIPTION:Des envies\, des idées\, des propositions pour notre commune ? Discutons-en !
+LOCATION:Salle des fêtes
+END:VEVENT
+END:VCALENDAR
+

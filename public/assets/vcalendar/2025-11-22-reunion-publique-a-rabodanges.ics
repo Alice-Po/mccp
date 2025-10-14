@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MCCP//Agenda//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20251122-rabodanges@mccp
+DTSTAMP:20250101T120000Z
+DTSTART;TZID=Europe/Paris:20251122T093000
+DTEND;TZID=Europe/Paris:20251122T120000
+SUMMARY:Réunion publique à Rabodanges
+DESCRIPTION:Des envies\, des idées\, des propositions pour notre commune ? Discutons-en !
+LOCATION:Salle des fêtes
+END:VEVENT
+END:VCALENDAR
+
