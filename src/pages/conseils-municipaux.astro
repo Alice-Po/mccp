@@ -119,11 +119,12 @@ import PdfViewer from '../components/PdfViewer.svelte';
       const doc = event.detail?.doc;
       console.log('📡 Page - Document extrait:', doc);
       
-      if (doc && doc.name) {
-        console.log('📡 Page - Traitement document:', doc.name);
+      if (doc && (doc.file || doc.path)) {
+        const fileName = doc.file || (doc.path ? String(doc.path).split('/').pop() : 'document.pdf');
+        console.log('📡 Page - Traitement document:', fileName);
         
         // Construire l'URL du PDF
-        const pdfUrl : string = doc.path;
+        const pdfUrl : string = doc.path || `/assets/datas/CR-municipaux/${fileName}`;
         console.log('📡 Page - URL PDF:', pdfUrl);
         
         // En mobile, basculer vers le viewer
@@ -135,7 +136,7 @@ import PdfViewer from '../components/PdfViewer.svelte';
         const updateEvent = new CustomEvent('updatePdfViewer', {
           detail: {
             pdfUrl: pdfUrl,
-            documentTitle: getDocumentTitle(doc),
+            documentTitle: getDocumentTitle({ ...doc, file: fileName }),
             isVisible: true,
             isMobile: isMobile()
           }
@@ -162,7 +163,8 @@ import PdfViewer from '../components/PdfViewer.svelte';
           return 'Compte rendu du ' + d.toLocaleDateString('fr-FR');
         } catch {}
       }
-      return doc.name.replace('_readable.pdf', '').replace(/[-_]/g, ' ');
+      const name = doc.file || doc.name || '';
+      return String(name).replace('_readable.pdf', '').replace(/[-_]/g, ' ');
     }
   });
 </script>
