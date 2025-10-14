@@ -17,8 +17,12 @@ const recentPosts = allPosts
 // Récupérer les événements de l'agenda
 const allEvents = await getCollection('agenda' as any, ({ data }: any) => !data.draft);
 
-// Trier par date et prendre les 3 prochains événements
+// Filtrer les événements futurs (date >= aujourd'hui à minuit)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const upcomingEvents = allEvents
+  .filter((event: any) => new Date(event.data.date).valueOf() >= today.valueOf())
   .sort((a: any, b: any) => new Date(a.data.date).valueOf() - new Date(b.data.date).valueOf());
 
 // Séparer les événements visibles et cachés
