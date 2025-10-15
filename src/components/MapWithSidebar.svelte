@@ -48,7 +48,7 @@
 
   function applyZaeFilter() {
     if (!zaeLayer) return;
-    const actives = activeCategories.size ? activeCategories : new Set(categories);
+    const actives = activeCategories;
     zaeLayer.eachLayer(l => {
       const show = actives.has(l.featureCategory);
       if (l.setStyle) l.setStyle({ opacity: show ? 0.9 : 0, fillOpacity: show ? 0.2 : 0 });
