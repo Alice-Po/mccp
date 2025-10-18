@@ -5,6 +5,8 @@ import Download from "../components/commonsElements/Download.svelte";
 import { getCollection } from 'astro:content';
 import "../styles/global.css";
 import EventCard from "../components/EventCard.svelte";
+import CampaignCallToAction from "../components/CampaignCallToAction.svelte";
+import VoterRegistration from "../components/VoterRegistration.svelte";
 
 // Récupérer les articles de blog
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -55,7 +57,12 @@ function generateSlug(title: string) {
       </div>
     </section>
 
+    <!-- <div class="campaign-wrapper">
+      <CampaignCallToAction client:load />
+    </div> -->
+
     <div class="content-wrapper">
+      
       <!-- Section Ambitions -->
       <section class="ambitions-section">
         <h2>Les ambitions</h2>
@@ -178,6 +185,8 @@ function generateSlug(title: string) {
 
       <!-- Section Contribution -->
       <section class="contribution-section">
+        <VoterRegistration client:load />
+
         <h2>Envie de contribuer ?</h2>
         <div class="max-w-3xl mx-auto">
           
@@ -343,6 +352,12 @@ function toggleAllEvents() {
   height: 80px;
   display: block;
   object-fit: contain;
+}
+
+.campaign-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 </style>
  
