@@ -574,6 +574,7 @@ strong {
   align-items: center;
   justify-content: center;
   margin: 0 calc(-50vw + 50%);
+  padding-top: 3rem;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url('/assets/img/IMG_6334.jpeg');
   background-size: cover;
