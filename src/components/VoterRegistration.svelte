@@ -88,10 +88,6 @@
     line-height: 1.5;
   }
   
-  .voter-highlight strong {
-    color: var(--primary);
-    font-weight: 700;
-  }
   
   .voter-info {
     font-size: 0.95rem;
@@ -101,10 +97,7 @@
     opacity: 0.85;
   }
   
-  .voter-info strong {
-    font-weight: 700;
-    color: var(--primary);
-  }
+
   
   .voter-actions {
     display: flex;

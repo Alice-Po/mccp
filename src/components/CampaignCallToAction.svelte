@@ -4,13 +4,13 @@
   const dispatch = createEventDispatcher();
   
   function handleSubmit() {
-    // Rediriger vers le formulaire de soumission
-    window.open('https://forms.gle/example', '_blank');
+    // Rediriger vers le formulaire de soumission Framaforms
+    window.open('https://framaforms.org/qui-autour-de-vous-ferait-un-bon-candidat-sur-la-liste-municipale-de-putanges-1760454296', '_blank');
   }
   
   function handleLearnMore() {
     // Rediriger vers l'article de blog détaillé
-    window.location.href = '/blog/campagne-designation-candidats';
+    window.location.href = '/blog/qui-autour-de-vous-ferait-un-bon-ou-une-bonne-conseillre-municipale-';
   }
 </script>
 
@@ -315,7 +315,7 @@
     color: var(--secondary);
     border: 2px solid white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: urgencyPulse 3s ease-in-out infinite;
+
   }
   
   @keyframes urgencyPulse {
