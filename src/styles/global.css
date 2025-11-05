@@ -1241,7 +1241,9 @@ strong {
   /* Masquer les éléments non essentiels */
   .site-header,
   footer,
-  .article-navigation {
+  .article-navigation,
+  .article-share-card {
+    /* carte de partage des articles */
     display: none !important;
   }
 
@@ -1257,14 +1259,14 @@ strong {
   }
 
   body {
-    font-size: 9pt !important;
+    font-size: 10pt !important; /* légèrement plus grand à l'impression */
     line-height: 1.2 !important;
   }
 
   /* Typographie condensée */
   p,
   li {
-    font-size: 0.8rem !important;
+    font-size: 0.9rem !important; /* légèrement plus grand */
     margin-bottom: 0.3rem !important;
     orphans: 2 !important;
     widows: 2 !important;
@@ -1307,7 +1309,7 @@ strong {
   }
 
   .post-content {
-    font-size: 1rem !important;
+    font-size: 1.05rem !important; /* légèrement plus grand */
     line-height: 1 !important;
   }
 
