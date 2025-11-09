@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import Download from './commonsElements/Download.svelte';
   
   const dispatch = createEventDispatcher();
   
@@ -52,6 +53,30 @@
     </div>
   </div>
   
+  <!-- Section livret et permanences -->
+  <div class="campaign-info">
+    <div class="campaign-info-content">
+      <p class="campaign-info-text">
+        Un livret présentant le MCCP et sa démarche, ainsi qu'un document expliquant la campagne de désignation ont été distribué dans toutes les boites aux lettres de la commune et sont dispobibles en téléchargement ici.
+      </p>
+      <div class="campaign-downloads">
+        <Download 
+          url="/assets/img/Journal_MCCP_4p.pdf"
+          label="Livret MCCP"
+          format="PDF"
+        />
+        <Download 
+          url="/assets/img/Journal_MCCP_designation.pdf"
+          label="Campagne de désignation"
+          format="PDF"
+        />
+      </div>
+      <p class="campaign-info-text">
+        Vous pouvez aussi venir en parler de vive voix : des personnes du MCCP tiennent des permanences au marché du jeudi matin à Putanges Pont Écrépin.
+      </p>
+    </div>
+  </div>
+  
   <div class="campaign-footer">
     <div class="campaign-countdown">
       <svg class="countdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +89,12 @@
 </div>
 
 <style>
+  /* Variables communes */
+  .campaign-banner {
+    --white-bg: rgba(255, 255, 255, 0.95);
+    --white-border: rgba(255, 255, 255, 0.2);
+  }
+
   .campaign-banner {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
@@ -73,56 +104,60 @@
     box-shadow: 0 10px 30px rgba(46, 139, 87, 0.25);
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.6s ease-out;
+    animation: fadeIn 0.6s ease-out; /* Réutilise l'animation de global.css */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-    .campaign-banner p{
-        color: white;
-        font-family: var(--font-main);
-        font-size: 1.2rem;
-        font-weight: 600;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0;
-    }
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .campaign-banner p,
+  .campaign-info-text {
+    color: white;
+    font-family: var(--font-main);
+    margin: 0;
+  }
+
+  .campaign-banner p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 0;
   }
   
-  /* Header avec tag et badge */
+  /* Éléments avec position relative et z-index */
+  .campaign-header,
+  .campaign-footer,
+  .campaign-info {
+    position: relative;
+    z-index: 10;
+  }
+
   .campaign-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    position: relative;
-    z-index: 10;
   }
   
-  /* Badge "En cours" animé */
-  .campaign-badge {
-    background: rgba(255, 255, 255, 0.95);
+  /* Badge et countdown - styles communs */
+  .campaign-badge,
+  .campaign-countdown {
+    background: var(--white-bg);
     backdrop-filter: blur(10px);
-    padding: 0.6rem 1.2rem;
+    border: 2px solid white;
     border-radius: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-family: var(--font-main);
+  }
+
+  .campaign-badge {
     color: var(--primary);
-    border: 2px solid white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     animation: pulse 2s ease-in-out infinite;
     flex-shrink: 0;
   }
@@ -142,18 +177,9 @@
     50% { opacity: 0.4; }
   }
   
-  .badge-text {
+  .badge-text,
+  .countdown-text {
     font-family: var(--font-main);
-  }
-  
-  /* Éléments décoratifs d'arrière-plan */
-  .campaign-banner::before,
-  .campaign-banner::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.1;
-    z-index: 0;
   }
   
   .campaign-content {
@@ -164,7 +190,6 @@
     z-index: 1;
   }
   
-  /* Icône avec effet d'animation */
   .campaign-visual {
     flex-shrink: 0;
   }
@@ -205,14 +230,13 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   }
   
-  /* Zone de texte */
   .campaign-text {
     flex: 1;
   }
   
   .campaign-tag {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--white-border);
     padding: 0.3rem 0.8rem;
     border-radius: 0.5rem;
     font-size: 0.85rem;
@@ -222,13 +246,10 @@
     letter-spacing: 0.5px;
   }
   
-  /* Footer avec countdown */
   .campaign-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    z-index: 10;
   }
   
   .campaign-text h3 {
@@ -247,7 +268,6 @@
     line-height: 1.5;
   }
   
-  /* Boutons d'action */
   .campaign-actions {
     display: flex;
     flex-direction: column;
@@ -269,7 +289,7 @@
     font-weight: 600;
     font-size: 1.05rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease; /* Harmonisé avec global.css */
     white-space: nowrap;
   }
   
@@ -280,13 +300,13 @@
   }
   
   .primary-btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px); /* Harmonisé avec global.css */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     background: #f8f9fa;
   }
   
   .primary-btn:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
   
   .secondary-btn {
@@ -298,35 +318,13 @@
   .secondary-btn:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: white;
-    transform: translateX(3px);
+    transform: translateY(-2px); /* Harmonisé avec global.css */
   }
   
-  /* Compte à rebours */
   .campaign-countdown {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 0.7rem 1.3rem;
-    border-radius: 2rem;
-    font-size: 1rem;
-    font-weight: 600;
     color: var(--secondary);
-    border: 2px solid white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  }
-  
-  @keyframes urgencyPulse {
-    0%, 100% { 
-      transform: scale(1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    50% { 
-      transform: scale(1.03);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
+    padding: 0.7rem 1.3rem;
+    gap: 0.6rem;
   }
   
   .countdown-icon {
@@ -334,23 +332,51 @@
     color: var(--primary);
   }
   
-  .countdown-text {
-    font-family: var(--font-main);
+  .campaign-info {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--white-border);
+  }
+  
+  .campaign-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .campaign-info-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+  
+  .campaign-downloads {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  
+  /* Adaptation du composant Download au contexte de la campagne */
+  .campaign-downloads :global(.help-button) {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    backdrop-filter: blur(10px);
+    margin: 0; /* Réinitialiser le margin du composant Download */
+  }
+  
+  .campaign-downloads :global(.help-button:hover) {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
   
   /* Responsive */
-  @media (max-width: 968px) {
-    .campaign-content {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .campaign-actions {
-      width: 100%;
-      min-width: auto;
-    }
-  }
-  
   @media (max-width: 768px) {
     .campaign-banner {
       padding: 1.5rem;
@@ -363,7 +389,8 @@
       gap: 0.75rem;
     }
     
-    .campaign-badge {
+    .campaign-badge,
+    .campaign-countdown {
       font-size: 0.9rem;
       padding: 0.5rem 1rem;
     }
@@ -397,6 +424,7 @@
     
     .campaign-actions {
       width: 100%;
+      min-width: auto;
     }
     
     .primary-btn,
@@ -409,13 +437,29 @@
       margin-top: 0.5rem;
     }
     
-    .campaign-countdown {
-      font-size: 0.95rem;
-      padding: 0.6rem 1.1rem;
-    }
-    
     .countdown-text {
       font-size: 0.9rem;
+    }
+    
+    .campaign-info {
+      margin-top: 0.75rem;
+      padding-top: 1rem;
+    }
+    
+    .campaign-info-text {
+      font-size: 0.95rem;
+    }
+    
+    .campaign-downloads {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    
+    .campaign-downloads :global(.help-button) {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
     }
   }
 </style>

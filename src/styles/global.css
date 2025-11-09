@@ -180,12 +180,7 @@ strong {
 }
 
 .news-grid,
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
+.blog-grid,
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -783,18 +778,23 @@ strong {
   background-color: var(--primary-dark);
 }
 
-/* Styles pour les boutons spécifiques */
-.phone-button {
+/* Styles pour les boutons spécifiques - styles communs */
+.phone-button,
+.facebook-button,
+.instagram-button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.5rem;
-  background-color: var(--primary);
-  color: white !important;
   border-radius: 0.5rem;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.2s ease;
+  color: white !important;
+}
+
+.phone-button {
+  background-color: var(--primary);
 }
 
 .phone-button:hover {
@@ -802,22 +802,9 @@ strong {
   transform: translateY(-2px);
 }
 
-.phone-button span {
-  font-size: 1.2rem;
-}
-
 .facebook-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.5rem;
   background-color: #1877f2; /* Couleur officielle Facebook */
-  color: white !important;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
   font-size: 1.1rem;
-  transition: all 0.2s ease;
 }
 
 .facebook-button:hover {
@@ -825,7 +812,9 @@ strong {
   transform: translateY(-2px);
 }
 
-.facebook-button span {
+.phone-button span,
+.facebook-button span,
+.instagram-button span {
   font-size: 1.2rem;
 }
 

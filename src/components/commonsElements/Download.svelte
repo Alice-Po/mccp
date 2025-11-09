@@ -46,6 +46,8 @@
     transition: all 0.2s ease;
     text-decoration: none;
     margin: 0 0.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .help-button:hover {
@@ -68,19 +70,66 @@
 
   .download-label {
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .download-format {
     font-size: 0.8rem;
     opacity: 0.8;
+    flex-shrink: 0;
+  }
+  
+  .help-button svg {
+    flex-shrink: 0;
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .help-button {
       margin: 0.25rem 0;
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      gap: 0.4rem;
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+    }
+    
+    .help-button svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .download-label {
+      white-space: normal;
+      text-align: center;
+      line-height: 1.3;
+    }
+    
+    .download-format {
+      font-size: 0.75rem;
+    }
+  }
+  
+  /* Très petits écrans */
+  @media (max-width: 400px) {
+    .help-button {
+      padding: 0.5rem 0.6rem;
+      font-size: 0.75rem;
+      gap: 0.3rem;
+    }
+    
+    .help-button svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .download-format {
+      font-size: 0.7rem;
     }
   }
 </style>
