@@ -93,7 +93,7 @@
 
   .competences-content {
     flex: 1;
-    padding: 2rem;
+    padding: 2rem 0;
     max-width: 1200px;
     margin: 0 auto;
   }

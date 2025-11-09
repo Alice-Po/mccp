@@ -292,7 +292,6 @@
     text-align: left;
     transition: all 0.2s ease;
     position: relative;
-    border-bottom: 1px solid #eaeaea;
   }
   
   .competence-header:hover {
