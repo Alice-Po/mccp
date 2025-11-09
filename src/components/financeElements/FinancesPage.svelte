@@ -343,7 +343,7 @@ function toggleAccordion(id: keyof typeof accordions) {
                 <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg> Analyse de la différence entre prévision, réalisation et proposition </h3>
               <p>
-                Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
+               [Commentaires à venir]
               </p>
               <div class="cta-container">
                 <button class="cta" onclick={() => toggleAccordion('accordion-fonctionnement')} aria-expanded={accordions['accordion-fonctionnement']}>
@@ -527,7 +527,7 @@ function toggleAccordion(id: keyof typeof accordions) {
                 <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg> Analyse des investissements réalisés</h3>
               <p>
-                Explication des écarts entre prévision, réalisation et proposition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dui massa, semper in placerat eget, iaculis eu justo. Morbi et risus eget erat cursus lobortis. Sed porttitor nisi mattis mauris consequat imperdiet. Donec eget bibendum eros. Donec elit neque, porttitor sed dictum eget, blandit eu neque. Suspendisse at orci vitae nisi blandit rhoncus vitae ut mi. Nullam ultrices volutpat lectus.
+               [Commentaire à venir]
               </p>
               <div class="cta-container">
                 <button class="cta" onclick={() => toggleAccordion('accordion-investissement')} aria-expanded={accordions['accordion-investissement']}>
@@ -931,7 +931,7 @@ function toggleAccordion(id: keyof typeof accordions) {
         border-left: 3px solid rgba(46, 139, 87, 0.25);
         background: rgba(248, 250, 252, 0.6);
         color: #6b7280;
-        font-size: 0.92rem;
+        font-size: 1rem;
         line-height: 1.55;
       }
       .justification-note p {
