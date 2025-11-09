@@ -10,6 +10,27 @@ Site web du **Mouvement Citoyen des Communes de Putanges** (MCCP), une liste cit
 - **Styling** : CSS natif avec variables CSS
 - **Hébergement** : Vercel + GitHub, le déploiement est automatique à chaque changement de la branche main.
 
+## Breakpoints Responsive
+
+- **600px** : Très petits écrans (mobile portrait)
+
+  - Utilisé pour les ajustements finaux sur très petits écrans
+  - Réduction des paddings, tailles de police, espacements
+
+- **768px** : Mobile (landscape / tablette portrait)
+
+  - Breakpoint principal pour les styles mobile
+  - Masquage de certains éléments, réorganisation des layouts
+
+- **1024px** : Tablette (landscape)
+
+  - Ajustements pour les tablettes
+  - Optimisation des tableaux et graphiques
+
+- **1299px** : Desktop
+  - Masquage de la sidebar de navigation sur la page finances
+  - Layout desktop complet
+
 ## Pourquoi Astro + Svelte 5 et pas WordPress comme tout le monde ?
 
 **Excellente performance** : Astro génère des sites statiques ultra-rapides (scores Lighthouse proches de 100/100), essentiel pour toucher tous les habitants, même avec une connexion limitée en zone rurale.

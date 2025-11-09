@@ -284,7 +284,7 @@
   }
 
   /* Responsive design */
-  @media (max-width: 1200px) {
+  @media (max-width: 1024px) {
     .modal-content {
       width: 95vw;
       max-height: 95vh;

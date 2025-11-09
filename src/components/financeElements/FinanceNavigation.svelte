@@ -340,13 +340,13 @@
   }
 
   /* Responsive design */
-  @media (max-width: 1400px) {
+  @media (max-width: 1299px) {
     .finance-navigation {
       width: 280px;
     }
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1024px) {
     .finance-navigation {
       width: 260px;
     }

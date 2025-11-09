@@ -262,6 +262,7 @@ function toggleAccordion(id: keyof typeof accordions) {
           en termes de nomenclature budgétaire officielle. Cette adaptation permet aux citoyens de trouver l'information 
           qu'ils cherchent plus facilement, sans se perdre dans les subtilités techniques de la comptabilité publique.
         </p>
+        <p>Les informations présentées ci-dessous sont extraites du budget primitif 2025 de la commune de Putanges-le-Lac. Des travaux sont en cours pour adapter le contenu de cette page par année.</p>
       </div>
     </div>
 
@@ -933,12 +934,6 @@ function toggleAccordion(id: keyof typeof accordions) {
         font-size: 0.92rem;
         line-height: 1.55;
       }
-      .justification-note h5 {
-        margin: 0.5rem 0 0.5rem 0;
-        font-size: 0.95rem;
-        color: #4b5563;
-        font-weight: 600;
-      }
       .justification-note p {
         margin: 0.3rem 0;
       }
@@ -961,15 +956,15 @@ function toggleAccordion(id: keyof typeof accordions) {
     }
   }
 
-  /* Responsive pour les grands écrans */
-  @media (min-width: 1400px) and (max-width: 1599px) {
+  /* Responsive pour les tablettes */
+  @media (min-width: 1024px) and (max-width: 1298px) {
     .finances-layout {
       gap: 1.5rem;
       padding: 1.5rem;
     }
   }
 
-  /* Responsive pour les petits écrans */
+  /* Responsive pour les petits écrans (mobile) */
   @media (max-width: 768px) {
     .finances-header h1 {
       font-size: 2rem;
@@ -996,6 +991,26 @@ function toggleAccordion(id: keyof typeof accordions) {
     .cta {
       margin: 0.5rem 0;
       padding: 0.75rem 1rem;
+    }
+
+    /* Ajustements pour très petits écrans (600px et moins) */
+    @media (max-width: 600px) {
+      .finances-header h1 {
+        font-size: 1.75rem;
+      }
+
+      .intro-section {
+        padding: 1rem;
+      }
+
+      .chart-section {
+        padding: 1rem;
+      }
+
+      .cta {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
     }
   }
 

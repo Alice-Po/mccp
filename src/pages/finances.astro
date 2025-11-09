@@ -6,7 +6,7 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
 <Layout title="Finances - MCCP">
   <main class="finances-main">
     <!-- Message d'avertissement pour les petits écrans -->
-    <div class="screen-warning">
+    <!-- <div class="screen-warning">
       <div class="warning-content">
         <h2>📊 Consultation des Finances</h2>
         <p>Pour une meilleure expérience de consultation des données financières, nous vous recommandons d'utiliser un ordinateur ou un écran plus large.</p>
@@ -18,7 +18,7 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
           <a href="/" class="btn-home">← Retour à l'accueil</a>
         </div>
       </div>
-    </div>
+    </div> -->
     <section class="finances-section">
       <FinancesPage client:load />
     </section>
@@ -110,9 +110,9 @@ import FinancesPage from '../components/financeElements/FinancesPage.svelte';
       display: flex;
     }
     
-    .finances-section {
+    /* .finances-section {
       display: none;
-    }
+    } */
     .warning-content {
       padding: 2rem;
       margin: 1rem;

@@ -418,9 +418,7 @@
   }
 
   /* Responsive design */
-  @media (max-width: 1200px) {
-
-    
+  @media (max-width: 1024px) {
     .financial-table {
       font-size: 0.8rem;
     }
