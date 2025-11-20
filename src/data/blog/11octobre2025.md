@@ -1,5 +1,5 @@
 ---
-title: 'Retour de la réunion publique de Chenedouit du 10 Octobre'
+title: 'Retour de la réunion publique de Chênedouit du 11 Octobre'
 description: "Pour préparer cette réunion publique, beaucoup de porte-à-porte a été réalisé dans le bourg. Plusieurs personnes ont mentionné avoir entendu parler de l'initiative par le bouche-à-oreille, signe que l'information circule."
 pubDate: 2025-10-17
 author: 'MCCP'
@@ -9,23 +9,23 @@ draft: false
 ---
 
 Pour préparer cette réunion publique, beaucoup de porte-à-porte a été réalisé dans le bourg. Plusieurs personnes ont mentionné avoir entendu parler de l'initiative par le bouche-à-oreille, signe que l'information circule.
-Une trentaine de personnes étaient présentes ce matin-là, dont prés d'une vingtaine du bourg de Chenedouit. Beaucoup de nouveaux visages, beaucoup de sujets concrets abordés.
+Une trentaine de personnes étaient présentes ce matin-là, dont prés d'une vingtaine du bourg de Chênedouit. Beaucoup de nouveaux visages, beaucoup de sujets concrets abordés.
 Comme d'habitude, après une présentation de l'initiative et des échanges ouverts, les participants se sont répartis en plusieurs petits groupes pour échanger sur différentes thématiques. Voici ce qui est ressorti de ces discussions.
 
-## Groupe 1 : Sentiment d'abandon du bourg de Chenedouit
+## Groupe 1 : Sentiment d'abandon du bourg de Chênedouit
 
 Des problèmes concrets d'entretien et de sécurité
 Les habitants ont souligné des problèmes très concrets dans le bourg : vitesse excessive sur la route de Briouze et la route du Chesnaie, signalisation mal placée.
 
 Des défauts d'entretien des fossés ont été relevés, et plus globalement une mauvaise gestion de l'eau pluviale. Une fuite d'eau a par exemple été signalée, mais elle persiste malgré les alertes. Ces défauts d'entretien sont perçus comme un éloignement des responsabilités. Avant la fusion, les problèmes étaient gérés plus rapidement car les personnes responsables étaient proches du terrain.
 
-L'entretien des chemins a été décrit comme insuffisant. Cela s'explique notamment par le fait que les agents communaux responsables de l'entretien viennent de Putanges-Pont-Écrépin et connaissent mal le terrain local.
+L'entretien des chemins a été décrit comme insuffisant. Cela s'explique notamment par le fait que les agents communaux responsables de l'entretien viennent de Putanges-Pont-Écrepin et connaissent mal le terrain local.
 
 ### Un sentiment d'abandon et d'injustice
 
-De la même manière, le centre du village est décrit comme peu esthétique et peu entretenu. Il y a un sentiment d'abandon, l'impression qu'il n'y a plus de soin apporté au bourg de Chenedouit à cause de la centralisation autour de Putanges-Pont-Écrépin.
+De la même manière, le centre du village est décrit comme peu esthétique et peu entretenu. Il y a un sentiment d'abandon, l'impression qu'il n'y a plus de soin apporté au bourg de Chênedouit à cause de la centralisation autour de Putanges-Pont-Écrepin.
 
-La vente du foncier communal génère aussi un sentiment d'injustice : Les biens communaux, richesses des communes historiques sont vendus au profit de Putanges-Pont-Écrépin : le café de la Forêt Auvray, le presbytère de Saint-Aubert... Pourquoi vendre ce patrimoine plutôt que de le louer ? D'autant que la commune semble avoir une bonne santé financière.
+La vente du foncier communal génère aussi un sentiment d'injustice : Les biens communaux, richesses des communes historiques sont vendus au profit de Putanges-Pont-Écrepin : le café de la Forêt-Auvray, le presbytère de Saint-Aubert... Pourquoi vendre ce patrimoine plutôt que de le louer ? D'autant que la commune semble avoir une bonne santé financière.
 
 ### Quelles pistes ont été évoquées
 
@@ -36,7 +36,7 @@ Il a été proposé que les habitants des communes puissent être associés aux 
 **Valoriser les atouts touristiques**
 
 Sur le soin apporté au bourg, les chemins de randonnée ont été identifiés comme un atout touristique majeur. Ils pourraient être mieux entretenus et mis en valeur. L'idée de rouvrir des chemins entre les communes a été évoquée, afin de proposer des boucles intercommunales pour améliorer la découverte des bourgs et l'expérience touristique.
-Chenedouit possède aussi un lavoir peu connu qui pourrait être mieux entretenu, mis en valeur et sécurisé. L'aménagement d'aires de pique-nique et de rencontre entre randonneurs a également été évoqué.
+Chênedouit possède aussi un lavoir peu connu qui pourrait être mieux entretenu, mis en valeur et sécurisé. L'aménagement d'aires de pique-nique et de rencontre entre randonneurs a également été évoqué.
 
 **Mieux connecter les cantonniers au terrain**
 
@@ -60,11 +60,11 @@ Le sujet des haies et des fossés a aussi été abordé. Comment aider et souten
 Un constat partagé : la perte du lien de proximité
 Il y a un sentiment de réticence et d'a priori entre habitants qui serait surtout lié à un manque de connaissance entre voisins. "On ne se connaît plus entre voisins !", **"On s'est perdu de vue dans les villages".**
 
-Avant la fusion, des rendez-vous réguliers ponctuaient l'année et étaient autant de prétextes à se voir : repas des anciens, l'arbre de Noël, galette des rois. Aujourd'hui, tout se passe à Putanges-Pont-Écrépin et certaines personnes n'ont plus envie de s'y rendre car c'est trop loin de leur commune.
+Avant la fusion, des rendez-vous réguliers ponctuaient l'année et étaient autant de prétextes à se voir : repas des anciens, l'arbre de Noël, galette des rois. Aujourd'hui, tout se passe à Putanges-Pont-Écrepin et certaines personnes n'ont plus envie de s'y rendre car c'est trop loin de leur commune.
 
 ### Un problème d'accès à l'information
 
-Beaucoup de difficultés ont été évoquées pour savoir ce qui se passe sur le territoire. "Sans l'agenda des voisins, on n'aurait jamais su qu'il y avait la fête du terroir à la Forêt Auvray le week-end dernier".
+Beaucoup de difficultés ont été évoquées pour savoir ce qui se passe sur le territoire. "Sans l'agenda des voisins, on n'aurait jamais su qu'il y avait la fête du terroir à la Forêt-Auvray le week-end dernier".
 
 Les initiatives locales ont le sentiment d'être très peu soutenues. Les panneaux d'affichage public servent davantage à diffuser des messages négatifs qu'à communiquer sur la vie de la commune.
 Quelles pistes ont été évoquées ?
@@ -77,7 +77,7 @@ Des navettes communales entre les communes lors d'événements particuliers ont 
 
 Les initiatives locales mériteraient d'être mieux valorisées : l'agenda des voisins, les associations d'entretien des chemins, les initiatives culturelles...
 
-Les ressources de chaque mairie pourraient aussi être mieux exploitées. La cuisine de la salle des fêtes de Chenedouit, par exemple, est très bien équipée mais très peu utilisée. On pourrait y organiser des ateliers communaux de transformation alimentaire, tout en créant du lien social.
+Les ressources de chaque mairie pourraient aussi être mieux exploitées. La cuisine de la salle des fêtes de Chênedouit, par exemple, est très bien équipée mais très peu utilisée. On pourrait y organiser des ateliers communaux de transformation alimentaire, tout en créant du lien social.
 
 Comment faire davantage de lien entre les communes pour partager les initiatives ? Comment améliorer les systèmes de communication locale (affichage public, support papier) ?
 
@@ -146,4 +146,4 @@ Mais ce qui frappe aussi, c'est la nature des pistes évoquées. Pas de grands p
 
 Merci à tous les participants pour leurs précieuses contributions !
 
-Rdv à Saint Aubert le 25 Octobre pour prolonger ces échanges.
+Rdv à Saint-Aubert le 25 Octobre pour prolonger ces échanges.
