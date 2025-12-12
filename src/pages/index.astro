@@ -57,11 +57,14 @@ function generateSlug(title: string) {
       </div>
     </section>
 
-    <div class="campaign-wrapper">
+    <!-- CTA Campagne de désignation -->
+    <!-- <div class="campaign-wrapper">
       <CampaignCallToAction client:load />
-    </div>
+    </div> -->
 
     <div class="content-wrapper">
+      <VoterRegistration client:load />
+
       
       <!-- Section Ambitions -->
       <section class="ambitions-section">
@@ -185,7 +188,6 @@ function generateSlug(title: string) {
 
       <!-- Section Contribution -->
       <section class="contribution-section">
-        <VoterRegistration client:load />
 
         <h2>Envie de contribuer ?</h2>
         <div class="max-w-3xl mx-auto">
