@@ -69,7 +69,9 @@
 <header class="site-header">
   <div class="container">
     <div class="logo">
-      <a href="/">MCCP</a>
+      <a href="/">
+        <img src="/assets/img/logo/logo.png" alt="MCCP Putanges-le-Lac" />
+      </a>
     </div>
     
     <nav class="main-nav">
@@ -130,6 +132,29 @@
 </header>
 
 <style>
+  /* Logo styles */
+  .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+  
+  .logo a {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img:hover {
+    opacity: 0.85;
+  }
+  
+  @media (max-width: 768px) {
+    .logo img {
+      height: 40px;
+    }
+  }
+  
   /* Styles spécifiques au dropdown uniquement */
   li.has-dropdown {
     position: relative;
