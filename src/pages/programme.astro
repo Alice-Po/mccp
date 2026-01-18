@@ -1,0 +1,468 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Download from "../components/commonsElements/Download.svelte";
+import "../styles/global.css";
+
+const themes = [
+  {
+    title: "Mobilisation citoyenne",
+    icon: "🗳️",
+    enjeux: "Besoin de démocratie, de transparence, sentiment d'abandon des communes déléguées, exercice vertical du pouvoir",
+    objectifs: "Mettre en place un mode de gouvernance qui permet l'implication des habitants dans les décisions et améliorer la communication sur les projets",
+    propositions: [
+      "Créer des commissions citoyennes",
+      "Mettre à jour et développer la communication municipale : affichage, site internet, journal communal",
+      "Adopter le principe de non cumul des mandats"
+    ]
+  },
+  {
+    title: "Vie économique",
+    icon: "🏪",
+    enjeux: "Fermeture des commerces, avenir des commerces actuels, moins de fréquentation du centre bourg",
+    objectifs: "Préserver les commerces de proximité, ré-animer le centre de Putanges, redonner de l'attractivité économique pour le territoire",
+    propositions: [
+      "Mettre en lien les acteurs économiques pour travailler leur complémentarité",
+      "Repenser l'aménagement de la place de la Mairie",
+      "S'inspirer d'expériences d'autres communes pour l'attractivité du territoire"
+    ]
+  },
+  {
+    title: "Agriculture et alimentation",
+    icon: "🌾",
+    enjeux: "Points de vente directe peu structurés, approvisionnement de la cuisine centrale par le département, métier d'agriculteur difficile",
+    objectifs: "Soutenir les producteurs et l'installation de nouvelles personnes, favoriser l'approvisionnement local",
+    propositions: [
+      "Faire un bilan de l'offre et de la demande sur le territoire",
+      "Étudier l'intégration de produits locaux dans la restauration collective",
+      "Travailler avec les structures d'insertion pour l'accessibilité alimentaire",
+      "Communiquer et sensibiliser à la consommation de produits locaux"
+    ]
+  },
+  {
+    title: "Tourisme et patrimoine",
+    icon: "🏰",
+    enjeux: "Équilibre entre activité touristique et qualité de vie, atouts naturels et patrimoniaux, résidences secondaires",
+    objectifs: "Valoriser le patrimoine et l'entretenir, privilégier l'attractivité de nouveaux habitants, privilégier les techniques durables",
+    propositions: [
+      "Recenser les actions déjà initiées et vérifier la cartographie des chemins",
+      "Impliquer les habitants pour l'entretien et la mise en valeur",
+      "Créer un parcours découverte des sites remarquables",
+      "Travailler à la réhabilitation et l'accessibilité de l'habitat"
+    ]
+  },
+  {
+    title: "Environnement",
+    icon: "🌱",
+    enjeux: "Thème transversal, enjeux locaux : haies, gestion de l'eau pluviale, chemins",
+    objectifs: "Rénovation énergétique du bâti public, végétaliser l'espace public, valoriser le patrimoine naturel",
+    propositions: [
+      "Prendre en compte le dérèglement climatique dans toutes les décisions",
+      "Créer un sentier pédagogique sur le patrimoine naturel",
+      "Recenser et réouvrir des chemins pédestres"
+    ]
+  },
+  {
+    title: "Vie sociale",
+    icon: "👥",
+    enjeux: "Perte du lien de proximité, isolement des personnes âgées, initiatives locales peu soutenues",
+    objectifs: "Créer des espaces permanents de rencontre, créer du lien entre les habitants et entre les associations",
+    propositions: [
+      "Permettre aux associations d'utiliser les salles communales",
+      "Mutualiser le matériel",
+      "Rendre visibles les événements existants en améliorant la communication"
+    ]
+  },
+  {
+    title: "Santé",
+    icon: "🏥",
+    enjeux: "Pôle médical diversifié à Putanges mais manque de spécialistes et problème de mobilité pour y accéder",
+    objectifs: "Apporter des solutions pour se rendre au pôle de santé, travailler avec les professionnels sur la promotion de la santé",
+    propositions: [
+      "Rendre visible l'association de mobilité vers le pôle de santé",
+      "Créer du lien avec les professionnels de santé du territoire"
+    ]
+  },
+  {
+    title: "Mobilité",
+    icon: "🚲",
+    enjeux: "Covoiturage existant, zones routières dangereuses, dépendance à la voiture",
+    objectifs: "Mettre en place le transport à la demande, favoriser la mobilité durable, sécuriser la circulation",
+    propositions: [
+      "Étudier une liaison Rabodanges - Putanges en barque électrique",
+      "Créer un espace dédié au covoiturage à Fromentel",
+      "Développer la location de vélos électriques",
+      "Mettre en place un feu rouge se déclenchant à une vitesse supérieure à 50 km/h"
+    ]
+  },
+  {
+    title: "Sport et jeunesse",
+    icon: "⚽",
+    enjeux: "Manque de bénévoles et de locaux, peu d'accès aux structures existantes, manque de soutien aux associations",
+    objectifs: "Soutenir les associations locales, créer des lieux attractifs pour les familles et les bénévoles",
+    propositions: [
+      "Soutien financier aux associations",
+      "Rénovation des lieux et équipements : équipements sportifs décentralisés, pôles scolaires",
+      "Création de 'fiche parcours' : Parents-Enfant, Habitant et nouveaux arrivants",
+      "Création d'un lieu d'accueil pour les enfants en bas âge",
+      "Mettre en place un conseil municipal des jeunes"
+    ]
+  },
+  {
+    title: "Culture",
+    icon: "🎭",
+    enjeux: "Offre culturelle peu visible, manque de bénévoles et de locaux, manque de soutien aux associations",
+    objectifs: "Soutenir les associations locales, créer un lieu pluridisciplinaire, favoriser les liens entre habitants",
+    propositions: [
+      "Identification de lieux existants",
+      "Résidences et ateliers avec les habitants",
+      "Décentralisation de l'offre culturelle"
+    ]
+  },
+  {
+    title: "Travaux et urbanisme",
+    icon: "🏗️",
+    enjeux: "Investissements concentrés sur Putanges, pas de prise en compte des risques, bâti sous-exploité, artificialisation des sols",
+    objectifs: "Rééquilibrer les investissements entre communes, prendre en compte les risques, décider avec les habitants du patrimoine",
+    propositions: [
+      "Création du Plan Communal de Sauvegarde étendu à la limitation de l'énergie",
+      "Création d'un moyen de suivre les travaux pour les habitants",
+      "Permettre l'acquisition d'immobilier pour éviter la vacance"
+    ]
+  }
+];
+---
+
+<Layout title="Programme - MCCP">
+  <main>
+    <section class="hero-section program-hero">
+      <div class="hero-content">
+        <h1>Le programme</h1>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+      <!-- Bandeau d'alerte -->
+      <div class="alert-banner">
+        <div class="alert-content">
+          <h3>Le programme est en cours de rédaction</h3>
+        </div>
+      </div>
+
+      <!-- Introduction -->
+      <section class="text-section">
+        <p>
+          Le programme de la liste citoyenne du MCCP est <strong>actuellement en cours de rédaction</strong> par un groupe de travail qui l'élabore à partir du travail collectif réalisé lors des <strong>10 réunions publiques</strong> organisées depuis juin 2025.
+        </p>
+        <p>
+          Voici ci-dessous la <strong>synthèse de nos réunions publiques</strong>. 
+        </p>
+      </section>
+
+      <!-- Téléchargement de la synthèse -->
+      <section class="download-section">
+        <div class="document-card">
+          <div class="document-icon">📋</div>
+          <div class="document-info">
+            <h3>Synthèse complète (2 pages)</h3>
+            <p>Téléchargez le document de synthèse des réunions publiques avec l'ensemble des 11 thématiques.</p>
+            <Download 
+              url="/assets/datas/programme/Synthese-des-reu-publique-2pages.pdf"
+              label="Télécharger la synthèse"
+              format="PDF"
+              inverted={true}
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Les 11 thématiques -->
+      <section class="themes-section">
+        <h2>Les 11 thématiques</h2>
+        <p class="themes-intro">
+          Découvrez les enjeux, objectifs et premières propositions pour chaque thématique.
+        </p>
+
+        <div class="themes-grid">
+          {themes.map((theme) => (
+            <div class="theme-card">
+              <div class="theme-header">
+                <span class="theme-icon">{theme.icon}</span>
+                <h3>{theme.title}</h3>
+              </div>
+              
+              <div class="theme-content">
+                <div class="theme-section">
+                  <h4>Enjeux partagés</h4>
+                  <p>{theme.enjeux}</p>
+                </div>
+                
+                <div class="theme-section">
+                  <h4>Objectifs</h4>
+                  <p>{theme.objectifs}</p>
+                </div>
+                
+                <div class="theme-section">
+                  <h4>Premières propositions</h4>
+                  <ul>
+                    {theme.propositions.map((prop) => (
+                      <li>{prop}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Appel à contribution -->
+      <section class="cta-section">
+        <h2>Et vous ?</h2>
+        <p>
+          Ce programme est le fruit d'un travail collectif et continue d'évoluer. 
+          Vos idées, vos suggestions et vos contributions sont les bienvenues !
+        </p>
+        <div class="cta-buttons">
+          <a href="/#contact" class="cta-button primary">Nous contacter</a>
+          <a href="/blog" class="cta-button secondary">Suivre les actualités</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .program-hero {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('/assets/img/putange-derniere-reu.jpg');
+    height: 50vh;
+    min-height: 400px;
+  }
+
+  /* Bandeau d'alerte */
+  .alert-banner {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 1rem;
+    margin: 2rem 0 3rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+
+  .alert-banner h3 {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--secondary);
+  }
+
+  .download-section {
+    margin: 3rem 0;
+  }
+
+  .themes-section {
+    margin: 4rem 0;
+  }
+
+  .themes-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .themes-intro {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+  }
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .theme-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eaeaea;
+  }
+
+  .theme-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(46, 139, 87, 0.1);
+  }
+
+  .theme-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .theme-header h3 {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .theme-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .theme-section h4 {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .theme-section p {
+    font-size: 1rem;
+    color: var(--secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .theme-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .theme-section li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--secondary);
+    line-height: 1.5;
+  }
+
+  .theme-section li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* Section CTA */
+  .cta-section {
+    text-align: center;
+    margin: 4rem 0;
+    padding: 3rem 2rem;
+    background: rgba(46, 139, 87, 0.05);
+    border-radius: 1rem;
+  }
+
+  .cta-section h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .cta-button.primary {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .cta-button.primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .cta-button.secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+
+  .cta-button.secondary:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .alert-banner {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .alert-banner h3 {
+      font-size: 1.3rem;
+    }
+
+    .themes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .theme-card {
+      padding: 1.5rem;
+    }
+
+    .theme-header h3 {
+      font-size: 1.3rem;
+    }
+
+    .cta-section {
+      padding: 2rem 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
