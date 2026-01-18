@@ -1,0 +1,614 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+
+const colistiers = [
+  { nom: "Loïc Lecoeur", commune: "Putanges-Pont-Écrepin", teteDeListe: true },
+  { nom: "Isabelle Lecomte", commune: "Putanges-Pont-Écrepin", teteDeListe: true },
+  { nom: "Julie Thivol", commune: "La Forêt-Auvray" },
+  { nom: "Marc Chalufour", commune: "Chênedouit" },
+  { nom: "Alice Poggioli", commune: "La Forêt-Auvray" },
+  { nom: "Véronique Leveque", commune: "La Fresnaye-au-Sauvage" },
+  { nom: "Touhami Cherrak", commune: "La Forêt-Auvray" },
+  { nom: "Estelle Corneville", commune: "La Fresnaye-au-Sauvage" },
+  { nom: "Rémy Carras", commune: "Rabodanges" },
+  { nom: "Rosanne Tardiff", commune: "Chênedouit" },
+  { nom: "David Morin", commune: "La Fresnaye-au-Sauvage" },
+  { nom: "Philippe Tulliez", commune: "Ménil-Jean" },
+  { nom: "Nicolas Gaultier", commune: "La Fresnaye-au-Sauvage" }
+];
+
+---
+
+<Layout title="La Liste - MCCP">
+  <main>
+    <section class="hero-section liste-hero">
+      <div class="hero-content">
+        <h1>La Liste</h1>
+        <p>Une liste citoyenne et participative pour Putanges-le-Lac</p>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+      <!-- Bandeau d'alerte -->
+      <div class="alert-banner">
+        <div class="alert-content">
+          <h3>La liste est en cours de construction</h3>
+        </div>
+      </div>
+
+      <!-- Section méthodologie -->
+      <section class="methodology-section">
+        <h2>Comment la liste se construit</h2>
+        <p class="methodology-intro">
+          La construction de notre liste s'est déroulée en deux étapes, basées sur des méthodes participatives et collectives.
+        </p>
+
+        <div class="steps-container">
+          <!-- Étape 1 -->
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>La campagne de plébiscite</h3>
+            <p class="step-period">Du 2 novembre au 2 décembre 2025</p>
+            <p>
+              Une campagne citoyenne a été lancée pour désigner les personnes en qui les habitants ont confiance : 
+              plutôt que de demander aux habitants de se porter candidats, les habitants ont été invités à désigner les personnes en qui ils ont confiance.
+            </p>
+            <div class="step-result">
+              <p>
+                <strong>60 personnes</strong> identifiées, qui ont ensuite été contactées pour participer à la construction collective de la liste.
+              </p>
+            </div>
+            <div class="step-link">
+              <a href="/blog/campagnePlebiscite" class="cta-learn-more">
+                <span>En savoir plus</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Étape 2 -->
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>L'élection sans candidat</h3>
+            <p class="step-period">Samedi 10 janvier 2026</p>
+            <p>
+              À La Fresnaye-au-Sauvage, le binôme de tête de liste a été choisi selon une <strong>méthode originale : l'élection sans candidat</strong>. 
+              Pas de candidature classique : les participants rédigent une fiche de poste, puis désignent collectivement les personnes les plus en adéquation avec ces missions. 
+              Cette journée était accompagnée par <strong>Fréquence Commune</strong>, une coopérative qui accompagne les listes citoyennes et participatives en France.
+            </p>
+            <div class="step-result">
+              <p>
+                <strong>Loïc Lecoeur</strong> et <strong>Isabelle Lecomte</strong> ont été désignés binôme de tête de liste.
+              </p>
+            </div>
+            <div class="step-link">
+              <a href="/blog/listecitoyenne" class="cta-learn-more">
+                <span>Comprendre la méthode</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section colistiers -->
+      <section class="team-section">
+        <h2>👥 Les colistiers engagés</h2>
+        <p class="team-intro">
+          La liste est <strong>presque entièrement constituée</strong> avec l'objectif de représenter l'ensemble des communes déléguées de Putanges-le-Lac. 
+          Voici les colistiers qui ont déjà annoncé leur engagement :
+        </p>
+
+        <div class="colistiers-grid">
+          {colistiers.map((colistier) => (
+            <div class="colistier-card" class:list={[{ 'tete-de-liste': colistier.teteDeListe }]}>
+              {colistier.teteDeListe && <div class="badge-tete-liste">⭐</div>}
+              <div class="colistier-name">{colistier.nom}</div>
+              <div class="colistier-commune">{colistier.commune}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="team-status">
+          <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.8;">
+            ⭐ Têtes de liste désignées le <strong>10 janvier 2026</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- Section appel à contribution -->
+      
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .liste-hero {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('/assets/img/20260110-election-sans-candidat.jpeg');
+    height: 50vh;
+    min-height: 400px;
+  }
+
+  /* Bandeau d'alerte */
+  .alert-banner {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 1rem;
+    margin: 2rem 0 3rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+
+  .alert-content h3 {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--secondary);
+  }
+
+
+  /* Section méthodologie */
+  .methodology-section {
+    margin: 4rem 0;
+    background: rgba(46, 139, 87, 0.03);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+  }
+
+  .methodology-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+
+  .methodology-intro {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .step-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .step-number {
+    position: absolute;
+    top: -1rem;
+    left: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .step-card h3 {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: 1rem 0 0.5rem;
+  }
+
+  .step-period {
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .step-card > p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .step-result {
+    background: rgba(46, 139, 87, 0.05);
+    border-left: 4px solid var(--primary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .step-result p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .step-link {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .cta-learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary);
+    color: white !important;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-learn-more:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-learn-more svg {
+    transition: transform 0.2s ease;
+  }
+
+  .cta-learn-more:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Section colistiers */
+  .team-section {
+    margin: 4rem 0;
+  }
+
+  .team-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .colistiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .colistier-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+
+  .colistier-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .colistier-card.tete-de-liste {
+    border: 2px solid var(--primary);
+  }
+
+  .badge-tete-liste {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    font-size: 1.5rem;
+    background: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .colistier-name {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .colistier-commune {
+    font-size: 0.95rem;
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  .team-status {
+    background: rgba(46, 139, 87, 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .team-status p {
+    font-size: 1.2rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  /* Section événements */
+  .events-section-liste {
+    margin: 4rem 0;
+  }
+
+  .events-section-liste h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .events-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .events-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .event-card-liste {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .event-card-liste:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-header-liste {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(46, 139, 87, 0.1);
+  }
+
+  .event-icon-liste {
+    font-size: 2rem;
+  }
+
+  .event-date-liste {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .event-time-liste {
+    font-size: 1rem;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+
+  .event-body h3 {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .event-body p {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Section contribution */
+  .contribution-section-liste {
+    margin: 4rem 0;
+    background: rgba(46, 139, 87, 0.05);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+  }
+
+  .contribution-section-liste h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .contribution-content > p {
+    text-align: center;
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .contribution-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .action-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .action-card h3 {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .action-card p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .contact-cta {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(46, 139, 87, 0.2);
+  }
+
+  .contact-cta p {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .cta-button.primary {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .cta-button.primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .cta-button.secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+
+  .cta-button.secondary:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .alert-banner {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .alert-content h3 {
+      font-size: 1.3rem;
+    }
+
+    .methodology-section {
+      padding: 2rem 1rem;
+    }
+
+    .steps-container {
+      grid-template-columns: 1fr;
+    }
+
+    .step-card {
+      padding: 1.5rem;
+    }
+
+    .colistiers-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .events-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .contribution-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .contribution-section-liste {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
