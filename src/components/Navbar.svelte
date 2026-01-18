@@ -7,8 +7,6 @@
   const navLinks = [
     { href: "/", text: "Accueil" },
     { href: "/blog", text: "Actualités" },
-    { href: "/retroplanning", text: "Rétro-planning" },
-    { href: "/conseils-municipaux", text: "Conseils Municipaux" },
     { href: "/finances", text: "Finances" },
     { href: "/cartes", text: "Cartes" },
     // {
