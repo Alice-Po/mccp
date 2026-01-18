@@ -1,7 +1,7 @@
 ---
 title: 'Retour sur la réunion publique du 25 octobre à Saint-Aubert-sur-Orne'
 description: 'Vingt-cinq personnes étaient présentes à la réunion publique de Saint-Aubert-sur-Orne. Voici la synthèse des échanges qui ont eu lieu lors de cette matinée.'
-pubDate: 2025-12-03
+pubDate: 2025-10-25
 author: 'MCCP'
 image: '/assets/img/reupublique-25102025.jpg'
 tags: ['actualite', 'reunion']
