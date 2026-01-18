@@ -8,7 +8,8 @@ const currentYear = new Date().getFullYear();
     <div class="footer-resources-content">
       <a href="/finances" class="footer-resource-link">Finances</a>
       <a href="/competences" class="footer-resource-link">Compétences</a>
-
+      <a href="/conseils-municipaux" class="footer-resource-link">Conseils Municipaux</a>
+      <a href="/cartes" class="footer-resource-link">Cartes</a>
     </div>
   </div>
   
@@ -42,11 +43,12 @@ const currentYear = new Date().getFullYear();
     margin-top: 4rem;
   }
 
-  /* Section liens ressources (discrète) */
+  /* Section liens ressources */
   .footer-resources {
-    border-bottom: 1px solid rgba(234, 234, 234, 0.5);
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    background: rgba(46, 139, 87, 0.05);
+    border-bottom: 2px solid rgba(46, 139, 87, 0.1);
+    padding: 1.25rem 0;
+    margin-bottom: 1.5rem;
   }
 
   .footer-resources-content {
@@ -56,21 +58,39 @@ const currentYear = new Date().getFullYear();
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     flex-wrap: wrap;
   }
 
   .footer-resource-link {
     color: var(--secondary);
     text-decoration: none;
-    font-size: 0.9rem;
-    opacity: 0.7;
-    transition: opacity 0.2s ease, color 0.2s ease;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: var(--font-main);
+    position: relative;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 0.5rem 0;
+  }
+
+  .footer-resource-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
   }
 
   .footer-resource-link:hover {
-    opacity: 1;
     color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .footer-resource-link:hover::after {
+    width: 100%;
   }
 
   .footer-content {
@@ -131,12 +151,20 @@ const currentYear = new Date().getFullYear();
   }
 
   @media (max-width: 768px) {
+    .footer-resources {
+      padding: 1rem 0;
+    }
+
     .footer-resources-content {
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
     }
 
     .footer-resource-link {
-      font-size: 0.85rem;
+      font-size: 1.2rem;
+      width: 100%;
+      text-align: center;
     }
 
     .footer-content {
