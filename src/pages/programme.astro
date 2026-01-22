@@ -151,10 +151,10 @@ const themes = [
       <!-- Introduction -->
       <section class="text-section">
         <p>
-          Le programme de la liste citoyenne du MCCP est <strong>actuellement en cours de rédaction</strong> par un groupe de travail qui l'élabore à partir du travail collectif réalisé lors des <strong>10 réunions publiques</strong> organisées depuis juin 2025.
+          Le programme de la liste citoyenne du MCCP est <strong>actuellement en cours de rédaction</strong> par un groupe de travail qui l'élabore à partir du travail collectif réalisé lors des 10 réunions publiques organisées depuis juin 2025.
         </p>
         <p>
-          Voici ci-dessous la <strong>synthèse de nos réunions publiques</strong>. 
+          Voici ci-dessous la synthèse de nos réunions publiques. <strong>Il ne s'agit pas d'un programme mais juste un compte rendu synthétique de ce qu'il s'est dit pendant les réunions publiques.</strong>
         </p>
       </section>
 
@@ -178,9 +178,6 @@ const themes = [
       <!-- Les 11 thématiques -->
       <section class="themes-section">
         <h2>Les 11 thématiques</h2>
-        <p class="themes-intro">
-          Découvrez les enjeux, objectifs et premières propositions pour chaque thématique.
-        </p>
 
         <div class="themes-grid">
           {themes.map((theme) => (
@@ -202,7 +199,7 @@ const themes = [
                 </div>
                 
                 <div class="theme-section">
-                  <h4>Premières propositions</h4>
+                  <h4>Idées des habitants</h4>
                   <ul>
                     {theme.propositions.map((prop) => (
                       <li>{prop}</li>
