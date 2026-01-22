@@ -7,8 +7,10 @@
   const navLinks = [
     { href: "/", text: "Accueil" },
     { href: "/blog", text: "Actualités" },
+    { href: "/programme", text: "Programme" },
+    { href: "/liste", text: "Liste" },
     { href: "/finances", text: "Finances" },
-    { href: "/cartes", text: "Cartes" },
+    // { href: "/cartes", text: "Cartes" },
     // {
     //   text: "Suivis Municipal",
     //   dropdown: [
