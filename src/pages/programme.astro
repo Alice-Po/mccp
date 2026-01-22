@@ -229,6 +229,18 @@ const themes = [
 </Layout>
 
 <style>
+  /* Prévenir le débordement horizontal */
+  main {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  
+  :global(.content-wrapper) {
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
   .program-hero {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url('/assets/img/putange-derniere-reu.jpg');
@@ -245,6 +257,8 @@ const themes = [
     padding: 1.5rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     text-align: center;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .alert-banner h3 {
@@ -257,10 +271,23 @@ const themes = [
 
   .download-section {
     margin: 3rem 0;
+    overflow-x: hidden;
+  }
+  
+  .download-section .document-card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .download-section .document-info {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .themes-section {
     margin: 4rem 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .themes-section h2 {
@@ -278,7 +305,7 @@ const themes = [
 
   .themes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
     gap: 2rem;
     margin-top: 2rem;
   }
@@ -290,6 +317,8 @@ const themes = [
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: 1px solid #eaeaea;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .theme-card:hover {
@@ -370,6 +399,8 @@ const themes = [
     padding: 3rem 2rem;
     background: rgba(46, 139, 87, 0.05);
     border-radius: 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .cta-section h2 {
@@ -403,6 +434,8 @@ const themes = [
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.2s ease;
+    box-sizing: border-box;
+    max-width: 100%;
   }
 
   .cta-button.primary {
@@ -430,11 +463,20 @@ const themes = [
   /* Responsive */
   @media (max-width: 768px) {
     .alert-banner {
-      padding: 1.25rem 1.5rem;
+      padding: 1.25rem 0.75rem;
     }
 
     .alert-banner h3 {
       font-size: 1.3rem;
+    }
+    
+    .download-section {
+      overflow-x: hidden;
+    }
+    
+    .download-section :global(.help-button) {
+      margin-left: 0;
+      margin-right: 0;
     }
 
     .themes-grid {
@@ -450,7 +492,8 @@ const themes = [
     }
 
     .cta-section {
-      padding: 2rem 1rem;
+      padding: 2rem 0.5rem;
+      margin: 4rem 0;
     }
 
     .cta-buttons {
