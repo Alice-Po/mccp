@@ -468,6 +468,24 @@
     }
   }
 
+  /* Media query pour mobile - évite le débordement horizontal */
+  @media (max-width: 768px) {
+    .chart-canvas-container {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      aspect-ratio: 1; /* Garde le ratio carré */
+    }
+    
+    .center-total-amount {
+      font-size: 1.1rem;
+    }
+    
+    .center-total-label {
+      font-size: 0.75rem;
+    }
+  }
+
   .drill-down-legend {
     display: flex;
     align-items: center;
