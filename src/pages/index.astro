@@ -7,6 +7,7 @@ import "../styles/global.css";
 import EventCard from "../components/EventCard.svelte";
 import CampaignCallToAction from "../components/CampaignCallToAction.svelte";
 import VoterRegistration from "../components/VoterRegistration.svelte";
+import PollCallToAction from "../components/PollCallToAction.svelte";
 
 // Récupérer les articles de blog
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -63,7 +64,8 @@ function generateSlug(title: string) {
     </div> -->
 
     <div class="content-wrapper">
-      <VoterRegistration client:load />
+
+      <PollCallToAction client:load />
 
       
       <!-- Section Ambitions -->
