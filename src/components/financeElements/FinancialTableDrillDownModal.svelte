@@ -309,15 +309,11 @@
       font-size: 1rem;
     }
     .drilldown-table {
-      font-size: 0.75rem;
+      font-size: var(--fs-mobile-xs);
     }
     .drilldown-table th,
     .drilldown-table td {
       padding: 0.2rem 0.1rem;
     }
-  }
-
-  .detail-table thead th {
-    color: white;
   }
 </style> 

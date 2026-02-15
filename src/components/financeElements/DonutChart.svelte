@@ -417,8 +417,9 @@
     }
 
     .chart-canvas-container {
-      width: 350px;
-      height: 350px;
+      width: min(350px, 100%); /* ✅ S'adapte automatiquement pour éviter le débordement */
+      height: auto;
+      aspect-ratio: 1; /* Garde le ratio carré */
       margin-bottom: 1rem;
     }
 
@@ -468,7 +469,7 @@
     }
   }
 
-  /* Media query pour mobile - évite le débordement horizontal */
+  /* Media query pour grands mobiles et petites tablettes */
   @media (max-width: 768px) {
     .chart-canvas-container {
       width: 100%;
@@ -478,11 +479,21 @@
     }
     
     .center-total-amount {
-      font-size: 1.1rem;
+      font-size: var(--fs-mobile-base);
     }
     
     .center-total-label {
-      font-size: 0.75rem;
+      font-size: var(--fs-mobile-xs);
+    }
+  }
+
+  /* Media query pour petits mobiles */
+  @media (max-width: 425px) {
+    .chart-canvas-container {
+      width: 100%;
+      max-width: 250px; /* ✅ Encore plus compact pour petits écrans */
+      height: auto;
+      aspect-ratio: 1;
     }
   }
 

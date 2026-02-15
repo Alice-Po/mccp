@@ -1,21 +1,7 @@
-/* Variables et styles de base */
-:root {
-  --primary: #2e8b57; /* Vert */
-  --primary-dark: #247a48;
-  --secondary: #1b365d; /* Bleu marine */
-  --accent: #ac502b;
-  --white: #ffffff;
-  --black: #13151a;
-  --gray: #747474;
-  --gray-light: #e0e0e0;
-  --light-gray: #f5f5f5;
-  --text-color: #333333;
-  --border-color: #e0e0e0;
-  --success: #28a745;
-  --success-light: #d4edda;
-  --background: #f9f9f9;
-  --font-main: 'League Spartan', sans-serif;
-}
+/* ============================================
+   Import des variables CSS centralisées
+   ============================================ */
+@import './variables.css';
 
 /* Styles globaux */
 html {

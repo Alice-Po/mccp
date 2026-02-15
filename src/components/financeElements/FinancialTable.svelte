@@ -305,7 +305,7 @@
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-main);
-    font-size: 0.85rem;
+    font-size: var(--fs-xs);
   }
 
   .financial-table thead {
@@ -317,7 +317,7 @@
     padding: 0.4rem 0.3rem;
     text-align: left;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -352,7 +352,7 @@
     font-weight: 500;
     color: white;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: var(--fs-xs);
   }
 
   /* Styles pour les en-têtes de section */
@@ -363,7 +363,7 @@
 
   .section-header .section-title {
     padding: 0.5rem 0.3rem;
-    font-size: 0.9rem;
+    font-size: var(--fs-xs);
     color: var(--secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -413,14 +413,14 @@
 
   .drill-down-indicator {
     margin-left: 0.5rem;
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     opacity: 0.7;
   }
 
   /* Responsive design */
   @media (max-width: 1024px) {
     .financial-table {
-      font-size: 0.8rem;
+      font-size: var(--fs-xs);
     }
     
     .financial-table th,
@@ -435,32 +435,32 @@
     }
     
     .header-content h2 {
-      font-size: 1rem;
+      font-size: var(--fs-mobile-base);
     }
     
     .period-tag {
-      font-size: 0.8rem;
+      font-size: var(--fs-mobile-xs);
       padding: 0.4rem 0.8rem;
     }
     
     .financial-table {
-      font-size: 0.75rem;
+      font-size: var(--fs-mobile-xs);
     }
     
     .col-compte {
       width: 10%;
-      min-width: 20px;
+      min-width: 30px;
     }
     
     .col-libelle {
       width: 30%;
-      min-width: 50px;
+      min-width: 80px;
     }
     
     .col-amount {
       width: 18%;
-      min-width: 30px;
-      font-size: 0.75rem;
+      min-width: 50px;
+      font-size: var(--fs-mobile-xs);
     }
   }
 

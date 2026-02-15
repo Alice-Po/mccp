@@ -271,13 +271,13 @@
   }
 
   .rate-label {
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     color: #64748b;
     font-weight: 500;
   }
 
   .rate-badge {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     background: #e2e8f0;
     color: #475569;
     padding: 0.2rem 0.5rem;
@@ -332,7 +332,7 @@
 
   .diff-desc {
     display: block;
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     color: #64748b;
     font-style: italic;
   }
@@ -345,7 +345,7 @@
   }
 
   .sample-size {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     color: #64748b;
     font-weight: 500;
   }
@@ -498,7 +498,7 @@
 
     .help-button {
       padding: 0.5rem 1rem;
-      font-size: 0.85rem;
+      font-size: var(--fs-mobile-xs);
     }
   }
 </style> 

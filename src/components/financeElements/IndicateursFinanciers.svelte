@@ -166,7 +166,7 @@
 
   .indicateurs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
   }
@@ -267,13 +267,13 @@
   }
 
   .value-label {
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     color: #64748b;
     font-weight: 500;
   }
 
   .ranking-badge {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     background: var(--primary);
     color: white;
     padding: 0.2rem 0.5rem;
@@ -282,7 +282,7 @@
   }
 
   .sample-info {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     background: #e2e8f0;
     color: #475569;
     padding: 0.2rem 0.5rem;
@@ -313,7 +313,7 @@
   }
 
   .decile-label {
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     color: #64748b;
     font-weight: 500;
   }
@@ -469,7 +469,7 @@
 
     .help-button {
       padding: 0.5rem 1rem;
-      font-size: 0.85rem;
+      font-size: var(--fs-mobile-xs);
     }
 
     .source-content {

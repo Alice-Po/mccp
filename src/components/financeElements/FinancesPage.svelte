@@ -706,6 +706,10 @@ function toggleAccordion(id: keyof typeof accordions) {
 
     
     <style>
+      /* Protection contre les débordements */
+      * {
+        box-sizing: border-box;
+      }
 
       .finances-content section{
         margin: 0 auto;
@@ -718,6 +722,7 @@ function toggleAccordion(id: keyof typeof accordions) {
         max-width: 1600px;
         margin: 0 auto;
         padding: 2rem;
+        box-sizing: border-box;
       }
     
       .finances-sidebar {
@@ -751,6 +756,8 @@ function toggleAccordion(id: keyof typeof accordions) {
         padding: 2rem;
         margin-bottom: 0.5rem;
         border-left: 4px solid var(--primary);
+        max-width: 100%;
+        box-sizing: border-box;
       }
     
       .intro-content p {
@@ -782,6 +789,8 @@ function toggleAccordion(id: keyof typeof accordions) {
         padding: 2rem;
         margin-bottom: 2rem;
         scroll-margin-top: 2rem;
+        max-width: 100%;
+        box-sizing: border-box;
       }
     
       .section-header {
@@ -941,7 +950,7 @@ function toggleAccordion(id: keyof typeof accordions) {
 
     
   /* Responsive pour masquer la sidebar en dessous de 1299px */
-  @media (max-width: 1299px) {
+  @media (max-width: 1300px) {
     .finances-sidebar {
       display: none;
     }
@@ -957,7 +966,7 @@ function toggleAccordion(id: keyof typeof accordions) {
   }
 
   /* Responsive pour les tablettes */
-  @media (min-width: 1024px) and (max-width: 1298px) {
+  @media (min-width: 1024px) and (max-width: 1300px) {
     .finances-layout {
       gap: 1.5rem;
       padding: 1.5rem;
@@ -966,6 +975,12 @@ function toggleAccordion(id: keyof typeof accordions) {
 
   /* Responsive pour les petits écrans (mobile) */
   @media (max-width: 768px) {
+    .finances-layout {
+      padding: 0.5rem;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     .finances-header h1 {
       font-size: 2rem;
     }
@@ -973,6 +988,7 @@ function toggleAccordion(id: keyof typeof accordions) {
     .intro-section {
       padding: 1.5rem;
       margin-bottom: 1.5rem;
+      max-width: 100%;
     }
 
     .intro-content p {
@@ -981,6 +997,7 @@ function toggleAccordion(id: keyof typeof accordions) {
 
     .chart-section {
       padding: 1.5rem;
+      max-width: 100%;
     }
 
     .cta-container {
@@ -992,25 +1009,25 @@ function toggleAccordion(id: keyof typeof accordions) {
       margin: 0.5rem 0;
       padding: 0.75rem 1rem;
     }
+  }
 
-    /* Ajustements pour très petits écrans (600px et moins) */
-    @media (max-width: 600px) {
-      .finances-header h1 {
-        font-size: 1.75rem;
-      }
+  /* Ajustements pour très petits écrans (600px et moins) */
+  @media (max-width: 600px) {
+    .finances-header h1 {
+      font-size: 1.75rem;
+    }
 
-      .intro-section {
-        padding: 1rem;
-      }
+    .intro-section {
+      padding: 1rem;
+    }
 
-      .chart-section {
-        padding: 1rem;
-      }
+    .chart-section {
+      padding: 1rem;
+    }
 
-      .cta {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.9rem;
-      }
+    .cta {
+      padding: 0.6rem 0.8rem;
+      font-size: var(--fs-mobile-xs);
     }
   }
 
