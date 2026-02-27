@@ -70,7 +70,7 @@
   <div class="container">
     <div class="logo">
       <a href="/">
-        <img src="/assets/img/logo/logo.png" alt="MCCP Putanges-le-Lac" />
+        <img src="/assets/img/logo/LOGO_MCCP_def.png" alt="MCCP Putanges-le-Lac" />
       </a>
     </div>
     
