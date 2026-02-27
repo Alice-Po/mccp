@@ -1,0 +1,107 @@
+{
+    "document": {
+        "title": "Programme",
+        "date_mentions": [
+            "27/02/2026"
+        ],
+        "sections": [
+            {
+                "theme": "Remettre les habitants et l'ensemble des villages au cœur du projet communal",
+                "quotes": [
+                    "« C'est impossible de faire remonter nos attentes. De toute façon, il n'y en a que pour le lac.»",
+                    "« Pourquoi maintenir et indemniser neuf maires délégués s'il n'y a plus qu'une commune ? »",
+                    "« Avec la commune nouvelle, le niveau de la taxe foncière a explosé dans les petites communes alors qu'on a des services en moins ! »"
+                ],
+                "objective": "Replacer les habitants, décideurs et acteurs, au cœur de la construction des projets tant pour la commune nouvelle que pour la vie des villages.",
+                "actions": [
+                    "La création de neuf « conseils de village » impliquant élus, habitants et agents : instances d'information, de débat, de concertation et de proposition",
+                    "L'ouverture de chaque commission municipale à tous les élus et aux habitants",
+                    "Questionnement du mandat de maire délégué au sein de chaque commune 10 ans après la fusion",
+                    "Le prolongement de l'initiative « local jeunes » pour amorcer, de manière complémentaire, un futur conseil municipal des jeunes"
+                ]
+            },
+            {
+                "theme": "Créer une relation de confiance avec les élus",
+                "quotes": [
+                    "« On a l'impression que tout est joué d'avance dans les réunions de conseil municipal et que personne n'y comprend grand-chose. »",
+                    "« Notre commune n'existe plus. On l'a appris un beau jour, on n'avait été ni informés, ni consultés. On nous avait dit que c'était la loi… »"
+                ],
+                "objectives": [
+                    "Rendre visible et effectif le rôle, les responsabilités et les marges de manœuvre de chaque élu",
+                    "Refuser la professionnalisation des mandats locaux",
+                    "Organiser une véritable transparence des décisions et une pédagogie permettant à tous de les comprendre"
+                ],
+                "actions": [
+                    "Accessibilité concrète de toutes les décisions et projets de la commune : accès à l'information (tout support) & présentation simple pour tous",
+                    "Pas de cumul de mandats à la présidence d'exécutifs locaux (commune, communauté de communes, syndicats intercommunaux…)",
+                    "Instauration d'un guichet « droit à réponse », confirmant la prise en compte des demandes et engageant la commune à identifier un interlocuteur, à fournir une réponse"
+                ]
+            },
+            {
+                "theme": "Raviver le tissu commercial et accompagner les acteurs économiques",
+                "quotes": [
+                    "« L'autre soir, parking de la mairie, pas un chien, pas une vitrine éclairée, rien d'ouvert, on aurait pu croire qu'il était 3h du mat. alors qu'il était 19h15… »",
+                    "« Il arrête la ferme l'année prochaine. Il y a un jeune couple qui aimerait reprendre mais les banques ne suivent pas. Cela part à l'agrandissement… »"
+                ],
+                "objectives": [
+                    "Utiliser tous les leviers disponibles pour lutter contre la vacance commerciale et remédier à la dévitalisation du bourg de Putanges et des villages",
+                    "Accompagner les porteurs de projet dans un environnement complexe"
+                ],
+                "actions": [
+                    "À défaut de repreneurs, acquisition de foncier commercial (réhabilitation, mise aux normes, montage locatif incitatif)",
+                    "Optimisation et aménagement des zones d'activités existantes pour répondre à la demande de terrain des artisans et des entreprises",
+                    "Implication financière de la commune dans des opérations de maîtrise du foncier agricole, (partenariats privés et publics avec la SAFER, Terres de lien…) pour rendre possible la reprise d'exploitation"
+                ]
+            },
+            {
+                "theme": "Renforcer la solidarité et le lien social",
+                "quotes": [
+                    "« Je préside l'asso depuis longtemps. Tout devient compliqué, j'ai pas de soutien. Je voudrais passer la main. Mais dans ces conditions, personne veut y aller. J'ai peur que cela se casse la figure… »",
+                    "« La voisine a perdu sa fille. Sans elle, je ne sais pas comment elle peut s'en sortir. Elle ne conduit pas, elle a même pas un portable »",
+                    "« Il ne se passe plus rien dans nos communes, on n'a plus l'occasion de faire connaissance avec les nouveaux habitants. »"
+                ],
+                "objectives": [
+                    "Faciliter les rencontres entre habitants et les liens de solidarité",
+                    "Inciter et accompagner les initiatives citoyennes et associatives",
+                    "Développer des actions envers les publics les plus vulnérables",
+                    "Soutenir l'animation sur l'ensemble du territoire (fêtes communales, rencontres, repas…)"
+                ],
+                "actions": [
+                    "Création d'une maison des associations (élu responsable, lieu ressource et agent référent), chargée de soutenir les associations et les initiatives sur les aspects logistiques, administratifs, financiers et juridiques",
+                    "Renforcement et identification du centre communal d'action sociale (CCAS) comme service essentiel de proximité pour résoudre des situations d'urgence et de précarité, fédérer les acteurs sociaux du territoire et lutter contre l'exclusion numérique"
+                ]
+            },
+            {
+                "theme": "Rester mobile sur un territoire étendu",
+                "quotes": [
+                    "« C'est cher de garder ma voiture. Je l'utilise très peu. Mais comment faire mes courses sans ça ? »"
+                ],
+                "objective": "Rendre accessible à tous l'offre de services dans la commune",
+                "actions": [
+                    "Mise en place d'un service de transport à la demande pour l'accès aux commerces et à l'offre de santé",
+                    "Lancement d'un appel à manifestation d'intérêt (AMI) pour structurer un service de transport solidaire (chauffeurs bénévoles indemnisés)",
+                    "Développement de l'offre d'autopartage"
+                ]
+            },
+            {
+                "theme": "Protéger et valoriser nos paysages et notre environnement",
+                "quotes": [
+                    "« Je suis inquiet : plus d'une fois sur dix, l'eau du robinet n'est pas conforme aux normes. Pourtant on me dit que l'usine de traitement est très performante. Qu'est-ce qu'on peut faire ? »",
+                    "« Je sais que c'est pas simple mais c'est quand même difficile d'accepter que presque tout ce qui est servi à la cantine vienne de loin alors qu'il y a plein de producteurs autour de nous. »",
+                    "« Avant, on partait souvent le week-end. Et puis on s'est rendu compte qu'il y avait ici plein de choses à voir, plein de possibilités de balades. En revanche, cela mériterait un petit coup de pouce et un peu d'entretien. »"
+                ],
+                "objectives": [
+                    "Remettre les besoins essentiels au cœur de l'action locale : alimentation et eau de qualité",
+                    "Affronter les incertitudes de demain en misant d'abord sur les ressources locales",
+                    "Favoriser les activités simples et accessibles : la découverte et l'entretien du patrimoine naturel et historique"
+                ],
+                "actions": [
+                    "Lancement d'un programme « Orne en vie » actant la place centrale de la rivière dans la commune (ressource en eau potable, biodiversité, qualité des paysages, tourisme, loisirs) mobilisant les nombreux acteurs institutionnels, associatifs et privés autour d'un nécessaire état des lieux et d'un plan d'actions concertées",
+                    "Soutien et développement d'opérations annuelles d'entretien des sentiers impliquant et équipant les habitants bénévoles et assurant un rôle de veille et d'entretien des chemins de randonnées",
+                    "Soutien à la plantation de haies, mise en place d'une concertation ouverte avec les agriculteurs sur la manière de partager la charge de l'entretien de ce patrimoine commun",
+                    "Contenir l'artificialisation des sols à travers le plan local d'urbanisme intercommunal, à travers la rénovation du bâti existant"
+                ]
+            }
+        ]
+    }
+}
