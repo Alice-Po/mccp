@@ -1,0 +1,336 @@
+{
+  "colistiers": [
+    {
+      "ordre": 1,
+      "nom": "Isabelle Lecomte",
+      "age": 56,
+      "commune": "Putanges",
+      "bio": "Je vis et travaille ici depuis 37 ans et j'ai été investie dans plusieurs associations (ABCD, APE..). Je m'engage à travailler avec et pour les habitants de Putanges.",
+      "teteDeListe": true,
+      "photo": "1_Isabelle_LECOMTE.jpg"
+    },
+    {
+      "ordre": 2,
+      "nom": "Loïc Lecoeur",
+      "age": 45,
+      "commune": "Putanges",
+      "bio": "Engagé pour la démocratie, la préservation du territoire, formé aux outils d'intelligence collective, je me mets au service des habitants de Putanges-le-Lac et du projet du MCCP.",
+      "teteDeListe": true,
+      "photo": "2_Loic_LEOEUR.jpg"
+    },
+    {
+      "ordre": 3,
+      "nom": "Estelle Corneville",
+      "age": 43,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Maman de 3 enfants, formatrice depuis 20 ans et exploitante depuis 10 ans. Solutionniste, je m'engage pour une commune solidaire et à l'écoute.",
+      "teteDeListe": false,
+      "photo": "3_Estelle_CORNEVILLE.jpg"
+    },
+    {
+      "ordre": 4,
+      "nom": "Rémy Carras",
+      "age": 41,
+      "commune": "Rabodanges",
+      "bio": "Coordinateur de festival et impliqué dans des associations locales, je désire m'engager pour une démocratie participative, l'intelligence collective et l'amélioration du bien commun.",
+      "teteDeListe": false,
+      "photo": "4_Remy_CARRAS.jpg"
+    },
+    {
+      "ordre": 5,
+      "nom": "Julie Thivol",
+      "age": 35,
+      "commune": "La Forêt-Auvray",
+      "bio": "Agronome de formation, je suis soucieuse d'offrir à mes deux enfants un cadre de vie préservé, riche de liens sociaux. Je souhaite que cette motivation profite à tous les habitants.",
+      "teteDeListe": false,
+      "photo": "5_Julie_THIVOL.jpg"
+    },
+    {
+      "ordre": 6,
+      "nom": "Philippe Tulliez",
+      "age": 52,
+      "commune": "Ménil-Jean",
+      "bio": "Je suis installé depuis près de 25 ans à Ménil-Jean dont j'ai été conseiller municipal. Cadre territorial, je suis spécialisé dans les finances publiques et entends mettre cette compétence au profit de la commune.",
+      "teteDeListe": false,
+      "photo": "6_Philippe_TULLIEZ.jpg"
+    },
+    {
+      "ordre": 7,
+      "nom": "Alice Poggioli",
+      "age": 34,
+      "commune": "La Forêt-Auvray",
+      "bio": "Dans l'informatique, mère de deux enfants, installée à La Forêt-Auvray depuis 2021. Je souhaite m'investir au service de la commune pour renforcer confiance, cohésion et solidarité.",
+      "teteDeListe": false,
+      "photo": "7_Alice_POGGIOLI.jpg"
+    },
+    {
+      "ordre": 8,
+      "nom": "Touhami Cherrak",
+      "age": 35,
+      "commune": "La Forêt-Auvray",
+      "bio": "Bénévole dans divers projets associatifs. Je suis engagé dans le collectif car j'ai à cœur de favoriser la solidarité et le lien social sur notre territoire.",
+      "teteDeListe": false,
+      "photo": "8_Touhami_CHERRAK.jpg"
+    },
+    {
+      "ordre": 9,
+      "nom": "Dominique Basset-Laignel",
+      "age": 67,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Mariée, 2 enfants, 4 petits-enfants. Cadre retraitée de la fonction publique, je tiens à la participation des habitants, à assurer un environnement sain pour l'ensemble du vivant.",
+      "teteDeListe": false,
+      "photo": "9_Dominique_BASSET-LAIGNEL.jpg"
+    },
+    {
+      "ordre": 10,
+      "nom": "Fabrice Lacaine",
+      "age": 47,
+      "commune": "Putanges",
+      "bio": "Marié et père de 3 garçons. Je suis artisan plombier-chauffagiste et chef d'entreprise, j'habite Putanges depuis 25 ans. Je m'engage pour retrouver de la transparence, de la démocratie et du bon sens pour notre commune.",
+      "teteDeListe": false,
+      "photo": "10_Fabrice_LACAINE.jpg"
+    },
+    {
+      "ordre": 11,
+      "nom": "Véronique Levêque",
+      "age": 61,
+      "commune": "Putanges",
+      "bio": "Retraitée et bénévole dans plusieurs associations. J'habite Putanges depuis 40 ans et j'aimerais soutenir des projets qui relient les habitants et revivifient le territoire.",
+      "teteDeListe": false,
+      "photo": "11_Veronique_LEVEQUE.jpg"
+    },
+    {
+      "ordre": 12,
+      "nom": "Marc Chalufour",
+      "age": 84,
+      "commune": "Chênedouit",
+      "bio": "Retraité du bâtiment et de la restauration des maisons anciennes. Je crois que l'avenir est au local, puisque tout ce dont nous avons besoin pour être heureux se trouve ici.",
+      "teteDeListe": false,
+      "photo": "12_Marc_CHALUFOUR.jpg"
+    },
+    {
+      "ordre": 13,
+      "nom": "Careen Boons",
+      "age": 53,
+      "commune": "Les Rotours",
+      "bio": "Aux Rotours depuis 2015, en France depuis 2000, agricultrice bio puis hôtelière engagée. Active localement, je veux une gouvernance participative et un village en musique.",
+      "teteDeListe": false,
+      "photo": "13_Careen_BOOS.jpg"
+    },
+    {
+      "ordre": 14,
+      "nom": "Laurent Tournier",
+      "age": 66,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Employé de banque, je retrouve dans la liste la chaleur avec laquelle j'ai été accueilli. Nous appliquerons les propositions des habitants pour reprendre le contrôle sur les décisions.",
+      "teteDeListe": false,
+      "photo": "14_Laurent_TOURNIER.jpg"
+    },
+    {
+      "ordre": 15,
+      "nom": "Rosanne Tardif",
+      "age": 42,
+      "commune": "Chênedouit",
+      "bio": "Je suis designer textile et mère d'un enfant. Je souhaite m'investir dans la vie de notre commune et construire avec les habitants une vie locale dynamique, riche de coopération et de lien social.",
+      "teteDeListe": false,
+      "photo": "15_Rosanne_TARDIF.jpg"
+    },
+    {
+      "ordre": 16,
+      "nom": "Nicolas Gaultier",
+      "age": 39,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Enseignant et ravi de revenir aux sources. J'ai la volonté de participer à la vie locale, convaincu que cette dynamique est un cadre puissant pour de beaux projets sur nos communes.",
+      "teteDeListe": false,
+      "photo": "16_Nicolas_GAULTIER.jpg"
+    },
+    {
+      "ordre": 17,
+      "nom": "Claire Le Peltier",
+      "age": 37,
+      "commune": "Putanges",
+      "bio": "Galetière et salariée agricole, installée dans le bocage ornais depuis 2022. Je souhaite m'investir sur les sujets liés à l'environnement, au lien social et à la jeunesse.",
+      "teteDeListe": false,
+      "photo": "17_Claire_LE_PELTIER.jpg"
+    },
+    {
+      "ordre": 18,
+      "nom": "Dominique Chartrain",
+      "age": 50,
+      "commune": "Putanges",
+      "bio": "Contrôleur du domaine public. La commune a un potentiel et un cadre de vie exceptionnels, à préserver, le rendant attractif et dynamique. Écouter, agir en transparence sont les raisons de mon engagement.",
+      "teteDeListe": false,
+      "photo": "18_Dominique_CHARTRAIN.jpg"
+    },
+    {
+      "ordre": 19,
+      "nom": "Séverine Chevalier",
+      "age": 49,
+      "commune": "Ménil-Jean",
+      "bio": "Ex-infirmière à domicile, j'ai toujours, au-delà des soins, été sensible aux parcours de vie des personnes très diverses vivant dans notre territoire.",
+      "teteDeListe": false,
+      "photo": "19_Severine_CHEVALIER.jpg"
+    },
+    {
+      "ordre": 20,
+      "nom": "Thomas Poncheaux",
+      "age": 41,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Ex-président de l'APE, animateur, je souhaite m'investir en tant que facilitateur de liens en donnant une place aux jeunes !",
+      "teteDeListe": false,
+      "photo": "20_Thomas_PONCHEAUX.jpg"
+    },
+    {
+      "ordre": 21,
+      "nom": "Catherine Leboisne",
+      "age": 49,
+      "commune": "Ménil-Jean",
+      "bio": "Mère de 2 filles, à Ménil-Jean depuis 18 ans. Manipulatrice en radiologie médicale. À l'écoute des gens, je m'engage pour redonner la parole aux habitants et renouer le lien social.",
+      "teteDeListe": false,
+      "photo": "21_Catherine_LEBOISNE.jpg"
+    },
+    {
+      "ordre": 22,
+      "nom": "Guillaume Masson",
+      "age": 45,
+      "commune": "Sainte-Croix-sur-Orne",
+      "bio": "Père de 3 filles. Je suis infirmier libéral depuis 15 ans en secteur rural. Rejoindre ce groupe me donne l'occasion de m'investir dans la vie locale.",
+      "teteDeListe": false,
+      "photo": "22_Guillaume_MASSON.jpg"
+    },
+    {
+      "ordre": 23,
+      "nom": "Camila Prioli Fernandez",
+      "age": 52,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Formatrice français, ancienne cheffe d'entreprise et maman, je veux mettre mon expérience au service d'une commune plus solidaire, conviviale et engagée pour un avenir durable.",
+      "teteDeListe": false,
+      "photo": "23_Camila_PRIOLI_F.jpg"
+    },
+    {
+      "ordre": 24,
+      "nom": "Igor Louboff",
+      "age": 40,
+      "commune": "Chênedouit",
+      "bio": "Gérant de coopérative, à Chênedouit depuis 2017. Je crois au dialogue et à l'action collective : s'écouter et se comprendre pour améliorer ensemble la vie de notre commune.",
+      "teteDeListe": false,
+      "photo": "24_Igor_LOUBOFF.jpg"
+    },
+    {
+      "ordre": 25,
+      "nom": "Anne-Marie Faurieux",
+      "age": 61,
+      "commune": "Putanges",
+      "bio": "Mère de 4 enfants, jeune retraitée, je suis heureuse de faire partie d'un collectif multigénérationnel, dynamique, apolitique, qui recherche le bien-être des habitants.",
+      "teteDeListe": false,
+      "photo": "25_Anne-Marie_FAURIEUX.jpg"
+    },
+    {
+      "ordre": 26,
+      "nom": "Damien Cuquemel",
+      "age": 40,
+      "commune": "Rabodanges",
+      "bio": "Éducateur de la Protection Judiciaire de la Jeunesse. Je m'engage dans ce projet citoyen afin de participer à la vie locale et de contribuer au développement de cette belle commune.",
+      "teteDeListe": false,
+      "photo": "26_Damien_CUQUEMEL.jpg"
+    },
+    {
+      "ordre": 27,
+      "nom": "Dominique Poilane",
+      "age": 61,
+      "commune": "Putanges",
+      "bio": "Infirmière, j'habite Putanges depuis 30 ans. Je me suis jointe au collectif pour une organisation nouvelle, où chacun apporte ses idées et ses compétences, à l'écoute des habitants.",
+      "teteDeListe": false,
+      "photo": "27_Dominique_POILANE.jpg"
+    },
+    {
+      "ordre": 28,
+      "nom": "Guillaume Cadieu",
+      "age": 49,
+      "commune": "Chênedouit",
+      "bio": "Technicien d'atelier en mécanique de précision, marié, père de famille. Très attaché à ce village, je mettrai mon énergie pour retrouver un esprit familial au sein de notre petit bourg.",
+      "teteDeListe": false,
+      "photo": "28_Guillaume_CADIEU.jpg"
+    },
+    {
+      "ordre": 29,
+      "nom": "Claire Billy",
+      "age": 54,
+      "commune": "Putanges",
+      "bio": "Monitrice éducatrice, j'ai travaillé 30 ans à Ste Croix dans un lieu de vie. Je m'engage pour refaire vivre mon village, avec des liens entre les habitants.",
+      "teteDeListe": false,
+      "photo": "29_Claire_BILLY.jpg"
+    },
+    {
+      "ordre": 30,
+      "nom": "David Morin",
+      "age": 46,
+      "commune": "La Fresnaye-au-Sauvage",
+      "bio": "Paysan bio, père de 2 filles, je m'engage pour que les habitants se sentent plus concernés par la vie communale.",
+      "teteDeListe": false,
+      "photo": "30_David_MORIN.jpg"
+    },
+    {
+      "ordre": 31,
+      "nom": "Tinda Lund-Tengby",
+      "age": 42,
+      "commune": "Saint-Aubert-sur-Orne",
+      "bio": "Psychologue, mère de 2 enfants. Pour des villages plus vivants, il faut une politique locale : on cherche l'avis et l'expertise des habitants. J'ai hâte d'assister aux Conseils de village !",
+      "teteDeListe": false,
+      "photo": "31_Tinda_LUND-TENGBY.jpg"
+    },
+    {
+      "ordre": 32,
+      "nom": "Gérard Grandsire",
+      "age": 72,
+      "commune": "Putanges",
+      "bio": "Docteur vétérinaire retraité. Élu à Putanges et à la CDC depuis plus de 30 ans, je soutiens le projet du MCCP, en lui apportant mes connaissances historiques et techniques.",
+      "teteDeListe": false,
+      "photo": "32_Gerard_GRANDSIRE.jpg"
+    },
+    {
+      "ordre": 33,
+      "nom": "Camille Darmony",
+      "age": 35,
+      "commune": "La Forêt-Auvray",
+      "bio": "Chargée de communication, je me suis engagée dans le MCCP pour contribuer à la création d'un collectif qui redonne du pouvoir de décision aux habitants.",
+      "teteDeListe": false,
+      "photo": "33_Camille_DARMONY.jpg"
+    },
+    {
+      "ordre": 34,
+      "nom": "Jérôme Marcault",
+      "age": 45,
+      "commune": "Ménil-Jean",
+      "bio": "Père de 2 enfants, formateur et éducateur sportif. Investi dans les associations scolaires et culturelles, je souhaite m'engager avec le MCCP pour que les décisions soient partagées et collectives.",
+      "teteDeListe": false,
+      "photo": "34_Jerome_MARCAULT.jpg"
+    },
+    {
+      "ordre": 35,
+      "nom": "Enora Javaudin",
+      "age": 37,
+      "commune": "Rabodanges",
+      "bio": "Apicultrice, je rejoins la liste citoyenne afin de contribuer à l'amélioration du bien vivre-ensemble à Putanges-le-Lac et ses communes.",
+      "teteDeListe": false,
+      "photo": "35_Enora_JAVAUDIN.jpg"
+    }
+  ],
+  "metadata": {
+    "total": 35,
+    "tetesDeliste": 2,
+    "communesRepresentees": [
+      "Putanges",
+      "La Fresnaye-au-Sauvage",
+      "Rabodanges",
+      "La Forêt-Auvray",
+      "Ménil-Jean",
+      "Chênedouit",
+      "Les Rotours",
+      "Sainte-Croix-sur-Orne",
+      "Saint-Aubert-sur-Orne"
+    ],
+    "dateCreation": "2026-02-23",
+    "description": "Liste citoyenne et participative du MCCP pour les élections municipales 2026"
+  }
+}

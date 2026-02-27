@@ -1,22 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
+import colistiersData from "../data/colistiers.json";
 
-const colistiers = [
-  { nom: "Loïc Lecoeur", commune: "Putanges-Pont-Écrepin", teteDeListe: true },
-  { nom: "Isabelle Lecomte", commune: "Putanges-Pont-Écrepin", teteDeListe: true },
-  { nom: "Julie Thivol", commune: "La Forêt-Auvray" },
-  { nom: "Marc Chalufour", commune: "Chênedouit" },
-  { nom: "Alice Poggioli", commune: "La Forêt-Auvray" },
-  { nom: "Véronique Leveque", commune: "La Fresnaye-au-Sauvage" },
-  { nom: "Touhami Cherrak", commune: "La Forêt-Auvray" },
-  { nom: "Estelle Corneville", commune: "La Fresnaye-au-Sauvage" },
-  { nom: "Rémy Carras", commune: "Rabodanges" },
-  { nom: "Rosanne Tardiff", commune: "Chênedouit" },
-  { nom: "David Morin", commune: "La Fresnaye-au-Sauvage" },
-  { nom: "Philippe Tulliez", commune: "Ménil-Jean" },
-  { nom: "Nicolas Gaultier", commune: "La Fresnaye-au-Sauvage" }
-];
+const colistiers = colistiersData.colistiers;
+const metadata = colistiersData.metadata;
 
 ---
 
@@ -29,14 +17,50 @@ const colistiers = [
     </section>
 
     <div class="content-wrapper">
-      <!-- Bandeau d'alerte -->
+      <!-- Bandeau d'information -->
       <div class="alert-banner">
         <div class="alert-content">
-          <h3>La liste est en cours de construction</h3>
+          <h3>La liste citoyenne est complète !</h3>
         </div>
       </div>
 
-      <!-- Section méthodologie -->
+     
+
+      <!-- Section colistiers -->
+      <section class="team-section">
+        <p class="team-intro">
+          La liste citoyenne du MCCP est désormais <strong>complète avec {metadata.total} colistiers et colistères</strong> représentant {metadata.communesRepresentees.length} communes déléguées de Putanges-le-Lac. 
+          Découvrez les personnes qui portent ce projet citoyen et participatif :
+        </p>
+
+        <div class="colistiers-grid">
+          {colistiers.map((colistier) => (
+            <div class="colistier-card" class:list={[{ 'tete-de-liste': colistier.teteDeListe }]}>
+              <div class="colistier-ordre">{colistier.ordre}</div>
+              {colistier.teteDeListe && <div class="badge-tete-liste">⭐</div>}
+              <div class="colistier-layout">
+                <div class="colistier-photo">
+                  <img src={`/assets/img/colisters/${colistier.photo}`} alt={colistier.nom} loading="lazy" />
+                </div>
+                <div class="colistier-content">
+                  <div class="colistier-header">
+                    <span class="colistier-name">{colistier.nom}</span><span class="colistier-age">, {colistier.age} ans</span><span class="colistier-separator">, </span><span class="colistier-commune">{colistier.commune}</span>
+                  </div>
+                  <div class="colistier-bio">{colistier.bio}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="team-status">
+          <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.8;">
+            ⭐ Têtes de liste désignées le <strong>10 janvier 2026</strong>
+          </p>
+        </div>
+      </section>
+
+        <!-- Section méthodologie -->
       <section class="methodology-section">
         <h2>Comment la liste se construit</h2>
         <p class="methodology-intro">
@@ -94,33 +118,6 @@ const colistiers = [
           </div>
         </div>
       </section>
-
-      <!-- Section colistiers -->
-      <section class="team-section">
-        <h2>👥 Les colistiers engagés</h2>
-        <p class="team-intro">
-          La liste est <strong>presque entièrement constituée</strong> avec l'objectif de représenter l'ensemble des communes déléguées de Putanges-le-Lac. 
-          Voici les colistiers qui ont déjà annoncé leur engagement :
-        </p>
-
-        <div class="colistiers-grid">
-          {colistiers.map((colistier) => (
-            <div class="colistier-card" class:list={[{ 'tete-de-liste': colistier.teteDeListe }]}>
-              {colistier.teteDeListe && <div class="badge-tete-liste">⭐</div>}
-              <div class="colistier-name">{colistier.nom}</div>
-              <div class="colistier-commune">{colistier.commune}</div>
-            </div>
-          ))}
-        </div>
-
-        <div class="team-status">
-          <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.8;">
-            ⭐ Têtes de liste désignées le <strong>10 janvier 2026</strong>
-          </p>
-        </div>
-      </section>
-
-      <!-- Section appel à contribution -->
       
     </div>
   </main>
@@ -134,10 +131,10 @@ const colistiers = [
     min-height: 400px;
   }
 
-  /* Bandeau d'alerte */
+  /* Bandeau d'information */
   .alert-banner {
-    background: #fff3cd;
-    border: 2px solid #ffc107;
+    background: rgba(46, 139, 87, 0.1);
+    border: 2px solid var(--primary);
     border-radius: 1rem;
     margin: 2rem 0 3rem;
     padding: 1.5rem 2rem;
@@ -150,7 +147,7 @@ const colistiers = [
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: var(--secondary);
+    color: var(--primary);
   }
 
 
@@ -308,34 +305,55 @@ const colistiers = [
 
   .colistiers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+    gap: 1.25rem;
     margin-bottom: 2rem;
   }
 
   .colistier-card {
     background: white;
-    border-radius: 0.75rem;
-    padding: 1.25rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eaeaea;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .colistier-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   }
 
   .colistier-card.tete-de-liste {
     border: 2px solid var(--primary);
   }
 
+  .colistier-ordre {
+    position: absolute;
+    top: -0.75rem;
+    left: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #2c3e50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
   .badge-tete-liste {
     position: absolute;
     top: -0.5rem;
-    right: -0.5rem;
+    right: 1rem;
     font-size: 1.5rem;
     background: white;
     border-radius: 50%;
@@ -344,21 +362,68 @@ const colistiers = [
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .colistier-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .colistier-photo {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 0.5rem;
+  }
+
+  .colistier-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .colistier-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+
+  .colistier-header {
+    font-size: 1.15rem;
+    line-height: 1.4;
   }
 
   .colistier-name {
     font-family: var(--font-main);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: #d35400;
+  }
+
+  .colistier-age {
+    font-weight: 700;
     color: var(--secondary);
-    margin-bottom: 0.5rem;
+  }
+
+  .colistier-separator {
+    color: var(--secondary);
   }
 
   .colistier-commune {
-    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--primary);
-    font-weight: 500;
+  }
+
+  .colistier-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary);
   }
 
   .team-status {
@@ -586,7 +651,34 @@ const colistiers = [
     }
 
     .colistiers-grid {
-      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .colistier-card {
+      padding: 1rem;
+    }
+
+    .colistier-layout {
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+    }
+
+    .colistier-photo {
+      height: 160px;
+    }
+
+    .colistier-header {
+      font-size: 1rem;
+    }
+
+    .colistier-bio {
+      font-size: 0.9rem;
+    }
+
+    .colistier-ordre {
+      width: 2rem;
+      height: 2rem;
+      font-size: 0.95rem;
     }
 
     .events-cards {
