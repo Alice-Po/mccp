@@ -58,6 +58,16 @@ function generateSlug(title: string) {
       </div>
     </section>
 
+    <!-- Bandeau annonce victoire -->
+    <section class="victory-banner">
+      <div class="victory-content">
+        <h2 class="victory-title">Victoire du MCCP aux élections municipales du 15 mars 2026</h2>
+        <p class="victory-text">
+          À l'issue d'une campagne qui s'est déroulée respectueusement de part et d'autre, le MCCP a réussi à convaincre une majorité des électeurs que son projet permettra aux habitants de la commune et de ses villages historiques de prendre un nouveau départ plus dynamique et plus démocratique. Nous nous engageons à porter le mandat qui nous a été confié avec l'ensemble des membres du conseil municipal dans l'intérêt de tous les habitants. Nous remercions toutes celles et ceux qui nous ont fait confiance et promettons que nous nous montrerons dignes du mandat qui nous a été confié.
+        </p>
+      </div>
+    </section>
+
     <!-- Section vidéo YouTube -->
     <section class="video-section">
       <div class="video-container">
@@ -79,7 +89,7 @@ function generateSlug(title: string) {
 
     <div class="content-wrapper">
 
-      <PollCallToAction client:load />
+      <!-- <PollCallToAction client:load /> -->
 
       
       <!-- Section Ambitions -->
@@ -368,6 +378,55 @@ function toggleAllEvents() {
 </script>
 
 <style>
+/* Bandeau victoire */
+.victory-banner {
+  background: linear-gradient(135deg, #2e8b57 0%, #3ca570 100%);
+  padding: 2.5rem 1rem;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+}
+
+.victory-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.victory-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  font-family: var(--font-main);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.victory-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: white;
+  margin: 0;
+  text-align: justify;
+  hyphens: auto;
+}
+
+@media (max-width: 768px) {
+  .victory-banner {
+    padding: 2rem 1rem;
+  }
+
+  .victory-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .victory-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+}
+
 .contribution-section li {
   margin-top: 1rem;
 }
