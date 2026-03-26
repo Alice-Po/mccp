@@ -42,14 +42,70 @@ const { title } = Astro.props;
   <body>
     <Navbar currentPath={Astro.url.pathname} client:load />
     
+    <!-- Bandeau informatif municipal -->
+    <div class="municipal-notice">
+      <div class="municipal-notice-content">
+        <span class="notice-icon">ℹ️</span>
+        <p>
+          Information : En attendant la reprise en main du site officiel de la mairie, 
+          nous publions ici les informations municipales essentielles.
+        </p>
+      </div>
+    </div>
+    
     <slot />
     <Footer />
   </body>
 </html>
 
-<style>
+<style is:global>
   html, body {
     margin: 0;
     padding: 0;
+  }
+
+  .municipal-notice {
+    background: #fffbeb;
+    border-bottom: 2px solid #fbbf24;
+    padding: 0.75rem 1rem;
+  }
+
+  .municipal-notice-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .notice-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .municipal-notice p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #78350f;
+    line-height: 1.4;
+    font-family: var(--font-main);
+  }
+
+  @media (max-width: 768px) {
+    .municipal-notice {
+      padding: 0.65rem 1rem;
+    }
+
+    .municipal-notice-content {
+      gap: 0.5rem;
+    }
+
+    .notice-icon {
+      font-size: 1.1rem;
+    }
+
+    .municipal-notice p {
+      font-size: 0.85rem;
+    }
   }
 </style>

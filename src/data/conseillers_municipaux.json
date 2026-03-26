@@ -354,6 +354,7 @@
       "ordre": 27,
       "nom": "Leslie Léger",
       "genre": "F",
+      "commune": "Les Rotours",
       "photo": "user.png",
       "roles": [
         {
@@ -379,6 +380,7 @@
       "ordre": 29,
       "nom": "Marie-Françoise Frouel",
       "genre": "F",
+      "commune": "Putanges-Pont-Ecrepin",
       "photo": "user.png",
       "roles": [
         {
@@ -390,6 +392,7 @@
       "ordre": 30,
       "nom": "Jean-Louis Pitel",
       "genre": "M",
+      "commune": "Putanges-Pont-Ecrepin",
       "photo": "user.png",
       "roles": [
         {
@@ -401,6 +404,7 @@
       "ordre": 31,
       "nom": "Anna Hacquebart",
       "genre": "F",
+      "commune": "Sainte-Croix-sur-Orne",
       "photo": "user.png",
       "roles": [
         {
