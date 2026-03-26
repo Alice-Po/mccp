@@ -57,7 +57,14 @@ import permanences from "../data/permanence.json";
         <h2>
           Mairies Déléguées
         </h2>
-        
+        <!-- Note informative -->
+      <div class="note-section">
+        <p>
+          <strong>Note :</strong> Les coordonnées téléphoniques et emails des mairies déléguées seront disponibles prochainement. 
+          Pour toute urgence, contactez la mairie principale.
+        </p>
+      </div>
+      <br />
         <div class="mairies-grid">
           {permanences.mairies_deleguees.map((mairie: any) => (
             <div class="mairie-card">
@@ -96,13 +103,7 @@ import permanences from "../data/permanence.json";
         </div>
       </section>
 
-      <!-- Note informative -->
-      <div class="note-section">
-        <p>
-          <strong>Note :</strong> Les coordonnées téléphoniques et emails des mairies déléguées seront disponibles prochainement. 
-          Pour toute urgence, contactez la mairie principale.
-        </p>
-      </div>
+      
     </div>
   </main>
 </Layout>
