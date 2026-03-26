@@ -1,0 +1,382 @@
+---
+import Layout from "../layouts/Layout.astro";
+import permanences from "../data/permanence.json";
+---
+
+<Layout title="Permanences - MCCP">
+  <main>
+    <section class="hero-section permanences-hero">
+      <div class="hero-content">
+        <h1>Permanences et Horaires</h1>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+
+      <!-- Mairie principale -->
+      <section class="mairie-section mairie-principale">
+        <div class="mairie-header">
+          <h2>
+            {permanences.mairie_principale.nom}
+          </h2>
+        </div>
+        
+        <div class="mairie-content">
+          <div class="info-group">
+            <h3>📍 Adresse</h3>
+            <p>
+              {permanences.mairie_principale.adresse.rue}<br/>
+              {permanences.mairie_principale.adresse.codePostal} {permanences.mairie_principale.adresse.ville}
+            </p>
+          </div>
+
+          <div class="info-group">
+            <h3>📞 Contact</h3>
+            <p>
+              <strong>Téléphone :</strong> <a href={`tel:${permanences.mairie_principale.contact.telephone.replace(/\s/g, '')}`}>{permanences.mairie_principale.contact.telephone}</a><br/>
+              <strong>Email :</strong> <a href={`mailto:${permanences.mairie_principale.contact.email}`}>{permanences.mairie_principale.contact.email}</a>
+            </p>
+          </div>
+
+          <div class="info-group horaires-group">
+            <h3>🕐 Horaires d'ouverture</h3>
+            <div class="horaires-grid">
+              {permanences.mairie_principale.horaires.map((horaire: any) => (
+                <div class={`horaire-item ${horaire.heures === 'Fermé' ? 'ferme' : ''}`}>
+                  <span class="jour">{horaire.jour}</span>
+                  <span class="heures">{horaire.heures}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mairies déléguées -->
+      <section class="mairies-deleguees-section">
+        <h2>
+          Mairies Déléguées
+        </h2>
+        
+        <div class="mairies-grid">
+          {permanences.mairies_deleguees.map((mairie: any) => (
+            <div class="mairie-card">
+              <h3 class="mairie-nom">{mairie.nom}</h3>
+              
+              <div class="mairie-info">
+                <div class="contact-info">
+                  <p>
+                    <strong>📞</strong> {mairie.contact.telephone}<br/>
+                    <strong>✉️</strong> {mairie.contact.email}
+                  </p>
+                </div>
+
+                {mairie.permanences && mairie.permanences.length > 0 ? (
+                  <div class="permanences-info">
+                    <h4>Permanences</h4>
+                    {mairie.permanences.map((perm: any) => (
+                      <div class="permanence-item">
+                        <p class="permanence-type">{perm.type}</p>
+                        {perm.jour && <p><strong>{perm.jour}</strong> : {perm.heures}</p>}
+                        {perm.frequence && <p>{perm.frequence} : {perm.heures}</p>}
+                        {perm.prochaine_date && (
+                          <p class="prochaine-date">📅 Prochaine date : {perm.prochaine_date}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="no-info">
+                    <p>ℹ️ {mairie.note || "Informations à venir"}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Note informative -->
+      <div class="note-section">
+        <p>
+          <strong>Note :</strong> Les coordonnées téléphoniques et emails des mairies déléguées seront disponibles prochainement. 
+          Pour toute urgence, contactez la mairie principale.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .permanences-hero {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('/assets/img/Putanges_mairie.jpg');
+    height: 50vh;
+    min-height: 400px;
+  }
+
+  .intro-section {
+    background: rgba(0, 61, 102, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .intro-section p {
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .mairie-section {
+    margin: 3rem 0;
+  }
+
+  .mairie-header {
+    margin-bottom: 2rem;
+  }
+
+  .mairie-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0;
+    font-family: var(--font-main);
+    font-weight: 700;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .mairie-principale .mairie-content {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--primary);
+  }
+
+  .info-group {
+    margin-bottom: 2rem;
+  }
+
+  .info-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-group h3 {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin: 0 0 1rem 0;
+    font-family: var(--font-main);
+    font-weight: 600;
+  }
+
+  .info-group p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .info-group a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .info-group a:hover {
+    text-decoration: underline;
+  }
+
+  .horaires-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .horaire-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 61, 102, 0.05);
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--primary);
+  }
+
+  .horaire-item.ferme {
+    opacity: 0.5;
+    border-left-color: #9ca3af;
+  }
+
+  .jour {
+    font-weight: 600;
+    color: var(--secondary);
+  }
+
+  .heures {
+    color: var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .mairies-deleguees-section {
+    margin: 4rem 0;
+  }
+
+  .mairies-deleguees-section > h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    font-family: var(--font-main);
+    font-weight: 700;
+  }
+
+  .mairies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 1.5rem;
+  }
+
+  .mairie-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .mairie-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .mairie-nom {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin: 0 0 1rem 0;
+    font-family: var(--font-main);
+  }
+
+  .contact-info {
+    background: rgba(0, 61, 102, 0.05);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info p {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .permanences-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: 0 0 0.75rem 0;
+    font-family: var(--font-main);
+  }
+
+  .permanence-item {
+    background: rgba(46, 139, 87, 0.05);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .permanence-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .permanence-type {
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .permanence-item p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+  }
+
+  .prochaine-date {
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 0.5rem !important;
+  }
+
+  .no-info {
+    background: rgba(156, 163, 175, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid #9ca3af;
+  }
+
+  .no-info p {
+    font-size: 1rem;
+    color: var(--secondary);
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .note-section {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .note-section p {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .intro-section {
+      padding: 1.5rem;
+    }
+
+    .intro-section p {
+      font-size: 1.1rem;
+    }
+
+    .mairie-header h2,
+    .mairies-deleguees-section > h2 {
+      font-size: 1.6rem;
+    }
+
+    .mairie-principale .mairie-content {
+      padding: 1.5rem;
+    }
+
+    .horaires-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mairies-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .mairie-card {
+      padding: 1.25rem;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+    }
+  }
+</style>

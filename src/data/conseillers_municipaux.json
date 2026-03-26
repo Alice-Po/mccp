@@ -1,0 +1,454 @@
+{
+  "elus": [
+    {
+      "ordre": 1,
+      "nom": "Isabelle Lecomte",
+      "genre": "F",
+      "commune": "Putanges",
+      "photo": "1_Isabelle_LECOMTE.jpg",
+      "roles": [
+        {
+          "type": "maire",
+          "titre": "Maire de Putanges-le-Lac",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 2,
+      "nom": "Loïc Lecoeur",
+      "genre": "M",
+      "commune": "Putanges",
+      "photo": "2_Loic_LEOEUR.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 1,
+          "titre": "1er adjoint",
+          "elu_communautaire": true
+        },
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Putanges Pont Ecrepin"
+        }
+      ]
+    },
+    {
+      "ordre": 3,
+      "nom": "Estelle Corneville",
+      "genre": "F",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "3_Estelle_CORNEVILLE.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 2,
+          "titre": "2ème adjointe",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 4,
+      "nom": "Rémy Carras",
+      "genre": "M",
+      "commune": "Rabodanges",
+      "photo": "4_Remy_CARRAS.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Rabodanges",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 5,
+      "nom": "Julie Thivol",
+      "genre": "F",
+      "commune": "La Forêt-Auvray",
+      "photo": "5_Julie_THIVOL.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 6,
+          "titre": "6ème adjointe",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 6,
+      "nom": "Philippe Tulliez",
+      "genre": "M",
+      "commune": "Ménil-Jean",
+      "photo": "6_Philippe_TULLIEZ.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 3,
+          "titre": "3ème adjoint",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 7,
+      "nom": "Alice Poggioli",
+      "genre": "F",
+      "commune": "La Forêt-Auvray",
+      "photo": "7_Alice_POGGIOLI.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "La Forêt Auvray",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 8,
+      "nom": "Touhami Cherrak",
+      "genre": "M",
+      "commune": "La Forêt-Auvray",
+      "photo": "8_Touhami_CHERRAK.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "St Aubert",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 9,
+      "nom": "Dominique Basset-Laignel",
+      "genre": "F",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "9_Dominique_BASSET-LAIGNEL.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 4,
+          "titre": "4ème adjointe",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 10,
+      "nom": "Fabrice Lacaine",
+      "genre": "M",
+      "commune": "Putanges",
+      "photo": "10_Fabrice_LACAINE.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 5,
+          "titre": "5ème adjoint",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 11,
+      "nom": "Véronique Levêque",
+      "genre": "F",
+      "commune": "Putanges",
+      "photo": "11_Veronique_LEVEQUE.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "La Fresnaye au Sauvage"
+        }
+      ]
+    },
+    {
+      "ordre": 12,
+      "nom": "Marc Chalufour",
+      "genre": "M",
+      "commune": "Chênedouit",
+      "photo": "12_Marc_CHALUFOUR.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 13,
+      "nom": "Careen Boons",
+      "genre": "F",
+      "commune": "Les Rotours",
+      "photo": "13_Careen_BOOS.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 14,
+      "nom": "Laurent Tournier",
+      "genre": "M",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "14_Laurent_TOURNIER.jpg",
+      "roles": [
+        {
+          "type": "adjoint",
+          "ordre": 7,
+          "titre": "7ème adjoint"
+        }
+      ]
+    },
+    {
+      "ordre": 15,
+      "nom": "Rosanne Tardif",
+      "genre": "F",
+      "commune": "Chênedouit",
+      "photo": "15_Rosanne_TARDIF.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Chênedouit"
+        }
+      ]
+    },
+    {
+      "ordre": 16,
+      "nom": "Nicolas Gaultier",
+      "genre": "M",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "16_Nicolas_GAULTIER.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 17,
+      "nom": "Claire Le Peltier",
+      "genre": "F",
+      "commune": "Putanges",
+      "photo": "17_Claire_LE_PELTIER.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Les Rotours"
+        }
+      ]
+    },
+    {
+      "ordre": 18,
+      "nom": "Dominique Chartrain",
+      "genre": "M",
+      "commune": "Putanges",
+      "photo": "18_Dominique_CHARTRAIN.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 19,
+      "nom": "Séverine Chevalier",
+      "genre": "F",
+      "commune": "Ménil-Jean",
+      "photo": "19_Severine_CHEVALIER.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 20,
+      "nom": "Thomas Poncheaux",
+      "genre": "M",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "20_Thomas_PONCHEAUX.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 21,
+      "nom": "Catherine Leboisne",
+      "genre": "F",
+      "commune": "Ménil-Jean",
+      "photo": "21_Catherine_LEBOISNE.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Ménil Jean"
+        }
+      ]
+    },
+    {
+      "ordre": 22,
+      "nom": "Guillaume Masson",
+      "genre": "M",
+      "commune": "Sainte-Croix-sur-Orne",
+      "photo": "22_Guillaume_MASSON.jpg",
+      "roles": [
+        {
+          "type": "maire_delegue",
+          "commune_deleguee": "Ste Croix"
+        }
+      ]
+    },
+    {
+      "ordre": 23,
+      "nom": "Camila Prioli Fernandez",
+      "genre": "F",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "23_Camila_PRIOLI_F.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 24,
+      "nom": "Igor Louboff",
+      "genre": "M",
+      "commune": "Chênedouit",
+      "photo": "24_Igor_LOUBOFF.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 25,
+      "nom": "Anne-Marie Faurieux",
+      "genre": "F",
+      "commune": "Putanges",
+      "photo": "25_Anne-Marie_FAURIEUX.jpg",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 26,
+      "nom": "Sébastien Leroux",
+      "genre": "M",
+      "commune": "Putanges-Pont-Ecrepin",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 27,
+      "nom": "Leslie Léger",
+      "genre": "F",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 28,
+      "nom": "Sylvain Gaudin",
+      "genre": "M",
+      "commune": "La Fresnaye-au-Sauvage",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal",
+          "elu_communautaire": true
+        }
+      ]
+    },
+    {
+      "ordre": 29,
+      "nom": "Marie-Françoise Frouel",
+      "genre": "F",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 30,
+      "nom": "Jean-Louis Pitel",
+      "genre": "M",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 31,
+      "nom": "Anna Hacquebart",
+      "genre": "F",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 32,
+      "nom": "Philippe Grandin",
+      "genre": "M",
+      "commune": "La Forêt-Auvray",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    },
+    {
+      "ordre": 33,
+      "nom": "Sophie Pichonnier",
+      "genre": "F",
+      "commune": "Ménil-Jean",
+      "photo": "user.png",
+      "roles": [
+        {
+          "type": "conseiller_municipal"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "total_elus": 33,
+    "repartition_roles": {
+      "maire": 1,
+      "adjoints": 7,
+      "maires_delegues": 9,
+      "conseillers_municipaux": 16
+    },
+    "elus_communautaires": {
+      "total": 13,
+      "note": "13 élus siègent au conseil communautaire"
+    },
+    "notes": [
+      "Loïc Lecoeur cumule les fonctions de 1er adjoint et maire délégué de Putanges Pont Ecrepin",
+      "13 élus siègent au conseil communautaire"
+    ],
+    "dateMAJ": "2026-02-27"
+  }
+}

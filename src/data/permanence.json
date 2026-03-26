@@ -1,0 +1,145 @@
+{
+  "mairie_principale": {
+    "nom": "Mairie de Putanges-le-Lac",
+    "adresse": {
+      "rue": "12 Place de l'Hôtel-de-Ville",
+      "codePostal": "61210",
+      "ville": "Putanges-le-Lac"
+    },
+    "contact": {
+      "telephone": "02 33 35 00 25",
+      "email": "accueil@putangeslelac.fr"
+    },
+    "horaires": [
+      {
+        "jour": "Lundi",
+        "heures": "09h00 - 12h00 / 14h00 - 17h00"
+      },
+      {
+        "jour": "Mardi",
+        "heures": "09h00 - 12h00"
+      },
+      {
+        "jour": "Mercredi",
+        "heures": "09h00 - 12h00 / 14h00 - 17h00"
+      },
+      {
+        "jour": "Jeudi",
+        "heures": "09h00 - 12h00 / 14h00 - 17h00"
+      },
+      {
+        "jour": "Vendredi",
+        "heures": "09h00 - 12h00 / 14h00 - 17h00"
+      },
+      {
+        "jour": "Samedi",
+        "heures": "09h00 - 12h00"
+      },
+      {
+        "jour": "Dimanche",
+        "heures": "Fermé"
+      }
+    ]
+  },
+  "mairies_deleguees": [
+    {
+      "nom": "Ménil-Jean",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [
+        {
+          "type": "Permanence mensuelle",
+          "frequence": "Un samedi matin par mois",
+          "heures": "10h00 - 12h00",
+          "prochaine_date": "4 avril 2026"
+        }
+      ]
+    },
+    {
+      "nom": "La Forêt-Auvray",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mercredi",
+          "heures": "14h00 - 16h00"
+        }
+      ]
+    },
+    {
+      "nom": "Chênedouit",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "La Fresnaye-au-Sauvage",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "Les Rotours",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "Putanges Pont-Écrepin",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "Rabodanges",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "Saint-Aubert-sur-Orne",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    },
+    {
+      "nom": "Sainte-Croix-sur-Orne",
+      "contact": {
+        "telephone": "À venir",
+        "email": "À venir"
+      },
+      "permanences": [],
+      "note": "Informations à venir"
+    }
+  ],
+  "metadata": {
+    "dateMAJ": "2026-02-27",
+    "notes": [
+      "Les coordonnées téléphoniques et emails des mairies déléguées seront disponibles prochainement",
+      "Les horaires de permanence peuvent évoluer selon les besoins"
+    ]
+  }
+}
