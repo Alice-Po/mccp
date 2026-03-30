@@ -77,8 +77,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
-      "note": "Informations à venir"
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mercredi",
+          "heures": "17h00 - 19h00"
+        }
+      ]
     },
     {
       "nom": "La Fresnaye-au-Sauvage",
@@ -86,8 +91,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
-      "note": "Informations à venir"
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mercredi",
+          "heures": "16h30 - 19h30"
+        }
+      ]
     },
     {
       "nom": "Les Rotours",
@@ -113,8 +123,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
-      "note": "Informations à venir"
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mercredi",
+          "heures": "14h00 - 18h00"
+        }
+      ]
     },
     {
       "nom": "Saint-Aubert-sur-Orne",
@@ -122,8 +137,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
-      "note": "Informations à venir"
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mercredi",
+          "heures": "16h30 - 18h30"
+        }
+      ]
     },
     {
       "nom": "Sainte-Croix-sur-Orne",
