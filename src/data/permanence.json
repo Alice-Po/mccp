@@ -151,7 +151,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Jeudi",
+          "heures": "14h - 16h"
+        }
+      ],
       "note": "Informations à venir"
     }
   ],
