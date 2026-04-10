@@ -105,8 +105,13 @@
         "telephone": "À venir",
         "email": "À venir"
       },
-      "permanences": [],
-      "note": "Informations à venir"
+      "permanences": [
+        {
+          "type": "Permanence hebdomadaire",
+          "jour": "Mardi",
+          "heures": "10h - 12h"
+        }
+      ]
     },
     {
       "nom": "Putanges Pont-Écrepin",
