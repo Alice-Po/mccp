@@ -8,8 +8,6 @@ tags: ['CdC']
 draft: false
 ---
 
-# Nous avons choisi de ne pas participer à une gouvernance qui ne nous ressemble pas
-
 Dans les jours qui ont précédé l’élection de la présidence de la Communauté de communes du Val d’Orne, nous avons pris part aux échanges avec une volonté explicite de construire une gouvernance ouverte, équilibrée et respectueuse de toutes les communes.
 Fidèles à l’engagement qui nous a conduits à être élus : faire de la politique autrement, dans l’écoute, le respect et le partage des responsabilités, nous avons formulé des propositions concrètes pour contribuer pleinement au travail collectif.
 
